@@ -1,0 +1,18 @@
+{
+    "cart": {
+        "shipping_addresses": [
+            {
+                "selected_shipping_method": {
+                    "carrier_code": "standard-gross",
+                    "carrier_title": "3-5 business days",
+                    "method_code": "standard-gross",
+                    "method_title": "Standard Delivery",
+                    "amount": {
+                        "value": 8.99,
+                        "currency": "USD"
+                    }
+                }
+            }
+        ]
+    }
+}

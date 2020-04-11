@@ -1,0 +1,15 @@
+{
+  "type": "cartWsDTO",
+  "code": "00000158",
+  "entries": [],
+  "guid": "d77d8f1f-e69e-4e1f-bf45-3e5bc27f6930",
+  "totalItems": 0,
+  "totalPrice": {
+     "currencyIso": "USD",
+     "value": 0.0
+  },
+  "totalPriceWithTax": {
+     "currencyIso": "USD",
+     "value": 0.0
+  }
+}

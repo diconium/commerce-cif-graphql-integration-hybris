@@ -1,0 +1,8 @@
+{
+    "customer": {
+        "email": "amar@test.com",
+        "firstname": "Amaresh",
+        "is_subscribed": true,
+        "lastname": "muni"
+    }
+}

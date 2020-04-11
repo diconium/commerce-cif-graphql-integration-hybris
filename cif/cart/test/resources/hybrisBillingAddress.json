@@ -1,0 +1,16 @@
+{
+  "country": {
+    "isocode": "US"
+  },
+  "defaultAddress": true,
+  "firstName": "Bob",
+  "lastName": "Roll",
+  "line1": "Magento Pkwy",
+  "line2": "Main Street",
+  "phone": "9999998899",
+  "postalCode": "78758",
+  "region": {
+    "isocode": "US-WA"
+  },
+  "town": "Austin"
+}

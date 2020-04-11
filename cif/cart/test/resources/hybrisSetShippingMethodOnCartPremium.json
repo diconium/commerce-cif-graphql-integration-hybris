@@ -1,0 +1,301 @@
+{
+  "type": "cartWsDTO",
+  "appliedOrderPromotions": [
+    {
+      "consumedEntries": [],
+      "description": "Buy over $200.00 get $20.00 discount on cart",
+      "promotion": {
+        "code": "order_threshold_fixed_discount_main",
+        "couldFireMessages": [],
+        "description": "A fixed discount is applied to the cart when the order threshold value is reached",
+        "firedMessages": [],
+        "promotionType": "Rule Based Promotion"
+      }
+    }
+  ],
+  "appliedProductPromotions": [],
+  "appliedVouchers": [],
+  "calculated": true,
+  "code": "00000000",
+  "deliveryAddress": {
+    "country": {
+      "isocode": "DE",
+      "name": "Germany"
+    },
+    "defaultAddress": false,
+    "firstName": "test",
+    "formattedAddress": "strasse 11, 70376, Stuttgart, Germany",
+    "id": "8796125921303",
+    "lastName": "user",
+    "line1": "strasse",
+    "line2": "11",
+    "phone": "012345678925",
+    "postalCode": "70376",
+    "shippingAddress": true,
+    "title": "Mr.",
+    "titleCode": "mr",
+    "town": "Stuttgart",
+    "visibleInAddressBook": true
+  },
+  "deliveryCost": {
+    "currencyIso": "USD",
+    "formattedValue": "$8.99",
+    "priceType": "BUY",
+    "value": 8.99
+  },
+  "deliveryItemsQuantity": 1,
+  "deliveryMode": {
+    "code": "premium-gross",
+    "deliveryCost": {
+      "currencyIso": "USD",
+      "formattedValue": "$8.99",
+      "priceType": "BUY",
+      "value": 8.99
+    },
+    "description": "3-5 business days",
+    "name": "Standard Delivery"
+  },
+  "deliveryOrderGroups": [
+    {
+      "entries": [
+        {
+          "basePrice": {
+            "currencyIso": "USD",
+            "formattedValue": "$333.49",
+            "priceType": "BUY",
+            "value": 333.49
+          },
+          "configurationInfos": [],
+          "entryNumber": 0,
+          "product": {
+            "availableForPickup": true,
+            "baseOptions": [],
+            "categories": [
+              {
+                "code": "902",
+                "name": "Flash Memory",
+                "url": "/Open-Catalogue/Data-storage/Flash-Memory/c/902"
+              },
+              {
+                "code": "brand_18",
+                "name": "Kingston",
+                "url": "/Brands/Kingston/c/brand_18"
+              }
+            ],
+            "code": "4205436",
+            "configurable": false,
+            "images": [
+              {
+                "altText": "32GB SDHC Card",
+                "format": "zoom",
+                "imageType": "PRIMARY",
+                "url": "/medias/?context=bWFzdGVyfGltYWdlc3wzNTg5OHxpbWFnZS9qcGVnfGltYWdlcy9oMmMvaGRmLzg3OTY4NDY2MjA3MDIuanBnfGE1N2I1MzNiZTExYTQ4NTE4NTVmYjI1ODYxZmIxZWQzYmZmY2NlYjhlMmMwODFhYWRkOWY3YWRjYzk4NmIzNjM"
+              },
+              {
+                "altText": "32GB SDHC Card",
+                "format": "product",
+                "imageType": "PRIMARY",
+                "url": "/medias/?context=bWFzdGVyfGltYWdlc3w3NzkwM3xpbWFnZS9qcGVnfGltYWdlcy9oNjcvaDRlLzg3OTY4NzI5MDA2MzguanBnfGQyOTM1MjJjYzU0NmU3ZGQ5MGVjNjdjYjc2YmI5NmM5NWE2ZmVhZWQ5YmVlNzhiZWVkMzg1YmY3ODU3MGNjOGI"
+              },
+              {
+                "altText": "32GB SDHC Card",
+                "format": "thumbnail",
+                "imageType": "PRIMARY",
+                "url": "/medias/?context=bWFzdGVyfGltYWdlc3wzNzg3fGltYWdlL2pwZWd8aW1hZ2VzL2hkYS9oMDAvODc5Njg5OTI0NjExMC5qcGd8MmFjOGI1NjdkMTVkNTMwOTIyZThmZjRiMDVlZjE1NWM3ZWYwNmFkZjk1MjU4OGFhZTc0ODdmODkyNTdkYmQ3NA"
+              },
+              {
+                "altText": "32GB SDHC Card",
+                "format": "cartIcon",
+                "imageType": "PRIMARY",
+                "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyMzQzfGltYWdlL2pwZWd8aW1hZ2VzL2gxNC9oMDAvODc5NjkyNTU5MTU4Mi5qcGd8YTEzN2E4ZDkyNjBlZGQ1MmMwODM1Mjk5YTdlNTZlYmVkNDBhNjlkYTYxODU1MDkxNThmNjc5ZWY3NzA5MWU3MA"
+              }
+            ],
+            "manufacturer": "Kingston",
+            "name": "32GB SDHC Card",
+            "purchasable": true,
+            "stock": {
+              "stockLevel": 2,
+              "stockLevelStatus": "lowStock"
+            },
+            "url": "/Open-Catalogue/Data-storage/Flash-Memory/32GB-SDHC-Card/p/4205436"
+          },
+          "quantity": 1,
+          "totalPrice": {
+            "currencyIso": "USD",
+            "formattedValue": "$333.49",
+            "priceType": "BUY",
+            "value": 333.49
+          },
+          "updateable": true
+        }
+      ],
+      "totalPriceWithTax": {
+        "currencyIso": "USD",
+        "formattedValue": "$349.37",
+        "priceType": "BUY",
+        "value": 349.37
+      }
+    }
+  ],
+  "entries": [
+    {
+      "basePrice": {
+        "currencyIso": "USD",
+        "formattedValue": "$333.49",
+        "priceType": "BUY",
+        "value": 333.49
+      },
+      "configurationInfos": [],
+      "entryNumber": 0,
+      "product": {
+        "availableForPickup": true,
+        "baseOptions": [],
+        "categories": [
+          {
+            "code": "902",
+            "name": "Flash Memory",
+            "url": "/Open-Catalogue/Data-storage/Flash-Memory/c/902"
+          },
+          {
+            "code": "brand_18",
+            "name": "Kingston",
+            "url": "/Brands/Kingston/c/brand_18"
+          }
+        ],
+        "code": "4205436",
+        "configurable": false,
+        "images": [
+          {
+            "altText": "32GB SDHC Card",
+            "format": "zoom",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wzNTg5OHxpbWFnZS9qcGVnfGltYWdlcy9oMmMvaGRmLzg3OTY4NDY2MjA3MDIuanBnfGE1N2I1MzNiZTExYTQ4NTE4NTVmYjI1ODYxZmIxZWQzYmZmY2NlYjhlMmMwODFhYWRkOWY3YWRjYzk4NmIzNjM"
+          },
+          {
+            "altText": "32GB SDHC Card",
+            "format": "product",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3w3NzkwM3xpbWFnZS9qcGVnfGltYWdlcy9oNjcvaDRlLzg3OTY4NzI5MDA2MzguanBnfGQyOTM1MjJjYzU0NmU3ZGQ5MGVjNjdjYjc2YmI5NmM5NWE2ZmVhZWQ5YmVlNzhiZWVkMzg1YmY3ODU3MGNjOGI"
+          },
+          {
+            "altText": "32GB SDHC Card",
+            "format": "thumbnail",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wzNzg3fGltYWdlL2pwZWd8aW1hZ2VzL2hkYS9oMDAvODc5Njg5OTI0NjExMC5qcGd8MmFjOGI1NjdkMTVkNTMwOTIyZThmZjRiMDVlZjE1NWM3ZWYwNmFkZjk1MjU4OGFhZTc0ODdmODkyNTdkYmQ3NA"
+          },
+          {
+            "altText": "32GB SDHC Card",
+            "format": "cartIcon",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyMzQzfGltYWdlL2pwZWd8aW1hZ2VzL2gxNC9oMDAvODc5NjkyNTU5MTU4Mi5qcGd8YTEzN2E4ZDkyNjBlZGQ1MmMwODM1Mjk5YTdlNTZlYmVkNDBhNjlkYTYxODU1MDkxNThmNjc5ZWY3NzA5MWU3MA"
+          }
+        ],
+        "manufacturer": "Kingston",
+        "name": "32GB SDHC Card",
+        "purchasable": true,
+        "stock": {
+          "stockLevel": 2,
+          "stockLevelStatus": "lowStock"
+        },
+        "url": "/Open-Catalogue/Data-storage/Flash-Memory/32GB-SDHC-Card/p/4205436"
+      },
+      "quantity": 1,
+      "totalPrice": {
+        "currencyIso": "USD",
+        "formattedValue": "$333.49",
+        "priceType": "BUY",
+        "value": 333.49
+      },
+      "updateable": true
+    }
+  ],
+  "guid": "65d8abb9-6c92-432d-9efb-7b4ba70d9041",
+  "net": false,
+  "orderDiscounts": {
+    "currencyIso": "USD",
+    "formattedValue": "$20.00",
+    "priceType": "BUY",
+    "value": 20.0
+  },
+  "paymentInfo": {
+    "accountHolderName": "karan",
+    "billingAddress": {
+      "country": {
+        "isocode": "DE",
+        "name": "Germany"
+      },
+      "defaultAddress": false,
+      "email": "test5@test.com",
+      "firstName": "karan",
+      "formattedAddress": "rommelstrasse 11, 70376, stuttgart, Germany",
+      "id": "8796125986839",
+      "lastName": "sharma",
+      "line1": "rommelstrasse 11",
+      "postalCode": "70376",
+      "shippingAddress": false,
+      "title": "Mr.",
+      "titleCode": "mr",
+      "town": "stuttgart",
+      "visibleInAddressBook": true
+    },
+    "cardNumber": "************6678",
+    "cardType": {
+      "code": "visa",
+      "name": "Visa"
+    },
+    "defaultPayment": false,
+    "expiryMonth": "11",
+    "expiryYear": "2027",
+    "id": "8796093153322",
+    "saved": false,
+    "subscriptionId": "MockedSubscriptionID"
+  },
+  "pickupItemsQuantity": 0,
+  "pickupOrderGroups": [],
+  "productDiscounts": {
+    "currencyIso": "USD",
+    "formattedValue": "$0.00",
+    "priceType": "BUY",
+    "value": 0.0
+  },
+  "site": "electronics",
+  "store": "electronics",
+  "subTotal": {
+    "currencyIso": "USD",
+    "formattedValue": "$313.49",
+    "priceType": "BUY",
+    "value": 313.49
+  },
+  "totalDiscounts": {
+    "currencyIso": "USD",
+    "formattedValue": "$20.00",
+    "priceType": "BUY",
+    "value": 20.0
+  },
+  "totalItems": 1,
+  "totalPrice": {
+    "currencyIso": "USD",
+    "formattedValue": "$322.48",
+    "priceType": "BUY",
+    "value": 322.48
+  },
+  "totalPriceWithTax": {
+    "currencyIso": "USD",
+    "formattedValue": "$322.48",
+    "priceType": "BUY",
+    "value": 322.48
+  },
+  "totalTax": {
+    "currencyIso": "USD",
+    "formattedValue": "$15.36",
+    "priceType": "BUY",
+    "value": 15.36
+  },
+  "user": {
+    "name": "test5 test",
+    "uid": "test5@test.com"
+  },
+  "potentialOrderPromotions": [],
+  "potentialProductPromotions": [],
+  "totalUnitCount": 1
+}

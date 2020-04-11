@@ -1,0 +1,50 @@
+{
+   "type": "cartWsDTO",
+   "code": "00000058",
+   "entries": [
+      {
+         "configurationInfos": [],
+         "entryNumber": 0,
+         "product": {
+            "availableForPickup": true,
+            "averageRating": 3.6875,
+            "baseOptions": [],
+            "categories": [
+               {
+                  "code": "588",
+                  "name": "Camera Lenses"
+               },
+               {
+                  "code": "brand_10",
+                  "name": "Canon"
+               }
+            ],
+            "code": "832382",
+            "configurable": false,
+            "manufacturer": "Canon",
+            "name": "EF-S 60mm f/2.8 USM Macro",
+            "purchasable": true,
+            "stock": {
+               "stockLevel": 7,
+               "stockLevelStatus": "inStock"
+            },
+            "url": "/Open-Catalogue/Cameras/Digital-Cameras/Digital-SLR/Camera-Lenses/EF-S-60mm-f-2-8-USM-Macro/p/832382"
+         },
+         "quantity": 1,
+         "totalPrice": {
+            "currencyIso": "USD",
+            "value": 466.88
+         }
+      }
+   ],
+   "guid": "ed529a33-de0e-466e-afbb-683bb87eefa1",
+   "totalItems": 1,
+   "totalPrice": {
+      "currencyIso": "USD",
+      "value": 446.88
+   },
+   "totalPriceWithTax": {
+      "currencyIso": "USD",
+      "value": 446.88
+   }
+}

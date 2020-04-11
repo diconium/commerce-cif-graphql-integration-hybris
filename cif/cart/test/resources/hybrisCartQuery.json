@@ -1,0 +1,309 @@
+{
+  "type": "cartWsDTO",
+  "appliedOrderPromotions": [
+    {
+      "consumedEntries": [],
+      "description": "Buy over $200.00 get $20.00 discount on cart",
+      "promotion": {
+        "code": "order_threshold_fixed_discount_main",
+        "couldFireMessages": [],
+        "description": "A fixed discount is applied to the cart when the order threshold value is reached",
+        "firedMessages": [],
+        "promotionType": "Rule Based Promotion"
+      }
+    }
+  ],
+  "appliedProductPromotions": [],
+  "appliedVouchers": [
+    {
+      "code": "coupontest001",
+      "freeShipping": false,
+      "voucherCode": "coupontest001"
+    }
+  ],
+  "calculated": true,
+  "code": "00000001",
+  "deliveryAddress": {
+    "country": {
+      "isocode": "DE",
+      "name": "Germany"
+    },
+    "defaultAddress": false,
+    "firstName": "test",
+    "formattedAddress": "strasse 11, 70376, Stuttgart, Germany",
+    "id": "8796125921303",
+    "lastName": "user",
+    "line1": "strasse",
+    "line2": "Rommelstraße 11",
+    "phone": "012345678925",
+    "postalCode": "70376",
+    "shippingAddress": true,
+    "title": "Mr.",
+    "titleCode": "mr",
+    "town": "Stuttgart",
+    "visibleInAddressBook": true
+  },
+  "deliveryCost": {
+    "currencyIso": "USD",
+    "formattedValue": "$8.99",
+    "priceType": "BUY",
+    "value": 8.99
+  },
+  "deliveryItemsQuantity": 2,
+  "deliveryMode": {
+    "code": "standard-gross",
+    "deliveryCost": {
+      "currencyIso": "USD",
+      "formattedValue": "$8.99",
+      "priceType": "BUY",
+      "value": 8.99
+    },
+    "description": "3-5 business days",
+    "name": "Standard Delivery"
+  },
+  "deliveryOrderGroups": [
+    {
+      "entries": [
+        {
+          "basePrice": {
+            "currencyIso": "USD",
+            "formattedValue": "$466.88",
+            "priceType": "BUY",
+            "value": 466.88
+          },
+          "configurationInfos": [],
+          "entryNumber": 0,
+          "product": {
+            "availableForPickup": true,
+            "averageRating": 3.6875,
+            "baseOptions": [],
+            "categories": [
+              {
+                "code": "588",
+                "name": "Camera Lenses",
+                "url": "/Open-Catalogue/Cameras/Digital-Cameras/Digital-SLR/Camera-Lenses/c/588"
+              },
+              {
+                "code": "brand_10",
+                "name": "Canon",
+                "url": "/Brands/Canon/c/brand_10"
+              }
+            ],
+            "code": "832382",
+            "configurable": false,
+            "images": [
+              {
+                "altText": "EF-S 60mm f/2.8 USM Macro",
+                "format": "zoom",
+                "imageType": "PRIMARY",
+                "url": "/medias/?context=bWFzdGVyfGltYWdlc3wzMjU4OHxpbWFnZS9qcGVnfGltYWdlcy9oNmUvaDY4Lzg3OTY4NTM2OTg1OTAuanBnfGQ4OWUzYzk1OTkxMjYzMjhkMDE1OWQwOGFjMTNjNDIyNzY5Yjg0NThmNGE1Zjk4OTJkYThjZTFhMmI5OTFkMGM"
+              },
+              {
+                "altText": "EF-S 60mm f/2.8 USM Macro",
+                "format": "product",
+                "imageType": "PRIMARY",
+                "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxNDU1NXxpbWFnZS9qcGVnfGltYWdlcy9oN2MvaDAyLzg3OTY4Nzk5Nzg1MjYuanBnfDk2MjE3NzJiNzg1ZmY2NTAyMDMwNjYzMTA2ZTY2NmMyYjQ0OWRlMWQ1ZjdmZjczMTZkY2Q5MzFiNzQ4ODQ5YWQ"
+              },
+              {
+                "altText": "EF-S 60mm f/2.8 USM Macro",
+                "format": "thumbnail",
+                "imageType": "PRIMARY",
+                "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyODE5fGltYWdlL2pwZWd8aW1hZ2VzL2hkMy9oNjgvODc5NjkwNjMyMzk5OC5qcGd8NGUxZTg5ZmMyYzkyMDU2NjU3YTYxOWQ0YzhmNDBhNGUyYTFiNzgzYzk0ZGFmMjc0MGM5YWE3OTFlMjg5MjQ2OA"
+              },
+              {
+                "altText": "EF-S 60mm f/2.8 USM Macro",
+                "format": "cartIcon",
+                "imageType": "PRIMARY",
+                "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxNzQyfGltYWdlL2pwZWd8aW1hZ2VzL2g3MS9oZWUvODc5NjkzMjY2OTQ3MC5qcGd8ZWM3ZmU1OWM5YmFiMGE2MTRhMmQxMzk4NmRmZGE1MDFhMDg5OGI0MmIzZDg4YmEzMDA0YjkwYmExZTFmM2Y2MQ"
+              }
+            ],
+            "manufacturer": "Canon",
+            "name": "EF-S 60mm f/2.8 USM Macro",
+            "purchasable": true,
+            "stock": {
+              "stockLevel": 7,
+              "stockLevelStatus": "inStock"
+            },
+            "url": "/Open-Catalogue/Cameras/Digital-Cameras/Digital-SLR/Camera-Lenses/EF-S-60mm-f-2-8-USM-Macro/p/832382"
+          },
+          "quantity": 2,
+          "totalPrice": {
+            "currencyIso": "USD",
+            "formattedValue": "$933.76",
+            "priceType": "BUY",
+            "value": 933.76
+          },
+          "updateable": true
+        }
+      ],
+      "totalPriceWithTax": {
+        "currencyIso": "USD",
+        "formattedValue": "$978.22",
+        "priceType": "BUY",
+        "value": 978.22
+      }
+    }
+  ],
+  "entries": [
+    {
+      "basePrice": {
+        "currencyIso": "USD",
+        "formattedValue": "$466.88",
+        "priceType": "BUY",
+        "value": 466.88
+      },
+      "configurationInfos": [],
+      "entryNumber": 0,
+      "product": {
+        "availableForPickup": true,
+        "averageRating": 3.6875,
+        "baseOptions": [],
+        "categories": [
+          {
+            "code": "588",
+            "name": "Camera Lenses",
+            "url": "/Open-Catalogue/Cameras/Digital-Cameras/Digital-SLR/Camera-Lenses/c/588"
+          },
+          {
+            "code": "brand_10",
+            "name": "Canon",
+            "url": "/Brands/Canon/c/brand_10"
+          }
+        ],
+        "code": "832382",
+        "configurable": false,
+        "images": [
+          {
+            "altText": "EF-S 60mm f/2.8 USM Macro",
+            "format": "zoom",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wzMjU4OHxpbWFnZS9qcGVnfGltYWdlcy9oNmUvaDY4Lzg3OTY4NTM2OTg1OTAuanBnfGQ4OWUzYzk1OTkxMjYzMjhkMDE1OWQwOGFjMTNjNDIyNzY5Yjg0NThmNGE1Zjk4OTJkYThjZTFhMmI5OTFkMGM"
+          },
+          {
+            "altText": "EF-S 60mm f/2.8 USM Macro",
+            "format": "product",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxNDU1NXxpbWFnZS9qcGVnfGltYWdlcy9oN2MvaDAyLzg3OTY4Nzk5Nzg1MjYuanBnfDk2MjE3NzJiNzg1ZmY2NTAyMDMwNjYzMTA2ZTY2NmMyYjQ0OWRlMWQ1ZjdmZjczMTZkY2Q5MzFiNzQ4ODQ5YWQ"
+          },
+          {
+            "altText": "EF-S 60mm f/2.8 USM Macro",
+            "format": "thumbnail",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyODE5fGltYWdlL2pwZWd8aW1hZ2VzL2hkMy9oNjgvODc5NjkwNjMyMzk5OC5qcGd8NGUxZTg5ZmMyYzkyMDU2NjU3YTYxOWQ0YzhmNDBhNGUyYTFiNzgzYzk0ZGFmMjc0MGM5YWE3OTFlMjg5MjQ2OA"
+          },
+          {
+            "altText": "EF-S 60mm f/2.8 USM Macro",
+            "format": "cartIcon",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxNzQyfGltYWdlL2pwZWd8aW1hZ2VzL2g3MS9oZWUvODc5NjkzMjY2OTQ3MC5qcGd8ZWM3ZmU1OWM5YmFiMGE2MTRhMmQxMzk4NmRmZGE1MDFhMDg5OGI0MmIzZDg4YmEzMDA0YjkwYmExZTFmM2Y2MQ"
+          }
+        ],
+        "manufacturer": "Canon",
+        "name": "EF-S 60mm f/2.8 USM Macro",
+        "purchasable": true,
+        "stock": {
+          "stockLevel": 7,
+          "stockLevelStatus": "inStock"
+        },
+        "url": "/Open-Catalogue/Cameras/Digital-Cameras/Digital-SLR/Camera-Lenses/EF-S-60mm-f-2-8-USM-Macro/p/832382"
+      },
+      "quantity": 2,
+      "totalPrice": {
+        "currencyIso": "USD",
+        "formattedValue": "$933.76",
+        "priceType": "BUY",
+        "value": 933.76
+      },
+      "updateable": true
+    }
+  ],
+  "guid": "6feefd7c-8a9b-4c1c-b3a0-9a7299a37ea3",
+  "net": false,
+  "orderDiscounts": {
+    "currencyIso": "USD",
+    "formattedValue": "$20.00",
+    "priceType": "BUY",
+    "value": 20.0
+  },
+  "paymentInfo": {
+    "accountHolderName": "karan",
+    "billingAddress": {
+      "country": {
+        "isocode": "DE",
+        "name": "Germany"
+      },
+      "defaultAddress": false,
+      "email": "test5@test.com",
+      "firstName": "karan",
+      "formattedAddress": "rommelstrasse 11, 70376, stuttgart, Germany",
+      "id": "8796125888535",
+      "lastName": "sharma",
+      "line1": "rommelstrasse 11",
+      "postalCode": "70376",
+      "shippingAddress": false,
+      "title": "Mr.",
+      "titleCode": "mr",
+      "town": "stuttgart",
+      "visibleInAddressBook": true
+    },
+    "cardNumber": "************1111",
+    "cardType": {
+      "code": "visa",
+      "name": "Visa"
+    },
+    "defaultPayment": false,
+    "expiryMonth": "02",
+    "expiryYear": "2021",
+    "id": "8796093087786",
+    "saved": true,
+    "subscriptionId": "MockedSubscriptionID"
+  },
+  "pickupItemsQuantity": 0,
+  "pickupOrderGroups": [],
+  "productDiscounts": {
+    "currencyIso": "USD",
+    "formattedValue": "$0.00",
+    "priceType": "BUY",
+    "value": 0.0
+  },
+  "site": "electronics",
+  "store": "electronics",
+  "subTotal": {
+    "currencyIso": "USD",
+    "formattedValue": "$913.76",
+    "priceType": "BUY",
+    "value": 913.76
+  },
+  "totalDiscounts": {
+    "currencyIso": "USD",
+    "formattedValue": "$20.00",
+    "priceType": "BUY",
+    "value": 20.0
+  },
+  "totalItems": 1,
+  "totalPrice": {
+    "currencyIso": "USD",
+    "formattedValue": "$922.75",
+    "priceType": "BUY",
+    "value": 922.75
+  },
+  "totalPriceWithTax": {
+    "currencyIso": "USD",
+    "formattedValue": "$922.75",
+    "priceType": "BUY",
+    "value": 922.75
+  },
+  "totalTax": {
+    "currencyIso": "USD",
+    "formattedValue": "$43.94",
+    "priceType": "BUY",
+    "value": 43.94
+  },
+  "user": {
+    "name": "test5 test",
+    "uid": "test5@test.com"
+  },
+  "potentialOrderPromotions": [],
+  "potentialProductPromotions": [],
+  "totalUnitCount": 2
+}

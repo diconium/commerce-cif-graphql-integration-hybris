@@ -1,0 +1,22 @@
+{
+  "addresses": [
+    {
+      "country": {
+        "isocode": "US"
+      },
+      "defaultAddress": true,
+      "firstName": "José",
+      "id": "8796125822999",
+      "lastName": "Maria",
+      "line1": "street name",
+      "line2": "34",
+      "phone": "23324",
+      "postalCode": "23345",
+      "region": {
+        "isocode": "US-CA"
+      },
+      "titleCode": "mr",
+      "town": "London"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+service: graphql-reference
+
+package:
+  individually: true
+  exclude:
+    - ./**
+
+provider:
+  name: openwhisk
+  runtime: nodejs:default
+  ignore_certs: true
+  service: graphql-reference
+
+plugins:
+  - serverless-openwhisk
+  - serverless-webpack
+
+resources:
+  packages:
+    graphql-reference:
+      parameters:
+
+functions:
+  dispatcher:
+    name: graphql-reference/dispatcher
+    handler: cif/common/dispatcher.main
+    concurrency: 200
+    annotations:
+      web-export: true
+    parameters:
+      remoteSchemas: # Action with smaller order has "merge priority" in schema conflicts
+        product:
+          order: 10
+          action: graphql-reference/product
+        cart:
+          order: 20
+          action: graphql-reference/cart
+        countris:
+          order: 30
+          action: graphql-reference/countries
+        customer:
+          order: 40
+          action: graphql-reference/customer
+        orders:
+          order: 50
+          action: graphql-reference/orders
+        category:
+          order: 60
+          action: graphql-reference/category
+
+  product:
+    name: graphql-reference/product
+    handler: cif/product/src/productResolver.main
+    concurrency: 200
+
+  cart:
+    name: graphql-reference/cart
+    handler: cif/cart/src/cartResolver.main
+    concurrency: 200
+
+  countries:
+    name: graphql-reference/countries
+    handler: cif/customer/src/countriesResolver.main
+    concurrency: 200
+
+  customer:
+    name: graphql-reference/customer
+    handler: cif/customer/src/customerResolver.main
+    concurrency: 200
+
+  orders:
+    name: graphql-reference/orders
+    handler: cif/order/src/orderResolver.main
+    concurrency: 200
+
+  category:
+    name: graphql-reference/category
+    handler: cif/category/src/categoryResolver.main
+    concurrency: 200

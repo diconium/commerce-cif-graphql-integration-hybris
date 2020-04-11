@@ -1,0 +1,17 @@
+{
+    "applied_coupon": {
+        "code": "coupontest001"
+    },
+    "items":[
+        {
+            "product":{"name":"AC Power Adapter ACK-E2"},
+            "quantity":1
+        }
+    ],
+    "prices":{
+        "grand_total":{
+            "currency":"USD",
+            "value":64.92
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "items":[
+        {
+            "id":"1",
+            "product":{                   
+                "name":"Monopod 100 - Floor Standing Monopod",
+                "sku":"1099285"
+            },
+            "quantity":3
+        }
+    ],
+    "prices":{
+        "grand_total":{
+            "currency":"USD",
+            "value":71.73
+        }
+    }
+}

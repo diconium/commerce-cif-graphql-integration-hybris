@@ -1,0 +1,102 @@
+{
+  "cart": {
+    "applied_coupon": {
+      "code": "coupontest001"
+    },
+    "available_payment_methods": [
+      {
+        "code": "visa",
+        "title": "Visa"
+      }
+    ],
+    "billing_address": {
+      "city": "stuttgart",
+      "country": {
+        "code": "DE",
+        "label": "Germany"
+      },
+      "firstname": "karan",
+      "lastname": "sharma",
+      "postcode": "70376",
+      "region": {
+        "code": "Mr.",
+        "label": "Mr."
+      },
+      "street": [
+        "rommelstrasse 11, 70376, stuttgart, Germany"
+      ],
+      "telephone": null
+    },
+    "email": "test5@test.com",
+    "items": [
+      {
+        "id": "0",
+        "product": {
+          "name": "EF-S 60mm f/2.8 USM Macro",
+          "sku": "832382"
+        },
+        "quantity": 2
+      }
+    ],
+    "prices": {
+      "grand_total": {
+        "currency": "USD",
+        "value": 922.75
+      }
+    },
+    "selected_payment_method": {
+      "code": "visa",
+      "title": "visa"
+    },
+    "shipping_addresses": [
+      {
+        "available_shipping_methods": [
+          {
+            "amount": {
+              "currency": "USD",
+              "value": 8.99
+            },
+            "available": true,
+            "carrier_code": "standard-gross",
+            "carrier_title": "3-5 business days",
+            "error_message": "",
+            "method_code": "standard-gross",
+            "method_title": "Standard Delivery",
+            "price_excl_tax": {
+              "value": 8.99,
+              "currency": "USD"
+            },
+            "price_incl_tax": {
+              "value": 8.99,
+              "currency": "USD"
+            }
+          }
+        ],
+        "city": "Stuttgart",
+        "country": {
+          "code": "DE",
+          "label": "Germany"
+        },
+        "firstname": "test",
+        "lastname": "user",
+        "region": {
+          "code": "Mr.",
+          "label": "Mr."
+        },
+        "selected_shipping_method": {
+          "amount": {
+            "value": 8.99,
+            "currency": "USD"
+          },
+          "carrier_code": "standard-gross",
+          "carrier_title": "3-5 business days",
+          "method_code": "standard-gross",
+          "method_title": "Standard Delivery"
+        },
+        "street": [
+          "strasse 11, 70376, Stuttgart, Germany"
+        ]
+      }
+    ]
+  }
+}

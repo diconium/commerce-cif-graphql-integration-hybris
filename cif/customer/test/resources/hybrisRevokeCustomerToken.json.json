@@ -1,0 +1,7 @@
+{
+  "access_token": "2f8ea6eb-907e-4f19-bece-7a918b15ebf6",
+    "token_type": "bearer",
+    "refresh_token": "bfa7b7e6-cc51-4222-a96b-fc073c9b8cd1",
+    "expires_in": 43199,
+    "scope": "extended openid"
+}

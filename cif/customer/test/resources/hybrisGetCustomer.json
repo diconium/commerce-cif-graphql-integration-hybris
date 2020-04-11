@@ -1,0 +1,23 @@
+{
+  "type": "userWsDTO",
+  "name": "karan sharma test",
+  "uid": "karanaug88test@gmail.com",
+  "currency": {
+    "active": true,
+    "isocode": "USD",
+    "name": "USDollar",
+    "symbol": "$"
+  },
+  "customerId": "97df5850-2792-45e2-a84b-9152b844ae70",
+  "displayUid": "karanaug88@gmail.com",
+  "firstName": "karan test",
+  "language": {
+    "active": true,
+    "isocode": "en",
+    "name": "English",
+    "nativeName": "English"
+  },
+  "lastName": "sharma test",
+  "title": "Mr.",
+  "titleCode": "mr"
+}

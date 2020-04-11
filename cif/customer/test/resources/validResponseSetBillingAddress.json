@@ -1,0 +1,20 @@
+{
+  "city": "Austin",
+  "company": null,
+  "country": {
+    "code": "US",
+    "label": null
+  },
+  "firstname": "Bob",
+  "lastname": "Roll",
+  "postcode": "78758",
+  "region": {
+    "code": "US-WA",
+    "label": null
+  },
+  "street": [
+    "Magento Pkwy",
+    "Main Street"
+  ],
+  "telephone": "9999998899"
+}

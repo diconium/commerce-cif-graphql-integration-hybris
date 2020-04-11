@@ -1,0 +1,243 @@
+{
+  "type": "orderWsDTO",
+  "appliedOrderPromotions": [],
+  "appliedProductPromotions": [],
+  "appliedVouchers": [],
+  "calculated": true,
+  "code": "00000024",
+  "deliveryAddress": {
+     "country": {
+        "isocode": "DE"
+     },
+     "defaultAddress": false,
+     "firstName": "Test",
+     "id": "8796131164183",
+     "lastName": "5",
+     "line1": "address1",
+     "line2": "line2",
+     "phone": "",
+     "postalCode": "998873",
+     "town": "city"
+  },
+  "deliveryCost": {
+     "currencyIso": "USD",
+     "formattedValue": "$8.99",
+     "priceType": "BUY",
+     "value": 8.99
+  },
+  "deliveryItemsQuantity": 1,
+  "deliveryMode": {
+     "code": "standard-gross",
+     "deliveryCost": {
+        "currencyIso": "USD",
+        "formattedValue": "$8.99",
+        "priceType": "BUY",
+        "value": 8.99
+     },
+     "description": "3-5 business days",
+     "name": "Standard Delivery"
+  },
+  "deliveryOrderGroups": [
+     {
+        "entries": [
+           {
+              "configurationInfos": [],
+              "entryNumber": 0,
+              "product": {
+                 "availableForPickup": true,
+                 "averageRating": 4.3125,
+                 "baseOptions": [],
+                 "categories": [
+                    {
+                       "code": "827",
+                       "name": "Power Adapters & Inverters"
+                    },
+                    {
+                       "code": "brand_10",
+                       "name": "Canon"
+                    }
+                 ],
+                 "code": "594471",
+                 "configurable": false,
+                 "manufacturer": "Canon",
+                 "name": "AC Power Adapter ACK-E2",
+                 "purchasable": true,
+                 "stock": {
+                    "stockLevel": 2,
+                    "stockLevelStatus": "lowStock"
+                 },
+                 "url": "/Open-Catalogue/Components/Power-Supplies/Power-Adapters-%26-Inverters/AC-Power-Adapter-ACK-E2/p/594471"
+              },
+              "quantity": 1,
+              "totalPrice": {
+                 "currencyIso": "USD",
+                 "value": 64.92
+              }
+           }
+        ],
+        "totalPriceWithTax": {
+           "currencyIso": "USD",
+           "formattedValue": "$68.01",
+           "priceType": "BUY",
+           "value": 68.01
+        }
+     }
+  ],
+  "entries": [
+     {
+        "configurationInfos": [],
+        "entryNumber": 0,
+        "product": {
+           "availableForPickup": true,
+           "averageRating": 4.3125,
+           "baseOptions": [],
+           "categories": [
+              {
+                 "code": "827",
+                 "name": "Power Adapters & Inverters"
+              },
+              {
+                 "code": "brand_10",
+                 "name": "Canon"
+              }
+           ],
+           "code": "594471",
+           "configurable": false,
+           "manufacturer": "Canon",
+           "name": "AC Power Adapter ACK-E2",
+           "purchasable": true,
+           "stock": {
+              "stockLevel": 2,
+              "stockLevelStatus": "lowStock"
+           },
+           "url": "/Open-Catalogue/Components/Power-Supplies/Power-Adapters-%26-Inverters/AC-Power-Adapter-ACK-E2/p/594471"
+        },
+        "quantity": 1,
+        "totalPrice": {
+           "currencyIso": "USD",
+           "value": 64.92
+        }
+     }
+  ],
+  "guid": "9380f525-fac5-4a1c-bb3b-4b8f1e804cd9",
+  "net": false,
+  "orderDiscounts": {
+     "currencyIso": "USD",
+     "formattedValue": "$0.00",
+     "priceType": "BUY",
+     "value": 0.0
+  },
+  "paymentInfo": {
+     "accountHolderName": "test",
+     "billingAddress": {
+        "country": {
+           "isocode": "DE"
+        },
+        "defaultAddress": false,
+        "firstName": "Test",
+        "id": "8796131229719",
+        "lastName": "5",
+        "line1": "address1",
+        "line2": "line2",
+        "phone": "",
+        "postalCode": "998873",
+        "town": "city"
+     },
+     "cardNumber": "************1111",
+     "cardType": {
+        "code": "visa",
+        "name": "Visa"
+     },
+     "defaultPayment": false,
+     "expiryMonth": "6",
+     "expiryYear": "2023",
+     "id": "8796094005290",
+     "saved": true,
+     "subscriptionId": "5d231034-bad4-4fb1-909d-8336c94b334b"
+  },
+  "pickupItemsQuantity": 0,
+  "pickupOrderGroups": [],
+  "productDiscounts": {
+     "currencyIso": "USD",
+     "formattedValue": "$0.00",
+     "priceType": "BUY",
+     "value": 0.0
+  },
+  "site": "electronics",
+  "store": "electronics",
+  "subTotal": {
+     "currencyIso": "USD",
+     "formattedValue": "$64.92",
+     "priceType": "BUY",
+     "value": 64.92
+  },
+  "totalDiscounts": {
+     "currencyIso": "USD",
+     "formattedValue": "$0.00",
+     "priceType": "BUY",
+     "value": 0.0
+  },
+  "totalItems": 1,
+  "totalPrice": {
+     "currencyIso": "USD",
+     "formattedValue": "$73.91",
+     "priceType": "BUY",
+     "value": 73.91
+  },
+  "totalPriceWithTax": {
+     "currencyIso": "USD",
+     "formattedValue": "$73.91",
+     "priceType": "BUY",
+     "value": 73.91
+  },
+  "totalTax": {
+     "currencyIso": "USD",
+     "formattedValue": "$3.52",
+     "priceType": "BUY",
+     "value": 3.52
+  },
+  "user": {
+     "name": "test 5",
+     "uid": "test5@test.com"
+  },
+  "consignments": [],
+  "created": "2020-03-20T08:06:40+0000",
+  "guestCustomer": false,
+  "statusDisplay": "processing",
+  "unconsignedEntries": [
+     {
+        "configurationInfos": [],
+        "entryNumber": 0,
+        "product": {
+           "availableForPickup": true,
+           "averageRating": 4.3125,
+           "baseOptions": [],
+           "categories": [
+              {
+                 "code": "827",
+                 "name": "Power Adapters & Inverters"
+              },
+              {
+                 "code": "brand_10",
+                 "name": "Canon"
+              }
+           ],
+           "code": "594471",
+           "configurable": false,
+           "manufacturer": "Canon",
+           "name": "AC Power Adapter ACK-E2",
+           "purchasable": true,
+           "stock": {
+              "stockLevel": 2,
+              "stockLevelStatus": "lowStock"
+           },
+           "url": "/Open-Catalogue/Components/Power-Supplies/Power-Adapters-%26-Inverters/AC-Power-Adapter-ACK-E2/p/594471"
+        },
+        "quantity": 1,
+        "totalPrice": {
+           "currencyIso": "USD",
+           "value": 64.92
+        }
+     }
+  ]
+}
