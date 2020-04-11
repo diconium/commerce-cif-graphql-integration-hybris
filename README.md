@@ -1,4 +1,6 @@
-# 3rd-Party GraphQL integration with AEM Commerce and CIF on Adobe I/O Runtime
+# 3rd-Party GraphQL integration with AEM Commerce and CIF on Adobe I/O Runtime by [diconium](https://www.diconium.com)
+
+[![diconium-dds](images/diconium-dds.png  "diconium digital solutions" )](https://diconium.com/en/news/adobe-io-hybris)
 
 ## Introduction
 
