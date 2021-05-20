@@ -67,7 +67,7 @@ To be able to use this CIF connector you will need to provid some Hybris configu
 Under [cif/common/options.json.example](cif/common/options.json.example) you will find an example json file you should use as an example.
 
 The example file should look something like this
-'''
+```
 {
   "HB_CLIENTSECRET": "<CLIENT_SECRET>",
   "HB_CLIENTID": "<CLIENT_ID>",
@@ -78,7 +78,7 @@ The example file should look something like this
   "HB_PROTOCOL": "https",
   "HB_SECURE_BASE_MEDIA_URL": "https://hybris.example.com/yacceleratorstorefront"
 }
-'''
+```
 
 You should copy the example file to an options.json file under the same path, this will be the real file that will have your configurations.
 This file is under .gitignore and should not be commited to the repository since it has client secrets.
