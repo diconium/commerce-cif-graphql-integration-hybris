@@ -21,8 +21,11 @@ const chai = require('chai');
 const { expect } = chai;
 const chaiShallowDeepEqual = require('chai-shallow-deep-equal');
 chai.use(chaiShallowDeepEqual);
+const createCartLoader = require('../../src/CreateEmptyCart.js');
+const ymlData = require('../../../common/options.json');
 
 describe('CreateEmptyCart', function() {
+  let emptyCart;
   before(() => {
     sinon.stub(console, 'debug');
     sinon.stub(console, 'error');
@@ -33,6 +36,11 @@ describe('CreateEmptyCart', function() {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    emptyCart = sinon.spy(createCartLoader.prototype, '_createEmptyCart');
+  });
+
   describe('Integration Tests', () => {
     let args = {
       url: TestUtils.getHybrisInstance(),
@@ -40,27 +48,36 @@ describe('CreateEmptyCart', function() {
         settings: {
           bearer: '',
           customerId: 'current',
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
         },
       },
     };
+    before(async () => {
+      args.context.settings.bearer = await TestUtils.getBearer();
+    });
 
     it('Mutation: validate response should return new cart id', () => {
       args.query = 'mutation {createEmptyCart}';
-      return TestUtils.getBearer().then(accessToken => {
-        args.context.settings.bearer = accessToken;
-        return resolve(args).then(result => {
-          const { errors } = result;
-          assert.isUndefined(result.errors);
-          let responseData = result.data.createEmptyCart;
-          assert.notEqual(responseData, '');
-          expect(errors).to.be.undefined;
-        });
+      return resolve(args).then(result => {
+        console.log(result);
+        const { errors } = result;
+        assert.isUndefined(result.errors);
+        let responseData = result.data.createEmptyCart;
+        assert.notEqual(responseData, '');
+        expect(errors).to.be.undefined;
+        assert.equal(emptyCart.callCount, 1);
       });
     });
 
     it('Mutation: validate response should return guid for anonymous user ', () => {
       args.query = 'mutation {createEmptyCart}';
       args.context.settings.customerId = 'anonymous';
+      args.context.settings.HB_CLIENTID = 'client-side';
+      args.context.settings.HB_OAUTH_PATH = '/authorizationserver/oauth/token';
+      args.context.settings.HB_CLIENTSECRET = '<CLIENT_SECRET>';
       return resolve(args).then(result => {
         const { errors } = result;
         assert.isUndefined(result.errors);

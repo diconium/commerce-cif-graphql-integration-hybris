@@ -14,22 +14,31 @@
 
 'use strict';
 
-const magentoSchema = require('../../resources/magento-schema-2.3.2.min.json');
 const { graphql } = require('graphql');
 const SchemaBuilder = require('../../common/SchemaBuilder.js');
 const Countries = require('./Countries.js');
-
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 let cachedSchema = null;
 
+/**
+ *
+ * @param args
+ * @returns {Promise<ExecutionResult<ExecutionResultDataDefault>>}
+ */
 function resolve(args) {
   if (cachedSchema == null) {
-    let schemaBuilder = new SchemaBuilder(magentoSchema)
+    let schemaBuilder = new SchemaBuilder()
       .removeMutationType()
       .filterQueryFields(new Set(['countries']));
 
     cachedSchema = schemaBuilder.build();
   }
 
+  /**
+   * method used to getcountries in hybris
+   * @param {Object} params parameter contains input,graphqlContext and actionParameters
+   * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+   */
   let resolvers = {
     countries: () => {
       return new Countries({
@@ -38,6 +47,16 @@ function resolve(args) {
     },
   };
 
+  /**
+   * The resolver for this action
+   * @param {cachedSchema} cachedSchema parameter contains the catched schema of GraphQL
+   * @param {Object} query parameter contains the query of GraphQL
+   * @param {cachedSchema} resolvers parameter resolvers of the particular action
+   * @param {Object} context parameter contains the context of GraphQL
+   * @param {cachedSchema} variables parameter contains the variables of GraphQL
+   * @param {Object} operationName parameter contains the operationName of GraphQL context.
+   * @returns {Promise} a promise resolves and return the response.
+   */
   return graphql(
     cachedSchema,
     args.query,

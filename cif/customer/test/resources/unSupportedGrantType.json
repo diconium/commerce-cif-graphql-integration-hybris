@@ -1,7 +1,22 @@
 {
-    "errors": [
-      {
-        "message": "Unsupported grant type: pass"
-      }
-    ]
+  "errors": [
+    {
+      "message": "Request failed with status code 400",
+      "locations": [
+        {
+          "line": 1,
+          "column": 94
+        }
+      ],
+      "path": [
+        "generateCustomerToken",
+        "token"
+      ]
+    }
+  ],
+  "data": {
+    "generateCustomerToken": {
+      "token": null
+    }
   }
+}

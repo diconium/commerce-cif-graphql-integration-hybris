@@ -1,0 +1,404 @@
+{
+  "availableForPickup": true,
+  "averageRating": 2.52,
+  "baseOptions": [],
+  "categories": [
+    {
+      "code": "604",
+      "name": "Blank Video Tapes",
+      "url": "/Open-Catalogue/Cameras/Camera-Accessories-%26-Supplies/Blank-Video-Tapes/c/604"
+    },
+    {
+      "code": "562",
+      "name": "TDK",
+      "url": "/Brands/TDK/c/562"
+    }
+  ],
+  "classifications": [
+    {
+      "code": "643",
+      "features": [
+        {
+          "code": "ElectronicsClassification/1.0/643.tape type, 2217",
+          "comparable": true,
+          "featureUnit": {
+            "name": ".",
+            "symbol": ".",
+            "unitType": "300"
+          },
+          "featureValues": [
+            {
+              "value": "MiniDV"
+            }
+          ],
+          "name": "Tape type",
+          "range": false
+        },
+        {
+          "code": "ElectronicsClassification/1.0/643.source data-sheet, 6617",
+          "comparable": true,
+          "featureUnit": {
+            "name": ".",
+            "symbol": ".",
+            "unitType": "300"
+          },
+          "featureValues": [
+            {
+              "value": "ICEcat.biz"
+            }
+          ],
+          "name": "Source data-sheet",
+          "range": false
+        }
+      ],
+      "name": "Technical details"
+    }
+  ],
+  "code": "2278102",
+  "configurable": false,
+  "description": "- Provides an easy and effective means to remove dust and contamination from the heads of the camcorder.<br/>- The non-abrasive, durable head cleaning tape gently removes harmful oxide accumulations over approximately 100 cleaning cycles.<br/>- The cleani",
+  "images": [
+    {
+      "altText": "miniDV Head Cleaner",
+      "format": "zoom",
+      "imageType": "PRIMARY",
+      "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyNTQ3N3xpbWFnZS9qcGVnfGltYWdlcy9oZTEvaDk5Lzg3OTY4MTIxMTU5OTguanBnfDdiM2M5ZmVhMGUzZDA2NjgzZGE3NzhjY2QzOGIzNDc3ZTQzMzFiYmM1N2M1M2YyZjNhYmJjYzY1MGVmZDA1ODQ"
+    },
+    {
+      "altText": "miniDV Head Cleaner",
+      "format": "product",
+      "imageType": "PRIMARY",
+      "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxMjM4MHxpbWFnZS9qcGVnfGltYWdlcy9oZTIvaGIzLzg3OTY4MzgzOTU5MzQuanBnfDZhNGFhMWM5MDhkOTRkODQ3YWEwNTcyZGM4OGZmYTQyMGVjNGY4ZmZjYWE1ZWY4ZjZkZmY2ZjkzMjk5NTRmYTE"
+    },
+    {
+      "altText": "miniDV Head Cleaner",
+      "format": "thumbnail",
+      "imageType": "PRIMARY",
+      "url": "/medias/?context=bWFzdGVyfGltYWdlc3wzMDk5fGltYWdlL2pwZWd8aW1hZ2VzL2g3OS9oYjgvODc5Njg2NDc0MTQwNi5qcGd8OTRhMWFiM2RjMzdmYzRmNGJmMjI4MTVkMzEzNTc2MTVkMzA4NTc2OTg2ZTQ4Y2Q5NjBhNzg1ZTVlNjI0M2Q2YQ"
+    },
+    {
+      "altText": "miniDV Head Cleaner",
+      "format": "cartIcon",
+      "imageType": "PRIMARY",
+      "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyMDUzfGltYWdlL2pwZWd8aW1hZ2VzL2g3Zi9oN2QvODc5Njg5MTA4Njg3OC5qcGd8NWUzNjI1NDg1ZDYxZmJmOGM0MGExODc4ODQ5MzczMTZjNGU0ZGY2M2UwOGM1YTlhMTQ3ODM3ZTJiNmNkMGI5OQ"
+    },
+    {
+      "altText": "miniDV Head Cleaner",
+      "format": "zoom",
+      "galleryIndex": 0,
+      "imageType": "GALLERY",
+      "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyNTQ3N3xpbWFnZS9qcGVnfGltYWdlcy9oZTEvaDk5Lzg3OTY4MTIxMTU5OTguanBnfDdiM2M5ZmVhMGUzZDA2NjgzZGE3NzhjY2QzOGIzNDc3ZTQzMzFiYmM1N2M1M2YyZjNhYmJjYzY1MGVmZDA1ODQ"
+    },
+    {
+      "altText": "miniDV Head Cleaner",
+      "format": "product",
+      "galleryIndex": 0,
+      "imageType": "GALLERY",
+      "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxMjM4MHxpbWFnZS9qcGVnfGltYWdlcy9oZTIvaGIzLzg3OTY4MzgzOTU5MzQuanBnfDZhNGFhMWM5MDhkOTRkODQ3YWEwNTcyZGM4OGZmYTQyMGVjNGY4ZmZjYWE1ZWY4ZjZkZmY2ZjkzMjk5NTRmYTE"
+    },
+    {
+      "altText": "miniDV Head Cleaner",
+      "format": "thumbnail",
+      "galleryIndex": 0,
+      "imageType": "GALLERY",
+      "url": "/medias/?context=bWFzdGVyfGltYWdlc3wzMDk5fGltYWdlL2pwZWd8aW1hZ2VzL2g3OS9oYjgvODc5Njg2NDc0MTQwNi5qcGd8OTRhMWFiM2RjMzdmYzRmNGJmMjI4MTVkMzEzNTc2MTVkMzA4NTc2OTg2ZTQ4Y2Q5NjBhNzg1ZTVlNjI0M2Q2YQ"
+    }
+  ],
+  "manufacturer": "TDK",
+  "name": "miniDV Head Cleaner",
+  "numberOfReviews": 25,
+  "potentialPromotions": [],
+  "price": {
+    "currencyIso": "USD",
+    "formattedValue": "$11.00",
+    "priceType": "BUY",
+    "value": 11
+  },
+  "priceRange": {},
+  "productReferences": [],
+  "purchasable": true,
+  "reviews": [
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "Satisfactory product, but not overwhelmed.",
+      "id": "8796191162417",
+      "principal": {
+        "name": "George Reviewer",
+        "uid": "keenreviewer25@hybris.com"
+      },
+      "rating": 3
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "I would prefer a product with extra features.",
+      "id": "8796191129649",
+      "principal": {
+        "name": "Doris Reviewer",
+        "uid": "keenreviewer24@hybris.com"
+      },
+      "rating": 2
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "I would prefer a product with extra features.",
+      "id": "8796191096881",
+      "principal": {
+        "name": "Claudius Reviewer",
+        "uid": "keenreviewer23@hybris.com"
+      },
+      "rating": 2
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "I would prefer a product with extra features.",
+      "id": "8796191064113",
+      "principal": {
+        "name": "Nicko Reviewer",
+        "uid": "keenreviewer22@hybris.com"
+      },
+      "rating": 2
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "I would prefer a product with extra features.",
+      "id": "8796191031345",
+      "principal": {
+        "name": "Alistair Reviewer",
+        "uid": "keenreviewer21@hybris.com"
+      },
+      "rating": 2
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "I would prefer a product with extra features.",
+      "id": "8796190998577",
+      "principal": {
+        "name": "Moritz Reviewer",
+        "uid": "keenreviewer20@hybris.com"
+      },
+      "rating": 2
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "I would prefer a product with extra features.",
+      "id": "8796190965809",
+      "principal": {
+        "name": "Axel Reviewer",
+        "uid": "keenreviewer19@hybris.com"
+      },
+      "rating": 2
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "Satisfactory product, but not overwhelmed.",
+      "id": "8796190933041",
+      "principal": {
+        "name": "Thomas Reviewer",
+        "uid": "keenreviewer18@hybris.com"
+      },
+      "rating": 3
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "Satisfactory product, but not overwhelmed.",
+      "id": "8796190900273",
+      "principal": {
+        "name": "Flavia Reviewer",
+        "uid": "keenreviewer17@hybris.com"
+      },
+      "rating": 3
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "I would prefer a product with extra features.",
+      "id": "8796190867505",
+      "principal": {
+        "name": "Kate Reviewer",
+        "uid": "keenreviewer16@hybris.com"
+      },
+      "rating": 2
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "Satisfactory product, but not overwhelmed.",
+      "id": "8796190834737",
+      "principal": {
+        "name": "Brendan Reviewer",
+        "uid": "keenreviewer15@hybris.com"
+      },
+      "rating": 3
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "Satisfactory product, but not overwhelmed.",
+      "id": "8796190801969",
+      "principal": {
+        "name": "Toby Reviewer",
+        "uid": "keenreviewer14@hybris.com"
+      },
+      "rating": 3
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "I would prefer a product with extra features.",
+      "id": "8796190769201",
+      "principal": {
+        "name": "Aseem Reviewer",
+        "uid": "keenreviewer13@hybris.com"
+      },
+      "rating": 2
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "I would prefer a product with extra features.",
+      "id": "8796190736433",
+      "principal": {
+        "name": "Richard Reviewer",
+        "uid": "keenreviewer12@hybris.com"
+      },
+      "rating": 2
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "I would prefer a product with extra features.",
+      "id": "8796190703665",
+      "principal": {
+        "name": "Rick Reviewer",
+        "uid": "keenreviewer11@hybris.com"
+      },
+      "rating": 2
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "Satisfactory product, but not overwhelmed.",
+      "id": "8796190670897",
+      "principal": {
+        "name": "Stefan Reviewer",
+        "uid": "keenreviewer10@hybris.com"
+      },
+      "rating": 3
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "Satisfactory product, but not overwhelmed.",
+      "id": "8796190638129",
+      "principal": {
+        "name": "Klaus Reviewer",
+        "uid": "keenreviewer9@hybris.com"
+      },
+      "rating": 3
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "Satisfactory product, but not overwhelmed.",
+      "id": "8796190605361",
+      "principal": {
+        "name": "Ronald Reviewer",
+        "uid": "keenreviewer8@hybris.com"
+      },
+      "rating": 3
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "I would prefer a product with extra features.",
+      "id": "8796190572593",
+      "principal": {
+        "name": "Roger Reviewer",
+        "uid": "keenreviewer7@hybris.com"
+      },
+      "rating": 2
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "Satisfactory product, but not overwhelmed.",
+      "id": "8796190539825",
+      "principal": {
+        "name": "Honda Reviewer",
+        "uid": "keenreviewer6@hybris.com"
+      },
+      "rating": 3
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "Satisfactory product, but not overwhelmed.",
+      "id": "8796190507057",
+      "principal": {
+        "name": "Adam Reviewer",
+        "uid": "keenreviewer5@hybris.com"
+      },
+      "rating": 3
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "Satisfactory product, but not overwhelmed.",
+      "id": "8796190474289",
+      "principal": {
+        "name": "Steve Reviewer",
+        "uid": "keenreviewer4@hybris.com"
+      },
+      "rating": 3
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "Satisfactory product, but not overwhelmed.",
+      "id": "8796190441521",
+      "principal": {
+        "name": "John Reviewer",
+        "uid": "keenreviewer3@hybris.com"
+      },
+      "rating": 3
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "I would prefer a product with extra features.",
+      "id": "8796190408753",
+      "principal": {
+        "name": "Ken Reviewer",
+        "uid": "keenreviewer2@hybris.com"
+      },
+      "rating": 2
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:05+0000",
+      "headline": "Satisfactory product, but not overwhelmed.",
+      "id": "8796190375985",
+      "principal": {
+        "name": "Kenneth Reviewer",
+        "uid": "keenreviewer1@hybris.com"
+      },
+      "rating": 3
+    }
+  ],
+  "stock": {
+    "isValueRounded": false,
+    "stockLevel": 87,
+    "stockLevelStatus": "inStock"
+  },
+  "summary": "miniDV Head Cleaner",
+  "url": "/electronics/products/2278102"
+}

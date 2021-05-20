@@ -21,7 +21,6 @@ const chai = require('chai');
 const expect = require('chai').expect;
 const chaiShallowDeepEqual = require('chai-shallow-deep-equal');
 chai.use(chaiShallowDeepEqual);
-const TestUtils = require('../../../utils/TestUtils.js');
 
 describe('RevokeCustomerToken', function() {
   before(() => {
@@ -36,28 +35,21 @@ describe('RevokeCustomerToken', function() {
 
   describe('Integration tests', () => {
     let args = {
-      url: TestUtils.getHybrisInstance(),
+      url: '',
       context: {
         settings: {
           bearer: '',
-          customerId: 'current',
-          HB_CLIENTSECRET: 'oauth-client-secret',
-          HB_CLIENTID: 'oauth-clientid',
-          HB_OAUTH_PATH: '/authorizationserver/oauth/token',
         },
       },
     };
 
     it('Mutation: Validate revoke customer token', () => {
       args.query = 'mutation { revokeCustomerToken { result } }';
-      return TestUtils.getRefreshToken().then(refreshToken => {
-        args.context.settings.bearer = refreshToken;
-        return resolve(args).then(result => {
-          const { errors } = result;
-          let responseData = result.data.revokeCustomerToken.result;
-          assert.equal(responseData, true);
-          expect(errors).to.be.undefined;
-        });
+      return resolve(args).then(result => {
+        const { errors } = result;
+        let responseData = result.data.revokeCustomerToken.result;
+        assert.equal(responseData, true);
+        expect(errors).to.be.undefined;
       });
     });
   });

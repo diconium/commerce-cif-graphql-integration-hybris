@@ -15,7 +15,7 @@
 'use strict';
 
 const DataLoader = require('dataloader');
-const rp = require('request-promise');
+const axios = require('axios');
 
 class RemoveItemFromCartLoader {
   /**
@@ -23,9 +23,11 @@ class RemoveItemFromCartLoader {
    */
   constructor(actionParameters) {
     let loadingFunction = cartInputs => {
-      // This loader loads each cart one by one, but if the 3rd party backend allows it,
-      // it could also fetch all carts in one single request. In this case, the method
-      // must still return an Array of carts with the same order as the keys.
+      /**
+       *This loader loads each cart one by one, but if the 3rd party backend allows it,
+       *it could also fetch all carts in one single request. In this case, the method
+       *must still return an Array of carts with the same order as the keys.
+       */
       return Promise.resolve(
         cartInputs.map(cartInput => {
           console.debug(
@@ -73,17 +75,24 @@ class RemoveItemFromCartLoader {
       HB_BASESITEID,
     } = actionParameters.context.settings;
 
-    const { cart_id, cart_item_id } = cartInput;
-
+    let { cart_id, cart_item_id, cart_item_uid } = cartInput;
+    cart_item_id = cart_item_uid || cart_item_id;
+    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cart_id}/entries/${cart_item_id}?fields=DEFAULT`;
     return new Promise((resolve, reject) => {
-      return rp({
-        method: 'DELETE',
-        uri: `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cart_id}/entries/${cart_item_id}?fields=DEFAULT&access_token=${bearer}`,
-        json: true,
-      })
-        .then(response => resolve(response))
-        .catch(err => {
-          reject(err.error.errors[0].message);
+      axios
+        .delete(uri, {
+          params: {
+            query: '',
+          },
+          headers: {
+            Authorization: `Bearer ${bearer}`,
+          },
+        })
+        .then(() => {
+          resolve(true);
+        })
+        .catch(error => {
+          reject(error);
         });
     });
   }

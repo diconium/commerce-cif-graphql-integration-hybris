@@ -14,7 +14,8 @@
 
 'use strict';
 
-const rp = require('request-promise');
+const axios = require('axios').default;
+const qs = require('querystring');
 
 class TokenUtils {
   static getOAuthClientBearer(actionParameters) {
@@ -26,16 +27,19 @@ class TokenUtils {
       HB_PROTOCOL,
     } = actionParameters.context.settings;
 
-    return rp({
-      uri: `${HB_PROTOCOL}://${HB_API_HOST}${HB_OAUTH_PATH}?operationType=oAuth`,
-      method: 'POST',
-      form: {
-        HB_CLIENTID,
-        HB_CLIENTSECRET,
-        grant_type: 'client_credentials',
-      },
-    })
-      .then(response => JSON.parse(response).access_token)
+    return axios
+      .request({
+        url: `${HB_PROTOCOL}://${HB_API_HOST}${HB_OAUTH_PATH}?operationType=oAuth`,
+        method: 'POST',
+        auth: {
+          username: HB_CLIENTID,
+          password: HB_CLIENTSECRET,
+        },
+        data: qs.stringify({
+          grant_type: 'client_credentials',
+        }),
+      })
+      .then(response => response.data.access_token)
       .catch(err => err);
   }
 }

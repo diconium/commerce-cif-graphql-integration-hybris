@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Payment info is not set"
+      "message": "Request failed with status code 400"
     }
   ]
 }

@@ -14,7 +14,6 @@
 
 'use strict';
 
-const magentoSchema = require('../resources/magento-schema-2.3.2.min.json');
 const {
   makeRemoteExecutableSchema,
   introspectSchema,
@@ -86,7 +85,7 @@ function resolve(args) {
       // Local resolvers object
       let resolvers = {
         storeConfig: () => ({
-          secure_base_media_url: 'https://hybris.example.com/',
+          secure_base_media_url: '',
         }),
       };
 
@@ -110,7 +109,7 @@ function resolve(args) {
 }
 
 function localSchema() {
-  let schemaBuilder = new SchemaBuilder(magentoSchema)
+  let schemaBuilder = new SchemaBuilder()
     .removeMutationType()
     .filterQueryFields(new Set(['storeConfig']));
 

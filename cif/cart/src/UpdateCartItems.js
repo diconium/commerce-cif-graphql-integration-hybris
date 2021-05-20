@@ -40,6 +40,7 @@ class UpdateCartItems {
 
   /**
    * method used to call the loadingFunction using dataloader
+   * @param {*} input will have the parameter cartId
    * @returns {Promise} a promise return null after resolved successfully other wise return the error.
    */
   __load() {

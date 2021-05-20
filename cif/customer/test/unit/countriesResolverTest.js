@@ -22,12 +22,15 @@ const chaiShallowDeepEqual = require('chai-shallow-deep-equal');
 const nock = require('nock');
 
 chai.use(chaiShallowDeepEqual);
-
+const TestUtils = require('../../../utils/TestUtils.js');
 const hybrisCountriesList = require('../resources/hybrisGetCountries');
+const hybrisRegionsAF = require('../resources/hybrisRegionsAF.json');
+const hybrisRegionsUS = require('../resources/hybrisRegionsUS.json');
 const validResponseCountriesList = require('../resources/validResponseCountriesList');
+const ymlData = require('../../../common/options.json');
 
 describe('Countries Resolver', () => {
-  const scope = nock('https://hybris.example.com');
+  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
 
   before(() => {
     // Disable console debugging
@@ -42,24 +45,33 @@ describe('Countries Resolver', () => {
 
   describe('Unit Tests', () => {
     let args = {
-      url: 'https://hybris.example.com',
+      url: TestUtils.getHybrisInstance(),
       context: {
         settings: {
-          HB_PROTOCOL: 'https',
-          HB_API_HOST: 'hybris.example.com',
-          HB_API_BASE_PATH: '/rest/v2',
-          HB_BASESITEID: '/electronics',
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
         },
       },
     };
 
     it('Basic countries search', () => {
       scope
-        .get('/rest/v2/electronics/countries')
-        .query({ fields: 'FULL' })
+        .get(`${ymlData.HB_API_BASE_PATH}electronics/countries`)
+        .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisCountriesList);
+      scope
+        .get(`${ymlData.HB_API_BASE_PATH}electronics/countries/AF/regions`)
+        .query({ fields: 'FULL', query: '' })
+        .reply(200, hybrisRegionsAF);
+      scope
+        .get(`${ymlData.HB_API_BASE_PATH}electronics/countries/US/regions`)
+        .query({ fields: 'FULL', query: '' })
+        .reply(200, hybrisRegionsUS);
       args.query = '{countries{two_letter_abbreviation, full_name_english}}';
       return resolve(args).then(result => {
+        console.log(result);
         const { errors } = result;
         const { countries } = result.data;
         expect(countries).to.exist.and.to.deep.equal(

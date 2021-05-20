@@ -6,7 +6,7 @@
 
 The [CIF (Commerce Integration Framework) GraphQL connector](https://github.com/adobe/commerce-cif-connector) and the [AEM CIF Core Components](https://github.com/adobe/aem-core-cif-components) offer authoring and frontend integration between AEM (Adobe Experience Manager) and Magento. This integration is based on the [Magento GraphQL API](https://devdocs.magento.com/guides/v2.3/graphql/index.html) which offers a very flexible and efficient integration point between AEM and Magento.
 
-In order to support other 3rd-party "non-Magento" commerce platforms, this project demonstrates how a 3rd-party commerce platform like Hybris can be integrated with the CIF GraphQL connector and the AEM CIF Core Components via the Magento GraphQL API. Note that the integration is currently based on the GraphQL API of Magento 2.3.2.
+In order to support other 3rd-party "non-Magento" commerce platforms, this project demonstrates how a 3rd-party commerce platform like Hybris can be integrated with the CIF GraphQL connector and the AEM CIF Core Components via the Magento GraphQL API. Note that the integration is currently based on the GraphQL API of Magento 2.4.2.
 
 This enables customers to reuse our existing connector and components in their project by simply exposing the Magento GraphQL API on top of a 3rd-party commerce platform like Hybris. To offer maximum flexibility and scalability, this "adaptation layer" is deployed on the serverless [Adobe I/O Runtime](https://www.adobe.io/apis/experienceplatform/runtime.html) platform.
 
@@ -51,7 +51,7 @@ This second diagram illustrates how a GraphQL query is being executed. The `cart
 
 ![GraphQL query execution](images/graphql-query-execution.png)
 
-## How to build, test, and deploy
+## How to configure, build, test, and deploy
 
 ### Tools
 
@@ -61,6 +61,28 @@ Make sure you have the following tools installed:
 * [OpenWhisk CLI](https://github.com/apache/incubator-openwhisk-cli/releases)
 
 OpenWhisk CLI must be available in your systems PATH and set up correctly to either use a local OpenWhisk installation or an Adobe I/O account. Try `wsk --help` to make sure it is working.
+
+### Configuration
+To be able to use this CIF connector you will need to provid some Hybris configurations to connect to your Hybris endpoint.
+Under [cif/common/options.json.example](cif/common/options.json.example) you will find an example json file you should use as an example.
+
+The example file should look something like this
+'''
+{
+  "HB_CLIENTSECRET": "<CLIENT_SECRET>",
+  "HB_CLIENTID": "<CLIENT_ID>",
+  "HB_OAUTH_PATH": "/authorizationserver/oauth/token",
+  "HB_API_HOST": "hybris.example.com",
+  "HB_API_BASE_PATH": "/occ/v2/",
+  "HB_BASESITEID": "electronics",
+  "HB_PROTOCOL": "https",
+  "HB_SECURE_BASE_MEDIA_URL": "https://hybris.example.com/yacceleratorstorefront"
+}
+'''
+
+You should copy the example file to an options.json file under the same path, this will be the real file that will have your configurations.
+This file is under .gitignore and should not be commited to the repository since it has client secrets.
+
 
 ### Build & Deployment
 

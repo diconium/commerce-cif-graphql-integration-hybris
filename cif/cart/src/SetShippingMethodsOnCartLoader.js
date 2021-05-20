@@ -15,7 +15,7 @@
 'use strict';
 
 const DataLoader = require('dataloader');
-const rp = require('request-promise');
+const axios = require('axios');
 
 class setShippingMethodsOnCartLoader {
   /**
@@ -23,9 +23,11 @@ class setShippingMethodsOnCartLoader {
    */
   constructor(actionParameters) {
     let loadingFunction = inputs => {
-      // This loader loads each cart one by one, but if the 3rd party backend allows it,
-      // it could also fetch all carts in one single request. In this case, the method
-      // must still return an Array of carts with the same order as the keys.
+      /**
+       *This loader loads each cart one by one, but if the 3rd party backend allows it,
+       *it could also fetch all carts in one single request. In this case, the method
+       *must still return an Array of carts with the same order as the keys.
+       */
       return Promise.resolve(
         inputs.map(input => {
           console.debug(`--> Fetching cart with id ${JSON.stringify(input)}`);
@@ -56,7 +58,7 @@ class setShippingMethodsOnCartLoader {
   }
 
   /**
-   * @param {String} input consist of cart id and shipping method array.
+   * @param {String} params consist of cart id and shipping method array.
    * @param {Object} actionParameters Some parameters of the I/O action itself (e.g. backend server URL, authentication info, etc)
    * @returns {Promise} A Promise with the cart data.
    */
@@ -71,17 +73,22 @@ class setShippingMethodsOnCartLoader {
     } = actionParameters.context.settings;
 
     const { cart_id, shipping_methods } = input;
-    let url = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cart_id}/deliverymode?deliveryModeId=${shipping_methods[0].carrier_code}&fields=DEFAULT&access_token=${bearer}`;
-
-    return rp({
-      method: 'PUT',
-      uri: url,
-      json: true,
-    })
-      .then(() => {})
-      .catch(err => {
-        throw new Error(err.error.errors[0].message);
-      });
+    let url = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cart_id}/deliverymode?deliveryModeId=${shipping_methods[0].carrier_code}&fields=DEFAULT`;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${bearer}`,
+      },
+    };
+    return new Promise((resolve, reject) => {
+      axios
+        .put(url, {}, config)
+        .then(() => {
+          resolve(true);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
   }
 }
 

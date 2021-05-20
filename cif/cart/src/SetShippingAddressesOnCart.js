@@ -15,6 +15,7 @@
 'use strict';
 const LoaderProxy = require('../../common/LoaderProxy.js');
 const SetShippingAddressOnCartLoader = require('./SetShippingAddressOnCartLoader.js');
+const ShippingMethodsLoader = require('./ShippingMethodsLoader.js');
 
 class SetShippingAddressesOnCart {
   /**
@@ -32,6 +33,9 @@ class SetShippingAddressesOnCart {
     this.setShippingAddressOnCartLoader = new SetShippingAddressOnCartLoader(
       parameters
     );
+    this.shippingMethodsLoader = new ShippingMethodsLoader(
+      parameters.actionParameters
+    );
     /**
      * This class returns a Proxy to avoid having to implement a getter for all properties.
      */
@@ -42,7 +46,48 @@ class SetShippingAddressesOnCart {
    * method used to call load method from setshippingaddressoncart loader class
    */
   __load() {
-    return this.setShippingAddressOnCartLoader.load(this.cartId);
+    return this.setShippingAddressOnCartLoader.load(this.cartId).then(data => {
+      console.log(data);
+      return this.shippingMethodsLoader.load(this.cartId).then(result => {
+        data.deliveryModes = result.deliveryModes;
+        return data;
+      });
+    });
+  }
+
+  /**
+   * @param deliveryModes
+   * @returns {[]}
+   */
+  getShippingMethods(deliveryModes) {
+    let shippingMethods = [];
+    deliveryModes.map(shippingMethod => {
+      if (shippingMethod.code !== 'pickup') {
+        shippingMethods.push({
+          amount: {
+            currency: shippingMethod.deliveryCost.currencyIso,
+            value: shippingMethod.deliveryCost.value,
+          },
+          available: true,
+          carrier_code: shippingMethod.code,
+          carrier_title: shippingMethod.description
+            ? shippingMethod.description
+            : shippingMethod.code,
+          error_message: '',
+          method_code: shippingMethod.code,
+          method_title: shippingMethod.name,
+          price_excl_tax: {
+            value: shippingMethod.deliveryCost.value,
+            currency: shippingMethod.deliveryCost.currencyIso,
+          },
+          price_incl_tax: {
+            value: shippingMethod.deliveryCost.value,
+            currency: shippingMethod.deliveryCost.currencyIso,
+          },
+        });
+      }
+    });
+    return shippingMethods;
   }
 
   /**
@@ -51,6 +96,12 @@ class SetShippingAddressesOnCart {
    * @returns {Object} convert the hybris data into magento graphQL schema and return the shippingAddresss object
    */
   __convertData(data) {
+    let regionCode = data.region.isocode.split('-');
+    regionCode = regionCode.length === 2 ? regionCode[1] : regionCode[0];
+    let availableShippingMethods =
+      data.deliveryModes !== undefined
+        ? this.getShippingMethods(data.deliveryModes)
+        : [];
     return {
       cart: {
         shipping_addresses: [
@@ -60,13 +111,16 @@ class SetShippingAddressesOnCart {
             street: [data.line1, data.line2],
             city: data.town,
             region: {
-              code: data.region.isocode,
+              code: regionCode,
+              label: regionCode,
             },
             postcode: data.postalCode,
             telephone: data.phone,
             country: {
               code: data.country.isocode,
+              label: data.country.isocode,
             },
+            available_shipping_methods: availableShippingMethods,
           },
         ],
       },

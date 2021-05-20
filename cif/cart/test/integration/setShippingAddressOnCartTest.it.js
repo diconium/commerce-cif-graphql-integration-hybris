@@ -19,11 +19,14 @@ const assert = require('chai').assert;
 const expect = require('chai').expect;
 const CartLoader = require('../../src/CartLoader.js');
 const TestUtils = require('../../../utils/TestUtils.js');
+const ShippingAddressLoader = require('../../src/SetShippingAddressOnCartLoader');
 
 // The cart resolver
 const resolve = require('../../src/cartResolver.js').main;
+const ymlData = require('../../../common/options.json');
 
 describe('Shipping Address on Cart', () => {
+  let ShippingAddress;
   before(() => {
     // Disable console debugging
     sinon.stub(console, 'debug');
@@ -34,6 +37,13 @@ describe('Shipping Address on Cart', () => {
     console.debug.restore();
     console.error.restore();
   });
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    ShippingAddress = sinon.spy(
+      ShippingAddressLoader.prototype,
+      '_setShippingAddressOnCart'
+    );
+  });
 
   describe('Integration Tests', () => {
     let args = {
@@ -42,18 +52,23 @@ describe('Shipping Address on Cart', () => {
         settings: {
           bearer: '',
           customerId: 'current',
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
         },
       },
     };
+    before(async () => {
+      args.context.settings.bearer = await TestUtils.getBearer();
+    });
 
     it('Mutation: set shipping address on cart', () => {
-      return TestUtils.getBearer().then(accessToken => {
-        args.context.settings.bearer = accessToken;
-        args.query =
-          'mutation {setShippingAddressesOnCart(input: {cart_id: "00000080", shipping_addresses: [{address: {firstname: "Bob", lastname: "Roll", company: "Magento", street: ["Magento shipping", "Main Street"], city: "Austin", region: "US-WA", postcode: "78758", country_code: "US", telephone: "9999998899", save_in_address_book: false}}]}) { cart {shipping_addresses {firstname,lastname,company,street,city,region {code,label},postcode,telephone,country {code,label} }}}}';
-        return resolve(args).then(result => {
-          assert.isUndefined(result.errors); // No GraphQL errors
-        });
+      args.query =
+        'mutation {setShippingAddressesOnCart(input: {cart_id: "00000035", shipping_addresses: [{address: {firstname: "Senthil", lastname: "Roll", company: "Magento", street: ["Magento shipping", "Main Street"], city: "Austin", region: "WA", postcode: "78758", country_code: "US", telephone: "9999998899", save_in_address_book: false}}]}) { cart {shipping_addresses {firstname,lastname,company,street,city,region {code,label},postcode,telephone,country {code,label} }}}}';
+      return resolve(args).then(result => {
+        assert.isUndefined(result.errors); // No GraphQL errors
+        assert.equal(ShippingAddress.callCount, 1);
       });
     });
 
@@ -65,7 +80,7 @@ describe('Shipping Address on Cart', () => {
       return resolve(args)
         .then(result => {
           assert.equal(result.errors.length, 1);
-          assert.equal(result.errors[0].message, 'Backend data is null');
+          assert.equal(result.errors[0].message, '');
           expect(result.errors[0].path).to.eql(['cart', 'email']);
         })
         .finally(() => {

@@ -15,9 +15,12 @@
 'use strict';
 
 const DataLoader = require('dataloader');
-const rp = require('request-promise');
+const axios = require('axios');
 
 class CountriesLoader {
+  /**
+   * @param {Object} actionParameters parameter object contains the bearer and host details
+   */
   constructor(actionParameters) {
     let cacheKeyFunction = key => JSON.stringify(key, null, 0);
 
@@ -47,10 +50,19 @@ class CountriesLoader {
     });
   }
 
+  /**
+   * method used to call the loadingFunction using dataloader
+   * @param {*} input parameter contains the country details like two_letter_abbreviation, full_name_english details
+   * @returns {Promise} a promise return countries  after resolved successfully other wise return the error.
+   */
   load(key) {
     return this.loader.load(key);
   }
-
+  /**
+   * method used to call commerce GraphQL create customer endpoint to create new customer
+   * @param {Object} parameter contains the country details like two_letter_abbreviation, full_name_english details
+   * @param {Object} actionParameters parameter object contains the bearer and host details
+   */
   __countries(actionParameters) {
     const {
       HB_API_BASE_PATH,
@@ -58,16 +70,30 @@ class CountriesLoader {
       HB_PROTOCOL,
       HB_BASESITEID,
     } = actionParameters.context.settings;
-
-    return rp({
-      uri: `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/countries?fields=FULL`,
-      json: true,
-    })
-      .then(response => response.countries)
-      .catch(() => ({
-        countries: [],
-      }));
+    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/countries?fields=FULL`;
+    return new Promise((resolve, reject) => {
+      axios
+        .get(uri, {
+          params: {
+            query: '',
+          },
+          headers: {},
+        })
+        .then(response => {
+          if (response.data.countries) {
+            resolve(response.data.countries);
+          } else {
+            reject(false);
+          }
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
   }
 }
 
+/**
+ * @type {CountriesLoader}
+ */
 module.exports = CountriesLoader;

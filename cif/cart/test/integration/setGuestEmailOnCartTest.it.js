@@ -17,13 +17,15 @@
 const sinon = require('sinon');
 const assert = require('chai').assert;
 const expect = require('chai').expect;
-const CartLoader = require('../../src/CartLoader.js');
-//const TestUtils = require('../../../utils/TestUtils.js');
+const TestUtils = require('../../../utils/TestUtils.js');
+const SetGuestEmailLoader = require('../../src/SetGuestEmailOnCartLoader.js');
 
 // The cart resolver
 const resolve = require('../../src/cartResolver.js').main;
+const ymlData = require('../../../common/options.json');
 
-describe('Shipping Address on Cart', () => {
+describe('set email cart', () => {
+  let SetGuestEmail;
   before(() => {
     // Disable console debugging
     sinon.stub(console, 'debug');
@@ -35,52 +37,41 @@ describe('Shipping Address on Cart', () => {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    SetGuestEmail = sinon.spy(
+      SetGuestEmailLoader.prototype,
+      '_setGuestEmailOnCart'
+    );
+  });
+
   describe('Integration Tests', () => {
     let args = {
-      url: 'https://hybris.example.com',
+      url: TestUtils.getHybrisInstance(),
       context: {
         settings: {
           bearer: '',
-          customerId: 'current',
+          customerId: 'anonymous',
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
         },
       },
     };
+    before(async () => {
+      args.context.settings.bearer = await TestUtils.getOAuthClientBearer();
+    });
 
-    // todo this test was not working, maybe this endpoint does not work for current user, need to investigate
-    /*it('Mutation: set guest email on cart for signed in user', () => {
-            return TestUtils.getBearer().then(accessToken => {
-                args.context.settings.bearer = '52673971-1103-4460-aa2f-b3bff6463c8e';
-                args.query = 'mutation { setGuestEmailOnCart(input: {cart_id: "00000104", email: "guestemail@test.com"}) { cart { email}}}';
-                return resolve(args).then(result => {
-                    assert.isUndefined(result.errors); // No GraphQL errors
-                });
-            });
-        });*/
-
-    // uncomment this whenever we want to test integration
-    /* it('Mutation: set guest email on cart for anonymous in user', () => {
-                args.context.settings.customerId = 'anonymous';
-                args.context.settings.bearer = '';
-                args.query = 'mutation { setGuestEmailOnCart(input: {cart_id: "3e5e1aef-c12c-4c63-a4f8-2dd5b525250c", email: "guestemail@test.com"}) { cart { email}}}';
-                return resolve(args).then(result => {
-                    assert.isUndefined(result.errors); // No GraphQL errors
-                });
-        });*/
-
-    it('Error when fetching the cart data', () => {
-      let stub = sinon
-        .stub(CartLoader.prototype, '__getCartById')
-        .returns(Promise.reject('Connection failed'));
-      args.query = '{cart(cart_id:"abcd"){email}}';
-      return resolve(args)
-        .then(result => {
-          assert.equal(result.errors.length, 1);
-          assert.equal(result.errors[0].message, 'Backend data is null');
-          expect(result.errors[0].path).to.eql(['cart', 'email']);
-        })
-        .finally(() => {
-          stub.restore();
-        });
+    it('set email on cart - guest user', () => {
+      args.query =
+        'mutation { setGuestEmailOnCart(input: {cart_id: "37ada5ad-3fd7-4f4d-9818-5ada248797b0", email: "mytestemail@hybris.com"}) { cart { email}}}';
+      return resolve(args).then(result => {
+        const { errors } = result;
+        assert.isUndefined(result.errors);
+        expect(errors).to.be.undefined;
+        assert.equal(SetGuestEmail.callCount, 1);
+      });
     });
   });
 });

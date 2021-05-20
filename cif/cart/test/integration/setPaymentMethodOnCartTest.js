@@ -13,12 +13,35 @@
  ******************************************************************************/
 
 'use strict';
-
+const sinon = require('sinon');
 const assert = require('chai').assert;
 const resolve = require('../../../customer/src/customerResolver.js').main;
 const TestUtils = require('../../../utils/TestUtils.js');
+const PaymentMethodLoader = require('../../../customer/src/SetPaymentMethodOnCartLoader');
+const ymlData = require('../../../common/options.json');
 
 describe('Set Payment method on Cart', () => {
+  let PaymentMethod;
+
+  before(() => {
+    // Disable console debugging
+    sinon.stub(console, 'debug');
+    sinon.stub(console, 'error');
+  });
+
+  after(() => {
+    console.debug.restore();
+    console.error.restore();
+  });
+
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    PaymentMethod = sinon.spy(
+      PaymentMethodLoader.prototype,
+      '_postPaymentMethodOnCart'
+    );
+  });
+
   describe('Integration Tests', () => {
     let args = {
       url: TestUtils.getHybrisInstance(),
@@ -26,19 +49,35 @@ describe('Set Payment method on Cart', () => {
         settings: {
           bearer: '',
           customerId: 'current',
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
         },
       },
     };
+    before(async () => {
+      args.context.settings.bearer = await TestUtils.getBearer();
+    });
 
     // commented to avoid unnecessary failures on running integration tests
-    it('Remove item from cart', () => {
+    it('set payment method on cart', () => {
       args.query =
-        'mutation{setPaymentMethodOnCart(input:{cart_id:"00000011",payment_method:{code:"visa"}}){cart{selected_payment_method{code,title}}}}';
-      return TestUtils.getBearer().then(accessToken => {
-        args.context.settings.bearer = accessToken;
-        return resolve(args).then(result => {
-          assert.isUndefined(result.errors);
-        });
+        'mutation{setPaymentMethodOnCart(input:{cart_id:"00000035",payment_method:{code:"visa"}}){cart{selected_payment_method{code,title}}}}';
+      return resolve(args).then(result => {
+        assert.isUndefined(result.errors);
+        assert.equal(PaymentMethod.callCount, 1);
+      });
+    });
+
+    it('set payment method on cart with cart not found', () => {
+      args.query =
+        'mutation{setPaymentMethodOnCart(input:{cart_id:"INVALID-CART-ID",payment_method:{code:"visa"}}){cart{selected_payment_method{code,title}}}}';
+      return resolve(args).then(result => {
+        assert.equal(
+          result.errors[0].message,
+          'Request failed with status code 400'
+        );
       });
     });
   });

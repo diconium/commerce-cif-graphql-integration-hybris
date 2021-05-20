@@ -1,0 +1,1194 @@
+{
+  "type": "productCategorySearchPageWsDTO",
+  "breadcrumbs": [
+    {
+      "facetCode": "allCategories",
+      "facetName": "allCategories",
+      "facetValueCode": "106",
+      "facetValueName": "Components",
+      "removeQuery": {
+        "query": {
+          "value": ":relevance"
+        },
+        "url": "/search?q=%3Arelevance"
+      }
+    }
+  ],
+  "currentQuery": {
+    "query": {
+      "value": ":relevance:allCategories:106"
+    },
+    "url": "/search?q=%3Arelevance%3AallCategories%3A106"
+  },
+  "facets": [
+    {
+      "category": false,
+      "multiSelect": true,
+      "name": "Stores",
+      "priority": 2147483647,
+      "values": [
+        {
+          "count": 17,
+          "name": "Chiba",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Chiba"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AChiba"
+          },
+          "selected": false
+        },
+        {
+          "count": 17,
+          "name": "Choshi",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Choshi"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AChoshi"
+          },
+          "selected": false
+        },
+        {
+          "count": 20,
+          "name": "Fukuoka Best Western Fukuoka Nakasu Inn",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Fukuoka+Best+Western+Fukuoka+Nakasu+Inn"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AFukuoka%2BBest%2BWestern%2BFukuoka%2BNakasu%2BInn"
+          },
+          "selected": false
+        },
+        {
+          "count": 17,
+          "name": "Fukuoka Canal City Fukuoka Washington Hotel",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Fukuoka+Canal+City+Fukuoka+Washington+Hotel"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AFukuoka%2BCanal%2BCity%2BFukuoka%2BWashington%2BHotel"
+          },
+          "selected": false
+        },
+        {
+          "count": 15,
+          "name": "Fukuoka Hilton Fukuoka Sea Hawk",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Fukuoka+Hilton+Fukuoka+Sea+Hawk"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AFukuoka%2BHilton%2BFukuoka%2BSea%2BHawk"
+          },
+          "selected": false
+        },
+        {
+          "count": 16,
+          "name": "Fukuoka Hotel Monterey La Soeur Fukuoka",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Fukuoka+Hotel+Monterey+La+Soeur+Fukuoka"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AFukuoka%2BHotel%2BMonterey%2BLa%2BSoeur%2BFukuoka"
+          },
+          "selected": false
+        },
+        {
+          "count": 15,
+          "name": "Fukuoka Hotel Nikko Fukuoka",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Fukuoka+Hotel+Nikko+Fukuoka"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AFukuoka%2BHotel%2BNikko%2BFukuoka"
+          },
+          "selected": false
+        },
+        {
+          "count": 20,
+          "name": "Ichikawa",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Ichikawa"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AIchikawa"
+          },
+          "selected": false
+        },
+        {
+          "count": 20,
+          "name": "Kawasaki Grand Hotel",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Kawasaki+Grand+Hotel"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AKawasaki%2BGrand%2BHotel"
+          },
+          "selected": false
+        },
+        {
+          "count": 17,
+          "name": "Kawasaki Hotel Sunroute Kawasaki",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Kawasaki+Hotel+Sunroute+Kawasaki"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AKawasaki%2BHotel%2BSunroute%2BKawasaki"
+          },
+          "selected": false
+        },
+        {
+          "count": 20,
+          "name": "Kawasaki Mets Kawasaki Hotel",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Kawasaki+Mets+Kawasaki+Hotel"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AKawasaki%2BMets%2BKawasaki%2BHotel"
+          },
+          "selected": false
+        },
+        {
+          "count": 22,
+          "name": "Kawasaki Mets Mizonokuchi Hotel",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Kawasaki+Mets+Mizonokuchi+Hotel"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AKawasaki%2BMets%2BMizonokuchi%2BHotel"
+          },
+          "selected": false
+        },
+        {
+          "count": 15,
+          "name": "Kawasaki Pearl Hotel Kawasaki",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Kawasaki+Pearl+Hotel+Kawasaki"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AKawasaki%2BPearl%2BHotel%2BKawasaki"
+          },
+          "selected": false
+        },
+        {
+          "count": 20,
+          "name": "Kobe Bay Sheraton Hotel and Towers",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Kobe+Bay+Sheraton+Hotel+and+Towers"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AKobe%2BBay%2BSheraton%2BHotel%2Band%2BTowers"
+          },
+          "selected": false
+        },
+        {
+          "count": 11,
+          "name": "Kobe Hotel Monterey Amalie",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Kobe+Hotel+Monterey+Amalie"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AKobe%2BHotel%2BMonterey%2BAmalie"
+          },
+          "selected": false
+        },
+        {
+          "count": 11,
+          "name": "Kobe Hotel Monterey Kobe",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Kobe+Hotel+Monterey+Kobe"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AKobe%2BHotel%2BMonterey%2BKobe"
+          },
+          "selected": false
+        },
+        {
+          "count": 22,
+          "name": "Kobe Sannomiya Terminal Hotel",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Kobe+Sannomiya+Terminal+Hotel"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AKobe%2BSannomiya%2BTerminal%2BHotel"
+          },
+          "selected": false
+        },
+        {
+          "count": 7,
+          "name": "Kobe the b",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Kobe+the+b"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AKobe%2Bthe%2Bb"
+          },
+          "selected": false
+        },
+        {
+          "count": 17,
+          "name": "Koto",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Koto"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AKoto"
+          },
+          "selected": false
+        },
+        {
+          "count": 18,
+          "name": "Matsudo",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Matsudo"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AMatsudo"
+          },
+          "selected": false
+        },
+        {
+          "count": 16,
+          "name": "Misato",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Misato"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AMisato"
+          },
+          "selected": false
+        },
+        {
+          "count": 11,
+          "name": "Nagoya Crowne Plaza Ana Grand Court Nagoya",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Nagoya+Crowne+Plaza+Ana+Grand+Court+Nagoya"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3ANagoya%2BCrowne%2BPlaza%2BAna%2BGrand%2BCourt%2BNagoya"
+          },
+          "selected": false
+        },
+        {
+          "count": 20,
+          "name": "Nagoya Hilton Nagoya Hotel",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Nagoya+Hilton+Nagoya+Hotel"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3ANagoya%2BHilton%2BNagoya%2BHotel"
+          },
+          "selected": false
+        },
+        {
+          "count": 14,
+          "name": "Nagoya Marriott Nagoya",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Nagoya+Marriott+Nagoya"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3ANagoya%2BMarriott%2BNagoya"
+          },
+          "selected": false
+        },
+        {
+          "count": 19,
+          "name": "Nagoya Royal Park Inn Nagoya",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Nagoya+Royal+Park+Inn+Nagoya"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3ANagoya%2BRoyal%2BPark%2BInn%2BNagoya"
+          },
+          "selected": false
+        },
+        {
+          "count": 20,
+          "name": "Nagoya The Westin Nagoya Castle",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Nagoya+The+Westin+Nagoya+Castle"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3ANagoya%2BThe%2BWestin%2BNagoya%2BCastle"
+          },
+          "selected": false
+        },
+        {
+          "count": 22,
+          "name": "Nakano",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Nakano"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3ANakano"
+          },
+          "selected": false
+        },
+        {
+          "count": 16,
+          "name": "Osaka Best Western Hotel Fino Osaka Shinsaibashi",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Osaka+Best+Western+Hotel+Fino+Osaka+Shinsaibashi"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AOsaka%2BBest%2BWestern%2BHotel%2BFino%2BOsaka%2BShinsaibashi"
+          },
+          "selected": false
+        },
+        {
+          "count": 19,
+          "name": "Osaka Cross Hotel Osaka",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Osaka+Cross+Hotel+Osaka"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AOsaka%2BCross%2BHotel%2BOsaka"
+          },
+          "selected": false
+        },
+        {
+          "count": 15,
+          "name": "Osaka Crowne Plaza Hotel Ana Osaka",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Osaka+Crowne+Plaza+Hotel+Ana+Osaka"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AOsaka%2BCrowne%2BPlaza%2BHotel%2BAna%2BOsaka"
+          },
+          "selected": false
+        },
+        {
+          "count": 17,
+          "name": "Osaka Hilton Osaka Hotel",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Osaka+Hilton+Osaka+Hotel"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AOsaka%2BHilton%2BOsaka%2BHotel"
+          },
+          "selected": false
+        },
+        {
+          "count": 13,
+          "name": "Osaka Ramada Osaka",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Osaka+Ramada+Osaka"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AOsaka%2BRamada%2BOsaka"
+          },
+          "selected": false
+        },
+        {
+          "count": 19,
+          "name": "Sapporo Ana Hotel Sapporo",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Sapporo+Ana+Hotel+Sapporo"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3ASapporo%2BAna%2BHotel%2BSapporo"
+          },
+          "selected": false
+        },
+        {
+          "count": 20,
+          "name": "Sapporo Best Western Hotel Sapporo Nakajima Koen",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Sapporo+Best+Western+Hotel+Sapporo+Nakajima+Koen"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3ASapporo%2BBest%2BWestern%2BHotel%2BSapporo%2BNakajima%2BKoen"
+          },
+          "selected": false
+        },
+        {
+          "count": 19,
+          "name": "Sapporo Hotel Resol Trinity Sapporo",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Sapporo+Hotel+Resol+Trinity+Sapporo"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3ASapporo%2BHotel%2BResol%2BTrinity%2BSapporo"
+          },
+          "selected": false
+        },
+        {
+          "count": 21,
+          "name": "Sapporo Hotel Sunroute Sapporo",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Sapporo+Hotel+Sunroute+Sapporo"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3ASapporo%2BHotel%2BSunroute%2BSapporo"
+          },
+          "selected": false
+        },
+        {
+          "count": 18,
+          "name": "Sapporo Sheraton Sapporo Hotel",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Sapporo+Sheraton+Sapporo+Hotel"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3ASapporo%2BSheraton%2BSapporo%2BHotel"
+          },
+          "selected": false
+        },
+        {
+          "count": 20,
+          "name": "Shinbashi",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Shinbashi"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AShinbashi"
+          },
+          "selected": false
+        },
+        {
+          "count": 18,
+          "name": "Tokio Cerulean Tower Tokyu Hotel",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Tokio+Cerulean+Tower+Tokyu+Hotel"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3ATokio%2BCerulean%2BTower%2BTokyu%2BHotel"
+          },
+          "selected": false
+        },
+        {
+          "count": 15,
+          "name": "Tokio Dormy Inn Tokyo Hatchobori",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Tokio+Dormy+Inn+Tokyo+Hatchobori"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3ATokio%2BDormy%2BInn%2BTokyo%2BHatchobori"
+          },
+          "selected": false
+        },
+        {
+          "count": 24,
+          "name": "Tokio Flexstay Nippori Inn",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Tokio+Flexstay+Nippori+Inn"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3ATokio%2BFlexstay%2BNippori%2BInn"
+          },
+          "selected": false
+        },
+        {
+          "count": 17,
+          "name": "Tokio Hotel Metropolitan Tokyo",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Tokio+Hotel+Metropolitan+Tokyo"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3ATokio%2BHotel%2BMetropolitan%2BTokyo"
+          },
+          "selected": false
+        },
+        {
+          "count": 17,
+          "name": "Tokio Park Hotel Tokyo",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Tokio+Park+Hotel+Tokyo"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3ATokio%2BPark%2BHotel%2BTokyo"
+          },
+          "selected": false
+        },
+        {
+          "count": 24,
+          "name": "Yokohama Comfort Hotel Yokohama Kannai",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Yokohama+Comfort+Hotel+Yokohama+Kannai"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AYokohama%2BComfort%2BHotel%2BYokohama%2BKannai"
+          },
+          "selected": false
+        },
+        {
+          "count": 16,
+          "name": "Yokohama Hotel JAL City Kannai Yokohama",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Yokohama+Hotel+JAL+City+Kannai+Yokohama"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AYokohama%2BHotel%2BJAL%2BCity%2BKannai%2BYokohama"
+          },
+          "selected": false
+        },
+        {
+          "count": 23,
+          "name": "Yokohama Hotel New Grand",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Yokohama+Hotel+New+Grand"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AYokohama%2BHotel%2BNew%2BGrand"
+          },
+          "selected": false
+        },
+        {
+          "count": 17,
+          "name": "Yokohama Sakuragicho Washington Hotel",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Yokohama+Sakuragicho+Washington+Hotel"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AYokohama%2BSakuragicho%2BWashington%2BHotel"
+          },
+          "selected": false
+        },
+        {
+          "count": 18,
+          "name": "Yokohama Shin Yokohama Prince Hotel",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Yokohama+Shin+Yokohama+Prince+Hotel"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AYokohama%2BShin%2BYokohama%2BPrince%2BHotel"
+          },
+          "selected": false
+        },
+        {
+          "count": 16,
+          "name": "Yokosuka",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:availableInStores:Yokosuka"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AavailableInStores%3AYokosuka"
+          },
+          "selected": false
+        }
+      ],
+      "visible": true
+    },
+    {
+      "category": false,
+      "multiSelect": true,
+      "name": "Price",
+      "priority": 2147483646,
+      "values": [
+        {
+          "count": 2,
+          "name": "$0-$49.99",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:price:%240-%2449.99"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3Aprice%3A%25240-%252449.99"
+          },
+          "selected": false
+        },
+        {
+          "count": 22,
+          "name": "$50-$199.99",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:price:%2450-%24199.99"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3Aprice%3A%252450-%2524199.99"
+          },
+          "selected": false
+        },
+        {
+          "count": 5,
+          "name": "$200-$499.99",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:price:%24200-%24499.99"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3Aprice%3A%2524200-%2524499.99"
+          },
+          "selected": false
+        },
+        {
+          "count": 1,
+          "name": "$500-$999.99",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:price:%24500-%24999.99"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3Aprice%3A%2524500-%2524999.99"
+          },
+          "selected": false
+        }
+      ],
+      "visible": true
+    },
+    {
+      "category": false,
+      "multiSelect": true,
+      "name": "Color",
+      "priority": 2147483641,
+      "values": [
+        {
+          "count": 7,
+          "name": "Black",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:Colour of product, 1766:Black"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3AColour+of+product%2C+1766%3ABlack"
+          },
+          "selected": false
+        }
+      ],
+      "visible": true
+    },
+    {
+      "category": true,
+      "multiSelect": false,
+      "name": "Brand",
+      "priority": 2147483640,
+      "values": [
+        {
+          "count": 21,
+          "name": "Sony",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:brand:555"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3Abrand%3A555"
+          },
+          "selected": false
+        },
+        {
+          "count": 13,
+          "name": "Rechargeable Batteries",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:brand:814"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3Abrand%3A814"
+          },
+          "selected": false
+        },
+        {
+          "count": 9,
+          "name": "Battery Chargers",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:brand:829"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3Abrand%3A829"
+          },
+          "selected": false
+        },
+        {
+          "count": 8,
+          "name": "Power Adapters & Inverters",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:brand:827"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3Abrand%3A827"
+          },
+          "selected": false
+        },
+        {
+          "count": 7,
+          "name": "Canon",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:brand:553"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3Abrand%3A553"
+          },
+          "selected": false
+        },
+        {
+          "count": 2,
+          "name": "Sweex",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:brand:563"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3Abrand%3A563"
+          },
+          "selected": false
+        },
+        {
+          "count": 1,
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:brand:chargers"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3Abrand%3Achargers"
+          },
+          "selected": false
+        },
+        {
+          "count": 1,
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:brand:configurations"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3Abrand%3Aconfigurations"
+          },
+          "selected": false
+        }
+      ],
+      "visible": true
+    },
+    {
+      "category": true,
+      "multiSelect": false,
+      "name": "Category",
+      "priority": 2147483638,
+      "values": [
+        {
+          "count": 13,
+          "name": "Rechargeable Batteries",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:category:814"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3Acategory%3A814"
+          },
+          "selected": false
+        },
+        {
+          "count": 9,
+          "name": "Battery Chargers",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:category:829"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3Acategory%3A829"
+          },
+          "selected": false
+        },
+        {
+          "count": 8,
+          "name": "Power Adapters & Inverters",
+          "query": {
+            "query": {
+              "value": ":relevance:allCategories:106:category:827"
+            },
+            "url": "/search?q=%3Arelevance%3AallCategories%3A106%3Acategory%3A827"
+          },
+          "selected": false
+        }
+      ],
+      "visible": true
+    }
+  ],
+  "freeTextSearch": "",
+  "pagination": {
+    "currentPage": 1,
+    "pageSize": 20,
+    "sort": "relevance",
+    "totalPages": 2,
+    "totalResults": 30
+  },
+  "products": [
+    {
+      "availableForPickup": true,
+      "code": "5103775",
+      "configurable": false,
+      "configuratorType": "",
+      "description": "<br/><br/>AC travel adaptor compatible with all Sony DSLR cameras.<br/><br/>Can be used worldwide (100-240V, 50/60Hz).<br/><br/>Approx. size (mm):  W127 × H35 × D63.<br/><br/>Approx. weight: 300g.<br/><br/>",
+      "images": [
+        {
+          "format": "thumbnail",
+          "imageType": "PRIMARY",
+          "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyMTMwfGltYWdlL2pwZWd8aW1hZ2VzL2g4Yy9oNTMvODc5Njg3NTE2MTYzMC5qcGd8NGU3ZDViOGM4MzQ5ODRhZWQ5ZGUxZmRiNzE2MGRhODM3ZDBhNWU2NGVlNzJjMTMzYjQyNzY4ODI3ZDNiYTU0OA"
+        },
+        {
+          "format": "product",
+          "imageType": "PRIMARY",
+          "url": "/medias/?context=bWFzdGVyfGltYWdlc3w4ODg4fGltYWdlL2pwZWd8aW1hZ2VzL2g3Zi9oOTIvODc5Njg0ODgxNjE1OC5qcGd8NzU1Y2JjODI1OGQwMDRlZmY1MjkyNzY0YWFjM2U4MTU5ZGFiNjBmM2RhZDBjOTlkNTc4MTU2Zjg3MzYxZGQwOA"
+        }
+      ],
+      "manufacturer": "Sony",
+      "multidimensional": false,
+      "name": "AC-PW10AM",
+      "price": {
+        "currencyIso": "USD",
+        "formattedValue": "$169.07",
+        "priceType": "BUY",
+        "value": 169.07
+      },
+      "priceRange": {},
+      "stock": {
+        "isValueRounded": false,
+        "stockLevelStatus": "inStock"
+      },
+      "summary": "AC Adaptor",
+      "url": "/Open-Catalogue/Components/Power-Supplies/Battery-Chargers/AC-PW10AM/p/5103775",
+      "volumePricesFlag": false
+    },
+    {
+      "availableForPickup": true,
+      "code": "5103712",
+      "configurable": false,
+      "configuratorType": "",
+      "description": "Rapid charging of up to 2 batteries<br/><br/>Dual indication of remaining amount in hour and percentage<br/><br/><br/><br/>High-speed dual charging of P, H, and V series InfoLITHIUM batteries.<br/><br/>Information display shows remaining amount and current battery levels as percentage.<br/><br/>",
+      "images": [
+        {
+          "format": "thumbnail",
+          "imageType": "PRIMARY",
+          "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyMDg0fGltYWdlL2pwZWd8aW1hZ2VzL2g2Ni9oZTYvODc5Njg3NTA5NjA5NC5qcGd8OGYxMGE2MWJhMzkzZjUzOGE2MDNjMjM0ZmI5YzUwY2M5Y2QwYTVlMTg3Y2Y0N2E1ZjExZWRiYWY4ZTIxZGMzYw"
+        },
+        {
+          "format": "product",
+          "imageType": "PRIMARY",
+          "url": "/medias/?context=bWFzdGVyfGltYWdlc3w3NTc0fGltYWdlL2pwZWd8aW1hZ2VzL2g5YS9oNzMvODc5Njg0ODc1MDYyMi5qcGd8NGM1OTRmZTJhNzc2MTFiOTdiZjA1ZmQ5ZWZlY2Q0N2JiZWIyZjliNzkzYTVlMzhjODc5OGYwMmEyMzI4OGEzMw"
+        }
+      ],
+      "manufacturer": "Sony",
+      "multidimensional": false,
+      "name": "AC-VQV10",
+      "price": {
+        "currencyIso": "USD",
+        "formattedValue": "$131.54",
+        "priceType": "BUY",
+        "value": 131.54
+      },
+      "priceRange": {},
+      "stock": {
+        "isValueRounded": false,
+        "stockLevel": 4,
+        "stockLevelStatus": "lowStock"
+      },
+      "summary": "High-speed dual battery charger for P, H, and V series batteries",
+      "url": "/Open-Catalogue/Components/Power-Supplies/Rechargeable-Batteries/AC-VQV10/p/5103712",
+      "volumePricesFlag": false
+    },
+    {
+      "availableForPickup": true,
+      "code": "899387",
+      "configurable": false,
+      "configuratorType": "",
+      "description": "AC Adapter Kit contains AC Adapter AC-E2, AC Cable and DR Coupler DR-400.<br/><br/><b>Compatibility</b><br/>- EOS 10D.<br/>- EOS 20D.<br/>- EOS 20Da.<br/>- EOS 30D.<br/>- EOS 30D Refurbished (Body).<br/>- EOS 30D with EF-S 18-55 Lens Refurbished.<br/>- EOS 40D.<br/>- EOS 40D Refurbished (Body).<br/>- EOS 40D with EF 28-135IS Refurbished.<br/>- EOS 50D.<br/>- EOS 50D Refurbished (Body).<br/>- EOS 50D with EF 28-135IS Refurbished.<br/>- EOS 5D.<br/>- EOS D30.<br/>- EOS D60.<br/>- EOS Digital Rebel.<br/>- EOS Digital Rebel XT Black with EF-S 18-55 Lens Refurbished.<br/>- EOS Digital Rebel XT Silver with EF-S 18-55 Lens Refurbished.",
+      "images": [
+        {
+          "format": "thumbnail",
+          "imageType": "PRIMARY",
+          "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyMjk4fGltYWdlL2pwZWd8aW1hZ2VzL2hhOC9oZjcvODc5Njg3OTk0NTc1OC5qcGd8ODI0ZjFmNWI1OWRiMWU3YTJjNDAwMTgyZGFlNTRjYmU2ZjRlNDkzNmQwNzQ2NTI4MDhjY2QxMTk4MzI0MDY1MQ"
+        },
+        {
+          "format": "product",
+          "imageType": "PRIMARY",
+          "url": "/medias/?context=bWFzdGVyfGltYWdlc3w4MDkwfGltYWdlL2pwZWd8aW1hZ2VzL2g3Ny9oOTMvODc5Njg1MzYwMDI4Ni5qcGd8YzkxYjE0OTQyYmI1MDkzMWM3MDcyOTI5Mjc2OWNmYTU0OTlhMDViOGNjZDZjNDBiODgzNTQwNjBhNTM5MWRmOA"
+        }
+      ],
+      "manufacturer": "Canon",
+      "multidimensional": false,
+      "name": "ACK-E2",
+      "price": {
+        "currencyIso": "USD",
+        "formattedValue": "$94.71",
+        "priceType": "BUY",
+        "value": 94.71
+      },
+      "priceRange": {},
+      "stock": {
+        "isValueRounded": false,
+        "stockLevelStatus": "inStock"
+      },
+      "summary": "ACK-E2 AC Adapter Kit",
+      "url": "/Open-Catalogue/Components/Power-Supplies/Power-Adapters-%26-Inverters/ACK-E2/p/899387",
+      "volumePricesFlag": false
+    },
+    {
+      "availableForPickup": true,
+      "code": "514518",
+      "configurable": false,
+      "configuratorType": "",
+      "description": "AC Adapter Kit contains AC Adapter AC-E2, AC Cable and DR Coupler DR-400.<br/><br/><b>Compatibility</b><br/>- EOS 10D.<br/>- EOS 20D.<br/>- EOS 20Da.<br/>- EOS 30D.<br/>- EOS 30D Refurbished (Body).<br/>- EOS 30D with EF-S 18-55 Lens Refurbished.<br/>- EOS 40D.<br/>- EOS 40D Refurbished (Body).<br/>- EOS 40D with EF 28-135IS Refurbished.<br/>- EOS 50D.<br/>- EOS 50D Refurbished (Body).<br/>- EOS 50D with EF 28-135IS Refurbished.<br/>- EOS 5D.<br/>- EOS D30.<br/>- EOS D60.<br/>- EOS Digital Rebel.<br/>- EOS Digital Rebel XT Black with EF-S 18-55 Lens Refurbished.<br/>- EOS Digital Rebel XT Silver with EF-S 18-55 Lens Refurbished.",
+      "images": [
+        {
+          "format": "thumbnail",
+          "imageType": "PRIMARY",
+          "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyMjk5fGltYWdlL2pwZWd8aW1hZ2VzL2hhNy9oMzQvODc5Njg3NTIyNzE2Ni5qcGd8MWMwOWJhYTc0ODM5MWU4OWJkODZiZTdhY2M3ZTA2MDUzZWQyOWY0YjY0YzkxOTIxYWMyNjQwMzI0ODlkNjYyMA"
+        },
+        {
+          "format": "product",
+          "imageType": "PRIMARY",
+          "url": "/medias/?context=bWFzdGVyfGltYWdlc3w4MDk0fGltYWdlL2pwZWd8aW1hZ2VzL2hhNi9oYmQvODc5Njg0ODg4MTY5NC5qcGd8N2FkYzJiZDgxYTk0OWY2ZjUwN2E4YWEyNTI2YjM3MjhjNThkZmVjMWY0ZjJkZGRkOWZlYTAyMTEwY2I4NGRjZQ"
+        }
+      ],
+      "manufacturer": "Canon",
+      "multidimensional": false,
+      "name": "ACK-E2",
+      "price": {
+        "currencyIso": "USD",
+        "formattedValue": "$315.52",
+        "priceType": "BUY",
+        "value": 315.52
+      },
+      "priceRange": {},
+      "stock": {
+        "isValueRounded": false,
+        "stockLevelStatus": "inStock"
+      },
+      "summary": "ACK-E2 AC Adapter Kit",
+      "url": "/Open-Catalogue/Components/Power-Supplies/Power-Adapters-%26-Inverters/ACK-E2/p/514518",
+      "volumePricesFlag": false
+    },
+    {
+      "availableForPickup": true,
+      "averageRating": 4.588235294117647,
+      "code": "824267",
+      "configurable": false,
+      "configuratorType": "",
+      "description": "-Never miss a precious moment with STAMINA super long battery life. <br/>-New ActiFORCE battery technology for higher capacity, faster recharging time and more accurate and fast remaining capacity indication. <br/>-Hybrid Lithium-ion cells with no ‘Memory",
+      "images": [
+        {
+          "format": "thumbnail",
+          "imageType": "PRIMARY",
+          "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyMTM3fGltYWdlL2pwZWd8aW1hZ2VzL2g0Ni9oZGUvODc5Njg3ODg5NzE4Mi5qcGd8NWUwNWZmY2I4MGQ2YjQ4ZjFlY2FjZmY1ZTdmMzY2OTJjMDEwZTAxY2Q1MzU3MGZhOWJmZTAyYWQwNzdmNzE1Mg"
+        },
+        {
+          "format": "product",
+          "imageType": "PRIMARY",
+          "url": "/medias/?context=bWFzdGVyfGltYWdlc3w4MDU0fGltYWdlL2pwZWd8aW1hZ2VzL2gwYy9oZWQvODc5Njg1MjU1MTcxMC5qcGd8N2Q4NTI1YjhjODA3ODg0ZWYzMDk5MzlmYjI0Yzg1NTRiMTg0ZGMzMzNjYmUzN2Y2YjI5Y2FiYjljYWM5YWI4Zg"
+        }
+      ],
+      "manufacturer": "Sony",
+      "multidimensional": false,
+      "name": "InfoLITHIUM™ H Series Battery",
+      "price": {
+        "currencyIso": "USD",
+        "formattedValue": "$283.85",
+        "priceType": "BUY",
+        "value": 283.85
+      },
+      "priceRange": {},
+      "stock": {
+        "isValueRounded": false,
+        "stockLevel": 2,
+        "stockLevelStatus": "lowStock"
+      },
+      "summary": "InfoLITHIUM™ H Series Battery",
+      "url": "/Open-Catalogue/Components/Power-Supplies/Rechargeable-Batteries/InfoLITHIUM%E2%84%A2-H-Series-Battery/p/824267",
+      "volumePricesFlag": false
+    },
+    {
+      "availableForPickup": true,
+      "averageRating": 4.5,
+      "code": "325234",
+      "configurable": true,
+      "configuratorType": "TEXTFIELD",
+      "description": "Battery charger for P series InfoLITHIUM camcorders<br/><br/>- Compatible with P Series batteries <br/>- Suitable for charging from mains power supply <br/>- Multi-voltage allows charging worldwide <br/>- Compact design ideal for travel",
+      "images": [
+        {
+          "format": "thumbnail",
+          "imageType": "PRIMARY",
+          "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyMjY0fGltYWdlL2pwZWd8aW1hZ2VzL2hkYy9oYmUvODc5Njg2ODM0NTg4Ni5qcGd8MTkwYTU3MzliNGFiNTVlZGQwYjM5MDcxZjM5NTkwNjk1MmM2OGQ5MDc1M2M1N2QyZWQxODJmMTlhOTFlNjhhYQ"
+        },
+        {
+          "format": "product",
+          "imageType": "PRIMARY",
+          "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxMDcxN3xpbWFnZS9qcGVnfGltYWdlcy9oOTgvaDg0Lzg3OTY4NDIwMDA0MTQuanBnfDkyZmUxOTgwZjQ2OGQ1Mzk0MDJlMWMyNDI2ZjNjOGI4YzczOTQwM2U2NTQ4N2E0YjUxNjY2MDc3OWQ2ZThhMjY"
+        }
+      ],
+      "manufacturer": "Sony",
+      "multidimensional": false,
+      "name": "Charger BC-TRP",
+      "price": {
+        "currencyIso": "USD",
+        "formattedValue": "$134.95",
+        "priceType": "BUY",
+        "value": 134.95
+      },
+      "priceRange": {},
+      "stock": {
+        "isValueRounded": false,
+        "stockLevelStatus": "inStock"
+      },
+      "summary": "Sony Charger BC-TRP",
+      "url": "/Open-Catalogue/Components/Power-Supplies/Battery-Chargers/Charger-BC-TRP/p/325234",
+      "volumePricesFlag": false
+    },
+    {
+      "availableForPickup": true,
+      "code": "346944",
+      "configurable": false,
+      "configuratorType": "",
+      "description": "Recharge your battery faster than you can say 'Sony'!",
+      "images": [
+        {
+          "format": "thumbnail",
+          "imageType": "PRIMARY",
+          "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyMTM1fGltYWdlL2pwZWd8aW1hZ2VzL2g2MS9oYTMvODc5Njg2OTI2MzM5MC5qcGd8MGIwMzdlNDc2MWNkMTg4NTYzYzVlNjE1N2VmN2FlYzBhYjJjOWVlZmE5MWE4ZWMzOGMwZjRlMjYxZGU2MTcyMA"
+        },
+        {
+          "format": "product",
+          "imageType": "PRIMARY",
+          "url": "/medias/?context=bWFzdGVyfGltYWdlc3w3ODg1fGltYWdlL2pwZWd8aW1hZ2VzL2gyNi9oNmYvODc5Njg0MjkxNzkxOC5qcGd8NjJlYjYwMGQyZjkxMmI3YWNjMTYwOTkxZjIzNDcwYmUxMjI0MzlmMWZjMzliYTk4ZWY4ZmZjN2M3OWI5MDUxYg"
+        }
+      ],
+      "manufacturer": "Sony",
+      "multidimensional": false,
+      "name": "AC Adapter AC-L200",
+      "price": {
+        "currencyIso": "USD",
+        "formattedValue": "$105.48",
+        "priceType": "BUY",
+        "value": 105.48
+      },
+      "priceRange": {},
+      "stock": {
+        "isValueRounded": false,
+        "stockLevelStatus": "inStock"
+      },
+      "summary": "AC Adaptor and Battery Charger (AC-L200)",
+      "url": "/Open-Catalogue/Components/Power-Supplies/Power-Adapters-%26-Inverters/AC-Adapter-AC-L200/p/346944",
+      "volumePricesFlag": false
+    },
+    {
+      "availableForPickup": true,
+      "averageRating": 4.785714285714286,
+      "code": "107701",
+      "configurable": false,
+      "configuratorType": "",
+      "description": "It's time to take a road trip and you want to capture the whole event with your HandyCam® camcorder but you know the battery isn't going to last the whole trip. Not a problem with the DCC-L50B Car Battery Adaptor. You can power your HandyCam® camcorder directly from your car's cigarette lighter socket and record your adventure non-stop!<br/>Includes the DK215 and DK235 connecting cords",
+      "images": [
+        {
+          "format": "thumbnail",
+          "imageType": "PRIMARY",
+          "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyMTI3fGltYWdlL2pwZWd8aW1hZ2VzL2gwMC9oZGMvODc5Njg1Mzk5MzUwMi5qcGd8MmQxNGJjYWMwOWE0ZTZhZGQzNGM0YjE3MDRiYTVhMGI4NGRmM2RiM2YzNTAzMTY0MmUyYmQ4YThmOTJjYTVkNA"
+        },
+        {
+          "format": "product",
+          "imageType": "PRIMARY",
+          "url": "/medias/?context=bWFzdGVyfGltYWdlc3w4MjM2fGltYWdlL2pwZWd8aW1hZ2VzL2g3OC9oOWMvODc5NjgyNzcxMzU2Ni5qcGd8MTQ1Njc1MDhiYjI4NjhjNDMxOTBhMzVmYmE2NTYyMjFjZmVhMjgwNjJiYzg1NjFjZTZkNDFhYzE4NDljZjM4YQ"
+        }
+      ],
+      "manufacturer": "Sony",
+      "multidimensional": false,
+      "name": "DC Car Battery Adapter",
+      "price": {
+        "currencyIso": "USD",
+        "formattedValue": "$179.93",
+        "priceType": "BUY",
+        "value": 179.93
+      },
+      "priceRange": {},
+      "stock": {
+        "isValueRounded": false,
+        "stockLevelStatus": "inStock"
+      },
+      "summary": "DC Car Battery Adapter",
+      "url": "/Open-Catalogue/Components/Power-Supplies/Power-Adapters-%26-Inverters/DC-Car-Battery-Adapter/p/107701",
+      "volumePricesFlag": false
+    },
+    {
+      "availableForPickup": true,
+      "averageRating": 2.6666666666666665,
+      "code": "572473",
+      "configurable": false,
+      "configuratorType": "",
+      "description": "Since it began operations, Canon has placed great importance on technology. By developing original technologies, Canon has been able to diversify into a wide range of business fields. Behind the company's fully equipped product line stands a whole line of innovative power accessories that will help you to work more productively. All power accessories are reliable and noted for their superior quality.The new Ni-MH Pack NP-E2 is a rechargeable nickel-metal hydride power pack specifically developed for the Power Drive Booster PB-E2 and recommended for use only with the new EOS-3 camera. Shooting capacity is approximately 70 rolls of 36-exposure film per charge, and charging time is approximately 100 minutes using the optional Ni-MH Charger NC-E2. Each NP-E2 pack can be recharged more than 500 times and is equipped with a built-in safety circuit to prevent overcharging.<br/><br/>For Models: EOS-1V, EOS-3 Do not use with with EOS-1 or 1N.",
+      "images": [
+        {
+          "format": "thumbnail",
+          "imageType": "PRIMARY",
+          "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyMTA3fGltYWdlL2pwZWd8aW1hZ2VzL2hkNy9oOTIvODc5Njg3NTU1NDg0Ni5qcGd8ZTIzZjRlMzE4ZTZhNDkyZmQyNzYxZTFkNzRhZDEyYzI1ODNkNGM0ZDkxYTg1MWZjNzE0MjI5MDRhYzhlMTlmNQ"
+        },
+        {
+          "format": "product",
+          "imageType": "PRIMARY",
+          "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxMDYzMXxpbWFnZS9qcGVnfGltYWdlcy9oOTEvaDY5Lzg3OTY4NDkyMDkzNzQuanBnfDM5Mjc3NWE5MzUxMDEyMzEzNWVjYzk2NTBiOWFkNTM1OGUzNmUxMzM3MTgxMjQwMTc0MjQ3OGU5ZGRjMzJkZDU"
+        }
+      ],
+      "manufacturer": "Canon",
+      "multidimensional": false,
+      "name": "NP-E2 Nickel-Metal Hydride Battery",
+      "price": {
+        "currencyIso": "USD",
+        "formattedValue": "$146.60",
+        "priceType": "BUY",
+        "value": 146.6
+      },
+      "priceRange": {},
+      "stock": {
+        "isValueRounded": false,
+        "stockLevel": 0,
+        "stockLevelStatus": "outOfStock"
+      },
+      "summary": "NP-E2 Nickel-Metal Hydride Battery",
+      "url": "/Open-Catalogue/Components/Power-Supplies/Rechargeable-Batteries/NP-E2-Nickel-Metal-Hydride-Battery/p/572473",
+      "volumePricesFlag": false
+    },
+    {
+      "availableForPickup": true,
+      "averageRating": 4.571428571428571,
+      "code": "824259",
+      "configurable": false,
+      "configuratorType": "",
+      "description": "-Never miss a precious moment with STAMINA super long battery life. <br/>-New ActiFORCE battery technology for higher capacity, faster recharging time and more accurate and fast remaining capacity indication. <br/>-Hybrid Lithium-ion cells with no ‘Memory",
+      "images": [
+        {
+          "format": "thumbnail",
+          "imageType": "PRIMARY",
+          "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyNDk0fGltYWdlL2pwZWd8aW1hZ2VzL2hiNC9oZWYvODc5Njg3ODgzMTY0Ni5qcGd8Yjc1Mjk3MjQwMmViNmI0ZjZjYzg2ZWEyOTk4OTFlODY1ZDc0NzY5OWE1Zjc2NDEwYmEyMDQwYWM3NzIzZGYyMw"
+        },
+        {
+          "format": "product",
+          "imageType": "PRIMARY",
+          "url": "/medias/?context=bWFzdGVyfGltYWdlc3w5OTg4fGltYWdlL2pwZWd8aW1hZ2VzL2hmZi9oMjYvODc5Njg1MjQ4NjE3NC5qcGd8ZDgyNTgwNzg0MTVhYjYyZTZkNmFhM2RkMzBiOTM4NDMyM2VjOTJlNGQ2ZDA2YmQzYWMyZDYyMWRlYTBjMDg1NA"
+        }
+      ],
+      "manufacturer": "Sony",
+      "multidimensional": false,
+      "name": "InfoLITHIUM™ H Series Battery",
+      "price": {
+        "currencyIso": "USD",
+        "formattedValue": "$184.58",
+        "priceType": "BUY",
+        "value": 184.58
+      },
+      "priceRange": {},
+      "stock": {
+        "isValueRounded": false,
+        "stockLevel": 0,
+        "stockLevelStatus": "outOfStock"
+      },
+      "summary": "InfoLITHIUM™ H Series Battery, 6,8 V/12,2 Wh/1800 mAh",
+      "url": "/Open-Catalogue/Components/Power-Supplies/Rechargeable-Batteries/InfoLITHIUM%E2%84%A2-H-Series-Battery/p/824259",
+      "volumePricesFlag": false
+    }
+  ],
+  "sorts": [
+    {
+      "code": "relevance",
+      "name": "Relevance",
+      "selected": true
+    },
+    {
+      "code": "topRated",
+      "name": "Top Rated",
+      "selected": false
+    },
+    {
+      "code": "name-asc",
+      "name": "Name (ascending)",
+      "selected": false
+    },
+    {
+      "code": "name-desc",
+      "name": "Name (descending)",
+      "selected": false
+    },
+    {
+      "code": "price-asc",
+      "name": "Price (lowest first)",
+      "selected": false
+    },
+    {
+      "code": "price-desc",
+      "name": "Price (highest first)",
+      "selected": false
+    }
+  ]
+}

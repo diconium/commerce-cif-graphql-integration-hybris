@@ -14,25 +14,25 @@
 
 'use strict';
 
-const magentoSchema = require('../../resources/magento-schema-2.3.2.min.json');
 const { graphql } = require('graphql');
 const SchemaBuilder = require('../../common/SchemaBuilder.js');
-const { Products } = require('../../common/Catalog.js');
+const { Products, ProductsBySkus } = require('../../common/Catalog.js');
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 let cachedSchema = null;
 
 function resolve(args) {
   if (cachedSchema == null) {
-    let schemaBuilder = new SchemaBuilder(magentoSchema)
+    let schemaBuilder = new SchemaBuilder()
       .removeMutationType()
       .filterQueryFields(new Set(['products']));
 
-    let queryRootType = schemaBuilder.getType('Query');
+    // let queryRootType = schemaBuilder.getType('Query');
 
-    // Remove "sort" unimplemented args of the "products" field
-    let productsField = queryRootType.fields.find(f => f.name == 'products');
-    productsField.args = productsField.args.filter(a => a.name != 'sort');
-    // Remove all fields from ProductFilterInput except "sku"
+    /** Remove "sort" unimplemented args of the "products" field */
+    // let productsField = queryRootType.fields.find(f => f.name == 'products');
+    // productsField.args = productsField.args.filter(a => a.name != 'sort');
+    /** Remove all fields from ProductFilterInput except "sku" */
     let productFilterInput = schemaBuilder.getType('ProductFilterInput');
     productFilterInput.inputFields = productFilterInput.inputFields.filter(
       f => f.name == 'sku' || f.name === 'url_key'
@@ -41,18 +41,32 @@ function resolve(args) {
     cachedSchema = schemaBuilder.build();
   }
 
-  // Builds the resolvers object
   let resolvers = {
     products: (params, context) => {
-      return new Products({
-        search: params,
-        graphqlContext: context,
-        actionParameters: args,
-      });
+      let skusFlag = false;
+      if (params.filter !== undefined) {
+        if (params.filter.sku !== undefined) {
+          if (params.filter.sku.in !== undefined) {
+            skusFlag = true;
+          }
+        }
+      }
+      if (skusFlag) {
+        return new ProductsBySkus({
+          search: params,
+          graphqlContext: context,
+          actionParameters: args,
+        });
+      } else {
+        return new Products({
+          search: params,
+          graphqlContext: context,
+          actionParameters: args,
+        });
+      }
     },
   };
 
-  // The resolver for this action
   return graphql(
     cachedSchema,
     args.query,

@@ -15,7 +15,7 @@
 'use strict';
 
 const DataLoader = require('dataloader');
-const rp = require('request-promise');
+const axios = require('axios');
 
 class SetShippingAddressOnCartLoader {
   /**
@@ -26,11 +26,13 @@ class SetShippingAddressOnCartLoader {
   constructor(parameters) {
     this.shippingAddressObj = parameters.shippingAddress;
     this.actionParameters = parameters.actionParameters;
-    // The loading function: "cartIds" is an Array of cart ids
+    /**The loading function: "cartIds" is an Array of cart ids */
     let loadingFunction = cartIds => {
-      // This loader loads each cart one by one, but if the 3rd party backend allows it,
-      // it could also fetch all carts in one single request. In this case, the method
-      // must still return an Array of carts with the same order as the keys.
+      /**
+       *This loader loads each cart one by one, but if the 3rd party backend allows it,
+       *it could also fetch all carts in one single request. In this case, the method
+       *must still return an Array of carts with the same order as the keys.
+       */
       return Promise.resolve(
         cartIds.map(cartId => {
           return this._setShippingAddressOnCart(
@@ -59,9 +61,8 @@ class SetShippingAddressOnCartLoader {
    * In a real 3rd-party integration, this method would query the 3rd-party system
    * in order to post shippingAddress details based on the cart id. This method returns a Promise,
    * for example to simulate some HTTP REST call being performed to the 3rd-party commerce system.
-   * @param {Object} cartId parameter contains the shippingaddress details
-   * @param {Object} shippingAddress parameter contains the shippingaddress details
-   * @param {Object} [actionParameters] Some optional parameters of the I/O Runtime action, like for example customerId, bearer token, query and url info.
+   * @param {Object} parameters.shippingAddress parameter contains the shippingaddress details
+   * @param {Object} [parameters.actionParameters] Some optional parameters of the I/O Runtime action, like for example customerId, bearer token, query and url info.
    * @returns {Promise} a promise with the shippingaddress data.
    */
   _setShippingAddressOnCart(cartId, shippingAddress, actionParameters) {
@@ -88,23 +89,32 @@ class SetShippingAddressOnCartLoader {
       postalCode: setShippingAddressesObj.postcode,
       region: {
         countryIso: setShippingAddressesObj.country_code,
-        isocode: setShippingAddressesObj.region,
+        isocode: `${setShippingAddressesObj.country_code}-${setShippingAddressesObj.region}`,
       },
       shippingAddress: true,
       town: setShippingAddressesObj.city,
       visibleInAddressBook: setShippingAddressesObj.save_in_address_book,
     };
-
-    return rp({
-      method: 'POST',
-      uri: `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cartId}/addresses/delivery?fields=DEFAULT&access_token=${bearer}`,
-      body: body,
-      json: true,
-    })
-      .then(response => response)
-      .catch(err => {
-        throw new Error(err.error.errors[0].message);
-      });
+    const config = {
+      headers: {
+        Authorization: `Bearer ${bearer}`,
+      },
+    };
+    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cartId}/addresses/delivery?fields=DEFAULT&access_token=${bearer}`;
+    return new Promise((resolve, reject) => {
+      axios
+        .post(uri, body, config)
+        .then(response => {
+          if (response.data) {
+            resolve(response.data);
+          } else {
+            reject(false);
+          }
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
   }
 }
 

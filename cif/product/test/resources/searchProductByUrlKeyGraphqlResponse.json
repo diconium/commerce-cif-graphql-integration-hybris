@@ -1,0 +1,97 @@
+[
+  {
+    "__typename": "SimpleProduct",
+    "sku": "4205436",
+    "name": "32GB SDHC Card",
+    "description": {
+      "html": "Secure Digital High Capacity cards you can rely on. Kingston Technology's Secure Digital High-Capacity (SDHC) memory cards are fully compliant with the Secure Digital Association 2.00 specification. They are the next high performance generation of SD memory cards designed to meet the storage demands of high-quality digital still and video cameras and other high-resolution image recording devices."
+    },
+    "image": {
+      "label": "32GB SDHC Card",
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wzNTg5OHxpbWFnZS9qcGVnfGltYWdlcy9oMjAvaDA0Lzg3OTcyNjUxMzM1OTguanBnfDA1ODI0ZGM4MDEwMzRmN2YwMDk5ZTAyOTYyMmYxYmU1MTM1OTIxYTliN2RmMzJiMDEyNzI1YzhmYjY3MWFjM2Y"
+    },
+    "thumbnail": {
+      "label": "32GB SDHC Card",
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wzNTg5OHxpbWFnZS9qcGVnfGltYWdlcy9oMjAvaDA0Lzg3OTcyNjUxMzM1OTguanBnfDA1ODI0ZGM4MDEwMzRmN2YwMDk5ZTAyOTYyMmYxYmU1MTM1OTIxYTliN2RmMzJiMDEyNzI1YzhmYjY3MWFjM2Y"
+    },
+    "url_key": "4205436",
+    "stock_status": "IN_STOCK",
+    "meta_description": null,
+    "meta_keyword": null,
+    "meta_title": null,
+    "price_range": {
+      "minimum_price": {
+        "regular_price": {
+          "value": 333.49,
+          "currency": "USD"
+        },
+        "final_price": {
+          "value": 333.49,
+          "currency": "USD"
+        },
+        "discount": {
+          "amount_off": 0,
+          "percent_off": 0
+        }
+      }
+    },
+    "media_gallery": [
+      {
+        "__typename": "ProductImage",
+        "disabled": false,
+        "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wzNTg5OHxpbWFnZS9qcGVnfGltYWdlcy9oMjAvaDA0Lzg3OTcyNjUxMzM1OTguanBnfDA1ODI0ZGM4MDEwMzRmN2YwMDk5ZTAyOTYyMmYxYmU1MTM1OTIxYTliN2RmMzJiMDEyNzI1YzhmYjY3MWFjM2Y",
+        "label": "32GB SDHC Card",
+        "position": 0
+      },
+      {
+        "__typename": "ProductImage",
+        "disabled": false,
+        "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3w3NzkwM3xpbWFnZS9qcGVnfGltYWdlcy9oZTAvaGRlLzg3OTcyOTE0MTM1MzQuanBnfGVmNmI1NmJjZDgxZWZkZDI3YTc1M2JiMGRmODI4MWM1ZmFiMzY3NmNjNTdiYjU1ZDExNzcxYTI4MDM4OTRhNjg",
+        "label": "32GB SDHC Card",
+        "position": 1
+      },
+      {
+        "__typename": "ProductImage",
+        "disabled": false,
+        "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wzNTg5OHxpbWFnZS9qcGVnfGltYWdlcy9oMjAvaDA0Lzg3OTcyNjUxMzM1OTguanBnfDA1ODI0ZGM4MDEwMzRmN2YwMDk5ZTAyOTYyMmYxYmU1MTM1OTIxYTliN2RmMzJiMDEyNzI1YzhmYjY3MWFjM2Y",
+        "label": "32GB SDHC Card",
+        "position": 2
+      },
+      {
+        "__typename": "ProductImage",
+        "disabled": false,
+        "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3w3NzkwM3xpbWFnZS9qcGVnfGltYWdlcy9oZTAvaGRlLzg3OTcyOTE0MTM1MzQuanBnfGVmNmI1NmJjZDgxZWZkZDI3YTc1M2JiMGRmODI4MWM1ZmFiMzY3NmNjNTdiYjU1ZDExNzcxYTI4MDM4OTRhNjg",
+        "label": "32GB SDHC Card",
+        "position": 3
+      },
+      {
+        "__typename": "ProductImage",
+        "disabled": false,
+        "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNzE4MHxpbWFnZS9qcGVnfGltYWdlcy9oYzcvaDE5Lzg3OTcyNjUxOTkxMzQuanBnfDkxNGRjM2ExMzQ1NzdjYzI0M2U0ZTQxMTZmMzlhNjg3MGM2ZDc5NDAyMmRkNTQwMzAyNDA0NWQyZDQwZjFmMzQ",
+        "label": "32GB SDHC Card",
+        "position": 4
+      },
+      {
+        "__typename": "ProductImage",
+        "disabled": false,
+        "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3w2NjQ5MHxpbWFnZS9qcGVnfGltYWdlcy9oZGIvaGFjLzg3OTcyOTE0NzkwNzAuanBnfGY5NzYyZGJkNWI2MTU5MDI2Yjk2YTRiOWU1NjJhMjk0ZTNkZGY4MWY2MmIzMGYzNzIxMjg2ODM4YWRlZjAzNWU",
+        "label": "32GB SDHC Card",
+        "position": 5
+      }
+    ],
+    "categories": [
+      {
+        "__typename": "CategoryTree",
+        "uid": "902",
+        "name": "Flash Memory",
+        "image": null
+      },
+      {
+        "__typename": "CategoryTree",
+        "uid": "brand_18",
+        "name": "Kingston",
+        "image": null
+      }
+    ]
+  }
+]

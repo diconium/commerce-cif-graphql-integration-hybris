@@ -25,10 +25,12 @@ const resolve = require('../../src/cartResolver.js').main;
 const hybrisCreateEmptyCart = require('../resources/hybrisCreateEmptyCart.json');
 const validResponseCreateEmptyCart = require('../resources/validResponseCreateEmptyCart.json');
 const validResponseCreateEmptyCartGuid = require('../resources/validResponseCreateEmptyCartGuid.json');
-const bearer = 'bb84cb05-9d99-4655-8f39-7d6ca7e0b22c';
+const TestUtils = require('../../../utils/TestUtils.js');
+const bearer = '40b612bb-d64a-461d-8279-3b853c124fb8';
+const ymlData = require('../../../common/options.json');
 
-describe('SetGuestEmailOnCart', function() {
-  const scope = nock('https://hybris.example.com');
+describe('create empty cart', function() {
+  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
 
   before(() => {
     // Disable console debugging
@@ -43,23 +45,23 @@ describe('SetGuestEmailOnCart', function() {
 
   describe('Unit Tests', () => {
     let args = {
-      url: 'https://hybris.example.com',
+      url: TestUtils.getHybrisInstance(),
       context: {
         settings: {
           bearer: '',
           customerId: 'current',
-          HB_PROTOCOL: 'https',
-          HB_API_HOST: 'hybris.example.com',
-          HB_API_BASE_PATH: '/rest/v2',
-          HB_BASESITEID: '/electronics',
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
         },
       },
     };
 
     it('Mutation: response should return new cart Id', () => {
       scope
-        .post('/rest/v2/electronics/users/current/carts')
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .post(`${ymlData.HB_API_BASE_PATH}electronics/users/current/carts`)
+        .query({ fields: 'DEFAULT' })
         .reply(200, hybrisCreateEmptyCart);
       args.context.settings.bearer = bearer;
       args.query = 'mutation {createEmptyCart}';
@@ -72,7 +74,7 @@ describe('SetGuestEmailOnCart', function() {
 
     it('Mutation: validate create empty cart for anonymous user', () => {
       scope
-        .post('/rest/v2/electronics/users/anonymous/carts')
+        .post(`${ymlData.HB_API_BASE_PATH}electronics/users/anonymous/carts`)
         .query({ fields: 'DEFAULT' })
         .reply(200, hybrisCreateEmptyCart);
       args.context.settings.customerId = 'anonymous';

@@ -18,6 +18,12 @@ const LoaderProxy = require('../../common/LoaderProxy.js');
 const CreateCustomerLoader = require('./CreateCustomerLoader.js');
 
 class CreateCustomer {
+  /**
+   * @param {Object} parameters parameters object contains the input, graphqlContext & actionParameters
+   * @param {String} parameters.input input parameter contains the customer details like firstname, lastname, email,  password details
+   * @param {Object} [parameters.graphqlContext] The optional GraphQL execution context passed to the resolver.
+   * @param {Object} [parameters.actionParameters] Some optional actionParameters of the I/O Runtime action, like for example bearer token, query and url info.
+   */
   constructor(parameters) {
     this.graphqlContext = parameters.graphqlContext;
     this.actionParameters = parameters.actionParameters;
@@ -26,13 +32,24 @@ class CreateCustomer {
       parameters.actionParameters
     );
 
+    /**
+     * This class returns a Proxy to avoid having to implement a getter for all properties.
+     */
     return new LoaderProxy(this);
   }
 
+  /**
+   * method used to call load method from createCustomerLoader loader class
+   */
   __load() {
     return this.createCustomerLoader.load(this.input);
   }
 
+  /**
+   * Converts data from the 3rd-party hybris system into the Magento GraphQL format.
+   * @param {Object} data parameter data contains customer details
+   * @returns {Object} convert the hybris data into magento graphQL schema and return the object
+   */
   __convertData(data) {
     return {
       customer: {

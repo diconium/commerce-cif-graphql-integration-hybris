@@ -1,0 +1,24 @@
+[
+  {
+    "__typename": "SimpleProduct",
+    "categories": [
+      {
+        "__typename": "CategoryTree",
+        "breadcrumbs": null,
+        "name": "Flash Memory",
+        "uid": "902",
+        "url_path": "902"
+      },
+      {
+        "__typename": "CategoryTree",
+        "breadcrumbs": null,
+        "name": "Kingston",
+        "uid": "brand_18",
+        "url_path": "brand_18"
+      }
+    ],
+    "name": "8GB SD Card",
+    "sku": "4852405",
+    "url_key": "4852405"
+  }
+]

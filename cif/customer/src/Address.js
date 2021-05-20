@@ -17,6 +17,12 @@
 const AddressLoader = require('./AddressLoader.js');
 
 class Address {
+  /**
+   * @param {Object} parameters parameters object contains the input, graphqlContext & actionParameters
+   * @param {String} parameters.input input parameter contains the customer details like firstname, lastname, street details
+   * @param {Object} [parameters.graphqlContext] The optional GraphQL execution context passed to the resolver.
+   * @param {Object} [parameters.actionParameters] Some optional actionParameters of the I/O Runtime action, like for example bearer token, query and url info.
+   */
   constructor(parameters) {
     this.graphqlContext = parameters.graphqlContext;
     this.actionParameters = parameters.actionParameters;
@@ -33,6 +39,11 @@ class Address {
     });
   }
 
+  /**
+   * Converts data from the 3rd-party hybris system into the Magento GraphQL format.
+   * @param {Object} data parameter data contains customer Address.
+   * @returns {Object} convert the hybris data into magento graphQL schema and return the object
+   */
   __convertData(data) {
     if (!data || data.length === 0) {
       return [];

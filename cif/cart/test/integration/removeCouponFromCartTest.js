@@ -22,8 +22,11 @@ chai.use(chaiShallowDeepEqual);
 const resolve = require('../../src/cartResolver.js').main;
 const TestUtils = require('../../../utils/TestUtils.js');
 const { expect } = chai;
+const RemoveCouponLoader = require('../../src/RemoveCouponFromCartLoader');
+const ymlData = require('../../../common/options.json');
 
 describe('RemoveCouponFromCart', function() {
+  let RemoveCoupon;
   before(() => {
     sinon.stub(console, 'debug');
     sinon.stub(console, 'error');
@@ -34,6 +37,14 @@ describe('RemoveCouponFromCart', function() {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    RemoveCoupon = sinon.spy(
+      RemoveCouponLoader.prototype,
+      '_removeCouponsFromCart'
+    );
+  });
+
   describe('Integration Tests', () => {
     let args = {
       url: TestUtils.getHybrisInstance(),
@@ -41,22 +52,25 @@ describe('RemoveCouponFromCart', function() {
         settings: {
           bearer: '',
           customerId: 'current',
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
         },
       },
     };
+    before(async () => {
+      args.context.settings.bearer = await TestUtils.getBearer();
+    });
 
     it('Mutation: Remove coupon from cart', () => {
       args.query =
-        'mutation {removeCouponFromCart(input:{ cart_id: "00000001"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
-      return TestUtils.getBearer().then(accessToken => {
-        args.context.settings.bearer = accessToken;
-        return resolve(args).then(result => {
-          const { errors } = result;
-          assert.isUndefined(result.errors);
-          let response = result.data.removeCouponFromCart.cart;
-          assert.equal(response.applied_coupon, null);
-          expect(errors).to.be.undefined;
-        });
+        'mutation {removeCouponFromCart(input:{ cart_id: "00000035"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
+      return resolve(args).then(result => {
+        const { errors } = result;
+        assert.isUndefined(result.errors);
+        expect(errors).to.be.undefined;
+        assert.equal(RemoveCoupon.callCount, 1);
       });
     });
   });

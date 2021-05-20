@@ -25,10 +25,12 @@ const createCustomerHybris = require('../resources/createCustomerHybris.json');
 const hybrisAuthLoginMock = require('../resources/hybris-token.json');
 const resolve = require('../../../customer/src/customerResolver.js').main;
 chai.use(chaiShallowDeepEqual);
+const TestUtils = require('../../../utils/TestUtils.js');
 const bearer = 'a7db795c-b1c2-46d9-a201-16130b6099af';
+const ymlData = require('../../../common/options.json');
 
 describe('Create Customer Resolver', function() {
-  const scope = nock('https://hybris.example.com');
+  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
 
   before(() => {
     // Disable console debugging
@@ -41,18 +43,20 @@ describe('Create Customer Resolver', function() {
     console.error.restore();
   });
 
-  describe('Integration Tests', () => {
+  describe('Unit Tests', () => {
     let args = {
-      url: 'https://hybris.example.com',
+      url: TestUtils.getHybrisInstance(),
       context: {
         settings: {
           bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: 'https',
-          HB_API_HOST: 'hybris.example.com',
-          HB_API_BASE_PATH: '/rest/v2',
-          HB_BASESITEID: '/electronics',
-          HB_OAUTH_PATH: '/authorizationserver/oauth/token',
+          HB_CLIENTID: 'client-side',
+          HB_CLIENTSECRET: 'adobeio20180605',
+          customerId: 'anonymous',
+          HB_OAUTH_PATH: ymlData.HB_OAUTH_PATH,
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
         },
       },
     };
@@ -64,8 +68,8 @@ describe('Create Customer Resolver', function() {
         .reply(200, hybrisAuthLoginMock);
 
       scope
-        .post('/rest/v2/electronics/users')
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .post(`${ymlData.HB_API_BASE_PATH}electronics/users`)
+        .query({ fields: 'DEFAULT' })
         .reply(200, createCustomerHybris);
       args.context.settings.bearer = bearer;
       args.query =
@@ -83,8 +87,8 @@ describe('Create Customer Resolver', function() {
         .reply(200, hybrisAuthLoginMock);
 
       scope
-        .post('/rest/v2/electronics/users')
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .post(`${ymlData.HB_API_BASE_PATH}electronics/users`)
+        .query({ fields: 'DEFAULT' })
         .reply(200, createCustomerHybris);
       args.context.settings.bearer = bearer;
       args.query =

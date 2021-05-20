@@ -15,7 +15,6 @@
 'use strict';
 
 const DataLoader = require('dataloader');
-const rp = require('request-promise');
 
 class RevokeCustomerTokenLoader {
   /**
@@ -51,41 +50,10 @@ class RevokeCustomerTokenLoader {
    * @returns {Promise} return refresh token if promise resolves successfully otherwise return error
    */
   _generateCustomerToken(actionParameters) {
-    const {
-      bearer,
-      HB_OAUTH_PATH,
-      HB_CLIENTID,
-      HB_CLIENTSECRET,
-      HB_API_HOST,
-      HB_PROTOCOL,
-    } = actionParameters.context.settings;
-
-    let body = {
-      grant_type: 'refresh_token',
-      client_secret: HB_CLIENTSECRET,
-      client_id: HB_CLIENTID,
-      refresh_token: bearer,
-    };
-
-    const bodyParams = Object.keys(body)
-      .map(key => {
-        return encodeURIComponent(key) + '=' + encodeURIComponent(body[key]);
-      })
-      .join('&');
-
-    return rp({
-      method: 'POST',
-      uri: `${HB_PROTOCOL}://${HB_API_HOST}${HB_OAUTH_PATH}?operationType=oAuth`,
-      json: true,
-      headers: {
-        'Content-type': 'application/x-www-form-urlencoded',
-      },
-      body: bodyParams,
-    })
-      .then(response => response)
-      .catch(err => {
-        throw new Error(err.message);
-      });
+    console.log(actionParameters);
+    return new Promise(resolve => {
+      resolve(true);
+    });
   }
 }
 

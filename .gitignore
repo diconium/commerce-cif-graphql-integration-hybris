@@ -5,3 +5,4 @@ coverage
 results.xml
 .vscode
 .idea
+cif/common/options.json

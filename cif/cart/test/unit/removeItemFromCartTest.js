@@ -24,11 +24,15 @@ const nock = require('nock');
 chai.use(chaiShallowDeepEqual);
 const hybrisRemoveItemCart = require('../resources/hybrisRemoveItemCart.json');
 const validResponseRemoveItemCart = require('../resources/validResponseRemoveItemCart');
+const hybrisDeliveryModes = require('../resources/hybrisDeliveryModes.json');
 const cartNotFound = require('../resources/cartNotFound.json');
-const bearer = 'efa24b05-8b84-4f3a-a72c-61cc9aa10a70';
+const itemNotFound = require('../resources/cartNotFound.json');
+const TestUtils = require('../../../utils/TestUtils.js');
+const bearer = 'df808bac-0353-4883-a7cc-67583ebb2532';
+const ymlData = require('../../../common/options.json');
 
 describe('RemoveItemFromCart', () => {
-  const scope = nock('https://hybris.example.com');
+  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
 
   before(() => {
     // Disable console debugging
@@ -43,31 +47,41 @@ describe('RemoveItemFromCart', () => {
 
   describe('Unit Tests', () => {
     let args = {
-      url: 'https://hybris.example.com',
+      url: TestUtils.getHybrisInstance(),
       context: {
         settings: {
           bearer: '',
           customerId: 'current',
-          HB_PROTOCOL: 'https',
-          HB_API_HOST: 'hybris.example.com',
-          HB_API_BASE_PATH: '/rest/v2',
-          HB_BASESITEID: '/electronics',
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
         },
       },
     };
 
     it('Remove item from cart with valid cartId', () => {
       scope
-        .delete('/rest/v2/electronics/users/current/carts/00000058/entries/0')
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .delete(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035/entries/1`
+        )
+        .query({ fields: 'DEFAULT', query: '' })
         .reply(200);
       scope
-        .get('/rest/v2/electronics/users/current/carts/00000058')
-        .query({ fields: 'FULL', access_token: `${bearer}` })
+        .get(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035`
+        )
+        .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisRemoveItemCart);
+      scope
+        .get(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymodes`
+        )
+        .query({ fields: 'FULL', query: '' })
+        .reply(200, hybrisDeliveryModes);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {removeItemFromCart(input:{cart_id: "00000058",cart_item_id: 0}){cart{items{id,product{name}quantity}prices{grand_total{value,currency}}}}}';
+        'mutation {removeItemFromCart(input:{cart_id: "00000035",cart_item_id: "1"}){cart{items{id,product{name}quantity}prices{grand_total{value,currency}}}}}';
       return resolve(args).then(result => {
         let response = result.data.removeItemFromCart.cart;
         const { errors } = result;
@@ -79,20 +93,30 @@ describe('RemoveItemFromCart', () => {
 
     it('Mutation: validate response should contain cart not found', () => {
       scope
-        .delete('/rest/v2/electronics/users/current/carts/0000004/entries/0')
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .delete(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/entries/1`
+        )
+        .query({ fields: 'DEFAULT', query: '' })
         .reply(400, cartNotFound);
       scope
-        .get('/rest/v2/electronics/users/current/carts/0000004')
+        .get(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID`
+        )
         .query({ fields: 'DEFAULT', access_token: `${bearer}` })
         .reply(200, hybrisRemoveItemCart);
+      scope
+        .get(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymodes`
+        )
+        .query({ fields: 'FULL', query: '' })
+        .reply(200, hybrisDeliveryModes);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {removeItemFromCart(input:{cart_id: "0000004",cart_item_id: 0}){cart{items{id,product{name}quantity}prices{grand_total{value,currency}}}}}';
+        'mutation {removeItemFromCart(input:{cart_id: "INVALID-CART-ID",cart_item_id: "1"}){cart{items{id,product{name}quantity}prices{grand_total{value,currency}}}}}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({
-          message: 'Cart not found.',
+          message: 'Error: Request failed with status code 400',
           source: {
             name: 'GraphQL request',
           },
@@ -100,6 +124,38 @@ describe('RemoveItemFromCart', () => {
       });
     });
 
-    // todo add test case for entry not found
+    // todo add test case for entry not found -- Done
+    it('Mutation: validate response should contain cart not found', () => {
+      scope
+        .delete(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035/entries/0`
+        )
+        .query({ fields: 'DEFAULT', query: '' })
+        .reply(400, itemNotFound);
+      scope
+        .get(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035`
+        )
+        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .reply(200, hybrisRemoveItemCart);
+      scope
+        .get(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymodes`
+        )
+        .query({ fields: 'FULL', query: '' })
+        .reply(200, hybrisDeliveryModes);
+      args.context.settings.bearer = bearer;
+      args.query =
+        'mutation {removeItemFromCart(input:{cart_id: "00000035",cart_item_id:"0"}){cart{items{id,product{name}quantity}prices{grand_total{value,currency}}}}}';
+      return resolve(args).then(result => {
+        const errors = result.errors[0];
+        expect(errors).shallowDeepEqual({
+          message: 'Error: Request failed with status code 400',
+          source: {
+            name: 'GraphQL request',
+          },
+        });
+      });
+    });
   });
 });

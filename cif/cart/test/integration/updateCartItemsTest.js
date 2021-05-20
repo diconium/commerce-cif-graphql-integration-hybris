@@ -18,8 +18,11 @@ const sinon = require('sinon');
 const assert = require('chai').assert;
 const resolve = require('../../src/cartResolver.js').main;
 const TestUtils = require('../../../utils/TestUtils');
+const UpdateCartLoader = require('../../src/UpdateCartItemsLoader');
+const ymlData = require('../../../common/options.json');
 
 describe('Cart Resolver', () => {
+  let UpdateCart;
   before(() => {
     // Disable console debugging
     sinon.stub(console, 'debug');
@@ -31,6 +34,11 @@ describe('Cart Resolver', () => {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    UpdateCart = sinon.spy(UpdateCartLoader.prototype, '_updateMethod');
+  });
+
   describe('Integration Tests', () => {
     let args = {
       url: TestUtils.getHybrisInstance(),
@@ -38,41 +46,49 @@ describe('Cart Resolver', () => {
         settings: {
           bearer: '',
           customerId: 'current',
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
         },
       },
     };
+    before(async () => {
+      args.context.settings.bearer = await TestUtils.getBearer();
+    });
 
     it('Mutation: update cart items', () => {
       args.query =
-        'mutation {updateCartItems(input: {cart_id: "00000184", cart_items: [{cart_item_id: 0,quantity: 6}]}){ cart{items {id,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
-      //todo check async await support so that this variable can be stored earlier
-      return TestUtils.getBearer().then(accessToken => {
-        args.context.settings.bearer = accessToken;
-        return resolve(args).then(result => {
-          assert.isUndefined(result.errors);
-          let response = result.data.updateCartItems.cart;
-          assert.equal(response.items.length > 0, true);
-          assert.equal(typeof response.prices != 'undefined', true);
-          assert.equal(
-            typeof response.prices.grand_total.currency != 'undefined',
-            true
-          );
-          assert.equal(
-            typeof response.prices.grand_total.value != 'undefined',
-            true
-          );
-        });
+        'mutation {updateCartItems(input: {cart_id: "00000035", cart_items: [{cart_item_id: "0",quantity: 3}]}){ cart{items {id,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
+      //todo check async await support so that this variable can be stored earlier -- Done
+      return resolve(args).then(result => {
+        assert.isUndefined(result.errors);
+        let response = result.data.updateCartItems.cart;
+        assert.equal(response.items.length > 0, true);
+        assert.equal(typeof response.prices != 'undefined', true);
+        assert.equal(
+          typeof response.prices.grand_total.currency != 'undefined',
+          true
+        );
+        assert.equal(
+          typeof response.prices.grand_total.value != 'undefined',
+          true
+        );
+        assert.equal(UpdateCart.callCount, 1);
       });
     });
 
     it('Mutation: update cart items entry number undefined', () => {
       args.query =
-        'mutation {updateCartItems(input: {cart_id: "00000057", cart_items: [{cart_item_id: 1,quantity: 2}]}){ cart{items {id,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
+        'mutation {updateCartItems(input: {cart_id: "00000035", cart_items: [{cart_item_id: 100,quantity: 2}]}){ cart{items {id,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
       args.context.settings.customerId = 'anonymous';
       args.context.settings.bearer = '';
       return resolve(args).then(result => {
         assert.equal(result.data.updateCartItems, null);
-        assert.equal(result.errors[0].message, 'Invalid access token: ');
+        assert.equal(
+          result.errors[0].message,
+          'Request failed with status code 401'
+        );
       });
     });
   });

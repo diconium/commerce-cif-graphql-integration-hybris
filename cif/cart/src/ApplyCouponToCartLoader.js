@@ -15,14 +15,12 @@
 'use strict';
 
 const DataLoader = require('dataloader');
-const rp = require('request-promise');
-
+const axios = require('axios');
 class ApplyCouponToCartLoader {
   /**
    * @param {Object} [actionParameters] Some optional parameters of the I/O Runtime action, like for example customerId, bearer token, query and url info.
    */
   constructor(actionParameters) {
-    // The loading function: "cartIds" is an Array of cart ids
     let loadingFunction = inputs => {
       return Promise.resolve(
         inputs.map(input => {
@@ -40,7 +38,7 @@ class ApplyCouponToCartLoader {
 
   /**
    * method used to call the loadingFunction using dataloader
-   * @param {*} input parameter cartId
+   * @param {*} input parameter contains cartId and couponcode details
    * @returns {Promise} a promise return null after resolved successfully other wise return the error.
    */
   load(input) {
@@ -66,17 +64,23 @@ class ApplyCouponToCartLoader {
     } = actionParameters.context.settings;
 
     const { cart_id, coupon_code } = input;
-
-    return rp({
-      method: 'POST',
-      uri: `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cart_id}/vouchers?voucherId=${coupon_code}&access_token=${bearer}`,
-      resolveWithFullResponse: true,
-      json: true,
-    })
-      .then(() => {})
-      .catch(err => {
-        throw new Error(err.error.errors[0].message);
-      });
+    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cart_id}/vouchers?voucherId=${coupon_code}`;
+    let body = {};
+    const config = {
+      headers: {
+        Authorization: `Bearer ${bearer}`,
+      },
+    };
+    return new Promise((resolve, reject) => {
+      axios
+        .post(uri, body, config)
+        .then(() => {
+          resolve(true);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
   }
 }
 

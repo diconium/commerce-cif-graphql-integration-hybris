@@ -21,8 +21,11 @@ const chai = require('chai');
 const { expect } = chai;
 const chaiShallowDeepEqual = require('chai-shallow-deep-equal');
 chai.use(chaiShallowDeepEqual);
+const PlaceOrderLoader = require('../../src/PlaceOrderLoader');
+const ymlData = require('../../../common/options.json');
 
 describe('Place Order', function() {
+  let PlaceOrder;
   before(() => {
     sinon.stub(console, 'debug');
     sinon.stub(console, 'error');
@@ -33,37 +36,47 @@ describe('Place Order', function() {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    PlaceOrder = sinon.spy(PlaceOrderLoader.prototype, '_placeOrder');
+  });
+
   describe('Integration Tests', () => {
     let args = {
-      url: 'https://hybris.example.com/',
+      url: TestUtils.getHybrisInstance(),
       context: {
         settings: {
           bearer: '',
           customerId: 'current',
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
         },
       },
     };
+    before(async () => {
+      args.context.settings.bearer = await TestUtils.getBearer();
+    });
 
     it('Mutation: validate response should return order Id', () => {
       args.query =
-        'mutation { placeOrder(input: {cart_id: "00000043"}) {order { order_id}}}';
-      return TestUtils.getBearer().then(accessToken => {
-        args.context.settings.bearer = accessToken;
-        return resolve(args).then(result => {
-          let responseData = result.data.placeOrder.order.order_id;
-          assert.notEqual(responseData, '');
-        });
+        'mutation { placeOrder(input: {cart_id: "00000050"}) {order { order_id}}}';
+      return resolve(args).then(result => {
+        let responseData = result.data.placeOrder.order.order_id;
+        assert.notEqual(responseData, '');
+        assert.equal(PlaceOrder.callCount, 1);
       });
     });
 
     it('Mutation: validate response should return invalid access token', () => {
       args.query =
-        'mutation { placeOrder(input: {cart_id: "00000043"}) {order { order_id}}}';
+        'mutation { placeOrder(input: {cart_id: "00000050"}) {order { order_id}}}';
       args.context.settings.bearer = 'accessToken';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({
-          message: 'Invalid access token: accessToken',
+          message: 'Request failed with status code 401',
           source: {
             name: 'GraphQL request',
           },
@@ -73,51 +86,42 @@ describe('Place Order', function() {
 
     it('Mutation: validate response should return Cart not found.', () => {
       args.query =
-        'mutation { placeOrder(input: {cart_id: "00000004"}) {order { order_id}}}';
-      return TestUtils.getBearer().then(accessToken => {
-        args.context.settings.bearer = accessToken;
-        return resolve(args).then(result => {
-          const errors = result.errors[0];
-          expect(errors).shallowDeepEqual({
-            message: 'Cart not found.',
-            source: {
-              name: 'GraphQL request',
-            },
-          });
+        'mutation { placeOrder(input: {cart_id: "CART NOT FOUND"}) {order { order_id}}}';
+      return resolve(args).then(result => {
+        const errors = result.errors[0];
+        expect(errors).shallowDeepEqual({
+          message: 'Request failed with status code 400',
+          source: {
+            name: 'GraphQL request',
+          },
         });
       });
     });
 
     it('Mutation: validate response should return Delivery mode is not set', () => {
       args.query =
-        'mutation { placeOrder(input: {cart_id: "00000045"}) {order { order_id}}}';
-      return TestUtils.getBearer().then(accessToken => {
-        args.context.settings.bearer = accessToken;
-        return resolve(args).then(result => {
-          const errors = result.errors[0];
-          expect(errors).shallowDeepEqual({
-            message: 'Delivery mode is not set',
-            source: {
-              name: 'GraphQL request',
-            },
-          });
+        'mutation { placeOrder(input: {cart_id: "00000050"}) {order { order_id}}}';
+      return resolve(args).then(result => {
+        const errors = result.errors[0];
+        expect(errors).shallowDeepEqual({
+          message: 'Request failed with status code 400',
+          source: {
+            name: 'GraphQL request',
+          },
         });
       });
     });
 
     it('Mutation: validate response should return Payment info is not set', () => {
       args.query =
-        'mutation { placeOrder(input: {cart_id: "00000004"}) {order { order_id}}}';
-      return TestUtils.getBearer().then(accessToken => {
-        args.context.settings.bearer = accessToken;
-        return resolve(args).then(result => {
-          const errors = result.errors[0];
-          expect(errors).shallowDeepEqual({
-            message: 'Payment info is not set',
-            source: {
-              name: 'GraphQL request',
-            },
-          });
+        'mutation { placeOrder(input: {cart_id: "00000050"}) {order { order_id}}}';
+      return resolve(args).then(result => {
+        const errors = result.errors[0];
+        expect(errors).shallowDeepEqual({
+          message: 'Request failed with status code 400',
+          source: {
+            name: 'GraphQL request',
+          },
         });
       });
     });

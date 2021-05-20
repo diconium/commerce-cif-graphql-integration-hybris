@@ -15,8 +15,7 @@
 'use strict';
 
 const DataLoader = require('dataloader');
-const rp = require('request-promise');
-
+const axios = require('axios');
 class RemoveCouponFromCartLoader {
   /**
    * @param {Object} [actionParameters] Some optional parameters of the I/O Runtime action, like for example customerId, bearer token, query and url info.
@@ -25,12 +24,16 @@ class RemoveCouponFromCartLoader {
   constructor(actionParameters) {
     this.vouchersList = actionParameters.vouchersList;
     this.actionParameters = actionParameters.actionParameters;
-    // this.actionParameters = parameters.actionParameters;
-    // The loading function: "cartIds" is an Array of cart ids
+    /**
+     *this.actionParameters = parameters.actionParameters;
+     *The loading function: "cartIds" is an Array of cart ids
+     */
     let loadingFunction = cartIds => {
-      // This loader loads each cart one by one, but if the 3rd party backend allows it,
-      // it could also fetch all carts in one single request. In this case, the method
-      // must still return an Array of carts with the same order as the keys.
+      /**
+       *This loader loads each cart one by one, but if the 3rd party backend allows it,
+       *it could also fetch all carts in one single request. In this case, the method
+       *must still return an Array of carts with the same order as the keys.
+       */
       return Promise.resolve(
         cartIds.map(cartId => {
           return this._removeCouponsFromCart(
@@ -48,7 +51,7 @@ class RemoveCouponFromCartLoader {
 
   /**
    * method used to call the loadingFunction using dataloader
-   * @param {*} cartId parameter cartId to remove
+   * @param {*} input parameter cartId and coupon code to remove
    * @returns {Promise} a promise return null after resolved successfully other wise return the error.
    */
   load(cartId) {
@@ -56,8 +59,8 @@ class RemoveCouponFromCartLoader {
   }
 
   /**
-   * @param {String}  cartId contains cartId details and
-   * @param {Object} vouchersList contains the list of voucher codes to remove
+   * @param {String}  parameter contains cartId details and
+   * @param {Object} parameter contains the list of voucher codes to remove
    * @param {Object} [actionParameters] Some optional parameters of the I/O Runtime action, like for example customerId, bearer token, query and url info.
    * @returns {Promise} a promise return null if resolves successfully else return error.
    */
@@ -74,11 +77,16 @@ class RemoveCouponFromCartLoader {
     return new Promise((resolve, reject) => {
       vouchersList &&
         vouchersList.vouchers.map(({ code }) => {
-          return rp({
-            method: 'DELETE',
-            uri: `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cartId}/vouchers/${code}?fields=DEFAULT&access_token=${bearer}`,
-            json: true,
-          })
+          let uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cartId}/vouchers/${code}?fields=DEFAULT`;
+          axios
+            .delete(uri, {
+              params: {
+                query: '',
+              },
+              headers: {
+                Authorization: `Bearer ${bearer}`,
+              },
+            })
             .then(() => {
               resolve(true);
             })

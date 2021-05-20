@@ -1,23 +1,37 @@
 {
   "type": "userWsDTO",
-  "name": "karan sharma test",
-  "uid": "karanaug88test@gmail.com",
+  "name": "Senthil",
+  "uid": "test.user@example.com",
   "currency": {
     "active": true,
     "isocode": "USD",
-    "name": "USDollar",
+    "name": "US Dollar",
     "symbol": "$"
   },
-  "customerId": "97df5850-2792-45e2-a84b-9152b844ae70",
-  "displayUid": "karanaug88@gmail.com",
-  "firstName": "karan test",
+  "defaultAddress": {
+    "country": {
+      "isocode": "US"
+    },
+    "defaultAddress": false,
+    "firstName": "Senthil",
+    "id": "8796127297559",
+    "lastName": "Roll",
+    "line1": "Magento shipping",
+    "line2": "Main Street",
+    "phone": "9999998899",
+    "postalCode": "78758",
+    "region": {
+      "isocode": "US-WA"
+    },
+    "town": "Austin"
+  },
+  "displayUid": "test.user@example.com",
+  "firstName": "Senthil",
   "language": {
     "active": true,
     "isocode": "en",
     "name": "English",
     "nativeName": "English"
   },
-  "lastName": "sharma test",
-  "title": "Mr.",
-  "titleCode": "mr"
+  "lastName": ""
 }

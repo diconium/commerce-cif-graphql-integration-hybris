@@ -19,8 +19,11 @@ const assert = require('chai').assert;
 
 const resolve = require('.././../src/cartResolver.js').main;
 const TestUtils = require('../../../utils/TestUtils.js');
+const AddProductLoader = require('../../src/AddProductToCartLoader');
+const ymlData = require('../../../common/options.json');
 
 describe('AddProductToCart', () => {
+  let AddProduct;
   before(() => {
     sinon.stub(console, 'debug');
     sinon.stub(console, 'error');
@@ -31,25 +34,37 @@ describe('AddProductToCart', () => {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    AddProduct = sinon.spy(AddProductLoader.prototype, '_addProductToCart');
+  });
+
   describe('Integration Tests', () => {
     let args = {
-      url: 'https://hybris.example.com',
+      url: TestUtils.getHybrisInstance(),
       context: {
         settings: {
           bearer: '',
           customerId: 'current',
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
         },
       },
     };
+    before(async () => {
+      args.context.settings.bearer = await TestUtils.getBearer();
+    });
 
     it('Add products to cart', () => {
+      //3514521 1298094
       args.query =
-        'mutation {addSimpleProductsToCart(input:{cart_id: "00000000", cart_items: [{data: {quantity: 1, sku: "3514521" } }]}){cart {items {id,product { name,sku },quantity} }}}';
-      return TestUtils.getBearer().then(accessToken => {
-        args.context.settings.bearer = accessToken;
-        return resolve(args).then(result => {
-          assert.isUndefined(result.errors);
-        });
+        'mutation {addSimpleProductsToCart(input:{cart_id: "00000035", cart_items: [{data: {quantity: "1", sku: "3514521" } }]}){cart {items {id,product { name,sku },quantity} }}}';
+      return resolve(args).then(result => {
+        console.log(result);
+        assert.isUndefined(result.errors);
+        assert.equal(AddProduct.callCount, 1);
       });
     });
   });

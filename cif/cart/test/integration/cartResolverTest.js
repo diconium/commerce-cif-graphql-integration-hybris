@@ -17,11 +17,14 @@
 const sinon = require('sinon');
 const assert = require('chai').assert;
 const expect = require('chai').expect;
+const CartLoader = require('../../src/CartLoader.js');
 const TestUtils = require('../../../utils/TestUtils.js');
 // The cart resolver
 const resolve = require('../../src/cartResolver.js').main;
+const ymlData = require('../../../common/options.json');
 
 describe('Cart Resolver', () => {
+  let getCart;
   before(() => {
     // Disable console debugging
     sinon.stub(console, 'debug');
@@ -33,6 +36,11 @@ describe('Cart Resolver', () => {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    getCart = sinon.spy(CartLoader.prototype, '__getCartById');
+  });
+
   describe('Integration Tests', () => {
     let args = {
       url: TestUtils.getHybrisInstance(),
@@ -40,21 +48,27 @@ describe('Cart Resolver', () => {
         settings: {
           bearer: '',
           customerId: 'current',
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
         },
       },
     };
+    before(async () => {
+      args.context.settings.bearer = await TestUtils.getBearer();
+    });
 
     it('Cart query', () => {
       args.query =
-        '{cart(cart_id: "00000001") {email,billing_address {city,country {code,label},firstname,lastname,postcode, region {code,label},street,telephone},shipping_addresses{firstname,lastname,street,city,region{code,label},country{code,label},available_shipping_methods{amount{currency,value},available,carrier_code,carrier_title,error_message,method_code,method_title,price_excl_tax{value,currency},price_incl_tax{value,currency}},selected_shipping_method{amount{value,currency},carrier_code,carrier_title,method_code,method_title}},items{id,product{name,sku},quantity},available_payment_methods{code,title},selected_payment_method{code,title},applied_coupon{code},prices{grand_total{value,currency}}}}';
-      return TestUtils.getBearer().then(accessToken => {
-        args.context.settings.bearer = accessToken;
-        return resolve(args).then(result => {
-          assert.isUndefined(result.errors);
-          let response = result.data.cart;
-          assert.notEqual(response, null);
-          expect(response).to.be.not.empty;
-        });
+        '{cart(cart_id: "00000000") {email,billing_address {city,country {code,label},firstname,lastname,postcode, region {code,label},street,telephone},shipping_addresses{firstname,lastname,street,city,region{code,label},country{code,label},available_shipping_methods{amount{currency,value},available,carrier_code,carrier_title,error_message,method_code,method_title,price_excl_tax{value,currency},price_incl_tax{value,currency}},selected_shipping_method{amount{value,currency},carrier_code,carrier_title,method_code,method_title}},items{id,product{name,sku},quantity},available_payment_methods{code,title},selected_payment_method{code,title},applied_coupon{code},prices{grand_total{value,currency}}}}';
+      return resolve(args).then(result => {
+        console.log(result);
+        assert.isUndefined(result.errors);
+        let response = result.data.cart;
+        assert.notEqual(response, null);
+        expect(response).to.be.not.empty;
+        assert.equal(getCart.callCount, 1);
       });
     });
   });

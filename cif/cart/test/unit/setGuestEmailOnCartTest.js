@@ -24,10 +24,12 @@ const resolve = require('../../../cart/src/cartResolver.js').main;
 const validResponseSetGuestEmail = require('../resources/validResponseSetGuestEmail.json');
 const cartNotFound = require('../resources/cartNotFound.json');
 const hybrisAuthLoginMock = require('../resources/hybris-token.json');
-const bearer = 'a7db795c-b1c2-46d9-a201-16130b6099af';
+const TestUtils = require('../../../utils/TestUtils.js');
+const bearer = '6ca31c1a-925b-4df3-ade7-3e99c8f9c3f2';
+const ymlData = require('../../../common/options.json');
 
 describe('SetGuestEmailOnCart', function() {
-  const scope = nock('https://hybris.example.com');
+  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
 
   before(() => {
     // Disable console debugging
@@ -42,21 +44,21 @@ describe('SetGuestEmailOnCart', function() {
 
   describe('Unit Tests', () => {
     let args = {
-      url: 'https://hybris.example.com',
+      url: TestUtils.getHybrisInstance(),
       context: {
         settings: {
           bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: 'https',
-          HB_API_HOST: 'hybris.example.com',
-          HB_API_BASE_PATH: '/rest/v2',
-          HB_BASESITEID: '/electronics',
-          HB_OAUTH_PATH: '/authorizationserver/oauth/token',
+          customerId: 'anonymous',
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
+          HB_OAUTH_PATH: ymlData.HB_OAUTH_PATH,
         },
       },
     };
 
-    it('Mutation: set guest email on carat', () => {
+    it('Mutation: set guest email on cart', () => {
       scope
         .post('/authorizationserver/oauth/token')
         .query({ operationType: 'oAuth' })
@@ -64,12 +66,11 @@ describe('SetGuestEmailOnCart', function() {
 
       scope
         .put(
-          '/rest/v2/electronics/users/anonymous/carts/96f344f0-367d-4893-92ce-16531e889169/email'
+          `${ymlData.HB_API_BASE_PATH}electronics/users/anonymous/carts/96f344f0-367d-4893-92ce-16531e889169/email`
         )
         .query({
           email: 'guestemail@test.com',
           fields: 'DEFAULT',
-          access_token: `${bearer}`,
         })
         .reply(200);
       args.context.settings.customerId = 'anonymous';
@@ -84,11 +85,12 @@ describe('SetGuestEmailOnCart', function() {
 
     it('Mutation: validate response should contain cart not found', () => {
       scope
-        .put('/rest/v2/electronics/users/anonymous/carts/22/email')
+        .put(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/anonymous/carts/22/email`
+        )
         .query({
           email: 'guestemail@test.com',
           fields: 'DEFAULT',
-          access_token: `${bearer}`,
         })
         .reply(400, cartNotFound);
       args.context.settings.bearer = bearer;
@@ -98,7 +100,7 @@ describe('SetGuestEmailOnCart', function() {
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).to.shallowDeepEqual({
-          message: 'Cart not found.',
+          message: 'Request failed with status code 400',
           source: {
             name: 'GraphQL request',
           },

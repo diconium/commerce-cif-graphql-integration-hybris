@@ -15,7 +15,7 @@
 'use strict';
 
 const DataLoader = require('dataloader');
-const rp = require('request-promise');
+const axios = require('axios');
 
 class PlaceOrderLoader {
   /**
@@ -24,11 +24,13 @@ class PlaceOrderLoader {
    */
   constructor(parameters) {
     this.actionParameters = parameters.actionParameters;
-    // The loading function: "cartIds" is an Array of cart ids
+    /** The loading function: "cartIds" is an Array of cart ids */
     let loadingFunction = cartIds => {
-      // This loader loads each cart one by one, but if the 3rd party backend allows it,
-      // it could also fetch all carts in one single request. In this case, the method
-      // must still return an Array of carts with the same order as the keys.
+      /**
+       *This loader loads each cart one by one, but if the 3rd party backend allows it,
+       *it could also fetch all carts in one single request. In this case, the method
+       *must still return an Array of carts with the same order as the keys.
+       */
       return Promise.resolve(
         cartIds.map(cartId => {
           return this._placeOrder(cartId, this.actionParameters).catch(
@@ -65,16 +67,27 @@ class PlaceOrderLoader {
       HB_PROTOCOL,
       HB_BASESITEID,
     } = actionParameters.context.settings;
-
-    return rp({
-      method: 'POST',
-      uri: `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/orders?cartId=${cartId}&fields=DEFAULT&access_token=${bearer}`,
-      json: true,
-    })
-      .then(response => response)
-      .catch(err => {
-        throw new Error(err.error.errors[0].message);
-      });
+    const config = {
+      headers: {
+        Authorization: `Bearer ${bearer}`,
+      },
+    };
+    let body = {};
+    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/orders?cartId=${cartId}&fields=DEFAULT&access_token=${bearer}`;
+    return new Promise((resolve, reject) => {
+      axios
+        .post(uri, body, config)
+        .then(response => {
+          if (!response.data.errors) {
+            resolve(response.data);
+          } else {
+            reject(response);
+          }
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
   }
 }
 

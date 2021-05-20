@@ -1,0 +1,26 @@
+[
+  {
+    "__typename": "SimpleProduct",
+    "image": {
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wxNTg1MXxpbWFnZS9qcGVnfGltYWdlcy9oZWQvaGRhLzg3OTcyNTU3NjE5NTAuanBnfGY3MTcyMTU2NzNkZDY5OTVkYTlhMzE2NjhkNGYzODE1MGM1ZTNmMTkzOGYwNjRkOGE5ZjJiMjBjYjQzZjNiNTc"
+    },
+    "name": "DSC-T90",
+    "price_range": {
+      "minimum_price": {
+        "discount": {
+          "amount_off": 0,
+          "percent_off": 0
+        },
+        "final_price": {
+          "currency": "USD",
+          "value": 541.34
+        },
+        "regular_price": {
+          "currency": "USD",
+          "value": 541.34
+        }
+      }
+    },
+    "url_key": "1992693"
+  }
+]

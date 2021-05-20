@@ -25,16 +25,17 @@ class TestUtils {
   }
 
   static getBearer() {
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
     return chai
       .request(TestUtils.getHybrisInstance())
-      .post('authorizationserver/oauth/token')
+      .post('/authorizationserver/oauth/token')
       .type('application/x-www-form-urlencoded')
       .send({
         grant_type: 'password',
-        username: 'user@example.com',
-        password: 'password',
-        client_secret: 'oauth-client-secret',
-        client_id: 'oauth-clientid',
+        username: 'test.user@example.com',
+        password: 'Test@123',
+        client_secret: 'adobeio20180605',
+        client_id: '<CLIENT_ID>',
       })
       .then(response => response.body.access_token)
       .catch(error => error);
@@ -47,8 +48,8 @@ class TestUtils {
       .type('application/x-www-form-urlencoded')
       .send({
         grant_type: 'client_credentials',
-        client_secret: 'oauth-client-secret',
-        client_id: 'oauth-clientid',
+        client_secret: 'adobeio20180605',
+        client_id: '<CLIENT_ID>',
       })
       .then(response => response.body.access_token)
       .catch(error => error);
@@ -61,10 +62,10 @@ class TestUtils {
       .type('application/x-www-form-urlencoded')
       .send({
         grant_type: 'password',
-        username: 'user@example.com',
-        password: 'password',
-        client_secret: 'oauth-client-secret',
-        client_id: 'oauth-clientid',
+        username: 'test.user@example.com',
+        password: 'Test@123',
+        client_secret: 'adobeio20180605',
+        client_id: '<CLIENT_ID>',
       })
       .then(response => response.body.refresh_token)
       .catch(error => error);

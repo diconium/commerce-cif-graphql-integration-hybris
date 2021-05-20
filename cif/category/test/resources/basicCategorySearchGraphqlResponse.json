@@ -1,0 +1,37 @@
+{
+  "uid": "1",
+  "name": "Open Catalogue",
+  "url_path": "1",
+  "url_key": "open-catalogue",
+  "children_count": "4",
+  "children": [
+    {
+      "uid": "106",
+      "name": "Components",
+      "url_path": "1/106",
+      "url_key": "components",
+      "children_count": "1"
+    },
+    {
+      "uid": "206",
+      "name": "Data storage",
+      "url_path": "1/206",
+      "url_key": "data-storage",
+      "children_count": "1"
+    },
+    {
+      "uid": "571",
+      "name": "Cameras",
+      "url_path": "1/571",
+      "url_key": "cameras",
+      "children_count": "5"
+    },
+    {
+      "uid": "1421",
+      "name": "Binoculars",
+      "url_path": "1/1421",
+      "url_key": "binoculars",
+      "children_count": "0"
+    }
+  ]
+}

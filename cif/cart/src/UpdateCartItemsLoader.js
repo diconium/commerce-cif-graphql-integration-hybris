@@ -15,17 +15,21 @@
 'use strict';
 
 const DataLoader = require('dataloader');
-const rp = require('request-promise');
+const axios = require('axios');
 
 class UpdateCartItemsLoader {
   /**
+   * @param {Object} parameters
    * @param {Object} [actionParameters] Some optional parameters of the I/O Runtime action, like for example authentication info.
+   * @param {Object} input consist of cartId, cart_item_id and quantity
    */
   constructor(actionParameters) {
     let loadingFunction = input => {
-      // This loader loads each cart one by one, but if the 3rd party backend allows it,
-      // it could also fetch all carts in one single request. In this case, the method
-      // must still return an Array of carts with the same order as the keys.
+      /**
+       *This loader loads each cart one by one, but if the 3rd party backend allows it,
+       *it could also fetch all carts in one single request. In this case, the method
+       *must still return an Array of carts with the same order as the keys.
+       */
       return Promise.resolve(
         input.map(queryInput => {
           return this._updateMethod(queryInput, actionParameters).catch(
@@ -71,21 +75,31 @@ class UpdateCartItemsLoader {
     const { cart_id, cart_items } = queryInput;
 
     const cart_item = cart_items[0];
-    const { cart_item_id, quantity } = cart_item;
-
+    let { cart_item_id, cart_item_uid, quantity } = cart_item;
+    cart_item_uid = cart_item_uid ? cart_item_uid : cart_item_id;
     let body = {
       quantity: quantity,
     };
-    return rp({
-      method: 'PATCH',
-      uri: `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cart_id}/entries/${cart_item_id}?access_token=${bearer}`,
-      body: body,
-      json: true,
-    })
-      .then(response => response)
-      .catch(err => {
-        throw new Error(err.error.errors[0].message);
-      });
+    const config = {
+      headers: {
+        Authorization: `Bearer ${bearer}`,
+      },
+    };
+    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cart_id}/entries/${cart_item_uid}?fields=FULL`;
+    return new Promise((resolve, reject) => {
+      axios
+        .patch(uri, body, config)
+        .then(response => {
+          if (response.data) {
+            resolve(response.data);
+          } else {
+            reject(false);
+          }
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
   }
 }
 

@@ -14,7 +14,6 @@
 
 'use strict';
 
-const magentoSchema = require('../../resources/magento-schema-2.3.2.min.json');
 const { graphql } = require('graphql');
 const SchemaBuilder = require('../../common/SchemaBuilder.js');
 const Cart = require('./Cart.js');
@@ -30,10 +29,11 @@ const RemoveItemFromCart = require('./RemoveItemFromCart.js');
 const SetShippingMethodsOnCart = require('./SetShippingMethodsOnCart.js');
 
 let cachedSchema = null;
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
 function resolve(args) {
   if (cachedSchema == null) {
-    let schemaBuilder = new SchemaBuilder(magentoSchema)
+    let schemaBuilder = new SchemaBuilder()
       .filterMutationFields(
         new Set([
           'createEmptyCart',
@@ -53,7 +53,6 @@ function resolve(args) {
     cachedSchema = schemaBuilder.build();
   }
 
-  // Builds the resolvers object
   let resolvers = {
     cart: (params, context) => {
       return new Cart({
@@ -62,12 +61,24 @@ function resolve(args) {
         actionParameters: args,
       });
     },
+
+    /**
+     * method used to createEmptyCart
+     * @param {Object} params parameter contains input,graphqlContext and actionParameters
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
     createEmptyCart: () => {
       const createEmptyCartResolver = new CreateEmptyCart({
         actionParameters: args,
       });
       return createEmptyCartResolver.createEmptyCart.then(cart => cart);
     },
+
+    /**
+     * method used to setGuestEmailOnCart
+     * @param {Object} params parameter contains input,graphqlContext and actionParameters
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
     setGuestEmailOnCart: (params, context) => {
       return new SetGuestEmailOnCart({
         cartId: params.input.cart_id,
@@ -76,6 +87,12 @@ function resolve(args) {
         actionParameters: args,
       });
     },
+
+    /**
+     * method used to setBillingAddressOnCart
+     * @param {Object} params parameter contains input,graphqlContext and actionParameters
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
     setBillingAddressOnCart: (params, context) => {
       return new SetBillingAddressesOnCart({
         cartId: params.input.cart_id,
@@ -84,6 +101,12 @@ function resolve(args) {
         actionParameters: args,
       });
     },
+
+    /**
+     * method used to setShippingAddressesOnCart
+     * @param {Object} params parameter contains input,graphqlContext and actionParameters
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
     setShippingAddressesOnCart: (params, context) => {
       return new SetShippingAddressesOnCart({
         cartId: params.input.cart_id,
@@ -92,6 +115,12 @@ function resolve(args) {
         actionParameters: args,
       });
     },
+
+    /**
+     * method used to applyCouponToCart
+     * @param {Object} params parameter contains input,graphqlContext and actionParameters
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
     applyCouponToCart: (params, context) => {
       const { input } = params;
       return new ApplyCouponToCart({
@@ -101,6 +130,12 @@ function resolve(args) {
         actionParameters: args,
       });
     },
+
+    /**
+     * method used to removeCouponFromCart
+     * @param {Object} params parameter contains input,graphqlContext and actionParameters
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
     removeCouponFromCart: (params, context) => {
       const { input } = params;
       return new VoucherList({
@@ -110,6 +145,11 @@ function resolve(args) {
       });
     },
 
+    /**
+     * method used to updateCartItems
+     * @param {Object} params parameter contains input,graphqlContext and actionParameters
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
     updateCartItems: (params, context) => {
       const { input } = params;
       return new UpdateCartItems({
@@ -118,6 +158,12 @@ function resolve(args) {
         input,
       });
     },
+
+    /**
+     * method used to addSimpleProductsToCart
+     * @param {Object} params parameter contains input,graphqlContext and actionParameters
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
     addSimpleProductsToCart: (params, context) => {
       const { input } = params;
       return new AddProductToCart({
@@ -126,6 +172,12 @@ function resolve(args) {
         actionParameters: args,
       });
     },
+
+    /**
+     * method used to removeItemFromCart
+     * @param {Object} params parameter contains input,graphqlContext and actionParameters
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
     removeItemFromCart: (params, context) => {
       const { input } = params;
       return new RemoveItemFromCart({
@@ -134,6 +186,12 @@ function resolve(args) {
         actionParameters: args,
       });
     },
+
+    /**
+     * method used to setShippingMethodsOnCart
+     * @param {Object} params parameter contains input,graphqlContext and actionParameters
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
     setShippingMethodsOnCart: (params, context) => {
       const { input } = params;
       return new SetShippingMethodsOnCart({
@@ -143,7 +201,17 @@ function resolve(args) {
       });
     },
   };
-  // The resolver for this action
+
+  /**
+   * The resolver for this action
+   * @param {cachedSchema} cachedSchema parameter contains the catched schema of GraphQL
+   * @param {Object} query parameter contains the query of GraphQL
+   * @param {cachedSchema} resolvers parameter resolvers of the particular action
+   * @param {Object} context parameter contains the context of GraphQL
+   * @param {cachedSchema} variables parameter contains the variables of GraphQL
+   * @param {Object} operationName parameter contains the operationName of GraphQL context.
+   * @returns {Promise} a promise resolves and return the response.
+   */
   return graphql(
     cachedSchema,
     args.query,

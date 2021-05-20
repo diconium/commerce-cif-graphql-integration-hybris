@@ -1,0 +1,344 @@
+{"regions": [
+  {
+    "countryIso": "US",
+    "isocode": "US-AL",
+    "isocodeShort": "AL",
+    "name": "Alabama"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-AK",
+    "isocodeShort": "AK",
+    "name": "Alaska"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-AS",
+    "isocodeShort": "AS",
+    "name": "American Samoa"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-AZ",
+    "isocodeShort": "AZ",
+    "name": "Arizona"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-AR",
+    "isocodeShort": "AR",
+    "name": "Arkansas"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-CA",
+    "isocodeShort": "CA",
+    "name": "California"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-CO",
+    "isocodeShort": "CO",
+    "name": "Colorado"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-CT",
+    "isocodeShort": "CT",
+    "name": "Connecticut"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-DE",
+    "isocodeShort": "DE",
+    "name": "Delaware"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-DC",
+    "isocodeShort": "DC",
+    "name": "District of Columbia"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-FL",
+    "isocodeShort": "FL",
+    "name": "Florida"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-GA",
+    "isocodeShort": "GA",
+    "name": "Georgia"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-GU",
+    "isocodeShort": "GU",
+    "name": "Guam"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-HI",
+    "isocodeShort": "HI",
+    "name": "Hawaii"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-ID",
+    "isocodeShort": "ID",
+    "name": "Idaho"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-IL",
+    "isocodeShort": "IL",
+    "name": "Illinois"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-IN",
+    "isocodeShort": "IN",
+    "name": "Indiana"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-IA",
+    "isocodeShort": "IA",
+    "name": "Iowa"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-KS",
+    "isocodeShort": "KS",
+    "name": "Kansas"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-KY",
+    "isocodeShort": "KY",
+    "name": "Kentucky"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-LA",
+    "isocodeShort": "LA",
+    "name": "Louisiana"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-ME",
+    "isocodeShort": "ME",
+    "name": "Maine"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-MD",
+    "isocodeShort": "MD",
+    "name": "Maryland"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-MA",
+    "isocodeShort": "MA",
+    "name": "Massachusetts"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-MI",
+    "isocodeShort": "MI",
+    "name": "Michigan"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-MN",
+    "isocodeShort": "MN",
+    "name": "Minnesota"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-MS",
+    "isocodeShort": "MS",
+    "name": "Mississippi"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-MO",
+    "isocodeShort": "MO",
+    "name": "Missouri"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-MT",
+    "isocodeShort": "MT",
+    "name": "Montana"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-NE",
+    "isocodeShort": "NE",
+    "name": "Nebraska"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-NV",
+    "isocodeShort": "NV",
+    "name": "Nevada"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-NH",
+    "isocodeShort": "NH",
+    "name": "New Hampshire"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-NJ",
+    "isocodeShort": "NJ",
+    "name": "New Jersey"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-NM",
+    "isocodeShort": "NM",
+    "name": "New Mexico"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-NY",
+    "isocodeShort": "NY",
+    "name": "New York"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-NC",
+    "isocodeShort": "NC",
+    "name": "North Carolina"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-ND",
+    "isocodeShort": "ND",
+    "name": "North Dakota"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-MP",
+    "isocodeShort": "MP",
+    "name": "Northern Mariana Islands"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-OH",
+    "isocodeShort": "OH",
+    "name": "Ohio"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-OK",
+    "isocodeShort": "OK",
+    "name": "Oklahoma"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-OR",
+    "isocodeShort": "OR",
+    "name": "Oregon"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-PA",
+    "isocodeShort": "PA",
+    "name": "Pennsylvania"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-PR",
+    "isocodeShort": "PR",
+    "name": "Puerto Rico"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-RI",
+    "isocodeShort": "RI",
+    "name": "Rhode Island"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-SC",
+    "isocodeShort": "SC",
+    "name": "South Carolina"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-SD",
+    "isocodeShort": "SD",
+    "name": "South Dakota"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-TN",
+    "isocodeShort": "TN",
+    "name": "Tennessee"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-TX",
+    "isocodeShort": "TX",
+    "name": "Texas"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-UM",
+    "isocodeShort": "UM",
+    "name": "United States Minor Outlying Islands"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-VI",
+    "isocodeShort": "VI",
+    "name": "United States Virgin Islands"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-UT",
+    "isocodeShort": "UT",
+    "name": "Utah"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-VT",
+    "isocodeShort": "VT",
+    "name": "Vermont"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-VA",
+    "isocodeShort": "VA",
+    "name": "Virginia"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-WA",
+    "isocodeShort": "WA",
+    "name": "Washington"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-WV",
+    "isocodeShort": "WV",
+    "name": "West Virginia"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-WI",
+    "isocodeShort": "WI",
+    "name": "Wisconsin"
+  },
+  {
+    "countryIso": "US",
+    "isocode": "US-WY",
+    "isocodeShort": "WY",
+    "name": "Wyoming"
+  }
+]}

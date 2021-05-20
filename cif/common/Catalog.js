@@ -15,9 +15,10 @@
 'use strict';
 
 const ProductsLoader = require('../product/src/ProductsLoader.js');
+const ProductLoader = require('../product/src/ProductLoader.js');
 const CategoryTreeLoader = require('../category/src/CategoryTreeLoader.js');
 const LoaderProxy = require('./LoaderProxy.js');
-
+const ymlData = require('./../common/options.json');
 // This module contains 3 classes because they have cross/cyclic dependencies to each other
 // and it's not possible to have them in separate files because this is not supported by Javascript
 
@@ -31,7 +32,23 @@ class CategoryTree {
    * @param {ProductsLoader} [parameters.productsLoader] An optional ProductsLoader, to optimise caching.
    */
   constructor(parameters) {
-    this.categoryId = parameters.categoryId;
+    console.log(parameters);
+    let cateId =
+      parameters.categoryId.url_key !== undefined
+        ? parameters.categoryId.url_key.eq
+        : '';
+    if (cateId !== '') {
+      cateId = cateId.split('/');
+      cateId = cateId[cateId.length - 1];
+    }
+    this.categoryId =
+      parameters.categoryId.category_uid !== undefined
+        ? parameters.categoryId.category_uid.eq
+        : parameters.categoryId.ids !== undefined
+        ? parameters.categoryId.ids.eq
+        : parameters.categoryId.url_key !== undefined
+        ? cateId
+        : parameters.categoryId;
     this.urlName = parameters.urlName || null;
     this.graphqlContext = parameters.graphqlContext;
     this.actionParameters = parameters.actionParameters;
@@ -48,6 +65,11 @@ class CategoryTree {
     return new LoaderProxy(this);
   }
 
+  /**
+   * Calls the category loader by category id
+   * @returns {Promise}
+   * @private
+   */
   __load() {
     console.debug(`Loading category for ${this.categoryId}`);
     return this.categoryTreeLoader.load(this.categoryId);
@@ -62,32 +84,42 @@ class CategoryTree {
    * @returns {Object} The backend category data converted into a GraphQL "CategoryTree" data.
    */
   __convertData(data) {
-    if (!this.urlName && this.urlName !== null) {
-      this.urlName = data.name;
+    console.log(data);
+    if (!this.urlName && this.urlName === null) {
+      this.urlName = data.id;
     }
-
+    let urlKey = data.name;
+    urlKey = urlKey
+      .toLowerCase()
+      .split('&')
+      .join('-')
+      .split(' ')
+      .join('-');
     return {
       id: data.id,
+      uid: data.id,
       name: data.name,
       description: data.url,
-      url_path:
-        this.urlName === null
-          ? null
-          : this.urlName
-              .toLowerCase()
-              .split('&')
-              .join('')
-              .split(' ')
-              .join(''),
+      url_key: urlKey,
+      url_path: this.urlName === null ? null : this.urlName,
       updated_at: data.lastModified,
       position: 0,
     };
   }
 
+  /**
+   * get Category type
+   * @returns {string}
+   * @private
+   */
   get __typename() {
     return 'CategoryTree';
   }
 
+  /**
+   * Get children categories data
+   * @returns {Promise<T>}
+   */
   get children() {
     return this.__load().then(data => {
       if (!data.subcategories || data.subcategories.length == 0) {
@@ -98,7 +130,7 @@ class CategoryTree {
         return new CategoryTree({
           categoryId: category.id,
           urlName:
-            (this.urlName !== null ? this.urlName + '/' : '') + category.name,
+            (this.urlName !== null ? this.urlName + '/' : '') + category.id,
           graphqlContext: this.graphqlContext,
           actionParameters: this.actionParameters,
           categoryTreeLoader: this.categoryTreeLoader,
@@ -108,13 +140,39 @@ class CategoryTree {
     });
   }
 
+  /**
+   * Get children category count
+   * @returns {Promise<T>}
+   */
   get children_count() {
     return this.__load().then(data => {
       return data.subcategories ? data.subcategories.length : 0;
     });
   }
 
-  // Getters cannot have arguments, so we define a function
+  /**
+   * Get products count for the particular category
+   * @returns {Promise<T>}
+   */
+  get product_count() {
+    return this.__load().then(data => {
+      let searchKey = {
+        categoryId: data.id,
+        pageSize: 20,
+        currentPage: 1,
+      };
+      return this.productsLoader.load(searchKey).then(response => {
+        console.log(response.pagination.totalResults);
+        return response.pagination.totalResults;
+      });
+    });
+  }
+
+  /**
+   * Getters cannot have arguments, so we define a function to fetch product data
+   * @param params
+   * @returns {Products}
+   */
   products(params) {
     // We don't need to call this.__load() here because only fetching the products
     // of a category does not require fetching the category itself
@@ -158,10 +216,16 @@ class Products {
     return new LoaderProxy(this);
   }
 
+  /**
+   * Calls the products loader by search param
+   * @returns {Promise<unknown>}
+   * @private
+   */
   __load() {
     console.debug(
       'Loading products for ' + JSON.stringify(this.search, null, 0)
     );
+    console.log(this.search);
     return this.productsLoader.load(this.search);
   }
 
@@ -184,6 +248,10 @@ class Products {
     };
   }
 
+  /**
+   * Get Items data in magento graphql format
+   * @returns {Promise<T>}
+   */
   get items() {
     return this.__load().then(() => {
       if (!this.data.products || this.data.products.length == 0) {
@@ -216,6 +284,7 @@ class Product {
     this.productData = parameters.productData;
     this.graphqlContext = parameters.graphqlContext;
     this.actionParameters = parameters.actionParameters;
+    this.HB_SECURE_BASE_MEDIA_URL = this.actionParameters.context.settings.HB_SECURE_BASE_MEDIA_URL;
     this.categoryTreeLoader =
       parameters.categoryTreeLoader ||
       new CategoryTreeLoader(parameters.actionParameters);
@@ -229,14 +298,24 @@ class Product {
     return new LoaderProxy(this);
   }
 
+  /**
+   * Get product type
+   * @returns {string}
+   * @private
+   */
   get __typename() {
     return 'SimpleProduct';
   }
 
+  /**
+   * Get categories detail for the product in magento graphql format
+   * @returns {CategoryTree[]}
+   */
   get categories() {
-    return this.productData.categoryIds.map(categoryId => {
+    console.log(this.productData);
+    return this.productData.categories.map(categoryId => {
       return new CategoryTree({
-        categoryId: categoryId,
+        categoryId: categoryId.code,
         graphqlContext: this.graphqlContext,
         actionParameters: this.actionParameters,
         categoryTreeLoader: this.categoryTreeLoader,
@@ -245,14 +324,25 @@ class Product {
     });
   }
 
+  /**
+   * @returns {Promise<Object>}
+   * @private
+   */
   __load() {
     return Promise.resolve(this.productData);
   }
 
+  /**
+   * Converts some product data from the 3rd-party commerce system into the Magento GraphQL format.
+   * @param data
+   * @returns {{image: {label: *, url: string}, thumbnail: {label: *, url: string}, stock_status: string, small_image: {label: *, url: string}, price: {regularPrice: {amount: {currency: *, value: *}}}, name: *, description: {html: (*|string)}, id: number, categories: [], sku: *, url_key: *}}
+   * @private
+   */
   __convertData(data) {
     return {
       sku: data.code,
-      id: 1,
+      id: data.code,
+      uid: data.code,
       url_key: data.code,
       name: data.name,
       description: {
@@ -262,6 +352,22 @@ class Product {
         data.stock && data.stock.stockLevelStatus === 'inStock'
           ? 'IN_STOCK'
           : 'OUT_OF_STOCK',
+      price_range: {
+        minimum_price: {
+          regular_price: {
+            value: data.price.value,
+            currency: data.price.currencyIso,
+          },
+          final_price: {
+            value: data.price.value,
+            currency: data.price.currencyIso,
+          },
+          discount: {
+            amount_off: 0,
+            percent_off: 0,
+          },
+        },
+      },
       price: {
         regularPrice: {
           amount: {
@@ -273,7 +379,7 @@ class Product {
       image: {
         url:
           data.images && data.images.length > 0
-            ? `https://hybris.example.com${data.images[0].url}`
+            ? `${this.HB_SECURE_BASE_MEDIA_URL}${data.images[0].url}`
             : '',
         label:
           data.images && data.images.length > 0
@@ -283,7 +389,7 @@ class Product {
       small_image: {
         url:
           data.images && data.images.length > 0
-            ? `https://hybris.example.com${data.images[0].url}`
+            ? `${this.HB_SECURE_BASE_MEDIA_URL}${data.images[0].url}`
             : '',
         label:
           data.images && data.images.length > 0
@@ -293,7 +399,7 @@ class Product {
       thumbnail: {
         url:
           data.images && data.images.length > 0
-            ? `https://hybris.example.com${data.images[0].url}`
+            ? `${this.HB_SECURE_BASE_MEDIA_URL}${data.images[0].url}`
             : '',
         label:
           data.images && data.images.length > 0
@@ -304,23 +410,133 @@ class Product {
     };
   }
 
-  get media_gallery_entries() {
+  /**
+   * @returns {*}
+   */
+  get media_gallery() {
     return this.productData.images
       ? this.productData.images
           .filter(
             image => image.format === 'product' || image.format === 'zoom'
           )
-          .map((image, index) => ({
-            file: image.url,
-            position: index,
-            label: image.altText || '',
-            media_type: 'image',
-            disabled: false,
-          }))
+          .map(
+            (image, index) =>
+              new MediaGallery({
+                position: index,
+                url: image.url,
+                disabled: false,
+                label: image.altText || '',
+                // media_type: 'image',
+              })
+          )
       : [];
   }
 }
 
+class ProductsBySkus {
+  /**
+   * @param {Object} parameters
+   * @param {Object} parameters.search The "search" argument of the GraphQL "products" field, with an optional categoryId property.
+   * @param {Object} [parameters.graphqlContext] The optional GraphQL execution context passed to the resolver.
+   * @param {Object} [parameters.actionParameters] Some optional parameters of the I/O Runtime action, like for example authentication info.
+   * @param {ProductsLoader} [parameters.productsLoader] An optional ProductsLoader, to optimise caching.
+   * @param {CategoryTreeLoader} [parameters.categoryTreeLoader] An optional CategoryTreeLoader, to optimise caching.
+   */
+  constructor(parameters) {
+    this.search = parameters.search;
+    this.skus = this.search.filter.sku.in;
+    this.graphqlContext = parameters.graphqlContext;
+    this.actionParameters = parameters.actionParameters;
+    this.ProductLoader = new ProductLoader(parameters.actionParameters);
+    this.productsLoader =
+      parameters.productsLoader ||
+      new ProductsLoader(parameters.actionParameters);
+    this.categoryTreeLoader =
+      parameters.categoryTreeLoader ||
+      new CategoryTreeLoader(parameters.actionParameters);
+
+    /**
+     * This class returns a Proxy to avoid having to implement a getter for all properties.
+     */
+    return new LoaderProxy(this);
+  }
+
+  /**
+   * Load products data by Array of skus
+   * @returns {Promise}
+   * @private
+   */
+  __load() {
+    console.debug('Loading products for ' + JSON.stringify(this.skus, null, 0));
+    return this.ProductLoader.loadMany(this.skus);
+  }
+
+  /**
+   * Converts some products data from the 3rd-party commerce system into the Magento GraphQL format.
+   * Properties that require some extra data fetching with the 3rd-party system must have dedicated getters
+   * in this class.
+   *
+   * @param {Object} data
+   * @returns {Object} The backend products data converted into a GraphQL "Products" data.
+   */
+  __convertData(data) {
+    console.log(data);
+    return {
+      total_count: data.length,
+      page_info: {
+        current_page: this.search.currentPage,
+        page_size: this.search.pageSize,
+        total_pages:
+          data.length > this.search.pageSize
+            ? Math.ceil(data.length / this.search.pageSize)
+            : 1,
+      },
+    };
+  }
+
+  /**
+   * Get Items data in magento graphql format
+   * @returns {Promise<T>}
+   */
+  get items() {
+    return this.__load().then(() => {
+      if (!this.data || this.data.length == 0) {
+        return [];
+      }
+
+      return this.data.map(productData => {
+        return new Product({
+          productData: productData,
+          graphqlContext: this.graphqlContext,
+          actionParameters: this.actionParameters,
+          categoryTreeLoader: this.categoryTreeLoader,
+          productsLoader: this.productsLoader,
+        });
+      });
+    });
+  }
+}
+class MediaGallery {
+  /**
+   * @param {Object} parameters
+   */
+  constructor(parameters) {
+    this.url = `${ymlData.HB_SECURE_BASE_MEDIA_URL}${parameters.url}`;
+    this.position = parameters.position;
+    this.label = parameters.label;
+    this.disabled = parameters.disabled;
+  }
+  /**
+   * get MediaGallery type
+   * @returns {string}
+   * @private
+   */
+  get __typename() {
+    return 'ProductImage';
+  }
+}
+module.exports.MediaGallery = MediaGallery;
 module.exports.Products = Products;
 module.exports.CategoryTree = CategoryTree;
 module.exports.Product = Product;
+module.exports.ProductsBySkus = ProductsBySkus;

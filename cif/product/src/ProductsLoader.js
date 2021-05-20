@@ -15,17 +15,17 @@
 'use strict';
 
 const DataLoader = require('dataloader');
-const rp = require('request-promise');
+const axios = require('axios');
 
 class ProductsLoader {
   /**
    * @param {Object} [actionParameters] Some optional parameters of the I/O Runtime action, like for example authentication info.
    */
   constructor(actionParameters) {
-    // A custom function to generate custom cache keys, simply serializing the key.
+    /** A custom function to generate custom cache keys, simply serializing the key.*/
     let cacheKeyFunction = key => JSON.stringify(key, null, 0);
 
-    // The loading function: the "key" is actually an object with search parameters
+    /** The loading function: the "key" is actually an object with search parameters */
     let loadingFunction = keys => {
       return Promise.resolve(
         keys.map(key => {
@@ -78,26 +78,56 @@ class ProductsLoader {
       HB_BASESITEID,
     } = actionParameters.context.settings;
 
+    let config = {
+      params: {
+        json: true,
+      },
+    };
+    let categoryId = params.categoryId ? params.categoryId : '';
+    if (params.filter) {
+      if (params.filter.category_uid || params.filter.category_id) {
+        categoryId = params.filter.category_uid
+          ? params.filter.category_uid.eq
+          : params.filter.category_id.eq;
+      }
+    }
+
     if (params.search) {
-      return rp({
-        uri: `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/products/search?currentPage=${params.currentPage}&fields=FULL&pageSize=${params.pageSize}&query=${params.search}`,
-        json: true,
-      }).then(response => response);
-    } else if (params.categoryId) {
-      // Text search or fetching of the products of a category
-      return rp({
-        uri: `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/products/search?currentPage=${params.currentPage}&fields=FULL&pageSize=${params.pageSize}&query=%3A%3AallCategories%3A${params.categoryId}`,
-        json: true,
-      }).then(response => response);
-    } else if (params.filter && params.filter.url_key) {
-      // Get a product by sku
-      if (params.filter.url_key.eq) {
-        return rp({
-          uri: `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/products/${params.filter.url_key.eq}?fields=FULL`,
-          json: true,
+      let apiHost = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/products/search?currentPage=${params.currentPage}&fields=FULL&pageSize=${params.pageSize}&query=${params.search}`;
+      return axios
+        .get(apiHost, config)
+        .then(response => {
+          return response.data;
         })
+        .catch(error => {
+          return error;
+        });
+    } else if (categoryId !== '') {
+      /** Text search or fetching of the products of a category */
+      let apiHost = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/products/search?currentPage=${params.currentPage}&fields=FULL&pageSize=${params.pageSize}&query=%3A%3AallCategories%3A${categoryId}`;
+      return axios
+        .get(apiHost, config)
+        .then(response => {
+          response.data.products = response.data.products.filter(
+            product => !isNaN(parseInt(product.code))
+          );
+          return response.data;
+        })
+        .catch(error => {
+          return error;
+        });
+    } else if (params.filter && (params.filter.url_key || params.filter.sku)) {
+      let productCode =
+        params.filter.sku !== undefined
+          ? params.filter.sku.eq
+          : params.filter.url_key.eq;
+      /** Get a product by sku */
+      if (productCode) {
+        let apiHost = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/products/${productCode}?fields=FULL`;
+        return axios
+          .get(apiHost, config)
           .then(response => ({
-            products: [response],
+            products: [response.data],
             pagination: {
               totalResults: 1,
               currentPage: params.currentPage,
@@ -114,6 +144,16 @@ class ProductsLoader {
               totalPages: 0,
             },
           }));
+      } else {
+        return {
+          products: [],
+          pagination: {
+            totalResults: 0,
+            currentPage: params.currentPage,
+            pageSize: params.pageSize,
+            totalPages: 0,
+          },
+        };
       }
     }
   }

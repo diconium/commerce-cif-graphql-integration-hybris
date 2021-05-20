@@ -25,11 +25,14 @@ const assert = require('chai').assert;
 const cartNotFound = require('../resources/cartNotFound.json');
 const hybrisGetVouchersList = require('../resources/hybrisGetVouchersList.json');
 const hybrisGetCartWithCouponsResponse = require('../resources/hybrisGetCartWithCouponsResponse.json');
+const hybrisDeliveryModes = require('../resources/hybrisDeliveryModes.json');
 const validResponseRemoveCouponFromCart = require('../resources/validResponseRemoveCouponFromCart.json');
-const bearer = '11ec3520-46f8-48f2-bb9d-0788507466a6';
+const TestUtils = require('../../../utils/TestUtils.js');
+const bearer = 'df808bac-0353-4883-a7cc-67583ebb2532';
+const ymlData = require('../../../common/options.json');
 
 describe('RemoveCouponFromCart', function() {
-  const scope = nock('https://hybris.example.com');
+  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
   before(() => {
     sinon.stub(console, 'debug');
     sinon.stub(console, 'error');
@@ -42,38 +45,48 @@ describe('RemoveCouponFromCart', function() {
 
   describe('Unit Tests', () => {
     let args = {
-      url: 'https://hybris.example.com',
+      url: TestUtils.getHybrisInstance(),
       context: {
         settings: {
           bearer: '',
           customerId: 'current',
-          HB_PROTOCOL: 'https',
-          HB_API_HOST: 'hybris.example.com',
-          HB_API_BASE_PATH: '/rest/v2',
-          HB_BASESITEID: '/electronics',
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
         },
       },
     };
 
-    it('Mutation: Remove coupon from cart', () => {
+    it('Mutation: unit Remove coupon from cart', () => {
       scope
-        .get('/rest/v2/electronics/users/current/carts/00000002/vouchers')
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .get(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035/vouchers`
+        )
+        .query({ fields: 'DEFAULT', query: '' })
         .reply(200, hybrisGetVouchersList);
       scope
         .intercept(
-          '/rest/v2/electronics/users/current/carts/00000002/vouchers/coupontest001',
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035/vouchers/BUYMORE16`,
           'delete'
         )
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .query({ fields: 'DEFAULT', query: '' })
         .reply(200);
       scope
-        .get('/rest/v2/electronics/users/current/carts/00000002')
-        .query({ fields: 'FULL', access_token: `${bearer}` })
+        .get(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035`
+        )
+        .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisGetCartWithCouponsResponse);
+      scope
+        .get(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymodes`
+        )
+        .query({ fields: 'FULL', query: '' })
+        .reply(200, hybrisDeliveryModes);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {removeCouponFromCart(input:{ cart_id: "00000002"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
+        'mutation {removeCouponFromCart(input:{ cart_id: "00000035"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
         let response = result.data.removeCouponFromCart.cart;
@@ -83,27 +96,37 @@ describe('RemoveCouponFromCart', function() {
 
     it('Mutation: validate response should contain cart not found', () => {
       scope
-        .get('/rest/v2/electronics/users/current/carts/0000002/vouchers')
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .get(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/vouchers`
+        )
+        .query({ fields: 'DEFAULT', query: '' })
         .reply(400, cartNotFound);
       scope
         .intercept(
-          '/rest/v2/electronics/users/current/carts/0000002/vouchers/coupontest001',
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/vouchers/BUYMORE16`,
           'delete'
         )
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .query({ fields: 'DEFAULT', query: '' })
         .reply(200, undefined);
       scope
-        .get('/rest/v2/electronics/users/current/carts/0000002')
-        .query({ fields: 'FULL', access_token: `${bearer}` })
+        .get(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID`
+        )
+        .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisGetCartWithCouponsResponse);
+      scope
+        .get(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/deliverymodes`
+        )
+        .query({ fields: 'FULL', query: '' })
+        .reply(200, hybrisDeliveryModes);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {removeCouponFromCart(input:{ cart_id: "0000002"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
+        'mutation {removeCouponFromCart(input:{ cart_id: "INVALID-CART-ID"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({
-          message: 'Cart not found.',
+          message: 'Error: Request failed with status code 400',
           source: {
             name: 'GraphQL request',
           },

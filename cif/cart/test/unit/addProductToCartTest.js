@@ -25,10 +25,12 @@ const nock = require('nock');
 const hybrisAddSimpleProductToCart = require('../resources/hybrisAddSimpleProductToCart');
 const validResponseAddSimpleProductToCart = require('../resources/validResponseAddSimpleProductToCart');
 const inValidCart = require('../resources/inValidJsonFileAddSimpleProductToCart.json');
-const bearer = '668c6483-ea82-4fcf-b181-06507c683d6c';
+const TestUtils = require('../../../utils/TestUtils.js');
+const bearer = '55af3c02-6dd3-4b45-92c2-38db35a2c43d';
+const ymlData = require('../../../common/options.json');
 
 describe('AddProductToCart', () => {
-  const scope = nock('https://hybris.example.com');
+  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
 
   before(() => {
     // Disable console debugging
@@ -43,27 +45,29 @@ describe('AddProductToCart', () => {
 
   describe('Unit Tests', () => {
     let args = {
-      url: 'https://hybris.example.com',
+      url: TestUtils.getHybrisInstance(),
       context: {
         settings: {
           bearer: '',
           customerId: 'current',
-          HB_PROTOCOL: 'https',
-          HB_API_HOST: 'hybris.example.com',
-          HB_API_BASE_PATH: '/rest/v2',
-          HB_BASESITEID: '/electronics',
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
         },
       },
     };
 
     it('Add products to cart nock test case', () => {
       scope
-        .post('/rest/v2/electronics/users/current/carts/00000000/entries')
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .post(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000015/entries`
+        )
+        .query({ fields: 'DEFAULT' })
         .reply(200, hybrisAddSimpleProductToCart);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {addSimpleProductsToCart(input: {cart_id: "00000000", cart_items: [{data: {quantity: 1, sku: "3514521"}}]}) {cart {items {id, product {name,sku},quantity}}}}';
+        'mutation {addSimpleProductsToCart(input: {cart_id: "00000015", cart_items: [{data: {quantity: 1.0, sku: "3514521"}}]}) {cart {items {id, product {name,sku},quantity}}}}';
       return resolve(args).then(result => {
         let items = result.data.addSimpleProductsToCart.cart.items[0];
         let testData = validResponseAddSimpleProductToCart.items[0];
@@ -79,16 +83,18 @@ describe('AddProductToCart', () => {
 
     it('Mutation: validate response should contain cart not found', () => {
       scope
-        .post('/rest/v2/electronics/users/current/carts/00000002/entries')
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .post(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/entries`
+        )
+        .query({ fields: 'DEFAULT' })
         .reply(400, inValidCart);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {addSimpleProductsToCart(input: {cart_id: "00000002", cart_items: [{data: {quantity: 1, sku: "3514521"}}]}) {cart {items {id, product {name,sku},quantity}}}}';
+        'mutation {addSimpleProductsToCart(input: {cart_id: "INVALID-CART-ID", cart_items: [{data: {quantity: 1.0, sku: "3514521"}}]}) {cart {items {id, product {name,sku},quantity}}}}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({
-          message: 'Cart not found.',
+          message: 'Error: Request failed with status code 400',
           source: {
             name: 'GraphQL request',
           },

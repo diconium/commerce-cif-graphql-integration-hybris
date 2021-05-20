@@ -15,10 +15,14 @@
 'use strict';
 
 const DataLoader = require('dataloader');
-const rp = require('request-promise');
+const axios = require('axios');
 
 class SetPaymentMethodOnCartLoader {
+  /**
+   * @param {Object} [actionParameters] Some optional parameters of the I/O Runtime action, like for example customerId, bearer token, query and url info.
+   */
   constructor(actionParameters) {
+    this.addresses = {};
     let loadingFunction = inputs => {
       return Promise.resolve(
         inputs.map(input => {
@@ -38,10 +42,24 @@ class SetPaymentMethodOnCartLoader {
     this.loader = new DataLoader(keys => loadingFunction(keys));
   }
 
-  load(key) {
+  /**
+   * method used to call the loadingFunction using dataloader
+   * @param {*} input parameter contains the cart_id,payment_method details
+   * @returns {Promise} a promise return PaymentMethod after resolved successfully other wise return the error.
+   */
+  load(key, addresses) {
+    this.addresses = addresses;
     return this.loader.load(key);
   }
 
+  /**
+   * In a real 3rd-party integration, this method would query the 3rd-party system
+   * in order to post PaymentMethod details based on the cart id. This method returns a Promise,
+   * for example to simulate some HTTP REST call being performed to the 3rd-party commerce system.
+   * @param {Object} parameters.input parameter contains the cart_id and payment_method details
+   * @param {Object} [parameters.actionParameters] Some optional parameters of the I/O Runtime action, like for example customerId, bearer token, query and url info.
+   * @returns {Promise} a promise with the paymentmethod data.
+   */
   _postPaymentMethodOnCart(input, actionParameters) {
     const {
       customerId,
@@ -54,42 +72,47 @@ class SetPaymentMethodOnCartLoader {
 
     const { cart_id: cartId, payment_method: paymentMethod } = input;
     const { code } = paymentMethod;
+    let billingAddress = this.getBillingAddress(this.addresses);
+    console.log(billingAddress);
 
     const body = {
       accountHolderName: 'testuser',
       expiryMonth: '11',
       expiryYear: '2027',
-      billingAddress: {
-        country: {
-          isocode: 'DE',
-        },
-        email: 'user@example.com',
-        firstName: 'test',
-        lastName: 'user',
-        line1: 'Strasse 11',
-        postalCode: '70376',
-        shippingAddress: false,
-        title: 'mr',
-        titleCode: 'mr',
-        town: 'stuttgart',
-        visibleInAddressBook: true,
-      },
+      billingAddress: billingAddress,
       cardNumber: `************1234`,
       cardType: {
         code: code,
       },
     };
+    const config = {
+      headers: {
+        Authorization: `Bearer ${bearer}`,
+      },
+    };
+    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cartId}/paymentdetails?fields=DEFAULT`;
+    return new Promise((resolve, reject) => {
+      axios
+        .post(uri, body, config)
+        .then(response => {
+          if (response.data) {
+            resolve(response.data);
+          } else {
+            reject(response);
+          }
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
 
-    return rp({
-      method: 'POST',
-      uri: `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cartId}/paymentdetails?fields=DEFAULT&access_token=${bearer}`,
-      body: body,
-      json: true,
-    })
-      .then(response => response)
-      .catch(err => {
-        throw new Error(err.error.errors[0].message);
-      });
+  getBillingAddress(addresses) {
+    return addresses.find(address => this.isBillingAddress(address));
+  }
+
+  isBillingAddress(address) {
+    return address.defaultAddress === true;
   }
 }
 

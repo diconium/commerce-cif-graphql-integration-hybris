@@ -22,17 +22,19 @@ const chaiShallowDeepEqual = require('chai-shallow-deep-equal');
 const resolve = require('../../../cart/src/cartResolver.js').main;
 const nock = require('nock');
 
-const bearer = '0b25590d-7731-4f25-8f09-88008d2a1792';
+const bearer = '55af3c02-6dd3-4b45-92c2-38db35a2c43d';
 
+const TestUtils = require('../../../utils/TestUtils.js');
 const hybrisUpdateCartItems = require('../resources/hybrisUpdateCartItems');
 const validUpdateCartItems = require('../resources/validUpdateCartItems');
 const cartNotFound = require('../resources/cartNotFound');
 const entryNotFoundUpdateCartItems = require('../resources/entryNotFoundUpdateCartItems');
+const ymlData = require('../../../common/options.json');
 
 chai.use(chaiShallowDeepEqual);
 
 describe('Update Cart Items Resolver', () => {
-  const scope = nock('https://hybris.example.com');
+  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
 
   before(() => {
     // Disable console debugging
@@ -47,28 +49,30 @@ describe('Update Cart Items Resolver', () => {
 
   describe('Unit Tests', () => {
     let args = {
-      url: 'https://hybris.example.com',
+      url: TestUtils.getHybrisInstance(),
       context: {
         settings: {
           bearer: '',
           customerId: 'current',
-          HB_PROTOCOL: 'https',
-          HB_API_HOST: 'hybris.example.com',
-          HB_API_BASE_PATH: '/rest/v2',
-          HB_BASESITEID: '/electronics',
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
         },
       },
     };
 
     it('Update cart items unit test case', () => {
       scope
-        .patch('/rest/v2/electronics/users/current/carts/00000057/entries/0')
-        .query({ access_token: `${bearer}` })
+        .patch(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/entries/0`
+        )
+        .query({})
         .reply(200, hybrisUpdateCartItems);
 
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {updateCartItems(input: {cart_id: "00000057", cart_items: [{cart_item_id: 0,quantity: 3}]}){ cart{items {id,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
+        'mutation {updateCartItems(input: {cart_id: "00000016", cart_items: [{cart_item_id: "0",quantity: 3}]}){ cart{items {id,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
       return resolve(args).then(result => {
         let response = result.data.updateCartItems.cart;
         const { errors } = result;
@@ -80,16 +84,18 @@ describe('Update Cart Items Resolver', () => {
 
     it('Mutation: Cart not found', () => {
       scope
-        .patch('/rest/v2/electronics/users/current/carts/00000058/entries/0')
-        .query({ access_token: `${bearer}` })
+        .patch(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/entries/0`
+        )
+        .query({})
         .reply(400, cartNotFound);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {updateCartItems(input: {cart_id: "00000058", cart_items: [{cart_item_id: 0,quantity: 3}]}){ cart{items {id,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
+        'mutation {updateCartItems(input: {cart_id: "INVALID-CART-ID", cart_items: [{cart_item_id: "0",quantity: 3}]}){ cart{items {id,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({
-          message: 'Cart not found.',
+          message: 'Request failed with status code 400',
           source: {
             name: 'GraphQL request',
           },
@@ -99,16 +105,18 @@ describe('Update Cart Items Resolver', () => {
 
     it('Mutation: Entry not found', () => {
       scope
-        .patch('/rest/v2/electronics/users/current/carts/00000058/entries/0')
-        .query({ access_token: `${bearer}` })
+        .patch(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/entries/10`
+        )
+        .query({})
         .reply(400, entryNotFoundUpdateCartItems);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {updateCartItems(input: {cart_id: "00000058", cart_items: [{cart_item_id: 0,quantity: 3}]}){ cart{items {id,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
+        'mutation {updateCartItems(input: {cart_id: "00000016", cart_items: [{cart_item_id:"10",quantity: 3}]}){ cart{items {id,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({
-          message: 'Entry not found',
+          message: 'Request failed with status code 400',
           source: {
             name: 'GraphQL request',
           },

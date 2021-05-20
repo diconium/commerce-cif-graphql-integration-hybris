@@ -15,17 +15,21 @@
 'use strict';
 
 const DataLoader = require('dataloader');
+const axios = require('axios');
 
 class ProductLoader {
   /**
    * @param {Object} [actionParameters] Some optional parameters of the I/O Runtime action, like for example authentication info.
    */
   constructor(actionParameters) {
-    // The loading function: "productSkus" is an Array of product skus
+    /**The loading function: "productSkus" is an Array of product skus */
     let loadingFunction = productSkus => {
-      // This loader loads each product one by one, but if the 3rd party backend allows it,
-      // it could also fetch all products in one single request. In this case, the method
-      // must still return an Array of products with the same order as the keys.
+      /**
+       *This loader loads each product one by one, but if the 3rd party backend allows it,
+       *it could also fetch all products in one single request. In this case, the method
+       *must still return an Array of products with the same order as the keys.
+       */
+      console.log(productSkus);
       return Promise.resolve(
         productSkus.map(productSku => {
           console.debug(`--> Fetching product with sku ${productSku}`);
@@ -54,8 +58,8 @@ class ProductLoader {
    * @param {*} productSku
    * @returns {Promise} A Promise with the product data.
    */
-  load(productSku) {
-    return this.loader.load(productSku);
+  loadMany(productSku) {
+    return this.loader.loadMany(productSku);
   }
 
   /**
@@ -68,18 +72,33 @@ class ProductLoader {
    * @returns {Promise} A Promise with the product data.
    */
   __getProductBySku(productSku, actionParameters) {
-    // Each cart entry only has the sku of the product: the function CartItem.product()
-    // demonstrates how each product will be fetched if they are being requested in the GraphQL query.
-    return Promise.resolve({
-      sku: productSku,
-      title: `Product #${productSku}`,
-      description: `Fetched product #${productSku} from ${actionParameters.url}`,
-      price: {
-        currency: 'USD',
-        amount: 12.34,
+    const {
+      HB_API_BASE_PATH,
+      HB_API_HOST,
+      HB_PROTOCOL,
+      HB_BASESITEID,
+    } = actionParameters.context.settings;
+
+    let apiHost = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/products/${productSku}?fields=FULL`;
+    let config = {
+      params: {
+        json: true,
       },
-      categoryIds: ['cat1', 'cat2'],
-    });
+    };
+    return axios
+      .get(apiHost, config)
+      .then(response => {
+        return response.data;
+      })
+      .catch(() => ({
+        products: [],
+        pagination: {
+          totalResults: 0,
+          currentPage: 1,
+          pageSize: 20,
+          totalPages: 0,
+        },
+      }));
   }
 }
 

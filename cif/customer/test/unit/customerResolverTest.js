@@ -21,17 +21,18 @@ const expect = require('chai').expect;
 const chaiShallowDeepEqual = require('chai-shallow-deep-equal');
 const resolve = require('../../src/customerResolver.js').main;
 const nock = require('nock');
-
+const TestUtils = require('../../../utils/TestUtils.js');
 const bearer = '9b5a39e5-13af-4cca-bcd0-824c2439c484';
 
 const hybrisCustomer = require('../resources/hybrisGetCustomer');
 const hybrisGetCustomerAddress = require('../resources/hybrisGetCustomerAddress');
 const validResponseCustomer = require('../resources/validResponseCustomer');
+const ymlData = require('../../../common/options.json');
 
 chai.use(chaiShallowDeepEqual);
 
 describe('Customer Resolver', () => {
-  const scope = nock('https://hybris.example.com');
+  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
 
   before(() => {
     // Disable console debugging
@@ -46,23 +47,23 @@ describe('Customer Resolver', () => {
 
   describe('Unit Tests', () => {
     let args = {
-      url: 'https://hybris.example.com',
+      url: TestUtils.getHybrisInstance(),
       context: {
         settings: {
           bearer: '',
           customerId: 'current',
-          HB_PROTOCOL: 'https',
-          HB_API_HOST: 'hybris.example.com',
-          HB_API_BASE_PATH: '/rest/v2',
-          HB_BASESITEID: '/electronics',
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
         },
       },
     };
 
     it('Basic Customer search', () => {
       scope
-        .get('/rest/v2/electronics/users/current')
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .get(`${ymlData.HB_API_BASE_PATH}electronics/users/current`)
+        .query({ fields: 'DEFAULT', query: '' })
         .reply(200, hybrisCustomer);
 
       args.context.settings.bearer = bearer;
@@ -70,8 +71,8 @@ describe('Customer Resolver', () => {
       return resolve(args).then(result => {
         let customer = result.data.customer;
         const { errors } = result;
-        assert.equal(customer.firstname, 'karan test');
-        assert.equal(customer.lastname, 'sharma test');
+        assert.equal(customer.firstname, 'Senthil');
+        assert.equal(customer.lastname, '');
         assert.isUndefined(result.errors);
         expect(errors).to.be.undefined;
         expect(customer).to.deep.equals(validResponseCustomer);
@@ -80,13 +81,13 @@ describe('Customer Resolver', () => {
 
     it('Basic Customer search with addresses', () => {
       scope
-        .get('/rest/v2/electronics/users/current')
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .get(`${ymlData.HB_API_BASE_PATH}electronics/users/current`)
+        .query({ fields: 'DEFAULT', query: '' })
         .reply(200, hybrisCustomer);
 
       scope
-        .get('/rest/v2/electronics/users/current/addresses')
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .get(`${ymlData.HB_API_BASE_PATH}electronics/users/current/addresses`)
+        .query({ fields: 'DEFAULT', query: '' })
         .reply(200, hybrisGetCustomerAddress);
 
       args.context.settings.bearer = bearer;
@@ -95,7 +96,7 @@ describe('Customer Resolver', () => {
       return resolve(args).then(result => {
         let addresses = result.data.customer.addresses;
         let street = addresses[0].street;
-        expect(addresses[0].firstname).to.be.equal('José');
+        expect(addresses[0].firstname).to.be.equal('Senthil');
         expect(street[0]).to.be.equal('street name');
         expect(street[1]).to.be.equal('34');
         expect(result.errors).to.be.undefined;

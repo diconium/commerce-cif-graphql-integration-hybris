@@ -21,8 +21,11 @@ const chai = require('chai');
 const expect = require('chai').expect;
 const chaiShallowDeepEqual = require('chai-shallow-deep-equal');
 chai.use(chaiShallowDeepEqual);
+const ApplyCouponLoader = require('../../src/ApplyCouponToCartLoader');
+const ymlData = require('../../../common/options.json');
 
 describe('ApplyCouponToCart', () => {
+  let ApplyCoupon;
   before(() => {
     sinon.stub(console, 'debug');
     sinon.stub(console, 'error');
@@ -33,6 +36,11 @@ describe('ApplyCouponToCart', () => {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    ApplyCoupon = sinon.spy(ApplyCouponLoader.prototype, '_applyCouponToCart');
+  });
+
   describe('Integration Tests', () => {
     let args = {
       url: TestUtils.getHybrisInstance(),
@@ -40,22 +48,27 @@ describe('ApplyCouponToCart', () => {
         settings: {
           bearer: '',
           customerId: 'current',
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
         },
       },
     };
+    before(async () => {
+      args.context.settings.bearer = await TestUtils.getBearer();
+    });
 
     it('Mutation: validate apply coupon to cart', () => {
-      return TestUtils.getBearer().then(accessToken => {
-        args.context.settings.bearer = accessToken;
-        args.query =
-          'mutation {applyCouponToCart(input: {cart_id: "00000001",coupon_code: "coupontest001"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
-        return resolve(args).then(result => {
-          const { errors } = result;
-          assert.isUndefined(result.errors); // N
-          let responseData = result.data.applyCouponToCart;
-          assert.notEqual(responseData, null);
-          expect(errors).to.be.undefined;
-        });
+      args.query =
+        'mutation {applyCouponToCart(input: {cart_id: "00000035",coupon_code: "BUYMORE16"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
+      return resolve(args).then(result => {
+        const { errors } = result;
+        assert.isUndefined(result.errors); // N
+        let responseData = result.data.applyCouponToCart;
+        assert.notEqual(responseData, null);
+        expect(errors).to.be.undefined;
+        assert.equal(ApplyCoupon.callCount, 1);
       });
     });
   });

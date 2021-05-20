@@ -25,7 +25,7 @@ class RemoteResolverFetcher {
   constructor(actionName) {
     this.actionName = actionName;
 
-    // We export a method which MUST be bound to the object
+    // We export a method which MUST be bound to the objec
     // because it's not going to be called with 'this.fetcher()'
     this.fetcher = this.__fetch.bind(this);
   }

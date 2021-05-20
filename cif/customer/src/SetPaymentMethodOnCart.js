@@ -18,8 +18,15 @@ const LoaderProxy = require('../../common/LoaderProxy.js');
 const SetPaymentMethodOnCartLoader = require('./SetPaymentMethodOnCartLoader.js');
 const Cart = require('../../cart/src/Cart.js');
 const CartLoader = require('../../cart/src/CartLoader.js');
+const AddressLoader = require('./AddressLoader.js');
 
 class SetPaymentMethodOnCart {
+  /**
+   * @param {Object} parameters parameters object contains the input, graphqlContext & actionParameters
+   * @param {String} parameters.input input parameter contains the cart_id and payment_method.
+   * @param {Object} [parameters.graphqlContext] The optional GraphQL execution context passed to the resolver.
+   * @param {Object} [parameters.actionParameters] Some optional actionParameters of the I/O Runtime action, like for example bearer token, query and url info.
+   */
   constructor(parameters) {
     this.input = parameters.input;
     this.graphqlContext = parameters.graphqlContext;
@@ -28,12 +35,21 @@ class SetPaymentMethodOnCart {
       parameters.actionParameters
     );
     this.cartLoader = new CartLoader(parameters.actionParameters);
+    this._addressLoader = new AddressLoader(parameters.actionParameters);
 
+    /**
+     * This class returns a Proxy to avoid having to implement a getter for all properties.
+     */
     return new LoaderProxy(this);
   }
 
+  /**
+   * method used to call load method from paymentmethod Loader loader class
+   */
   __load() {
-    return this.setPaymentMethodOnCartLoader.load(this.input);
+    return this._addressLoader.load(this.input.cart_id).then(address => {
+      return this.setPaymentMethodOnCartLoader.load(this.input, address);
+    });
   }
 
   /**

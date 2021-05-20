@@ -1,0 +1,47 @@
+service: hybris-graphql-product
+package:
+  individually: true
+  exclude:
+    - ./**
+provider:
+  name: openwhisk
+  runtime: nodejs:default
+  ignore_certs: true
+  defaultService: hybris-graphql-product
+  service: ${opt:service, self:provider.defaultService}
+
+custom:
+  npm-version: ${file(package.json):name}@${file(package.json):version}
+  ow-package: ${opt:ow-package, self:custom.npm-version}
+
+plugins:
+  - serverless-openwhisk
+  - serverless-webpack
+
+resources:
+  packages: ${file(../common/serverlessPackageConfig.js)}
+
+functions:
+  dispatcher:
+    name: hybris-graphql-product/dispatcher
+    handler: ./dispatcher.main
+    concurrency: 200
+    annotations:
+      web-export: true
+    parameters:
+      remoteSchemas:
+        product:
+          order: 10
+          action: hybris-graphql-product/product
+        customAttributeMetadata:
+          order: 20
+          action: hybris-graphql-product/customAttributeMetadata
+  product:
+    name: hybris-graphql-product/product
+    handler: src/productResolver.main
+    concurrency: 200
+  customAttributeMetadata:
+    name: hybris-graphql-product/customAttributeMetadata
+    handler: src/customAttributeMetadataResolver.main
+    concurrency: 200
+  

@@ -16,7 +16,7 @@
 
 const DataLoader = require('dataloader');
 const TokenUtils = require('../../common/TokenUtils.js');
-const rp = require('request-promise');
+const axios = require('axios');
 
 class SetGuestEmailOnCartLoader {
   /**
@@ -27,11 +27,13 @@ class SetGuestEmailOnCartLoader {
   constructor(parameters) {
     this.guestEmail = parameters.guestEmail;
     this.actionParameters = parameters.actionParameters;
-    // The loading function: "cartIds" is an Array of cart ids
+    /** The loading function: "cartIds" is an Array of cart ids */
     let loadingFunction = cartIds => {
-      // This loader loads each cart one by one, but if the 3rd party backend allows it,
-      // it could also fetch all carts in one single request. In this case, the method
-      // must still return an Array of carts with the same order as the keys.
+      /**
+       *This loader loads each cart one by one, but if the 3rd party backend allows it,
+       *it could also fetch all carts in one single request. In this case, the method
+       *must still return an Array of carts with the same order as the keys.
+       */
       return Promise.resolve(
         cartIds.map(cartId => {
           return this._setGuestEmailOnCart(
@@ -69,8 +71,8 @@ class SetGuestEmailOnCartLoader {
       return this._execute(actionParameters, cartId, guestEmail, bearer);
     }
 
-    return TokenUtils.getOAuthClientBearer(actionParameters).then(bearer =>
-      this._execute(actionParameters, cartId, guestEmail, bearer)
+    return TokenUtils.getOAuthClientBearer(actionParameters).then(bearerToken =>
+      this._execute(actionParameters, cartId, guestEmail, bearerToken)
     );
   }
 
@@ -82,17 +84,23 @@ class SetGuestEmailOnCartLoader {
       HB_PROTOCOL,
       HB_BASESITEID,
     } = actionParameters.context.settings;
+    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cartId}/email?email=${guestEmail}&fields=DEFAULT`;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${bearer}`,
+      },
+    };
 
-    return rp({
-      method: 'PUT',
-      uri: `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cartId}/email?email=${guestEmail}&fields=DEFAULT&access_token=${bearer}`,
-      resolveWithFullResponse: true,
-      json: true,
-    })
-      .then(() => guestEmail)
-      .catch(err => {
-        throw new Error(err.error.errors[0].message);
-      });
+    return new Promise((resolve, reject) => {
+      axios
+        .put(uri, {}, config)
+        .then(() => {
+          resolve(guestEmail);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
   }
 }
 

@@ -15,7 +15,7 @@
 'use strict';
 
 const DataLoader = require('dataloader');
-const rp = require('request-promise');
+const axios = require('axios');
 
 class GenerateCustomerTokenLoader {
   /**
@@ -58,7 +58,7 @@ class GenerateCustomerTokenLoader {
    * @returns {Promise} return access token if promise resolves successfully otherwise return error
    */
   _generateCustomerToken(input, actionParameters) {
-    const { email, password } = input;
+    const { email, password } = input.graphqlContext;
 
     const {
       HB_API_HOST,
@@ -82,19 +82,29 @@ class GenerateCustomerTokenLoader {
       })
       .join('&');
 
-    return rp({
-      method: 'POST',
-      uri: `${HB_PROTOCOL}://${HB_API_HOST}${HB_OAUTH_PATH}?operationType=oAuth`,
-      json: true,
+    const config = {
       headers: {
         'Content-type': 'application/x-www-form-urlencoded',
       },
-      body: searchParams,
-    })
-      .then(response => response)
-      .catch(err => {
-        throw new Error(err.message);
-      });
+    };
+    return new Promise((resolve, reject) => {
+      axios
+        .post(
+          `${HB_PROTOCOL}://${HB_API_HOST}${HB_OAUTH_PATH}?operationType=oAuth`,
+          searchParams,
+          config
+        )
+        .then(response => {
+          if (response.data) {
+            resolve(response.data);
+          } else {
+            reject(false);
+          }
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
   }
 }
 

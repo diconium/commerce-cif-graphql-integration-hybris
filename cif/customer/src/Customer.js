@@ -20,19 +20,35 @@ const AddressLoader = require('./AddressLoader.js');
 const Address = require('./Address.js');
 
 class Customer {
+  /**
+   * @param {Object} parameters parameter object contains the ,graphqlContext & actionParameters
+   * @param {Object} [parameters.graphqlContext] The optional GraphQL execution context passed to the resolver.
+   * @param {Object} [parameters.actionParameters] Some optional parameters of the I/O Runtime action, like for example customerId, bearer token, query and url info.
+   */
   constructor(parameters) {
     this.graphqlContext = parameters.graphqlContext;
     this.actionParameters = parameters.actionParameters;
     this.customerLoader = new CustomerLoader(parameters.actionParameters);
     this.addressLoader = new AddressLoader(parameters.actionParameters);
 
+    /**
+     * This class returns a Proxy to avoid having to implement a getter for all properties.
+     */
     return new LoaderProxy(this);
   }
 
+  /**
+   *  method used to call the load method from customerLoader class
+   */
   __load() {
     return this.customerLoader.load(this.actionParameters.query);
   }
 
+  /**
+   * Converts customer data from the 3rd-party hybris system into the Magento GraphQL format.
+   * @param {Object} data parameter data contains customer details from commerce
+   * @returns {Object} convert the hybris data into magento graphQL schema and return the customer object
+   */
   __convertData(data) {
     return {
       firstname: data.firstName,

@@ -18,8 +18,11 @@ const sinon = require('sinon');
 const assert = require('chai').assert;
 const resolve = require('../../src/cartResolver.js').main;
 const TestUtils = require('../../../utils/TestUtils.js');
+const RemoveItemLoader = require('../../src/RemoveItemFromCartLoader');
+const ymlData = require('../../../common/options.json');
 
 describe('RemoveItemFromCart', () => {
+  let RemoveItem;
   before(() => {
     // Disable console debugging
     sinon.stub(console, 'debug');
@@ -31,6 +34,11 @@ describe('RemoveItemFromCart', () => {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    RemoveItem = sinon.spy(RemoveItemLoader.prototype, '_removeItemFromCart');
+  });
+
   describe('Integration Tests', () => {
     let args = {
       url: TestUtils.getHybrisInstance(),
@@ -38,18 +46,23 @@ describe('RemoveItemFromCart', () => {
         settings: {
           bearer: '',
           customerId: 'current',
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
         },
       },
     };
+    before(async () => {
+      args.context.settings.bearer = await TestUtils.getBearer();
+    });
 
     it('Remove item from cart', () => {
       args.query =
-        'mutation { removeItemFromCart( input: { cart_id: "00000000", cart_item_id: 0 }) {cart { items {id,product { name } quantity } prices { grand_total{ value,currency}}}}}';
-      return TestUtils.getBearer().then(accessToken => {
-        args.context.settings.bearer = accessToken;
-        return resolve(args).then(result => {
-          assert.isUndefined(result.errors);
-        });
+        'mutation { removeItemFromCart( input: { cart_id: "00000035", cart_item_id: "0" }) {cart { items {id,product { name } quantity } prices { grand_total{ value,currency}}}}}';
+      return resolve(args).then(result => {
+        assert.isUndefined(result.errors);
+        assert.equal(RemoveItem.callCount, 1);
       });
     });
   });

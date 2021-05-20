@@ -3,14 +3,14 @@
   "company": null,
   "country": {
     "code": "US",
-    "label": null
+    "label": "US"
   },
   "firstname": "Bob",
   "lastname": "Roll",
   "postcode": "78758",
   "region": {
-    "code": "US-WA",
-    "label": null
+    "code": "WA",
+    "label": "WA"
   },
   "street": [
     "Magento Pkwy",

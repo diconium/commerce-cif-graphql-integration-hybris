@@ -15,9 +15,12 @@
 'use strict';
 
 const DataLoader = require('dataloader');
-const rp = require('request-promise');
+const axios = require('axios');
 
 class AddressLoader {
+  /**
+   * @param {Object} actionParameters parameter object contains the bearer and host details
+   */
   constructor(actionParameters) {
     let loadingFunction = keys => {
       return Promise.resolve(
@@ -37,16 +40,26 @@ class AddressLoader {
       );
     };
 
-    this.loader = new DataLoader(keys => loadingFunction(keys));
+    this.loader = new DataLoader(keys => {
+      return loadingFunction(keys);
+    });
   }
-
+  /**
+   * method used to call the loadingFunction using dataloader
+   * @param {*} input parameter contains the customer details like firstname, lastname, street details
+   * @returns {Promise} a promise return cart Id after resolved successfully other wise return the error.
+   */
   load(keys) {
     return this.loader.load(keys);
   }
 
+  /**
+   * method used to call commerce GraphQL create customer endpoint to create new customer
+   * @param {Object} parameter contains the customer details like firstname, lastname, street details
+   * @param {Object} actionParameters parameter object contains the bearer and host details
+   * @returns {Promise} a promise resolves and return newely created customer address.
+   */
   getCustomer(actionParameters) {
-    // eslint-disable-line no-unused-vars
-
     const {
       customerId,
       bearer,
@@ -55,13 +68,24 @@ class AddressLoader {
       HB_PROTOCOL,
       HB_BASESITEID,
     } = actionParameters.context.settings;
-
-    return rp({
-      uri: `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/addresses?fields=DEFAULT&access_token=${bearer}`,
-      json: true,
-    })
-      .then(response => response.addresses)
-      .catch(error => error);
+    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/addresses?fields=DEFAULT`;
+    return new Promise((resolve, reject) => {
+      axios
+        .get(uri, {
+          params: {
+            query: '',
+          },
+          headers: {
+            Authorization: `Bearer ${bearer}`,
+          },
+        })
+        .then(response => {
+          resolve(response.data.addresses);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
   }
 }
 

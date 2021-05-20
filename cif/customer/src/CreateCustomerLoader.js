@@ -15,10 +15,14 @@
 'use strict';
 
 const DataLoader = require('dataloader');
-const rp = require('request-promise');
+const axios = require('axios');
 const TokenUtils = require('../../common/TokenUtils.js');
 
 class CreateCustomerLoader {
+  /**
+   * @param {Object} actionParameters parameter object contains the bearer and host details
+   */
+
   constructor(actionParameters) {
     let loadingFunction = keys => {
       return Promise.resolve(
@@ -39,10 +43,33 @@ class CreateCustomerLoader {
     this.loader = new DataLoader(keys => loadingFunction(keys));
   }
 
+  /**
+   * method used to call the loadingFunction using dataloader
+   * @param {*} input parameter contains the customer details like firstname, lastname, email,  password details
+   * @returns {Promise} a promise return cart Id after resolved successfully other wise return the error.
+   */
   load(key) {
     return this.loader.load(key);
   }
+
+  /**
+   * method used to call commerce GraphQL create customer endpoint to create new customer
+   * @param {Object} parameter contains the customer details like firstname, lastname, email,  password details
+   * @param {Object} actionParameters contains the product details and host details
+   * @returns {Promise} a promise resolves and return newely created customer.
+   */
   _createCustomer(key, actionParameters) {
+    const { bearer } = actionParameters.context.settings;
+
+    if (bearer) {
+      return this._execute(key, actionParameters, bearer);
+    }
+
+    return TokenUtils.getOAuthClientBearer(actionParameters).then(bearerToken =>
+      this._execute(key, actionParameters, bearerToken)
+    );
+  }
+  _execute(key, actionParameters, bearer) {
     const {
       HB_API_BASE_PATH,
       HB_API_HOST,
@@ -58,15 +85,25 @@ class CreateCustomerLoader {
       uid: key.email,
     };
 
-    return TokenUtils.getOAuthClientBearer(actionParameters).then(bearer => {
-      return rp({
-        method: 'POST',
-        uri: `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users?fields=DEFAULT&access_token=${bearer}`,
-        body: body,
-        json: true,
-      })
-        .then(response => response)
-        .catch(err => err);
+    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users?fields=DEFAULT`;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${bearer}`,
+      },
+    };
+    return new Promise((resolve, reject) => {
+      axios
+        .post(uri, body, config)
+        .then(response => {
+          if (response.data) {
+            resolve(response.data);
+          } else {
+            reject(false);
+          }
+        })
+        .catch(error => {
+          reject(error);
+        });
     });
   }
 }

@@ -16,9 +16,15 @@
 
 const sinon = require('sinon');
 const assert = require('chai').assert;
+const expect = require('chai').expect;
+const CountryLoader = require('../../src/CountriesLoader.js');
 const resolve = require('../../src/countriesResolver.js').main;
+const TestUtils = require('../../../utils/TestUtils.js');
+const ymlData = require('../../../common/options.json');
 
 describe('Countries Resolver', () => {
+  //let resolve;
+  let getCountriesList;
   before(() => {
     // Disable console debugging
     sinon.stub(console, 'debug');
@@ -30,15 +36,34 @@ describe('Countries Resolver', () => {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    getCountriesList = sinon.spy(CountryLoader.prototype, '__countries');
+  });
+
   describe('Integration Tests', () => {
     let args = {
-      url: 'https://mybackendserver.com/rest',
+      url: TestUtils.getHybrisInstance(),
+      context: {
+        settings: {
+          bearer: '',
+          customerId: 'current',
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
+        },
+      },
     };
 
     it('Basic countries search', () => {
       args.query = '{countries{two_letter_abbreviation, full_name_english}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
+        let responseData = result.data;
+        assert.notEqual(responseData, null);
+        expect(result.errors).to.be.undefined;
+        assert.equal(getCountriesList.callCount, 1);
       });
     });
   });

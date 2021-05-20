@@ -15,7 +15,7 @@
 'use strict';
 
 const DataLoader = require('dataloader');
-const rp = require('request-promise');
+const axios = require('axios');
 
 class AddProductToCartResolverLoader {
   /**
@@ -46,7 +46,7 @@ class AddProductToCartResolverLoader {
 
   /**
    * method used to call the loadingFunction using dataloader
-   * @param {*} input parameter contains the cart id and the cart items
+   * @param {*} input parameter contains the cart id,quantity and sku details
    * @returns {Promise} a promise return cart Id after resolved successfully other wise return the error.
    */
   load(input) {
@@ -54,7 +54,7 @@ class AddProductToCartResolverLoader {
   }
 
   /**
-   * @param {String} input consists of cart id and cart items to which the item to added.
+   * @param {String} input consists of cart id,quantity and sku to which the item to added.
    * @param {Object} actionParameters Some parameters of the I/O action itself (e.g. backend server URL, authentication info, etc)
    * @returns {Promise} a promise with the Item to be added data.
    */
@@ -77,18 +77,24 @@ class AddProductToCartResolverLoader {
       },
       quantity: data.quantity,
     };
-
-    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cart_id}/entries?fields=DEFAULT&access_token=${bearer}`;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${bearer}`,
+      },
+    };
+    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cart_id}/entries?fields=FULL`;
     return new Promise((resolve, reject) => {
-      return rp({
-        method: 'POST',
-        uri: uri,
-        body: body,
-        json: true,
-      })
-        .then(response => resolve(response))
-        .catch(err => {
-          reject(err.error.errors[0].message);
+      axios
+        .post(uri, body, config)
+        .then(response => {
+          if (response.data) {
+            resolve(response.data);
+          } else {
+            reject(false);
+          }
+        })
+        .catch(error => {
+          reject(error);
         });
     });
   }

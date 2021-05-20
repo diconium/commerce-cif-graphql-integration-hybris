@@ -15,18 +15,20 @@
 'use strict';
 
 const DataLoader = require('dataloader');
-const rp = require('request-promise');
+const axios = require('axios');
 
 class CategoryTreeLoader {
   /**
    * @param {Object} [actionParameters] Some optional parameters of the I/O Runtime action, like for example authentication info.
    */
   constructor(actionParameters) {
-    // The loading function: "categoryIds" is an Array of category ids
+    /** The loading function: "categoryIds" is an Array of category ids */
     let loadingFunction = categoryIds => {
-      // This loader loads each category one by one, but if the 3rd party backend allows it,
-      // it could also fetch all categories in one single request. In this case, the method
-      // must still return an Array of categories with the same order as the keys.
+      /**
+       *This loader loads each category one by one, but if the 3rd party backend allows it,
+       *it could also fetch all category in one single request. In this case, the method
+       *must still return an Array of category with the same order as the keys.
+       */
       return Promise.resolve(
         categoryIds.map(categoryId => {
           console.debug(`--> Fetching category with id ${categoryId}`);
@@ -76,11 +78,20 @@ class CategoryTreeLoader {
       HB_BASESITEID,
     } = actionParameters.context.settings;
 
-    // eslint-disable-next-line no-undef
-    return rp({
-      uri: `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/catalogs/electronicsProductCatalog/Online/categories/${categoryId}?fields=FULL`,
-      json: true,
-    }).then(response => response);
+    let apiHost = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/catalogs/electronicsProductCatalog/Online/categories/${categoryId}?fields=FULL`;
+    let config = {
+      params: {
+        json: true,
+      },
+    };
+    return axios
+      .get(apiHost, config)
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => {
+        return error;
+      });
   }
 }
 

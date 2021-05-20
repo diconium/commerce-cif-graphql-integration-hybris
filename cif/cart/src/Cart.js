@@ -17,6 +17,7 @@
 const LoaderProxy = require('../../common/LoaderProxy.js');
 const CartLoader = require('./CartLoader.js');
 const CartItemInterface = require('./Interface/CartItemInterface.js');
+const ShippingMethodsLoader = require('./ShippingMethodsLoader.js');
 
 class Cart {
   /**
@@ -32,31 +33,106 @@ class Cart {
     this.actionParameters = parameters.actionParameters;
     this.cartLoader =
       parameters.cartLoader || new CartLoader(parameters.actionParameters);
+    this.shippingMethodsLoader = new ShippingMethodsLoader(
+      parameters.actionParameters
+    );
     /**
      * This class returns a Proxy to avoid having to implement a getter for all properties.
      */
     return new LoaderProxy(this);
   }
 
+  /**
+   * @returns {Promise<T>}
+   * @private
+   */
   __load() {
     console.debug(`Loading cart for ${this.cartId}`);
-    return this.cartLoader.load(this.cartId);
+    return this.cartLoader.load(this.cartId).then(data => {
+      return this.shippingMethodsLoader.load(this.cartId).then(result => {
+        data.deliveryModes = result.deliveryModes;
+        return data;
+      });
+    });
   }
 
+  /**
+   * @param address
+   * @returns {*|string}
+   */
+  getRegionCode(address) {
+    let code = address !== undefined ? address.region.isocode.split('-') : '';
+    code = code !== '' ? (code.length === 2 ? code[1] : code[0]) : '';
+    return code;
+  }
+
+  /**
+   * @param deliveryModes
+   * @returns {[]}
+   */
+  getShippingMethods(deliveryModes) {
+    let shippingMethods = [];
+    deliveryModes.map(shippingMethod => {
+      if (shippingMethod.code !== 'pickup') {
+        shippingMethods.push({
+          amount: {
+            currency: shippingMethod.deliveryCost.currencyIso,
+            value: shippingMethod.deliveryCost.value,
+          },
+          available: true,
+          carrier_code: shippingMethod.code,
+          carrier_title: shippingMethod.description
+            ? shippingMethod.description
+            : shippingMethod.code,
+          error_message: '',
+          method_code: shippingMethod.code,
+          method_title: shippingMethod.name,
+          price_excl_tax: {
+            value: shippingMethod.deliveryCost.value,
+            currency: shippingMethod.deliveryCost.currencyIso,
+          },
+          price_incl_tax: {
+            value: shippingMethod.deliveryCost.value,
+            currency: shippingMethod.deliveryCost.currencyIso,
+          },
+        });
+      }
+    });
+    return shippingMethods;
+  }
   /**
    * @param {Object} data parameter data contains the cart entries
    * @returns {Object} The backend cart data converted into a GraphQL "Cart" data.
    */
   __convertData(data) {
-    const { paymentInfo, deliveryAddress, user, totalPrice } = data;
+    const {
+      paymentInfo,
+      deliveryAddress,
+      user,
+      totalPrice,
+      totalDiscounts,
+      totalPriceWithTax,
+      totalTax,
+      deliveryModes,
+      deliveryMode,
+    } = data;
+    let regionCode = this.getRegionCode(deliveryAddress);
+    let billingRegionCode =
+      paymentInfo !== undefined
+        ? this.getRegionCode(paymentInfo.billingAddress)
+        : '';
+    let availableShippingMethods =
+      deliveryModes !== undefined ? this.getShippingMethods(deliveryModes) : [];
     const { appliedVouchers } = data;
-
     const { items } = new CartItemInterface(data.entries);
     return {
-      items,
+      items: items,
       email: user && user.uid,
+      is_virtual: false,
+      total_quantity: data.totalUnitCount,
       billing_address: paymentInfo &&
         paymentInfo.billingAddress && {
+          email: data.paymentInfo.billingAddress.email,
           city: data.paymentInfo.billingAddress.town,
           country: {
             code: data.paymentInfo.billingAddress.country.isocode,
@@ -66,72 +142,71 @@ class Cart {
           lastname: data.paymentInfo.billingAddress.lastName,
           postcode: data.paymentInfo.billingAddress.postalCode,
           region: {
-            code: data.paymentInfo.billingAddress.title,
-            label: data.paymentInfo.billingAddress.title,
+            code: billingRegionCode,
+            label: data.paymentInfo.billingAddress.region.name,
           },
           street: [data.paymentInfo.billingAddress.formattedAddress],
-          telephone: data.paymentInfo.billingAddress.phone,
+          telephone: data.paymentInfo.billingAddress.phone
+            ? data.paymentInfo.billingAddress.phone
+            : '',
         },
-      shipping_addresses: deliveryAddress && [
-        {
-          firstname: data.deliveryAddress.firstName,
-          lastname: data.deliveryAddress.lastName,
-          street: [data.deliveryAddress.formattedAddress],
-          city: data.deliveryAddress.town,
-          region: {
-            code: data.deliveryAddress.title,
-            label: data.deliveryAddress.title,
-          },
-          country: {
-            code: data.deliveryAddress.country.isocode,
-            label: data.deliveryAddress.country.name,
-          },
-          telephone: data.deliveryAddress.phone,
-          available_shipping_methods: [
-            {
-              amount: {
-                currency: data.deliveryMode.deliveryCost.currencyIso,
-                value: data.deliveryMode.deliveryCost.value,
+      shipping_addresses:
+        deliveryAddress !== undefined
+          ? [
+              {
+                email: user && user.uid,
+                firstname: data.deliveryAddress.firstName,
+                lastname: data.deliveryAddress.lastName,
+                street: [data.deliveryAddress.formattedAddress],
+                city: data.deliveryAddress.town,
+                region: {
+                  code: regionCode,
+                  label: data.deliveryAddress.region.name,
+                },
+                country: {
+                  code: data.deliveryAddress.country.isocode,
+                  label: data.deliveryAddress.country.name,
+                },
+                postcode: data.deliveryAddress.postalCode,
+                telephone: data.deliveryAddress.phone,
+                available_shipping_methods:
+                  deliveryModes && availableShippingMethods,
+                selected_shipping_method: deliveryMode && {
+                  amount: {
+                    value: data.deliveryMode.deliveryCost.value,
+                    currency: data.deliveryMode.deliveryCost.currencyIso,
+                  },
+                  carrier_code: data.deliveryMode.code,
+                  carrier_title: data.deliveryMode.description
+                    ? data.deliveryMode.description
+                    : data.deliveryMode.code,
+                  method_code: data.deliveryMode.code,
+                  method_title: data.deliveryMode.name,
+                },
               },
-              available: data.deliveryAddress.shippingAddress,
-              carrier_code: data.deliveryMode.code,
-              carrier_title: data.deliveryMode.description,
-              error_message: '',
-              method_code: data.deliveryMode.code,
-              method_title: data.deliveryMode.name,
-              price_excl_tax: {
-                value: data.deliveryMode.deliveryCost.value,
-                currency: data.deliveryMode.deliveryCost.currencyIso,
-              },
-              price_incl_tax: {
-                value: data.deliveryMode.deliveryCost.value,
-                currency: data.deliveryMode.deliveryCost.currencyIso,
-              },
-            },
-          ],
-          selected_shipping_method: {
-            amount: {
-              value: data.deliveryMode.deliveryCost.value,
-              currency: data.deliveryMode.deliveryCost.currencyIso,
-            },
-            carrier_code: data.deliveryMode.code,
-            carrier_title: data.deliveryMode.description,
-            method_code: data.deliveryMode.code,
-            method_title: data.deliveryMode.name,
-          },
-        },
-      ],
+            ]
+          : [],
       available_payment_methods: [
         {
           code:
-            paymentInfo && paymentInfo.cardType && paymentInfo.cardType.code,
+            paymentInfo && paymentInfo.cardType && paymentInfo.cardType.code
+              ? paymentInfo.cardType.code
+              : 'visa',
           title:
-            paymentInfo && paymentInfo.cardType && paymentInfo.cardType.name,
+            paymentInfo && paymentInfo.cardType && paymentInfo.cardType.name
+              ? paymentInfo.cardType.name
+              : 'Credit Card',
         },
       ],
       selected_payment_method: {
-        code: paymentInfo && paymentInfo.cardType && paymentInfo.cardType.code,
-        title: paymentInfo && paymentInfo.cardType && paymentInfo.cardType.code,
+        code:
+          paymentInfo && paymentInfo.cardType && paymentInfo.cardType.code
+            ? paymentInfo.cardType.code
+            : '',
+        title:
+          paymentInfo && paymentInfo.cardType && paymentInfo.cardType.code
+            ? paymentInfo.cardType.code
+            : '',
       },
       applied_coupon: {
         code:
@@ -144,6 +219,39 @@ class Cart {
         grand_total: {
           value: totalPrice && data.totalPrice.value,
           currency: totalPrice && data.totalPrice.currencyIso,
+        },
+        discounts: [
+          {
+            amount: {
+              currency:
+                totalDiscounts === undefined
+                  ? ''
+                  : data.totalDiscounts.currencyIso,
+              value:
+                totalDiscounts === undefined ? '' : data.totalDiscounts.value,
+            },
+            label: '',
+          },
+        ],
+        subtotal_with_discount_excluding_tax: {
+          currency: totalPrice === undefined ? '' : data.totalPrice.currencyIso,
+          value:
+            totalPriceWithTax === undefined && totalTax === undefined
+              ? ''
+              : totalTax === undefined
+              ? totalPriceWithTax.value
+              : totalPriceWithTax === undefined
+              ? ''
+              : totalPriceWithTax.value - totalTax.value,
+        },
+        subtotal_excluding_tax: {
+          currency: totalPrice === undefined ? '' : data.totalPrice.currencyIso,
+          value:
+            totalPriceWithTax === undefined && totalTax === undefined
+              ? ''
+              : totalTax === undefined
+              ? totalPriceWithTax.value
+              : totalPriceWithTax.value - totalTax.value,
         },
       },
     };

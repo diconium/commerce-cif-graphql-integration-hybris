@@ -14,16 +14,18 @@
 
 'use strict';
 
+const ymlData = require('./options.json');
+
 class InputSettings {
   constructor(args) {
-    //todo remove these 3 values and shift to options yaml file
-    this.HB_CLIENTSECRET = 'oauth-client-secret';
-    this.HB_CLIENTID = 'oauth-clientid';
-    this.HB_OAUTH_PATH = '/authorizationserver/oauth/token';
-    this.HB_API_HOST = 'hybris.example.com';
-    this.HB_API_BASE_PATH = '/rest/v2';
-    this.HB_BASESITEID = 'electronics';
-    this.HB_PROTOCOL = 'https';
+    this.HB_CLIENTSECRET = ymlData.HB_CLIENTSECRET;
+    this.HB_CLIENTID = ymlData.HB_CLIENTID;
+    this.HB_OAUTH_PATH = ymlData.HB_OAUTH_PATH;
+    this.HB_API_HOST = ymlData.HB_API_HOST;
+    this.HB_API_BASE_PATH = ymlData.HB_API_BASE_PATH;
+    this.HB_BASESITEID = ymlData.HB_BASESITEID;
+    this.HB_PROTOCOL = ymlData.HB_PROTOCOL;
+    this.HB_SECURE_BASE_MEDIA_URL = ymlData.HB_SECURE_BASE_MEDIA_URL;
 
     this.headers = this.extractHeaders(args);
     this.cookies = this.extractCookiesFromHeaders();
@@ -63,8 +65,8 @@ class InputSettings {
   }
 
   findCookieValue(cookieName) {
-    const cookie = this.cookies.find(cookie =>
-      Object.prototype.hasOwnProperty.call(cookie, 'cookieName')
+    const cookie = this.cookies.find(cookieData =>
+      Object.prototype.hasOwnProperty.call(cookieData, 'cookieName')
     );
     if (cookie) {
       return cookie[cookieName];

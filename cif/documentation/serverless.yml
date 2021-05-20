@@ -1,0 +1,33 @@
+service: hybris-graphql-documentation
+package:
+  individually: true
+  exclude:
+    - ./**
+provider:
+  name: openwhisk
+  runtime: nodejs:default
+  ignore_certs: true
+  defaultService: hybris-graphql-documentation
+  service: ${opt:service, self:provider.defaultService}
+
+custom:
+  npm-version: ${file(package.json):name}@${file(package.json):version}
+  ow-package: ${opt:ow-package, self:custom.npm-version}
+
+plugins:
+  - serverless-openwhisk
+  - serverless-webpack
+
+resources:
+  packages: ${file(../common/serverlessPackageConfig.js)}
+
+functions:
+  # This deploys a GraphQL introspection endpoint that includes all the Magento types and fields
+  # used by the AEM/Magento integration.
+  cif-schema:
+    name: hybris-graphql-documentation/cif-schema
+    handler: cif/documentation/introspection.main
+    concurrency: 200
+    annotations:
+      web-export: true
+  

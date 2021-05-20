@@ -15,9 +15,12 @@
 'use strict';
 
 const DataLoader = require('dataloader');
-const rp = require('request-promise');
+const axios = require('axios');
 
 class CustomerLoader {
+  /**
+   * @param {Object} actionParameters parameter object contains the bearer and host details
+   */
   constructor(actionParameters) {
     let loadingFunction = keys => {
       return Promise.resolve(
@@ -40,13 +43,20 @@ class CustomerLoader {
     this.loader = new DataLoader(keys => loadingFunction(keys));
   }
 
+  /**
+   * method used to call the loadingFunction using dataloader
+   * @param {*} input parameter contains the firstname,lastname
+   * */
   load(keys) {
     return this.loader.load(keys);
   }
 
+  /**
+   * Method used to get customer details from hybris
+   * @param {Object} [parameters.graphqlContext] The optional GraphQL execution context passed to the resolver.
+   * @returns {Promise} a promise resolves and return customer details.
+   */
   getCustomer(actionParameters) {
-    // eslint-disable-line no-unused-vars
-
     const {
       customerId,
       bearer,
@@ -55,13 +65,29 @@ class CustomerLoader {
       HB_PROTOCOL,
       HB_BASESITEID,
     } = actionParameters.context.settings;
+    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}?fields=DEFAULT`;
 
-    return rp({
-      uri: `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}?fields=DEFAULT&access_token=${bearer}`,
-      json: true,
-    })
-      .then(response => response)
-      .catch(error => error);
+    return new Promise((resolve, reject) => {
+      axios
+        .get(uri, {
+          params: {
+            query: '',
+          },
+          headers: {
+            Authorization: `Bearer ${bearer}`,
+          },
+        })
+        .then(response => {
+          if (response.data) {
+            resolve(response.data);
+          } else {
+            reject(false);
+          }
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
   }
 }
 

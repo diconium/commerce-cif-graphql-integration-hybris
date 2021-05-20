@@ -14,7 +14,8 @@
 
 'use strict';
 
-const rp = require('request-promise');
+const axios = require('axios');
+const TokenUtils = require('../../common/TokenUtils.js');
 
 class CreateEmptyCart {
   /**
@@ -44,28 +45,46 @@ class CreateEmptyCart {
    * method used to call hybris create empty cart api
    */
   _createEmptyCart(actionParameters) {
+    const { bearer } = actionParameters.context.settings;
+
+    if (bearer) {
+      return this._execute(actionParameters, bearer);
+    }
+    return TokenUtils.getOAuthClientBearer(actionParameters).then(bearerToken =>
+      this._execute(actionParameters, bearerToken)
+    );
+  }
+  _execute(actionParameters, bearer) {
     const {
       customerId,
-      bearer,
       HB_API_BASE_PATH,
       HB_API_HOST,
       HB_PROTOCOL,
       HB_BASESITEID,
     } = actionParameters.context.settings;
-
     let uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts?fields=DEFAULT`;
-    if (customerId === 'current') {
-      uri = uri.concat(`&access_token=${bearer}`);
-    }
-    return rp({
-      method: 'POST',
-      uri,
-      json: true,
-    })
-      .then(({ code, guid }) => (customerId === 'current' ? code : guid))
-      .catch(err => {
-        throw new Error(err.message);
-      });
+    const config = {
+      headers: {
+        Authorization: `Bearer ${bearer}`,
+        'Content-type': 'application/x-www-form-urlencoded',
+      },
+    };
+    return new Promise((resolve, reject) => {
+      axios
+        .post(uri, {}, config)
+        .then(response => {
+          if (response.data.code && response.data.guid) {
+            customerId === 'current'
+              ? resolve(response.data.code)
+              : resolve(response.data.guid);
+          } else {
+            reject(false);
+          }
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
   }
 }
 

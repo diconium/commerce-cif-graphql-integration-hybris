@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "coupon.already.exists.cart"
+      "message": "Request failed with status code 400"
     }
   ]
 }

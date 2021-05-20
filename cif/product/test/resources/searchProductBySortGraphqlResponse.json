@@ -1,0 +1,162 @@
+{
+  "aggregations": null,
+  "items": [
+    {
+      "__typename": "SimpleProduct",
+      "id": 346944,
+      "sku": "346944",
+      "name": "AC Adapter AC-L200",
+      "small_image": {
+        "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMTM1fGltYWdlL2pwZWd8aW1hZ2VzL2hjYS9oYzgvODc5NzMxNTEzNzU2Ni5qcGd8YTVmZTA1NDM1M2ExNGM0Yjg5MWM3ODg4OTgyODBjY2ZkOGFlYTg2NzVhODRkMDMwNzVkMTI2ZTMxNzM2OTk4Mg"
+      },
+      "url_key": "346944",
+      "price_range": {
+        "minimum_price": {
+          "regular_price": {
+            "value": 105.48,
+            "currency": "USD"
+          },
+          "final_price": {
+            "value": 105.48,
+            "currency": "USD"
+          },
+          "discount": {
+            "amount_off": 0,
+            "percent_off": 0
+          }
+        }
+      }
+    },
+    {
+      "__typename": "SimpleProduct",
+      "id": 443175,
+      "sku": "443175",
+      "name": "2GB SD Card",
+      "small_image": {
+        "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wzMDQ0fGltYWdlL2pwZWd8aW1hZ2VzL2gzNy9oYWIvODc5NzMxODAyMTE1MC5qcGd8ODYxZDY3ZjdhMDY5MzNmNTRmY2E0N2JiODY2YWU3MTA1NjQ4MmI5MjA1ZTA2YzI4ZGRmNzVjNmVhMTZiN2VkZA"
+      },
+      "url_key": "443175",
+      "price_range": {
+        "minimum_price": {
+          "regular_price": {
+            "value": 6.04,
+            "currency": "USD"
+          },
+          "final_price": {
+            "value": 6.04,
+            "currency": "USD"
+          },
+          "discount": {
+            "amount_off": 0,
+            "percent_off": 0
+          }
+        }
+      }
+    },
+    {
+      "__typename": "SimpleProduct",
+      "id": 450848,
+      "sku": "450848",
+      "name": "Rechargeable Battery Pack NP-BG1",
+      "small_image": {
+        "url": ""
+      },
+      "url_key": "450848",
+      "price_range": {
+        "minimum_price": {
+          "regular_price": {
+            "value": 65.51,
+            "currency": "USD"
+          },
+          "final_price": {
+            "value": 65.51,
+            "currency": "USD"
+          },
+          "discount": {
+            "amount_off": 0,
+            "percent_off": 0
+          }
+        }
+      }
+    },
+    {
+      "__typename": "SimpleProduct",
+      "id": 482105,
+      "sku": "482105",
+      "name": "InfoLITHIUM Battery, NP-FM55H",
+      "small_image": {
+        "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNTkxfGltYWdlL2pwZWd8aW1hZ2VzL2gxZC9oOGMvODc5NzMxOTU5NDAxNC5qcGd8NzFkYjk1YTBiZGE0YThmMmY5YzE3ZmEzNTJlNjFkMjI5NWY4NTYyNDJkYjFjOTEwNjJjZWQwZThiYzI1ZGJjOA"
+      },
+      "url_key": "482105",
+      "price_range": {
+        "minimum_price": {
+          "regular_price": {
+            "value": 149.69,
+            "currency": "USD"
+          },
+          "final_price": {
+            "value": 149.69,
+            "currency": "USD"
+          },
+          "discount": {
+            "amount_off": 0,
+            "percent_off": 0
+          }
+        }
+      }
+    },
+    {
+      "__typename": "SimpleProduct",
+      "id": 514518,
+      "sku": "514518",
+      "name": "ACK-E2",
+      "small_image": {
+        "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMjk5fGltYWdlL2pwZWd8aW1hZ2VzL2gwMS9oZmUvODc5NzMyMTEwMTM0Mi5qcGd8ZDJiZjMzZjIyNTc1MmNhYmJlZGU3YzI4NzA5MzBlNTllNjM3MTNjMDkyNDkzMmQ5MjYyOTM5YzYzOGYxZDRhMA"
+      },
+      "url_key": "514518",
+      "price_range": {
+        "minimum_price": {
+          "regular_price": {
+            "value": 315.52,
+            "currency": "USD"
+          },
+          "final_price": {
+            "value": 315.52,
+            "currency": "USD"
+          },
+          "discount": {
+            "amount_off": 0,
+            "percent_off": 0
+          }
+        }
+      }
+    },
+    {
+      "__typename": "SimpleProduct",
+      "id": 594471,
+      "sku": "594471",
+      "name": "AC Power Adapter ACK-E2",
+      "small_image": {
+        "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNDQwfGltYWdlL2pwZWd8aW1hZ2VzL2hhYi9oNWQvODc5NzMyMTk1MzMxMC5qcGd8NzliYThlNjE2NDFiNzdiY2JjNWM2M2E5ODAzODQ4NGY2NzIxMDNlMzQ2ZDAwM2ZhYTNhNTEyMTMzMDg3MWYyZg"
+      },
+      "url_key": "594471",
+      "price_range": {
+        "minimum_price": {
+          "regular_price": {
+            "value": 64.92,
+            "currency": "USD"
+          },
+          "final_price": {
+            "value": 64.92,
+            "currency": "USD"
+          },
+          "discount": {
+            "amount_off": 0,
+            "percent_off": 0
+          }
+        }
+      }
+    }
+  ],
+  "total_count": 180
+}

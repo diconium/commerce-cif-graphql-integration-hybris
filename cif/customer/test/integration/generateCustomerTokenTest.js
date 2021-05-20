@@ -22,8 +22,11 @@ const expect = require('chai').expect;
 const chaiShallowDeepEqual = require('chai-shallow-deep-equal');
 chai.use(chaiShallowDeepEqual);
 const TestUtils = require('../../../utils/TestUtils.js');
+const TokenLoader = require('../../src/GenerateCustomerTokenLoader.js');
+const ymlData = require('../../../common/options.json');
 
 describe('GenerateCustomerToken', function() {
+  let customerToken;
   before(() => {
     sinon.stub(console, 'debug');
     sinon.stub(console, 'error');
@@ -34,6 +37,11 @@ describe('GenerateCustomerToken', function() {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    customerToken = sinon.spy(TokenLoader.prototype, '_generateCustomerToken');
+  });
+
   describe('Integration tests', () => {
     let args = {
       url: TestUtils.getHybrisInstance(),
@@ -41,22 +49,27 @@ describe('GenerateCustomerToken', function() {
         settings: {
           bearer: '',
           customerId: 'current',
-          HB_CLIENTSECRET: 'oauth-client-secret',
-          HB_CLIENTID: 'oauth-clientid',
-          HB_OAUTH_PATH: '/authorizationserver/oauth/token',
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
+          HB_CLIENTSECRET: ymlData.HB_CLIENTSECRET,
+          HB_CLIENTID: ymlData.HB_CLIENTID,
+          HB_OAUTH_PATH: ymlData.HB_OAUTH_PATH,
         },
       },
     };
 
     it('Mutation: Validate generate customer token', () => {
       args.query =
-        'mutation {generateCustomerToken(email: "test4@test.com", password: "12341234"){token}}';
+        'mutation {generateCustomerToken(email: "test.user@example.com", password: "Test@123"){token}}';
       return resolve(args).then(result => {
         const { errors } = result;
         assert.isUndefined(result.errors);
         let responseData = result.data.generateCustomerToken.token;
         assert.notEqual(responseData, '');
         expect(errors).to.be.undefined;
+        assert.equal(customerToken.callCount, 1);
       });
     });
   });

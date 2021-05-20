@@ -1,0 +1,191 @@
+{
+  "type": "categoryHierarchyWsDTO",
+  "id": "1",
+  "lastModified": "2020-06-30T22:42:26+0000",
+  "name": "Open Catalogue",
+  "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/1",
+  "subcategories": [
+    {
+      "id": "106",
+      "lastModified": "2020-06-30T22:36:47+0000",
+      "name": "Components",
+      "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/106",
+      "subcategories": [
+        {
+          "id": "816",
+          "lastModified": "2020-06-30T22:42:27+0000",
+          "name": "Power Supplies",
+          "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/816",
+          "subcategories": [
+            {
+              "id": "814",
+              "lastModified": "2020-06-30T22:42:27+0000",
+              "name": "Rechargeable Batteries",
+              "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/814",
+              "subcategories": []
+            },
+            {
+              "id": "827",
+              "lastModified": "2020-06-30T22:42:27+0000",
+              "name": "Power Adapters & Inverters",
+              "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/827",
+              "subcategories": []
+            },
+            {
+              "id": "829",
+              "lastModified": "2020-06-30T22:42:27+0000",
+              "name": "Battery Chargers",
+              "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/829",
+              "subcategories": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "206",
+      "lastModified": "2020-06-30T22:36:47+0000",
+      "name": "Data storage",
+      "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/206",
+      "subcategories": [
+        {
+          "id": "902",
+          "lastModified": "2020-06-30T22:43:07+0000",
+          "name": "Flash Memory",
+          "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/902",
+          "subcategories": []
+        }
+      ]
+    },
+    {
+      "id": "571",
+      "lastModified": "2020-06-30T22:42:44+0000",
+      "name": "Cameras",
+      "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/571",
+      "subcategories": [
+        {
+          "id": "574",
+          "lastModified": "2020-06-30T22:38:05+0000",
+          "name": "Film cameras",
+          "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/574",
+          "subcategories": []
+        },
+        {
+          "id": "575",
+          "lastModified": "2020-06-30T22:42:44+0000",
+          "name": "Digital Cameras",
+          "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/575",
+          "subcategories": [
+            {
+              "id": "576",
+              "lastModified": "2020-06-30T22:42:27+0000",
+              "name": "Digital Compacts",
+              "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/576",
+              "subcategories": []
+            },
+            {
+              "id": "578",
+              "lastModified": "2020-06-30T22:42:45+0000",
+              "name": "Digital SLR",
+              "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/578",
+              "subcategories": [
+                {
+                  "id": "587",
+                  "lastModified": "2020-06-30T22:42:27+0000",
+                  "name": "Tripods",
+                  "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/587",
+                  "subcategories": []
+                },
+                {
+                  "id": "588",
+                  "lastModified": "2020-06-30T22:42:27+0000",
+                  "name": "Camera Lenses",
+                  "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/588",
+                  "subcategories": []
+                },
+                {
+                  "id": "1288",
+                  "lastModified": "2020-06-30T22:42:28+0000",
+                  "name": "Camera Kits",
+                  "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/1288",
+                  "subcategories": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "577",
+          "lastModified": "2020-06-30T22:38:18+0000",
+          "name": "Webcams",
+          "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/577",
+          "subcategories": []
+        },
+        {
+          "id": "584",
+          "lastModified": "2020-06-30T22:42:27+0000",
+          "name": "Hand-held Camcorders",
+          "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/584",
+          "subcategories": []
+        },
+        {
+          "id": "585",
+          "lastModified": "2020-06-30T22:42:44+0000",
+          "name": "Camera Accessories & Supplies",
+          "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/585",
+          "subcategories": [
+            {
+              "id": "586",
+              "lastModified": "2020-06-30T22:38:08+0000",
+              "name": "Camera Flashes",
+              "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/586",
+              "subcategories": []
+            },
+            {
+              "id": "597",
+              "lastModified": "2020-06-30T22:43:07+0000",
+              "name": "Colour Films",
+              "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/597",
+              "subcategories": []
+            },
+            {
+              "id": "598",
+              "lastModified": "2020-06-30T22:43:07+0000",
+              "name": "Black & White Films",
+              "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/598",
+              "subcategories": []
+            },
+            {
+              "id": "604",
+              "lastModified": "2020-06-30T22:42:27+0000",
+              "name": "Blank Video Tapes",
+              "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/604",
+              "subcategories": []
+            },
+            {
+              "id": "934",
+              "lastModified": "2020-06-30T22:40:04+0000",
+              "name": "Camera Cables",
+              "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/934",
+              "subcategories": []
+            },
+            {
+              "id": "1201",
+              "lastModified": "2020-06-30T22:38:42+0000",
+              "name": "Fixatives",
+              "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/1201",
+              "subcategories": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1421",
+      "lastModified": "2020-06-30T22:38:09+0000",
+      "name": "Binoculars",
+      "url": "/electronics/catalogs/electronicsProductCatalog/Online/categories/1421",
+      "subcategories": []
+    }
+  ]
+}

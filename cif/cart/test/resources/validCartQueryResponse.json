@@ -1,60 +1,45 @@
 {
   "cart": {
-    "applied_coupon": {
-      "code": "coupontest001"
-    },
-    "available_payment_methods": [
-      {
-        "code": "visa",
-        "title": "Visa"
-      }
-    ],
+    "email": "test.user@example.com",
     "billing_address": {
       "city": "stuttgart",
       "country": {
-        "code": "DE",
-        "label": "Germany"
+        "code": "US",
+        "label": "United States"
       },
-      "firstname": "karan",
-      "lastname": "sharma",
+      "firstname": "test",
+      "lastname": "user",
       "postcode": "70376",
       "region": {
-        "code": "Mr.",
-        "label": "Mr."
+        "code": "WA",
+        "label": "Washington"
       },
       "street": [
-        "rommelstrasse 11, 70376, stuttgart, Germany"
+        "Strasse 11, 70376, stuttgart, Germany"
       ],
-      "telephone": null
-    },
-    "email": "test5@test.com",
-    "items": [
-      {
-        "id": "0",
-        "product": {
-          "name": "EF-S 60mm f/2.8 USM Macro",
-          "sku": "832382"
-        },
-        "quantity": 2
-      }
-    ],
-    "prices": {
-      "grand_total": {
-        "currency": "USD",
-        "value": 922.75
-      }
-    },
-    "selected_payment_method": {
-      "code": "visa",
-      "title": "visa"
+      "telephone": ""
     },
     "shipping_addresses": [
       {
+        "firstname": "Bob",
+        "lastname": "Roll",
+        "street": [
+          "Magento Pkwy, Main Street, Washington, Austin, 78758"
+        ],
+        "city": "Austin",
+        "region": {
+          "code": "WA",
+          "label": "Washington"
+        },
+        "country": {
+          "code": "US",
+          "label": "United States"
+        },
         "available_shipping_methods": [
           {
             "amount": {
               "currency": "USD",
-              "value": 8.99
+              "value": 11.99
             },
             "available": true,
             "carrier_code": "standard-gross",
@@ -63,40 +48,75 @@
             "method_code": "standard-gross",
             "method_title": "Standard Delivery",
             "price_excl_tax": {
-              "value": 8.99,
+              "value": 11.99,
               "currency": "USD"
             },
             "price_incl_tax": {
-              "value": 8.99,
+              "value": 11.99,
+              "currency": "USD"
+            }
+          },
+          {
+            "amount": {
+              "currency": "USD",
+              "value": 19.99
+            },
+            "available": true,
+            "carrier_code": "premium-gross",
+            "carrier_title": "1-2 business days",
+            "error_message": "",
+            "method_code": "premium-gross",
+            "method_title": "Premium Delivery",
+            "price_excl_tax": {
+              "value": 19.99,
+              "currency": "USD"
+            },
+            "price_incl_tax": {
+              "value": 19.99,
               "currency": "USD"
             }
           }
         ],
-        "city": "Stuttgart",
-        "country": {
-          "code": "DE",
-          "label": "Germany"
-        },
-        "firstname": "test",
-        "lastname": "user",
-        "region": {
-          "code": "Mr.",
-          "label": "Mr."
-        },
         "selected_shipping_method": {
           "amount": {
-            "value": 8.99,
+            "value": 11.99,
             "currency": "USD"
           },
           "carrier_code": "standard-gross",
           "carrier_title": "3-5 business days",
           "method_code": "standard-gross",
           "method_title": "Standard Delivery"
-        },
-        "street": [
-          "strasse 11, 70376, Stuttgart, Germany"
-        ]
+        }
       }
-    ]
+    ],
+    "items": [
+      {
+        "id": "0",
+        "product": {
+          "name": "AC-VQ900AM",
+          "sku": "1298094"
+        },
+        "quantity": 3
+      }
+    ],
+    "available_payment_methods": [
+      {
+        "code": "visa",
+        "title": "Visa"
+      }
+    ],
+    "selected_payment_method": {
+      "code": "visa",
+      "title": "visa"
+    },
+    "applied_coupon": {
+      "code": ""
+    },
+    "prices": {
+      "grand_total": {
+        "value": 497.55,
+        "currency": "USD"
+      }
+    }
   }
 }

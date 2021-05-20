@@ -16,23 +16,19 @@
 
 const sinon = require('sinon');
 const assert = require('chai').assert;
-const expect = require('chai').expect;
 const mockRequire = require('mock-require');
-const ProductsLoader = require('../../src/ProductsLoader.js');
-const CategoryTreeLoader = require('../../../category/src/CategoryTreeLoader.js');
-const CartLoader = require('../../../cart/src/CartLoader.js');
+const ProductsLoader = require('../../../product/src/ProductsLoader.js');
+const CategoryTreeLoader = require('../../src/CategoryTreeLoader.js');
 const ProductLoader = require('../../../product/src/ProductLoader.js');
+const ymlData = require('../../../common/options.json');
 
 describe('Dispatcher Resolver', () => {
   let resolve;
   let searchProducts;
   let getProductBySku;
   let getCategoryById;
-  let getCartById;
 
   before(() => {
-    // Disable console debugging
-    sinon.stub(console, 'debug');
     sinon.stub(console, 'error');
 
     // Mock openwhisk client
@@ -40,7 +36,7 @@ describe('Dispatcher Resolver', () => {
       return {
         actions: {
           invoke: options => {
-            let resolve = require(options.actionName).main;
+            resolve = require(options.actionName).main;
             return resolve({
               query: options.params.query,
               variables: options.params.variables,
@@ -53,11 +49,10 @@ describe('Dispatcher Resolver', () => {
     });
 
     // The main dispatcher resolver (will use the mock openwhisk client)
-    resolve = require('../../../src/local/dispatcher.js').main;
+    resolve = require('../../../common/dispatcher.js').main;
   });
 
   after(() => {
-    console.debug.restore();
     console.error.restore();
   });
 
@@ -69,192 +64,68 @@ describe('Dispatcher Resolver', () => {
       CategoryTreeLoader.prototype,
       '__getCategoryById'
     );
-    getCartById = sinon.spy(CartLoader.prototype, '__getCartById');
   });
 
   afterEach(() => {
     searchProducts.restore();
     getProductBySku.restore();
     getCategoryById.restore();
-    getCartById.restore();
   });
 
   describe('Integration Tests', () => {
     let args = {
-      url: 'https://mybackendserver.com/rest',
+      url: `${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`,
+      __ow_headers: {
+        authorization: '',
+      },
       remoteSchemas: {
-        cart: {
+        category: {
           order: 20,
-          action: '../../src/remote/cartResolver.js',
+          action: '../../src/categoryResolver.js',
+        },
+        product: {
+          order: 20,
+          action: '../../../product/src/productResolver.js',
         },
       },
     };
 
     it('Basic category search', () => {
       args.query =
-        '{category(id: "1"){id,name,description,children{id,name,description,children{id,name,description}}}}';
+        '{categoryList(filters:{ids:{eq:"1"}}){id,name,url_path,url_key,product_count,children_count,children{id,name,url_path,url_key,product_count,children_count}}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.body.errors); // No GraphQL errors
 
-        let category = result.body.data.category;
-        assert.equal(category.id, '1');
-        assert.equal(category.name, 'Category #1');
+        let category = result.body.data.categoryList[0];
+        assert.equal(category.id, 1);
+        assert.equal(category.name, 'Open Catalogue');
 
         let children = category.children;
-        assert.equal(children.length, 2);
-        children.forEach((subcategory, idx) => {
-          let id = idx + 1;
-          assert.equal(subcategory.name, `Category #1-${id}`);
-          assert.equal(
-            subcategory.description,
-            `Fetched category #1-${id} from ${args.url}`
-          );
-          let subchildren = subcategory.children;
-          assert.equal(subchildren.length, 2);
-          subchildren.forEach((subsubcategory, idx2) => {
-            let id2 = idx2 + 1;
-            assert.equal(subsubcategory.name, `Category #1-${id}-${id2}`);
-            assert.equal(
-              subsubcategory.description,
-              `Fetched category #1-${id}-${id2} from ${args.url}`
-            );
-          });
-        });
+        assert.equal(children.length, 4);
 
         // Ensure the category loading function is only called once for each category being fetched
-        assert.equal(getCategoryById.callCount, 7);
-        assert(getCategoryById.calledWith('1', args));
-        assert(getCategoryById.calledWith('1-1', args));
-        assert(getCategoryById.calledWith('1-2', args));
-        assert(getCategoryById.calledWith('1-1-1', args));
-        assert(getCategoryById.calledWith('1-1-2', args));
-        assert(getCategoryById.calledWith('1-2-1', args));
-        assert(getCategoryById.calledWith('1-2-2', args));
+        assert.equal(getCategoryById.callCount, 1);
       });
     });
 
-    it('Combined products and category search', () => {
+    it('Basic category search with product details', () => {
       args.query =
-        '{products(filter:{sku:{eq:"a-sku"}}, currentPage:1){items{sku,categories{id}}}, category(id: "1"){id,products{items{sku}}}}';
+        '{categoryList(filters:{ids:{eq:"1"}}){id,products{items{sku,name}},name,description,children{id,products{items{sku,name}},name,description,children{id,products{items{sku,name}},name,description}}}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.body.errors); // No GraphQL errors
 
-        let items = result.body.data.products.items;
-        assert.equal(items.length, 1);
-        assert.equal(items[0].sku, 'a-sku');
+        let category = result.body.data.categoryList[0];
+        assert.equal(category.id, 1);
+        assert.equal(category.name, 'Open Catalogue');
 
-        let categories = items[0].categories;
-        assert.equal(categories.length, 2);
-        categories.forEach((category, idx) => {
-          let id = idx + 1;
-          assert.equal(category.id, `cat${id}`);
-        });
-
-        let products = result.body.data.category.products;
-        assert.equal(products.items.length, 2);
-        products.items.forEach((item, idx) => {
-          let id = idx + 1;
-          assert.equal(item.sku, `product-${id}`);
-        });
-
-        // Ensure the Products search function is called once for the "search by sku"
-        // and once for the category products
-        assert(searchProducts.calledTwice);
-        assert(
-          searchProducts.calledWith(
-            {
-              filter: {
-                sku: {
-                  eq: 'a-sku',
-                },
-              },
-              pageSize: 20,
-              currentPage: 1,
-            },
-            args
-          )
-        );
-        assert(
-          searchProducts.calledWith(
-            {
-              categoryId: '1',
-              pageSize: 20,
-              currentPage: 1,
-            },
-            args
-          )
-        );
+        let children = category.children;
+        assert.equal(children.length, 4);
+        assert.equal(category.products.items.length, 20);
 
         // Ensure the category loading function is only called once for each category being fetched
-        assert.equal(getCategoryById.callCount, 3);
-        assert(getCategoryById.calledWith('1', args));
-        assert(getCategoryById.calledWith('cat1', args));
-        assert(getCategoryById.calledWith('cat2', args));
-      });
-    });
+        assert.equal(getCategoryById.callCount, 1);
 
-    it('Query cart remote resolver', () => {
-      args.query =
-        '{products(filter:{sku:{in:["a-sku", "b-sku"]}}, currentPage:1){items{sku}}, cart(cart_id:"abcd"){email,items{product{sku}}}}';
-      return resolve(args).then(result => {
-        assert.isUndefined(result.body.errors); // No GraphQL errors
-
-        let items = result.body.data.products.items;
-        assert.equal(items.length, 2);
-        assert.equal(items[0].sku, 'a-sku');
-        assert.equal(items[1].sku, 'b-sku');
-
-        let cart = result.body.data.cart;
-        assert.equal(cart.email, 'dummy@example.com');
-
-        let cartItems = cart.items;
-        assert.equal(cartItems.length, 2);
-        cartItems.forEach((item, idx) => {
-          let id = idx + 1;
-          let product = item.product;
-          assert.equal(product.sku, `product-${id}`);
-        });
-
-        // Ensure the Products search function is called once
-        assert(
-          searchProducts.calledOnceWith(
-            {
-              filter: {
-                sku: {
-                  in: ['a-sku', 'b-sku'],
-                },
-              },
-              pageSize: 20,
-              currentPage: 1,
-            },
-            args
-          )
-        );
-
-        // Ensure the cart loading function is only called once
-        // (we dont check the 'args' parameter because this is modified by graphql-tools)
-        assert(getCartById.calledOnceWith('abcd'));
-
-        // Ensure the product loading function is only called twice, once for each product sku
-        // (we dont check the 'args' parameter because this is modified by graphql-tools)
-        assert(getProductBySku.calledTwice);
-        assert(getProductBySku.calledWith('product-1'));
-        assert(getProductBySku.calledWith('product-2'));
-      });
-    });
-
-    it('Error when fetching the category data', () => {
-      // Replace spy with stub
-      getCategoryById.restore();
-      getCategoryById = sinon
-        .stub(CategoryTreeLoader.prototype, '__getCategoryById')
-        .returns(Promise.reject('Connection failed'));
-
-      args.query = '{category(id: "1"){id}}';
-      return resolve(args).then(result => {
-        assert.equal(result.body.errors.length, 1);
-        assert.equal(result.body.errors[0].message, 'Backend data is null');
-        expect(result.body.errors[0].path).to.eql(['category', 'id']);
+        assert.equal(searchProducts.callCount, 12);
       });
     });
   });

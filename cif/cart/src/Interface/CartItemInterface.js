@@ -40,6 +40,17 @@ class CartItemInterface {
       return {
         __typename: this.__typename,
         id: item.entryNumber,
+        uid: item.entryNumber,
+        prices: {
+          price: {
+            currency: item.totalPrice.currencyIso,
+            value: item.totalPrice.value,
+          },
+          row_total: {
+            currency: item.totalPrice.currencyIso,
+            value: item.totalPrice.value,
+          },
+        },
         product: new ProductInterface(item.product).product,
         quantity: item.quantity,
       };

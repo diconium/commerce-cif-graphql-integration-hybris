@@ -14,23 +14,32 @@
 
 'use strict';
 
-const magentoSchema = require('../../resources/magento-schema-2.3.2.min.json');
 const { graphql } = require('graphql');
 const SchemaBuilder = require('../../common/SchemaBuilder.js');
 const { CategoryTree } = require('../../common/Catalog.js');
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 let cachedSchema = null;
 
 function resolve(args) {
   if (cachedSchema == null) {
-    let schemaBuilder = new SchemaBuilder(magentoSchema)
+    let schemaBuilder = new SchemaBuilder()
       .removeMutationType()
-      .filterQueryFields(new Set(['category']));
+      .filterQueryFields(new Set(['category', 'categoryList']));
 
     cachedSchema = schemaBuilder.build();
   }
 
   let resolvers = {
+    categoryList: (params, context) => {
+      return [
+        new CategoryTree({
+          categoryId: params.filters,
+          graphqlContext: context,
+          actionParameters: args,
+        }),
+      ];
+    },
     category: (params, context) => {
       return new CategoryTree({
         categoryId: params.id,
@@ -40,7 +49,6 @@ function resolve(args) {
     },
   };
 
-  // The resolver for this action
   return graphql(
     cachedSchema,
     args.query,

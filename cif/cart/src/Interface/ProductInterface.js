@@ -13,7 +13,7 @@
  ******************************************************************************/
 
 'use strict';
-
+const MediaGallery = require('./../../../common/Catalog').MediaGallery;
 class ProductInterface {
   /**
    * constructor of the CartItemInterface class
@@ -34,10 +34,22 @@ class ProductInterface {
    * Method used to return product details name and sku
    */
   get product() {
+    const thumbnail = this.data.images.find(
+      image => image.format === 'thumbnail'
+    );
     return {
       __typename: this.__typename,
       name: this.data.name,
       sku: this.data.code,
+      thumbnail: thumbnail
+        ? new MediaGallery({
+            position: 0,
+            url: thumbnail.url,
+            label: thumbnail.altText,
+            disabled: false,
+            // media_type: 'image',
+          })
+        : null,
     };
   }
 }

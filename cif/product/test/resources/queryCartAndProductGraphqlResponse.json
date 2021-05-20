@@ -1,0 +1,27 @@
+{
+  "products": {
+    "items": [
+      {
+        "sku": "898503"
+      },
+      {
+        "sku": "2278102"
+      }
+    ]
+  },
+  "cart": {
+    "email": "test.user@example.com",
+    "items": [
+      {
+        "product": {
+          "sku": "898503"
+        }
+      },
+      {
+        "product": {
+          "sku": "2278102"
+        }
+      }
+    ]
+  }
+}

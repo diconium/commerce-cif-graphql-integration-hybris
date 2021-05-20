@@ -1,0 +1,182 @@
+[
+  {
+    "sku": "898503",
+    "name": "1V",
+    "stock_status": "IN_STOCK",
+    "image": {
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNzQxfGltYWdlL2pwZWd8aW1hZ2VzL2hmMS9oNjUvODc5Njg3OTgxNDY4Ni5qcGd8YzJkOGIyMGZmOWNhYzVmNTA4ZTMyODZjYTMyYTk0MzJkM2ZkMzI0YjM5ODcxMTFiMDkzMGIxMDQwNGExZGEzYg",
+      "label": ""
+    }
+  },
+  {
+    "sku": "3965240",
+    "name": "NP-FV 70",
+    "stock_status": "IN_STOCK",
+    "image": {
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMjI2fGltYWdlL2pwZWd8aW1hZ2VzL2g4NC9oY2YvODc5Njg3MTYyMjY4Ni5qcGd8Yjk2ODgzNTZkOTE0ZTI5MzU1MGRhZTQ2YjdjMGNjNDY0MzJlOGUwYjFmNTg0ZmMyOThjODc5ZDgwNDUxZDg3Zg",
+      "label": ""
+    }
+  },
+  {
+    "sku": "4852405",
+    "name": "8GB SD Card",
+    "stock_status": "IN_STOCK",
+    "image": {
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNzAxfGltYWdlL2pwZWd8aW1hZ2VzL2hlMS9oZDIvODc5Njg3Mzc4NTM3NC5qcGd8MGRhNjhmY2UzODcyNzIwOGI5ZTU0MjVkM2M3OTYwOTk3MTc1MDMyYmMzMDdmZWQ4MTRjNzI1MDVlYWY2Mjk3OA",
+      "label": ""
+    }
+  },
+  {
+    "sku": "917699",
+    "name": "Accessory value kit for Handycam",
+    "stock_status": "IN_STOCK",
+    "image": {
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyODUyfGltYWdlL2pwZWd8aW1hZ2VzL2g0Mi9oMGQvODc5Njg4MDA3NjgzMC5qcGd8NmFiZjU4OGFkNjlhOGIzYjY3NDQ4OTM4YjUxNDBkYzdiMmY3ZDRiOTg3OTA0OTA0OWI4M2FhNzU0ZTdiMWRlYg",
+      "label": ""
+    }
+  },
+  {
+    "sku": "918735",
+    "name": "Connecting cable VMC-MD1",
+    "stock_status": "IN_STOCK",
+    "image": {
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wxOTA3fGltYWdlL2pwZWd8aW1hZ2VzL2hlNy9oYzgvODc5Njg4MDE0MjM2Ni5qcGd8M2NiODZhZTFhOWVjNjY3MjJhYTgxNDBhMjAwMjk5NTYwZDlhMjMzMmE0ZmU4ZjgxMTdkNzcyYjEwMDgyMTVmMA",
+      "label": ""
+    }
+  },
+  {
+    "sku": "278688",
+    "name": "AC-VQP10 CHARGER",
+    "stock_status": "IN_STOCK",
+    "image": {
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMjk0fGltYWdlL2pwZWd8aW1hZ2VzL2gxZS9oMGUvODc5Njg2NTcyNDQ0Ni5qcGd8MmEzZTlkMjgxNTU1MmVjZDE4NTNiYzZmNzEwNmEzNDA5ZjliNzA2ZTQ5MjU0M2FlNzdkNmYxMDg4NWE5ODAxNg",
+      "label": ""
+    }
+  },
+  {
+    "sku": "1099285",
+    "name": "Monopod 100 - Floor Standing Monopod",
+    "stock_status": "IN_STOCK",
+    "image": {
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wxMzI2fGltYWdlL2pwZWd8aW1hZ2VzL2gwZi9oYTkvODc5Njg1NDA1OTAzOC5qcGd8YzEzZGIwNzZlN2NhZjFlODEwNTVmMGYxY2EyZTdmM2MxZjRlYzJlOThmYWQ2YTc5NmYwOWM3NjM1Y2I2ZWQyYg",
+      "label": ""
+    }
+  },
+  {
+    "sku": "1099413",
+    "name": "Macro Ring Lite MR-14EX",
+    "stock_status": "IN_STOCK",
+    "image": {
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNDUyfGltYWdlL2pwZWd8aW1hZ2VzL2hhZS9oMmEvODc5Njg1NDEyNDU3NC5qcGd8YTcwNjQwYjZjNmNiYjhjYjI3MTY0ZWIwZjczYmMxNWRiYWM3NGRjMjhkOGEzN2VjNzZjYmNmNmViYWNiMWZhOA",
+      "label": ""
+    }
+  },
+  {
+    "sku": "1209761",
+    "name": "8X25 IS",
+    "stock_status": "IN_STOCK",
+    "image": {
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNDY0fGltYWdlL2pwZWd8aW1hZ2VzL2gwOS9oNjcvODc5Njg1NDI1NTY0Ni5qcGd8YjUxNDUyNzIxNzM2MmUzMjcyYzY3ZWE5MjdjM2VjYWJhNDgxZWEyYzYzYTNjYjkxMWI2OGZiNGNmZjIzOGE5Mg",
+      "label": ""
+    }
+  },
+  {
+    "sku": "1291399",
+    "name": "PROFESSIONAL BW400CN Film",
+    "stock_status": "IN_STOCK",
+    "image": {
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wzNjMyfGltYWdlL2pwZWd8aW1hZ2VzL2gxYS9oYWMvODc5Njg1NDcxNDM5OC5qcGd8OWNiYWQzMTkxMGJkYTViMjQzMDQ5MzM3NzVjYmM5YmJhYjlhMGZkNWYxZGNkYjk0MjY3ZjFmMGE2ZDI3YmFkZA",
+      "label": ""
+    }
+  },
+  {
+    "sku": "1225694",
+    "name": "EOS 40D body",
+    "stock_status": "IN_STOCK",
+    "image": {
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyODM2fGltYWdlL2pwZWd8aW1hZ2VzL2hjZi9oNmMvODc5Njg1NDMyMTE4Mi5qcGd8NzA3YTkxMjAxMmYyMGI3NmM4ZTE5Yjk5ODRkZjZkMWQwY2RkM2IxNjA0Y2Q2OTA4M2Y0Zjk3ZGNiZDgzZDkzMw",
+      "label": ""
+    }
+  },
+  {
+    "sku": "1312564",
+    "name": "Battery Charger 4xAA/AAA",
+    "stock_status": "IN_STOCK",
+    "image": {
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNDEyfGltYWdlL2pwZWd8aW1hZ2VzL2g5MC9oYTYvODc5Njg1NDkxMTAwNi5qcGd8MzljYmVmZDhjYTQxODRiYjA1ZjYwMWEyNjk0NTdkMzM2ZDljM2ExMDUzNzU4NDYyMWZjNTc3YTIyNTFjNGRkYw",
+      "label": ""
+    }
+  },
+  {
+    "sku": "1312640",
+    "name": "Battery Charger 2xAA/AAA",
+    "stock_status": "IN_STOCK",
+    "image": {
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMjU5fGltYWdlL2pwZWd8aW1hZ2VzL2g3OC9oNDgvODc5Njg1NTA0MjA3OC5qcGd8NGQ4YjdjM2MxNWUwM2YyZDljNmMyMDQ1NzYzMWQ2M2Q4MGQxMzQzNzJjNmZkMzM1N2ZjMDVhMzBkNzBjZGVlOA",
+      "label": ""
+    }
+  },
+  {
+    "sku": "1322041",
+    "name": "4GB CF Card",
+    "stock_status": "OUT_OF_STOCK",
+    "image": {
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wzMjk1fGltYWdlL2pwZWd8aW1hZ2VzL2g2Ni9oNGUvODc5Njg1NTM2OTc1OC5qcGd8ZjQ1MGFkN2IxODA0NTE1MThjNjQ0MzcxOGM4NDg0YTM2YjY2ZTUxY2MwZGMwYjcyMmMyMjU3NzFhMDNjNzlmNw",
+      "label": ""
+    }
+  },
+  {
+    "sku": "1325806",
+    "name": "EasyShare ZD710",
+    "stock_status": "OUT_OF_STOCK",
+    "image": {
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNjg4fGltYWdlL2pwZWd8aW1hZ2VzL2g5OS9oNDAvODc5Njg1NTUwMDgzMC5qcGd8ZDM1ZGJlNjlkMjAzNmI0YzBjNWY1MGQ0YjVlNDYzZjM3OWUyY2NmY2RhZWQ2ODNhOTNjZWI0NGVkY2MzNGFkOQ",
+      "label": ""
+    }
+  },
+  {
+    "sku": "1377492",
+    "name": "Micro Webcam",
+    "stock_status": "OUT_OF_STOCK",
+    "image": {
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wxNzgzfGltYWdlL2pwZWd8aW1hZ2VzL2gyNy9oYWIvODc5Njg1NjAyNTExOC5qcGd8YWJlZGNkNTQyODU1OTlmMTUxNDk2NDY4ODI1ZmRkOTcxZGIwYTZiNDlhN2M2MDQ1NGYwODRkOWZiZTc3MTlkZA",
+      "label": ""
+    }
+  },
+  {
+    "sku": "1422218",
+    "name": "LP-E5",
+    "stock_status": "IN_STOCK",
+    "image": {
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wxNTM4fGltYWdlL2pwZWd8aW1hZ2VzL2g4Yy9oOTgvODc5Njg1Njc0NjAxNC5qcGd8ZWFkZGY0YTZkNTQxOTA3ZGRkOTAwM2M3M2UyMDg0ZGM3NzFjYzEyOTAxZTAwZGQ2ZGViMmUwYTk4NDBlNzAzYQ",
+      "label": ""
+    }
+  },
+  {
+    "sku": "1422222",
+    "name": "ACK-E5 AC Adapter Kit",
+    "stock_status": "IN_STOCK",
+    "image": {
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wxNjU0fGltYWdlL2pwZWd8aW1hZ2VzL2gyYi9oMWEvODc5Njg1NjgxMTU1MC5qcGd8MDk2ZWUzYjc5NDlmNTVhOTYxZWIwNDMzYTdiOWYxZjEyMTdmNmZiMzA4MzZkN2RmY2U3NmNkM2E1M2RlM2JlOA",
+      "label": ""
+    }
+  },
+  {
+    "sku": "1422224",
+    "name": "BG-E5",
+    "stock_status": "IN_STOCK",
+    "image": {
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wxOTQwfGltYWdlL2pwZWd8aW1hZ2VzL2g4MC9oNGUvODc5Njg1Njg3NzA4Ni5qcGd8NDgzNWQwZDM5ZjkwMjJjZjZiM2I4NTVhMjFkMjFjNGM0NGMzY2Y3OGRkMTk2ZGZjOWU5ZWEyYTQyNzRmMzg5Mw",
+      "label": ""
+    }
+  },
+  {
+    "sku": "1422706",
+    "name": "Wide Strap for EOS 450D",
+    "stock_status": "IN_STOCK",
+    "image": {
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wxMjYxfGltYWdlL2pwZWd8aW1hZ2VzL2g4Yy9oNzcvODc5Njg1Njk0MjYyMi5qcGd8ZTA0ZDg3ZTk2NzhhYmM4MTllZGZkZWU3MzlhOGI4ODgwMWEyYTY0MDNiOTdjYWNlY2U2YTBjMWE3YzIzMmNhZg",
+      "label": ""
+    }
+  }
+]

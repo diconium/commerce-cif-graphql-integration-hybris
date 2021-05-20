@@ -4,9 +4,9 @@
    "appliedProductPromotions": [],
    "appliedVouchers": [
       {
-         "code": "coupontest001",
+         "code": "BUYMORE16",
          "freeShipping": false,
-         "voucherCode": "coupontest001"
+         "voucherCode": "BUYMORE16"
       }
    ],
    "calculated": true,
@@ -217,7 +217,7 @@
       "priceType": "BUY",
       "value": 3.09
    },
-   "user": {
+   test.user@example.com: {
       "name": "test 4",
       "uid": "test4@test.com"
    },

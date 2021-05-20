@@ -20,14 +20,9 @@ const chai = require('chai');
 const { expect } = chai;
 const chaiShallowDeepEqual = require('chai-shallow-deep-equal');
 chai.use(chaiShallowDeepEqual);
-const nock = require('nock');
 const assert = require('chai').assert;
-const hybrisRevokeCustomerToken = require('../resources/hybrisRevokeCustomerToken.json.json');
-const unSupportedGrantType = require('../resources/unSupportedGrantType.json');
-const bearer = '0b25590d-7731-4f25-8f09-88008d2a1792';
 
-describe('GenerateCustomerToken', () => {
-  const scope = nock('https://hybris.example.com');
+describe('Revoke Customer token', () => {
   before(() => {
     // Disable console debugging
     sinon.stub(console, 'debug');
@@ -41,51 +36,20 @@ describe('GenerateCustomerToken', () => {
 
   describe('Unit Tests', () => {
     let args = {
-      url: 'https://hybris.example.com',
+      url: '',
       context: {
         settings: {
           bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: 'https',
-          HB_CLIENTSECRET: 'oauth-client-secret',
-          HB_CLIENTID: 'oauth-clientid',
-          HB_API_HOST: 'hybris.example.com',
-          HB_OAUTH_PATH: '/authorizationserver/oauth/token',
         },
       },
     };
 
-    it('Mutation: Revoke customer token ', () => {
-      scope
-        .post('/authorizationserver/oauth/token')
-        .query({ operationType: 'oAuth' })
-        .reply(200, hybrisRevokeCustomerToken);
-      args.context.settings.bearer = bearer;
+    it('Mutation: Revoke customer token', () => {
       args.query = 'mutation { revokeCustomerToken { result } }';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
         let response = result.data.revokeCustomerToken.result;
         expect(response).to.deep.equals(true);
-      });
-    });
-
-    it('Mutation: validate response should return unsupported grant type', () => {
-      scope
-        .post('/authorizationserver/oauth/token')
-        .query({ operationType: 'oAuth' })
-        .reply(400, unSupportedGrantType);
-      args.context.settings.bearer = bearer;
-      args.query = 'mutation { revokeCustomerToken { result } }';
-      args.context.settings.grant_type = 'pass';
-      return resolve(args).then(result => {
-        const errors = result.errors[0];
-        expect(errors).shallowDeepEqual({
-          message:
-            '400 - {"errors":[{"message":"Unsupported grant type: pass"}]}',
-          source: {
-            name: 'GraphQL request',
-          },
-        });
       });
     });
   });

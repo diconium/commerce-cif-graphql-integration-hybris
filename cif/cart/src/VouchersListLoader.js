@@ -15,18 +15,19 @@
 'use strict';
 
 const DataLoader = require('dataloader');
-const rp = require('request-promise');
-
+const axios = require('axios');
 class VouchersListLoader {
   /**
    * @param {Object} [actionParameters] Some optional parameters of the I/O Runtime action, like for example customerId, bearer token, query and url info.
    */
   constructor(actionParameters) {
-    // The loading function: "cartIds" is an Array of cart ids
+    /** The loading function: "cartIds" is an Array of cart ids */
     let loadingFunction = cartIds => {
-      // This loader loads each cart one by one, but if the 3rd party backend allows it,
-      // it could also fetch all carts in one single request. In this case, the method
-      // must still return an Array of carts with the same order as the keys.
+      /**
+       *This loader loads each cart one by one, but if the 3rd party backend allows it,
+       *it could also fetch all carts in one single request. In this case, the method
+       *must still return an Array of carts with the same order as the keys.
+       */
       return Promise.resolve(
         cartIds.map(cartId => {
           return this._getVouchersList(cartId, actionParameters).catch(
@@ -63,17 +64,25 @@ class VouchersListLoader {
       HB_PROTOCOL,
       HB_BASESITEID,
     } = actionParameters.context.settings;
+    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cartId}/vouchers?fields=DEFAULT`;
 
     return new Promise((resolve, reject) => {
-      return rp({
-        uri: `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cartId}/vouchers?fields=DEFAULT&access_token=${bearer}`,
-        json: true,
-      })
-        .then(response => {
-          response.vouchers.length > 0 ? resolve(response) : reject(response);
+      axios
+        .get(uri, {
+          params: {
+            query: '',
+          },
+          headers: {
+            Authorization: `Bearer ${bearer}`,
+          },
         })
-        .catch(err => {
-          reject(err.error.errors[0].message);
+        .then(response => {
+          response.data.vouchers.length > 0
+            ? resolve(response.data)
+            : reject(response);
+        })
+        .catch(error => {
+          reject(error);
         });
     });
   }

@@ -51,6 +51,8 @@ class SetBillingAddressesOnCart {
    * @returns {Object} convert the hybris data into magento graphQL schema and return the billingAddresss object
    */
   __convertData(data) {
+    let regionCode = data.region.isocode.split('-');
+    regionCode = regionCode.length === 2 ? regionCode[1] : regionCode[0];
     return {
       cart: {
         billing_address: {
@@ -59,12 +61,14 @@ class SetBillingAddressesOnCart {
           street: [data.line1, data.line2],
           city: data.town,
           region: {
-            code: data.region.isocode,
+            code: regionCode,
+            label: regionCode,
           },
           postcode: data.postalCode,
           telephone: data.phone,
           country: {
             code: data.country.isocode,
+            label: data.country.isocode,
           },
         },
       },

@@ -1,7 +1,6 @@
 {
-    "access_token": "5ed77727-906c-4a73-86bf-535ef4e91518",
+    "access_token": "630c1860-ab0f-42a4-a890-bc217147ff35",
     "token_type": "bearer",
-    "refresh_token": "58969217-0947-4001-8746-01e774f31411",
-    "expires_in": 27651,
-    "scope": "extended openid"
-  }
+    "expires_in": 35607,
+    "scope": "basic openid"
+}

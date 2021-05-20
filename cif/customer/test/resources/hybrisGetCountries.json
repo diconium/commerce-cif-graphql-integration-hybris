@@ -5,36 +5,8 @@
       "name": "Afghanistan"
     },
     {
-      "isocode": "AX",
-      "name": "Aland Islands"
-    },
-    {
-      "isocode": "AL",
-      "name": "Albania"
-    },
-    {
-      "isocode": "DZ",
-      "name": "Algeria"
-    },
-    {
-      "isocode": "AS",
-      "name": "American Samoa"
-    },
-    {
-      "isocode": "AD",
-      "name": "Andorra"
-    },
-    {
-      "isocode": "AO",
-      "name": "Angola"
-    },
-    {
-      "isocode": "AI",
-      "name": "Anguilla"
-    },
-    {
-      "isocode": "AQ",
-      "name": "Antarctica"
+      "isocode": "US",
+      "name": "United States"
     }
   ]
 }

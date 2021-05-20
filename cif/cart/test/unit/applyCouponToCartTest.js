@@ -23,15 +23,18 @@ const expect = require('chai').expect;
 const chaiShallowDeepEqual = require('chai-shallow-deep-equal');
 chai.use(chaiShallowDeepEqual);
 const hybrisApplyCoupon = require('../resources/hybrisApplyCoupon.json');
+const hybrisDeliveryModes = require('../resources/hybrisDeliveryModes.json');
 const validResponseApplyCouponToCart = require('../resources/validResponseApplyCouponToCart.json');
 const cartNotFound = require('../resources/cartNotFound.json');
 const couponAlreadyExist = require('../resources/couponAlreadyExist.json');
 const invalidCouponCode = require('../resources/invalidCouponCode.json');
 const inActiveCouponCode = require('../resources/inActiveCouponCode.json');
-const bearer = 'bb84cb05-9d99-4655-8f39-7d6ca7e0b22c';
+const TestUtils = require('../../../utils/TestUtils.js');
+const bearer = '1049a531-a218-4b67-a831-e94b68c37f73';
+const ymlData = require('../../../common/options.json');
 
 describe('ApplyCouponOnCart', function() {
-  const scope = nock('https://hybris.example.com');
+  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
   before(() => {
     sinon.stub(console, 'debug');
     sinon.stub(console, 'error');
@@ -44,31 +47,41 @@ describe('ApplyCouponOnCart', function() {
 
   describe('Unit Tests', () => {
     let args = {
-      url: 'https://hybris.example.com',
+      url: TestUtils.getHybrisInstance(),
       context: {
         settings: {
           bearer: '',
           customerId: 'current',
-          HB_PROTOCOL: 'https',
-          HB_API_HOST: 'hybris.example.com',
-          HB_API_BASE_PATH: '/rest/v2',
-          HB_BASESITEID: '/electronics',
+          HB_PROTOCOL: ymlData.HB_PROTOCOL,
+          HB_API_HOST: ymlData.HB_API_HOST,
+          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
+          HB_BASESITEID: ymlData.HB_BASESITEID,
         },
       },
     };
 
     it('Mutation: validate apply coupon to cart', () => {
       scope
-        .post('/rest/v2/electronics/users/current/carts/00000002/vouchers')
-        .query({ voucherId: 'coupontest001', access_token: `${bearer}` })
+        .post(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/vouchers`
+        )
+        .query({ voucherId: 'BUYMORE16' })
         .reply(200);
       scope
-        .get('/rest/v2/electronics/users/current/carts/00000002')
-        .query({ fields: 'FULL', access_token: `${bearer}` })
+        .get(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016`
+        )
+        .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisApplyCoupon);
+      scope
+        .get(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/deliverymodes`
+        )
+        .query({ fields: 'FULL', query: '' })
+        .reply(200, hybrisDeliveryModes);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {applyCouponToCart(input: {cart_id: "00000002",coupon_code: "coupontest001"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
+        'mutation {applyCouponToCart(input: {cart_id: "00000016",coupon_code: "BUYMORE16"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
         let response = result.data.applyCouponToCart.cart;
@@ -78,20 +91,30 @@ describe('ApplyCouponOnCart', function() {
 
     it('Mutation: validate response should contain cart not found', () => {
       scope
-        .post('/rest/v2/electronics/users/current/carts/0000002/vouchers')
-        .query({ voucherId: 'coupontest001', access_token: `${bearer}` })
+        .post(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/vouchers`
+        )
+        .query({ voucherId: 'BUYMORE16' })
         .reply(400, cartNotFound);
       scope
-        .get('/rest/v2/electronics/users/current/carts/0000002')
+        .get(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID`
+        )
         .query({ fields: 'DEFAULT', access_token: `${bearer}` })
         .reply(200, hybrisApplyCoupon);
+      scope
+        .get(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/deliverymodes`
+        )
+        .query({ fields: 'FULL', query: '' })
+        .reply(200, hybrisDeliveryModes);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {applyCouponToCart(input: {cart_id: "0000002",coupon_code: "coupontest001"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
+        'mutation {applyCouponToCart(input: {cart_id: "INVALID-CART-ID",coupon_code: "BUYMORE16"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({
-          message: 'Cart not found.',
+          message: 'Request failed with status code 400',
           source: {
             name: 'GraphQL request',
           },
@@ -101,20 +124,30 @@ describe('ApplyCouponOnCart', function() {
 
     it('Mutation: validate response should contain coupon already exist for cart', () => {
       scope
-        .post('/rest/v2/electronics/users/current/carts/00000058/vouchers')
-        .query({ voucherId: 'coupontest001', access_token: `${bearer}` })
+        .post(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/vouchers`
+        )
+        .query({ voucherId: 'BUYMORE16' })
         .reply(400, couponAlreadyExist);
       scope
-        .get('/rest/v2/electronics/users/current/carts/00000058')
+        .get(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016`
+        )
         .query({ fields: 'DEFAULT', access_token: `${bearer}` })
         .reply(200, hybrisApplyCoupon);
+      scope
+        .get(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/deliverymodes`
+        )
+        .query({ fields: 'FULL', query: '' })
+        .reply(200, hybrisDeliveryModes);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {applyCouponToCart(input: {cart_id: "00000058",coupon_code: "coupontest001"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
+        'mutation {applyCouponToCart(input: {cart_id: "00000016",coupon_code: "BUYMORE16"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({
-          message: 'coupon.already.exists.cart',
+          message: 'Request failed with status code 400',
           source: {
             name: 'GraphQL request',
           },
@@ -124,20 +157,30 @@ describe('ApplyCouponOnCart', function() {
 
     it('Mutation: validate response should contain coupon is inactive', () => {
       scope
-        .post('/rest/v2/electronics/users/current/carts/00000058/vouchers')
-        .query({ voucherId: 'coupontest001', access_token: `${bearer}` })
+        .post(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/vouchers`
+        )
+        .query({ voucherId: 'WINTER16' })
         .reply(400, inActiveCouponCode);
       scope
-        .get('/rest/v2/electronics/users/current/carts/00000058')
+        .get(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016`
+        )
         .query({ fields: 'DEFAULT', access_token: `${bearer}` })
         .reply(200, hybrisApplyCoupon);
+      scope
+        .get(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/deliverymodes`
+        )
+        .query({ fields: 'FULL', query: '' })
+        .reply(200, hybrisDeliveryModes);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {applyCouponToCart(input: {cart_id: "00000058",coupon_code: "coupontest001"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
+        'mutation {applyCouponToCart(input: {cart_id: "00000016",coupon_code: "WINTER16"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({
-          message: 'coupon.not.active.expired',
+          message: 'Request failed with status code 400',
           source: {
             name: 'GraphQL request',
           },
@@ -147,20 +190,30 @@ describe('ApplyCouponOnCart', function() {
 
     it('Mutation: validate response should contain coupon is invalid', () => {
       scope
-        .post('/rest/v2/electronics/users/current/carts/00000058/vouchers')
-        .query({ voucherId: 'coupontest001', access_token: `${bearer}` })
+        .post(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/vouchers`
+        )
+        .query({ voucherId: 'SUMMER69' })
         .reply(400, invalidCouponCode);
       scope
-        .get('/rest/v2/electronics/users/current/carts/00000058')
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .get(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016`
+        )
+        .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisApplyCoupon);
+      scope
+        .get(
+          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/deliverymodes`
+        )
+        .query({ fields: 'FULL', query: '' })
+        .reply(200, hybrisDeliveryModes);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {applyCouponToCart(input: {cart_id: "00000058",coupon_code: "coupontest001"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
+        'mutation {applyCouponToCart(input: {cart_id: "00000016",coupon_code: "SUMMER69"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({
-          message: 'coupon.invalid.code.provided',
+          message: 'Request failed with status code 400',
           source: {
             name: 'GraphQL request',
           },

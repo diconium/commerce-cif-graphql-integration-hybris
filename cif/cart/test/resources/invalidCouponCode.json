@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "coupon.invalid.code.provided"
+      "message": "Request failed with status code 400"
     }
   ]
 }

@@ -1,0 +1,388 @@
+{
+  "availableForPickup": true,
+  "averageRating": 3.6,
+  "baseOptions": [],
+  "categories": [
+    {
+      "code": "574",
+      "name": "Film cameras",
+      "url": "/Open-Catalogue/Cameras/Film-cameras/c/574"
+    },
+    {
+      "code": "553",
+      "name": "Canon",
+      "url": "/Brands/Canon/c/553"
+    }
+  ],
+  "classifications": [
+    {
+      "code": "621",
+      "features": [
+        {
+          "code": "ElectronicsClassification/1.0/621.film speed setting  iso , 2873",
+          "comparable": true,
+          "featureUnit": {
+            "name": ".",
+            "symbol": ".",
+            "unitType": "300"
+          },
+          "featureValues": [
+            {
+              "value": "25 - 5000 / 6 - 6400"
+            }
+          ],
+          "name": "Film speed setting (ISO)",
+          "range": false
+        },
+        {
+          "code": "ElectronicsClassification/1.0/621.self-timer, 765",
+          "comparable": true,
+          "featureUnit": {
+            "name": "seconds",
+            "symbol": "s",
+            "unitType": "60"
+          },
+          "featureValues": [
+            {
+              "value": "2 - 10"
+            }
+          ],
+          "name": "Self-timer",
+          "range": false
+        },
+        {
+          "code": "ElectronicsClassification/1.0/621.shooting capacity, 2874",
+          "comparable": true,
+          "featureUnit": {
+            "name": ".",
+            "symbol": ".",
+            "unitType": "300"
+          },
+          "featureValues": [
+            {
+              "value": "10 fps"
+            }
+          ],
+          "name": "Shooting capacity",
+          "range": false
+        },
+        {
+          "code": "ElectronicsClassification/1.0/621.film type, 1948",
+          "comparable": true,
+          "featureUnit": {
+            "name": ".",
+            "symbol": ".",
+            "unitType": "300"
+          },
+          "featureValues": [
+            {
+              "value": "35 mm"
+            }
+          ],
+          "name": "Film type",
+          "range": false
+        },
+        {
+          "code": "ElectronicsClassification/1.0/621.camera shutter speed, 1295",
+          "comparable": true,
+          "featureUnit": {
+            "name": "seconds",
+            "symbol": "s",
+            "unitType": "60"
+          },
+          "featureValues": [
+            {
+              "value": "30 - 1/8000"
+            }
+          ],
+          "name": "Camera shutter speed",
+          "range": false
+        },
+        {
+          "code": "ElectronicsClassification/1.0/621.built-in flash, 1289",
+          "comparable": true,
+          "featureUnit": {
+            "name": ".",
+            "symbol": ".",
+            "unitType": "300"
+          },
+          "featureValues": [
+            {
+              "value": "true"
+            }
+          ],
+          "name": "Built-in flash",
+          "range": false
+        },
+        {
+          "code": "ElectronicsClassification/1.0/621.source data-sheet, 6617",
+          "comparable": true,
+          "featureUnit": {
+            "name": ".",
+            "symbol": ".",
+            "unitType": "300"
+          },
+          "featureValues": [
+            {
+              "value": "ICEcat.biz"
+            }
+          ],
+          "name": "Source data-sheet",
+          "range": false
+        }
+      ],
+      "name": "Technical details"
+    },
+    {
+      "code": "2621",
+      "features": [
+        {
+          "code": "ElectronicsClassification/1.0/2621.lens system, 576",
+          "comparable": true,
+          "featureUnit": {
+            "name": ".",
+            "symbol": ".",
+            "unitType": "300"
+          },
+          "featureValues": [
+            {
+              "value": "SLR"
+            }
+          ],
+          "name": "Lens system",
+          "range": false
+        }
+      ],
+      "name": "Lens system"
+    },
+    {
+      "code": "2623",
+      "features": [
+        {
+          "code": "ElectronicsClassification/1.0/2623.depth, 1650",
+          "comparable": true,
+          "featureUnit": {
+            "name": "millimeter",
+            "symbol": "mm",
+            "unitType": "24"
+          },
+          "featureValues": [
+            {
+              "value": "70.8"
+            }
+          ],
+          "name": "Depth",
+          "range": false
+        },
+        {
+          "code": "ElectronicsClassification/1.0/2623.weight, 94",
+          "comparable": true,
+          "featureUnit": {
+            "name": "gram",
+            "symbol": "g",
+            "unitType": "38"
+          },
+          "featureValues": [
+            {
+              "value": "945"
+            }
+          ],
+          "name": "Weight",
+          "range": false
+        },
+        {
+          "code": "ElectronicsClassification/1.0/2623.height, 1464",
+          "comparable": true,
+          "featureUnit": {
+            "name": "millimeter",
+            "symbol": "mm",
+            "unitType": "24"
+          },
+          "featureValues": [
+            {
+              "value": "120.8"
+            }
+          ],
+          "name": "Height",
+          "range": false
+        },
+        {
+          "code": "ElectronicsClassification/1.0/2623.width, 1649",
+          "comparable": true,
+          "featureUnit": {
+            "name": "millimeter",
+            "symbol": "mm",
+            "unitType": "24"
+          },
+          "featureValues": [
+            {
+              "value": "161"
+            }
+          ],
+          "name": "Width",
+          "range": false
+        }
+      ],
+      "name": "Weight & dimensions"
+    },
+    {
+      "code": "2625",
+      "features": [
+        {
+          "code": "ElectronicsClassification/1.0/2625.colour of product, 1766",
+          "comparable": true,
+          "featureUnit": {
+            "name": ".",
+            "symbol": ".",
+            "unitType": "300"
+          },
+          "featureValues": [
+            {
+              "value": "Black"
+            }
+          ],
+          "name": "Colour of product",
+          "range": false
+        }
+      ],
+      "name": "Colour"
+    }
+  ],
+  "code": "898503",
+  "configurable": false,
+  "description": "- Wide-area 45-point AF <br/>- Maximum continuous shooting speed of 10 fps <br/>- Ultra tough & duarble magnesium alloy casting <br/>- E-TTL/A-TTL/TTL autoflash metering with Speedlites <br/>- Optional EOS Link software allows downloading of shooting data",
+  "images": [
+    {
+      "altText": "1V",
+      "format": "zoom",
+      "imageType": "PRIMARY",
+      "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyODM2N3xpbWFnZS9qcGVnfGltYWdlcy9oOTAvaGU5Lzg3OTY4MjcxODkyNzguanBnfGI0MTE3ZjdhNDM5NTVhMjcxZWZjNTY4MjE4ODVkNWYxMWMzNWQzNzY3ZGIyYjAxMDViY2U3YmZkZWE5ZTkyMTY"
+    },
+    {
+      "altText": "1V",
+      "format": "product",
+      "imageType": "PRIMARY",
+      "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxMzU4M3xpbWFnZS9qcGVnfGltYWdlcy9oYWYvaDNiLzg3OTY4NTM0NjkyMTQuanBnfDNiOGY0MWE2MGNkZGMzZDY5YmQ1MGFiYzExY2U5YWMxYzRjNzYwMDBjMzQ0M2M3ZmRiY2VjMTBmMzUxYWRlNzg"
+    },
+    {
+      "altText": "1V",
+      "format": "thumbnail",
+      "imageType": "PRIMARY",
+      "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyNzQxfGltYWdlL2pwZWd8aW1hZ2VzL2hmMS9oNjUvODc5Njg3OTgxNDY4Ni5qcGd8YzJkOGIyMGZmOWNhYzVmNTA4ZTMyODZjYTMyYTk0MzJkM2ZkMzI0YjM5ODcxMTFiMDkzMGIxMDQwNGExZGEzYg"
+    },
+    {
+      "altText": "1V",
+      "format": "cartIcon",
+      "imageType": "PRIMARY",
+      "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxNzI0fGltYWdlL2pwZWd8aW1hZ2VzL2g4MC9oOTEvODc5NjkwNjE2MDE1OC5qcGd8ZmE4YjE0MzU4Zjc4Mzg3OTljYmU5OGI5ZTBiMjU2MmUzZDlkOTliMGJjNzFhNDJlOWMzZWFhNWZiMDlkMjgyYQ"
+    },
+    {
+      "altText": "1V",
+      "format": "zoom",
+      "galleryIndex": 0,
+      "imageType": "GALLERY",
+      "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyODM2N3xpbWFnZS9qcGVnfGltYWdlcy9oOTAvaGU5Lzg3OTY4MjcxODkyNzguanBnfGI0MTE3ZjdhNDM5NTVhMjcxZWZjNTY4MjE4ODVkNWYxMWMzNWQzNzY3ZGIyYjAxMDViY2U3YmZkZWE5ZTkyMTY"
+    },
+    {
+      "altText": "1V",
+      "format": "product",
+      "galleryIndex": 0,
+      "imageType": "GALLERY",
+      "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxMzU4M3xpbWFnZS9qcGVnfGltYWdlcy9oYWYvaDNiLzg3OTY4NTM0NjkyMTQuanBnfDNiOGY0MWE2MGNkZGMzZDY5YmQ1MGFiYzExY2U5YWMxYzRjNzYwMDBjMzQ0M2M3ZmRiY2VjMTBmMzUxYWRlNzg"
+    },
+    {
+      "altText": "1V",
+      "format": "thumbnail",
+      "galleryIndex": 0,
+      "imageType": "GALLERY",
+      "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyNzQxfGltYWdlL2pwZWd8aW1hZ2VzL2hmMS9oNjUvODc5Njg3OTgxNDY4Ni5qcGd8YzJkOGIyMGZmOWNhYzVmNTA4ZTMyODZjYTMyYTk0MzJkM2ZkMzI0YjM5ODcxMTFiMDkzMGIxMDQwNGExZGEzYg"
+    }
+  ],
+  "manufacturer": "Canon",
+  "name": "1V",
+  "numberOfReviews": 5,
+  "potentialPromotions": [],
+  "price": {
+    "currencyIso": "USD",
+    "formattedValue": "$2,117.00",
+    "priceType": "BUY",
+    "value": 2117
+  },
+  "priceRange": {},
+  "productReferences": [
+    {
+      "referenceType": "ACCESSORIES",
+      "target": {
+        "code": "572473",
+        "name": "NP-E2 Nickel-Metal Hydride Battery",
+        "url": "/Open-Catalogue/Components/Power-Supplies/Rechargeable-Batteries/NP-E2-Nickel-Metal-Hydride-Battery/p/572473"
+      },
+      "preselected": false
+    }
+  ],
+  "purchasable": true,
+  "reviews": [
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:03+0000",
+      "headline": "A good solid product, worthy of a purchase.",
+      "id": "8796160917553",
+      "principal": {
+        "name": "Adam Reviewer",
+        "uid": "keenreviewer5@hybris.com"
+      },
+      "rating": 4
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:03+0000",
+      "headline": "Satisfactory product, but not overwhelmed.",
+      "id": "8796160884785",
+      "principal": {
+        "name": "Steve Reviewer",
+        "uid": "keenreviewer4@hybris.com"
+      },
+      "rating": 3
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:03+0000",
+      "headline": "A good solid product, worthy of a purchase.",
+      "id": "8796160852017",
+      "principal": {
+        "name": "John Reviewer",
+        "uid": "keenreviewer3@hybris.com"
+      },
+      "rating": 4
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:03+0000",
+      "headline": "Satisfactory product, but not overwhelmed.",
+      "id": "8796160819249",
+      "principal": {
+        "name": "Ken Reviewer",
+        "uid": "keenreviewer2@hybris.com"
+      },
+      "rating": 3
+    },
+    {
+      "comment": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.",
+      "date": "2020-06-30T22:43:03+0000",
+      "headline": "A good solid product, worthy of a purchase.",
+      "id": "8796160786481",
+      "principal": {
+        "name": "Kenneth Reviewer",
+        "uid": "keenreviewer1@hybris.com"
+      },
+      "rating": 4
+    }
+  ],
+  "stock": {
+    "isValueRounded": false,
+    "stockLevel": 36,
+    "stockLevelStatus": "inStock"
+  },
+  "summary": "EOS 1V",
+  "url": "/electronics/products/898503"
+}

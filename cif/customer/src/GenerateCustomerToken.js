@@ -25,7 +25,7 @@ class GenerateCustomerToken {
    */
   constructor(parameters) {
     this.graphqlContext = parameters.graphqlContext;
-    this.actionParameters = parameters.actionParameters;
+    this.actionParameters = parameters;
     this.generateCustomerTokenLoader = new GenerateCustomerTokenLoader(
       parameters.actionParameters
     );
