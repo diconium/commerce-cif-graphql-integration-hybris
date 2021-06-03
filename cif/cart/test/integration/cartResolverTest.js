@@ -63,7 +63,6 @@ describe('Cart Resolver', () => {
       args.query =
         '{cart(cart_id: "00000000") {email,billing_address {city,country {code,label},firstname,lastname,postcode, region {code,label},street,telephone},shipping_addresses{firstname,lastname,street,city,region{code,label},country{code,label},available_shipping_methods{amount{currency,value},available,carrier_code,carrier_title,error_message,method_code,method_title,price_excl_tax{value,currency},price_incl_tax{value,currency}},selected_shipping_method{amount{value,currency},carrier_code,carrier_title,method_code,method_title}},items{id,product{name,sku},quantity},available_payment_methods{code,title},selected_payment_method{code,title},applied_coupon{code},prices{grand_total{value,currency}}}}';
       return resolve(args).then(result => {
-        console.log(result);
         assert.isUndefined(result.errors);
         let response = result.data.cart;
         assert.notEqual(response, null);

@@ -29,7 +29,6 @@ class ProductLoader {
        *it could also fetch all products in one single request. In this case, the method
        *must still return an Array of products with the same order as the keys.
        */
-      console.log(productSkus);
       return Promise.resolve(
         productSkus.map(productSku => {
           console.debug(`--> Fetching product with sku ${productSku}`);

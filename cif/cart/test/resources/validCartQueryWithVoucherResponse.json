@@ -5,7 +5,7 @@
     "shipping_addresses": [],
     "items": [
       {
-        "id": "0",
+        "uid": "0",
         "product": {
           "name": "AC-VQ900AM",
           "sku": "1298094"
@@ -13,7 +13,7 @@
         "quantity": 1
       },
       {
-        "id": "1",
+        "uid": "1",
         "product": {
           "name": "InfoLITHIUM Battery, NP-FM55H",
           "sku": "482105"
@@ -21,7 +21,7 @@
         "quantity": 1
       },
       {
-        "id": "2",
+       "uid": "2",
         "product": {
           "name": "AC Adapter",
           "sku": "847942"
@@ -29,7 +29,7 @@
         "quantity": 1
       },
       {
-        "id": "3",
+       "uid": "3",
         "product": {
           "name": "EF-S 60mm f/2.8 USM Macro",
           "sku": "832382"
@@ -37,7 +37,7 @@
         "quantity": 1
       },
       {
-        "id": "4",
+       "uid": "4",
         "product": {
           "name": "Adapter AC Infolithium f Cybershot",
           "sku": "266899"
@@ -45,7 +45,7 @@
         "quantity": 1
       },
       {
-        "id": "5",
+       "uid": "5",
         "product": {
           "name": "32GB SDHC Card",
           "sku": "4205436"
@@ -53,7 +53,7 @@
         "quantity": 1
       },
       {
-        "id": "6",
+       "uid": "6",
         "product": {
           "name": "EOS450D + 18-55 IS Kit",
           "sku": "1382080"
@@ -61,7 +61,7 @@
         "quantity": 1
       },
       {
-        "id": "7",
+       "uid": "7",
         "product": {
           "name": "2GB SD Card",
           "sku": "443175"
@@ -69,7 +69,7 @@
         "quantity": 1
       },
       {
-        "id": "8",
+       "uid": "8",
         "product": {
           "name": "SD High Capacity Card 8GB",
           "sku": "1366053"

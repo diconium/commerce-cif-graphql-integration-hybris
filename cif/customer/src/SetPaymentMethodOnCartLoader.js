@@ -73,7 +73,6 @@ class SetPaymentMethodOnCartLoader {
     const { cart_id: cartId, payment_method: paymentMethod } = input;
     const { code } = paymentMethod;
     let billingAddress = this.getBillingAddress(this.addresses);
-    console.log(billingAddress);
 
     const body = {
       accountHolderName: 'testuser',

@@ -1,39 +1,40 @@
 {
-    "entry": {
-       "configurationInfos": [],
-       "entryNumber": 1,
-       "product": {
-          "availableForPickup": true,
-          "averageRating": 2.4545454545454546,
-          "baseOptions": [],
-          "categories": [
-             {
-                "code": "587",
-                "name": "Tripods"
-             },
-             {
-                "code": "brand_10",
-                "name": "Canon"
-             }
-          ],
-          "code": "1099285",
-          "configurable": false,
-          "manufacturer": "Canon",
-          "name": "Monopod 100 - Floor Standing Monopod",
-          "purchasable": true,
-          "stock": {
-             "stockLevel": 99,
-             "stockLevelStatus": "inStock"
-          },
-          "url": "/Open-Catalogue/Cameras/Digital-Cameras/Digital-SLR/Tripods/Monopod-100---Floor-Standing-Monopod/p/1099285"
-       },
-       "quantity": 3,
-       "totalPrice": {
-          "currencyIso": "USD",
-          "value": 71.73
-       }
+  "entry": {
+    "configurationInfos": [],
+    "entryNumber": 1,
+    "product": {
+      "availableForPickup": true,
+      "averageRating": 2.4545454545454546,
+      "baseOptions": [],
+      "images": [],
+      "categories": [
+        {
+          "code": "587",
+          "name": "Tripods"
+        },
+        {
+          "code": "brand_10",
+          "name": "Canon"
+        }
+      ],
+      "code": "1099285",
+      "configurable": false,
+      "manufacturer": "Canon",
+      "name": "Monopod 100 - Floor Standing Monopod",
+      "purchasable": true,
+      "stock": {
+        "stockLevel": 99,
+        "stockLevelStatus": "inStock"
+      },
+      "url": "/Open-Catalogue/Cameras/Digital-Cameras/Digital-SLR/Tripods/Monopod-100---Floor-Standing-Monopod/p/1099285"
     },
     "quantity": 3,
-    "quantityAdded": 0,
-    "statusCode": "success"
- }
+    "totalPrice": {
+      "currencyIso": "USD",
+      "value": 71.73
+    }
+  },
+  "quantity": 3,
+  "quantityAdded": 0,
+  "statusCode": "success"
+}

@@ -5,11 +5,11 @@
   "description": "diconium, Hybris and CIF - Graphql - IO Connector - documentation ",
   "author": "diconium",
   "license": "Apache-2.0",
-  "hybrishost": "https://sap-commerce.test.diconium.com/",
+  "hybrishost": "https://hybris.example.com/",
   "scripts": {
     "run-doc": "npm run doc",
     "deploy": "serverless deploy",
-    "doc": "node ./generate.js && jq -c . < ../resources/magento-schema-2.3.4.pruned.json > ../resources/magento-schema-2.3.4.pruned.min.json"
+    "doc": "node ./generate.js && jq -c . < ../resources/magento-schema-2.4.2.pruned.json > ../resources/magento-schema-2.4.2.pruned.min.json"
   },
   "dependencies": {
     "@adobe/commerce-cif-model": "^1.1.2",

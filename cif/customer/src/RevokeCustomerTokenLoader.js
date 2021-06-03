@@ -49,8 +49,7 @@ class RevokeCustomerTokenLoader {
    * @param {Object} actionParameters Some parameters of the I/O action itself (e.g. backend server URL, authentication info, etc)
    * @returns {Promise} return refresh token if promise resolves successfully otherwise return error
    */
-  _generateCustomerToken(actionParameters) {
-    console.log(actionParameters);
+  _generateCustomerToken() {
     return new Promise(resolve => {
       resolve(true);
     });

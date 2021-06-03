@@ -26,7 +26,6 @@ class CustomAttributeMetadataLoader {
       // This loader loads each product one by one, but if the 3rd party backend allows it,
       // it could also fetch all products in one single request. In this case, the method
       // must still return an Array of products with the same order as the keys.
-      console.log(metaDatas);
       return Promise.resolve(
         metaDatas.map(metaData => {
           console.debug(`--> Fetching product with sku ${metaData}`);
@@ -66,8 +65,7 @@ class CustomAttributeMetadataLoader {
    * @param {Object} actionParameters Some parameters of the I/O action itself (e.g. backend server URL, authentication info, etc)
    * @returns {Promise} A Promise with the product data.
    */
-  __getMetaData(metaData, actionParameters) {
-    console.log(actionParameters);
+  __getMetaData(metaData) {
     return Promise.resolve(metaData);
   }
 }

@@ -32,7 +32,7 @@ function resolve(args) {
     let schemaBuilder = new SchemaBuilder()
       .filterMutationFields(
         new Set([
-          'createCustomer',
+          'createCustomerV2',
           'generateCustomerToken',
           'revokeCustomerToken',
           'setPaymentMethodOnCart',
@@ -64,7 +64,7 @@ function resolve(args) {
      * @param {Object} params parameter contains input,graphqlContext and actionParameters
      * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
      */
-    createCustomer: (params, context) => {
+    createCustomerV2: (params, context) => {
       const { input } = params;
       return new CreateCustomer({
         input,

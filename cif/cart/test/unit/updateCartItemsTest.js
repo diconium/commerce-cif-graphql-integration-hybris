@@ -67,12 +67,12 @@ describe('Update Cart Items Resolver', () => {
         .patch(
           `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/entries/0`
         )
-        .query({})
+        .query({ fields: 'FULL' })
         .reply(200, hybrisUpdateCartItems);
 
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {updateCartItems(input: {cart_id: "00000016", cart_items: [{cart_item_id: "0",quantity: 3}]}){ cart{items {id,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
+        'mutation {updateCartItems(input: {cart_id: "00000016", cart_items: [{cart_item_uid: "0",quantity: 3}]}){ cart{items {uid,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
       return resolve(args).then(result => {
         let response = result.data.updateCartItems.cart;
         const { errors } = result;
@@ -87,11 +87,11 @@ describe('Update Cart Items Resolver', () => {
         .patch(
           `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/entries/0`
         )
-        .query({})
+        .query({ fields: 'FULL' })
         .reply(400, cartNotFound);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {updateCartItems(input: {cart_id: "INVALID-CART-ID", cart_items: [{cart_item_id: "0",quantity: 3}]}){ cart{items {id,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
+        'mutation {updateCartItems(input: {cart_id: "INVALID-CART-ID", cart_items: [{cart_item_uid: "0",quantity: 3}]}){ cart{items {uid,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({
@@ -108,11 +108,11 @@ describe('Update Cart Items Resolver', () => {
         .patch(
           `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/entries/10`
         )
-        .query({})
+        .query({ fields: 'FULL' })
         .reply(400, entryNotFoundUpdateCartItems);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {updateCartItems(input: {cart_id: "00000016", cart_items: [{cart_item_id:"10",quantity: 3}]}){ cart{items {id,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
+        'mutation {updateCartItems(input: {cart_id: "00000016", cart_items: [{cart_item_uid:"10",quantity: 3}]}){ cart{items {uid,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({

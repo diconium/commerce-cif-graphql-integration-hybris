@@ -137,7 +137,7 @@ describe('Dispatcher Resolver', () => {
 
     it('Search products by category id', () => {
       args.query =
-        '{products(filter:{category_id:{eq:"1"}}, currentPage:1){items{sku,name,stock_status,image{url,label}}}}';
+        '{products(filter:{category_uid:{eq:"1"}}, currentPage:1){items{sku,name,stock_status,image{url,label}}}}';
 
       return resolve(args).then(result => {
         assert.isUndefined(result.body.errors); // No GraphQL errors

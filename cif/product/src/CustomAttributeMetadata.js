@@ -52,8 +52,7 @@ class CustomAttributeMetadata {
    * @returns {{image: {label: *, url: string}, thumbnail: {label: *, url: string}, stock_status: string, small_image: {label: *, url: string}, price: {regularPrice: {amount: {currency: *, value: *}}}, name: *, description: {html: (*|string)}, id: number, categories: [], sku: *, url_key: *}}
    * @private
    */
-  __convertData(data) {
-    console.log(data);
+  __convertData() {
     return {
       items: [
         {

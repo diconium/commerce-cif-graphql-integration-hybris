@@ -5,7 +5,7 @@
     "sku": "1981412",
     "name": "PL60 Black",
     "small_image": {
-      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMjkxfGltYWdlL2pwZWd8aW1hZ2VzL2g5Mi9oZWIvODc5NzMwNzI3MzI0Ni5qcGd8YTY4ZTZjZDQzYWRlYjZhNDcyYzA1ODY4OGRjZmFhYzk4NGIwOTc1Y2FlMmI1ZDU2ODhhYjkwZjdiN2U3YmViOA"
+      "url": "https://b2c-accelerator.test.diconium.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMjkxfGltYWdlL2pwZWd8aW1hZ2VzL2g5Mi9oZWIvODc5NzMwNzI3MzI0Ni5qcGd8YTY4ZTZjZDQzYWRlYjZhNDcyYzA1ODY4OGRjZmFhYzk4NGIwOTc1Y2FlMmI1ZDU2ODhhYjkwZjdiN2U3YmViOA"
     },
     "url_key": "1981412",
     "price_range": {
@@ -31,7 +31,7 @@
     "sku": "1981413",
     "name": "PL60 Grey",
     "small_image": {
-      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMTg3fGltYWdlL2pwZWd8aW1hZ2VzL2hkZC9oODcvODc5NzMwNzMzODc4Mi5qcGd8NjJhYjZlOTQ2YTMzMTYyODZmNGRjYTI2MGVmM2ZhYzU0NWZiYTZiNDhlODJhYmEyNWMzNWM0YzZkM2RiNzcyNg"
+      "url": "https://b2c-accelerator.test.diconium.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMTg3fGltYWdlL2pwZWd8aW1hZ2VzL2hkZC9oODcvODc5NzMwNzMzODc4Mi5qcGd8NjJhYjZlOTQ2YTMzMTYyODZmNGRjYTI2MGVmM2ZhYzU0NWZiYTZiNDhlODJhYmEyNWMzNWM0YzZkM2RiNzcyNg"
     },
     "url_key": "1981413",
     "price_range": {
@@ -57,7 +57,7 @@
     "sku": "1981414",
     "name": "PL60 Pink",
     "small_image": {
-      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNTcxfGltYWdlL2pwZWd8aW1hZ2VzL2hhMC9oMDYvODc5NzMwNzQwNDMxOC5qcGd8YzY5YzY3MzI0N2RjYjMyODUyZTIxYzAxYzJiM2ZkYzc2YmY5ZDgwMDA2MGQ4Y2I4MjIxNThiNWIzNThlNTI5OQ"
+      "url": "https://b2c-accelerator.test.diconium.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNTcxfGltYWdlL2pwZWd8aW1hZ2VzL2hhMC9oMDYvODc5NzMwNzQwNDMxOC5qcGd8YzY5YzY3MzI0N2RjYjMyODUyZTIxYzAxYzJiM2ZkYzc2YmY5ZDgwMDA2MGQ4Y2I4MjIxNThiNWIzNThlNTI5OQ"
     },
     "url_key": "1981414",
     "price_range": {
@@ -83,7 +83,7 @@
     "sku": "1981415",
     "name": "PL60 Silver",
     "small_image": {
-      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMzEwfGltYWdlL2pwZWd8aW1hZ2VzL2g2Yi9oZTYvODc5NzMwNzQ2OTg1NC5qcGd8MzY2NTJmOWNlODhiZWRkNWZmYjYxNGM2OGM0YWQwZDM1ZmFkMjY1MDUwNGE2NzJiMzQyNmE4MDczODlkNGM5NA"
+      "url": "https://b2c-accelerator.test.diconium.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMzEwfGltYWdlL2pwZWd8aW1hZ2VzL2g2Yi9oZTYvODc5NzMwNzQ2OTg1NC5qcGd8MzY2NTJmOWNlODhiZWRkNWZmYjYxNGM2OGM0YWQwZDM1ZmFkMjY1MDUwNGE2NzJiMzQyNmE4MDczODlkNGM5NA"
     },
     "url_key": "1981415",
     "price_range": {
@@ -109,7 +109,7 @@
     "sku": "3325048",
     "name": "DSC-W180",
     "small_image": {
-      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wxNzk4fGltYWdlL2pwZWd8aW1hZ2VzL2g0NS9oM2QvODc5NzMxNDQ4MjIwNi5qcGd8MDFkYTUzZTIzMWQwYWRkNjAzODZhMWIyNDUxZTIyYzYwN2JlMTQ0ZDUzOWNjZmM2MGM5NjU1NmY2ZTUxNWEyNA"
+      "url": "https://b2c-accelerator.test.diconium.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wxNzk4fGltYWdlL2pwZWd8aW1hZ2VzL2g0NS9oM2QvODc5NzMxNDQ4MjIwNi5qcGd8MDFkYTUzZTIzMWQwYWRkNjAzODZhMWIyNDUxZTIyYzYwN2JlMTQ0ZDUzOWNjZmM2MGM5NjU1NmY2ZTUxNWEyNA"
     },
     "url_key": "3325048",
     "price_range": {
@@ -135,7 +135,7 @@
     "sku": "3357724",
     "name": "DSC-W180",
     "small_image": {
-      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMzY1fGltYWdlL2pwZWd8aW1hZ2VzL2gxZS9oMzgvODc5NzMxNDY3ODgxNC5qcGd8NmM4YjU2MThkMmNmMDQwNjYwNGNmYTA3YmFmNTM3OGE5OGE0MzM5ZjM1M2Q1NGZjZTljMDdlOGM3MWVjM2YxZQ"
+      "url": "https://b2c-accelerator.test.diconium.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMzY1fGltYWdlL2pwZWd8aW1hZ2VzL2gxZS9oMzgvODc5NzMxNDY3ODgxNC5qcGd8NmM4YjU2MThkMmNmMDQwNjYwNGNmYTA3YmFmNTM3OGE5OGE0MzM5ZjM1M2Q1NGZjZTljMDdlOGM3MWVjM2YxZQ"
     },
     "url_key": "3357724",
     "price_range": {

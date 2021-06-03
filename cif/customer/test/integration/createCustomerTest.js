@@ -63,7 +63,7 @@ describe('Create Customer Resolver', function() {
     // todo move such test to unit test -- Done
     it('Mutation: create customer response should always contain object', () => {
       args.query =
-        'mutation {createCustomer(input: {firstname: "Test", lastname: "User", email: "test.user@example.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
+        'mutation {createCustomer(input: {firstname: "Amaresh1", lastname: "muni", email: "surya1@embitel.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
         let customer = result.data.createCustomer;

@@ -73,25 +73,5 @@ describe('GenerateCustomerToken', () => {
         expect(response).to.deep.equals(validGenerateCustomerToken.token);
       });
     });
-
-    /*it('Mutation: validate response should return bad client credentials', () => {
-      scope
-        .post('/authorizationserver/oauth/token')
-        .query({ operationType: 'oAuth' })
-        .reply(400, badClientCredentials);
-      args.query =
-        'mutation {generateCustomerToken(email: "test.com", password: "00000000"){token}}';
-      args.context.settings.HB_CLIENTSECRET = 'ADOBE_';
-      return resolve(args).then(result => {
-        console.log(result);
-        const errors = result.errors[0];
-        expect(errors).shallowDeepEqual({
-          message: 'Request failed with status code 400',
-          source: {
-            name: 'GraphQL request',
-          },
-        });
-      });
-    });*/
   });
 });

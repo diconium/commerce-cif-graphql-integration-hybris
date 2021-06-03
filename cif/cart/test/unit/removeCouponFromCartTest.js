@@ -70,7 +70,7 @@ describe('RemoveCouponFromCart', function() {
           `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035/vouchers/BUYMORE16`,
           'delete'
         )
-        .query({ fields: 'DEFAULT', query: '' })
+        .query({ fields: 'FULL', query: '' })
         .reply(200);
       scope
         .get(
@@ -106,7 +106,7 @@ describe('RemoveCouponFromCart', function() {
           `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/vouchers/BUYMORE16`,
           'delete'
         )
-        .query({ fields: 'DEFAULT', query: '' })
+        .query({ fields: 'FULL', query: '' })
         .reply(200, undefined);
       scope
         .get(

@@ -63,18 +63,18 @@ describe('AddProductToCart', () => {
         .post(
           `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000015/entries`
         )
-        .query({ fields: 'DEFAULT' })
+        .query({ fields: 'FULL' })
         .reply(200, hybrisAddSimpleProductToCart);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {addSimpleProductsToCart(input: {cart_id: "00000015", cart_items: [{data: {quantity: 1.0, sku: "3514521"}}]}) {cart {items {id, product {name,sku},quantity}}}}';
+        'mutation {addSimpleProductsToCart(input: {cart_id: "00000015", cart_items: [{data: {quantity: 1.0, sku: "3514521"}}]}) {cart {items {uid, product {name,sku},quantity}}}}';
       return resolve(args).then(result => {
         let items = result.data.addSimpleProductsToCart.cart.items[0];
         let testData = validResponseAddSimpleProductToCart.items[0];
         const { errors } = result;
         assert.isUndefined(result.errors);
         expect(errors).to.be.undefined;
-        assert.equal(items.id, testData.id);
+        assert.equal(items.uid, testData.uid);
         assert.equal(items.quantity, testData.quantity);
         assert.equal(items.product.name, testData.product.name);
         assert.equal(items.product.sku, testData.product.sku);
@@ -86,11 +86,11 @@ describe('AddProductToCart', () => {
         .post(
           `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/entries`
         )
-        .query({ fields: 'DEFAULT' })
+        .query({ fields: 'FULL' })
         .reply(400, inValidCart);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {addSimpleProductsToCart(input: {cart_id: "INVALID-CART-ID", cart_items: [{data: {quantity: 1.0, sku: "3514521"}}]}) {cart {items {id, product {name,sku},quantity}}}}';
+        'mutation {addSimpleProductsToCart(input: {cart_id: "INVALID-CART-ID", cart_items: [{data: {quantity: 1.0, sku: "3514521"}}]}) {cart {items {uid, product {name,sku},quantity}}}}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({

@@ -20,18 +20,19 @@ const chai = require('chai');
 const expect = require('chai').expect;
 const chaiShallowDeepEqual = require('chai-shallow-deep-equal');
 const nock = require('nock');
-const customerData = require('../resources/createCustomer.json');
+const customerDataGraphqlResponse = require('../resources/createCustomer.json');
 const createCustomerHybris = require('../resources/createCustomerHybris.json');
 const hybrisAuthLoginMock = require('../resources/hybris-token.json');
 const resolve = require('../../../customer/src/customerResolver.js').main;
 chai.use(chaiShallowDeepEqual);
 const TestUtils = require('../../../utils/TestUtils.js');
+const createCustomerLoader = require('../../src/CreateCustomerLoader.js');
 const bearer = 'a7db795c-b1c2-46d9-a201-16130b6099af';
 const ymlData = require('../../../common/options.json');
 
 describe('Create Customer Resolver', function() {
   const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
-
+  let createCustomer;
   before(() => {
     // Disable console debugging
     sinon.stub(console, 'debug');
@@ -41,6 +42,18 @@ describe('Create Customer Resolver', function() {
   after(() => {
     console.debug.restore();
     console.error.restore();
+  });
+
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    createCustomer = sinon.spy(
+      createCustomerLoader.prototype,
+      '_createCustomer'
+    );
+  });
+
+  afterEach(() => {
+    createCustomer.restore();
   });
 
   describe('Unit Tests', () => {
@@ -73,10 +86,12 @@ describe('Create Customer Resolver', function() {
         .reply(200, createCustomerHybris);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {createCustomer(input: {firstname: "Amaresh", lastname: "muni", email: "amar@test.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
+        'mutation {createCustomerV2(input: {firstname: "Amaresh", lastname: "muni", email: "amar@test.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
       return resolve(args).then(result => {
-        let response = result.data.createCustomer.customer;
-        expect(response).to.exist.and.to.deep.equal(customerData.customer);
+        let response = result.data.createCustomerV2.customer;
+        expect(response).to.exist.and.to.deep.equal(
+          customerDataGraphqlResponse.customer
+        );
       });
     });
 
@@ -92,12 +107,38 @@ describe('Create Customer Resolver', function() {
         .reply(200, createCustomerHybris);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {createCustomer(input: {firstname: "Amaresh", lastname: "muni", email: "amar@test.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
+        'mutation {createCustomerV2(input: {firstname: "Amaresh", lastname: "muni", email: "amar@test.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
       return resolve(args).then(result => {
-        let response = result.data.createCustomer.customer;
+        let response = result.data.createCustomerV2.customer;
         assert.ok(response.firstname);
         assert.ok(response.lastname);
         assert.ok(response.email);
+      });
+    });
+
+    it('Mutation: create customer response should always contain object', () => {
+      scope
+        .post('/authorizationserver/oauth/token')
+        .query({ operationType: 'oAuth' })
+        .reply(200, hybrisAuthLoginMock);
+
+      scope
+        .post(`${ymlData.HB_API_BASE_PATH}electronics/users`)
+        .query({ fields: 'DEFAULT' })
+        .reply(200, createCustomerHybris);
+      args.context.settings.bearer = bearer;
+      args.query =
+        'mutation {createCustomerV2(input: {firstname: "Amaresh", lastname: "muni", email: "amar@test.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
+      return resolve(args).then(result => {
+        assert.isUndefined(result.errors);
+        let response = result.data.createCustomerV2;
+        assert.notEqual(response, null);
+        expect(response).to.be.not.empty;
+        assert.equal(createCustomer.callCount, 1);
+        expect(response).to.exist.and.to.deep.equal(
+          customerDataGraphqlResponse
+        );
+        expect(response.customer).to.be.an('object');
       });
     });
   });

@@ -59,7 +59,7 @@ describe('RemoveItemFromCart', () => {
 
     it('Remove item from cart', () => {
       args.query =
-        'mutation { removeItemFromCart( input: { cart_id: "00000035", cart_item_id: "0" }) {cart { items {id,product { name } quantity } prices { grand_total{ value,currency}}}}}';
+        'mutation { removeItemFromCart( input: { cart_id: "00000035", cart_item_uid: "0" }) {cart { items {uid,product { name } quantity } prices { grand_total{ value,currency}}}}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
         assert.equal(RemoveItem.callCount, 1);

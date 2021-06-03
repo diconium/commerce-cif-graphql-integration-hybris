@@ -91,7 +91,7 @@
     ],
     "items": [
       {
-        "id": "0",
+        "uid": "0",
         "product": {
           "name": "AC-VQ900AM",
           "sku": "1298094"
