@@ -13,20 +13,35 @@
  ******************************************************************************/
 
 'use strict';
-
-const ymlData = require('./options.json');
+// eslint-disable-next-line strict
+const fs = require('fs');
+const path = require('path');
+const yaml = require('js-yaml');
+let ymlData = require('./options.yml');
 
 class InputSettings {
   constructor(args) {
-    this.HB_CLIENTSECRET = ymlData.HB_CLIENTSECRET;
-    this.HB_CLIENTID = ymlData.HB_CLIENTID;
-    this.HB_OAUTH_PATH = ymlData.HB_OAUTH_PATH;
-    this.HB_API_HOST = ymlData.HB_API_HOST;
-    this.HB_API_BASE_PATH = ymlData.HB_API_BASE_PATH;
-    this.HB_BASESITEID = ymlData.HB_BASESITEID;
-    this.HB_PROTOCOL = ymlData.HB_PROTOCOL;
-    this.HB_SECURE_BASE_MEDIA_URL = ymlData.HB_SECURE_BASE_MEDIA_URL;
-
+    //todo remove these 3 values and shift to options yaml file  -- Done (yml reading was not feasible hence json)
+    try {
+      if (!Object.keys(ymlData).length) {
+        // code will excute while running unit testing
+        const optionsContent = fs.readFileSync(
+          path.join(__dirname, './options.yml'),
+          'utf-8'
+        );
+        ymlData = yaml.safeLoad(optionsContent);
+      }
+      this.HB_CLIENTSECRET = ymlData.HB_CLIENTSECRET;
+      this.HB_CLIENTID = ymlData.HB_CLIENTID;
+      this.HB_OAUTH_PATH = ymlData.HB_OAUTH_PATH;
+      this.HB_API_HOST = ymlData.HB_API_HOST;
+      this.HB_API_BASE_PATH = ymlData.HB_API_BASE_PATH;
+      this.HB_BASESITEID = ymlData.HB_BASESITEID;
+      this.HB_PROTOCOL = ymlData.HB_PROTOCOL;
+      this.HB_SECURE_BASE_MEDIA_URL = ymlData.HB_SECURE_BASE_MEDIA_URL;
+    } catch (e) {
+      console.log(e);
+    }
     this.headers = this.extractHeaders(args);
     this.cookies = this.extractCookiesFromHeaders();
     this.bearer = this.extractBearer();

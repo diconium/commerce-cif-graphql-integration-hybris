@@ -47,7 +47,6 @@ class SetShippingAddressesOnCart {
    */
   __load() {
     return this.setShippingAddressOnCartLoader.load(this.cartId).then(data => {
-      console.log(data);
       return this.shippingMethodsLoader.load(this.cartId).then(result => {
         data.deliveryModes = result.deliveryModes;
         return data;

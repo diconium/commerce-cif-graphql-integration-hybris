@@ -39,7 +39,6 @@ class CartItemInterface {
     return this.data.map(item => {
       return {
         __typename: this.__typename,
-        id: item.entryNumber,
         uid: item.entryNumber,
         prices: {
           price: {

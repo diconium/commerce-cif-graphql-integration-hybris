@@ -33,7 +33,7 @@ class TestUtils {
       .send({
         grant_type: 'password',
         username: 'test.user@example.com',
-        password: 'Test@123',
+        password: 'Embitel@123',
         client_secret: 'adobeio20180605',
         client_id: '<CLIENT_ID>',
       })
@@ -63,7 +63,7 @@ class TestUtils {
       .send({
         grant_type: 'password',
         username: 'test.user@example.com',
-        password: 'Test@123',
+        password: 'Embitel@123',
         client_secret: 'adobeio20180605',
         client_id: '<CLIENT_ID>',
       })

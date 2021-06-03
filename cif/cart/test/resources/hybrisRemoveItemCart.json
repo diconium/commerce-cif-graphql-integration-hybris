@@ -1,122 +1,125 @@
 {
-    "type": "cartWsDTO",
-    "code": "00000058",
-    "entries": [
-      {
-        "configurationInfos": [],
-        "entryNumber": 0,
-        "product": {
-          "availableForPickup": true,
-          "averageRating": 3.526315789473684,
-          "baseOptions": [],
-          "categories": [
-            {
-              "code": "584",
-              "name": "Hand-held Camcorders"
-            },
-            {
-              "code": "brand_5",
-              "name": "Sony"
-            }
-          ],
-          "code": "1934406",
-          "configurable": false,
-          "manufacturer": "Sony",
-          "name": "HDR-CX105E  Red",
-          "purchasable": true,
-          "stock": {
-            "stockLevel": 45,
-            "stockLevelStatus": "inStock"
+  "type": "cartWsDTO",
+  "code": "00000058",
+  "entries": [
+    {
+      "configurationInfos": [],
+      "entryNumber": 0,
+      "product": {
+        "availableForPickup": true,
+        "averageRating": 3.526315789473684,
+        "baseOptions": [],
+        "images": [],
+        "categories": [
+          {
+            "code": "584",
+            "name": "Hand-held Camcorders"
           },
-          "url": "/Open-Catalogue/Cameras/Hand-held-Camcorders/HDR-CX105E-Red/p/1934406"
+          {
+            "code": "brand_5",
+            "name": "Sony"
+          }
+        ],
+        "code": "1934406",
+        "configurable": false,
+        "manufacturer": "Sony",
+        "name": "HDR-CX105E  Red",
+        "purchasable": true,
+        "stock": {
+          "stockLevel": 45,
+          "stockLevelStatus": "inStock"
         },
-        "quantity": 1,
-        "totalPrice": {
-          "currencyIso": "USD",
-          "value": 452.88
-        }
+        "url": "/Open-Catalogue/Cameras/Hand-held-Camcorders/HDR-CX105E-Red/p/1934406"
       },
-      {
-        "configurationInfos": [],
-        "entryNumber": 1,
-        "product": {
-          "availableForPickup": true,
-          "averageRating": 4.384615384615385,
-          "baseOptions": [],
-          "categories": [
-            {
-              "code": "584",
-              "name": "Hand-held Camcorders"
-            },
-            {
-              "code": "brand_2",
-              "name": "Toshiba"
-            }
-          ],
-          "code": "1776948",
-          "configurable": false,
-          "manufacturer": "Toshiba",
-          "name": "Camileo S10 EU",
-          "purchasable": true,
-          "stock": {
-            "stockLevel": 31,
-            "stockLevelStatus": "inStock"
-          },
-          "url": "/Open-Catalogue/Cameras/Hand-held-Camcorders/Camileo-S10-EU/p/1776948"
-        },
-        "quantity": 1,
-        "totalPrice": {
-          "currencyIso": "USD",
-          "value": 146.88
-        }
-      },
-      {
-        "configurationInfos": [],
-        "entryNumber": 2,
-        "product": {
-          "availableForPickup": true,
-          "averageRating": 4.571428571428571,
-          "baseOptions": [],
-          "categories": [
-            {
-              "code": "584",
-              "name": "Hand-held Camcorders"
-            },
-            {
-              "code": "brand_2",
-              "name": "Toshiba"
-            }
-          ],
-          "code": "1432722",
-          "configurable": false,
-          "manufacturer": "Toshiba",
-          "name": "Gigashot K80H",
-          "purchasable": true,
-          "stock": {
-            "stockLevel": 11,
-            "stockLevelStatus": "inStock"
-          },
-          "url": "/Open-Catalogue/Cameras/Hand-held-Camcorders/Gigashot-K80H/p/1432722"
-        },
-        "quantity": 1,
-        "totalPrice": {
-          "currencyIso": "USD",
-          "value": 396.88
-        }
+      "quantity": 1,
+      "totalPrice": {
+        "currencyIso": "USD",
+        "value": 452.88
       }
-    ],
-    "guid": "ed529a33-de0e-466e-afbb-683bb87eefa1",
-    "totalItems": 3,
-    "totalPrice": {
-      "currencyIso": "USD",
-      "value": 976.64
     },
-    "totalPriceWithTax": {
-      "currencyIso": "USD",
-      "value": 976.64
+    {
+      "configurationInfos": [],
+      "entryNumber": 1,
+      "product": {
+        "availableForPickup": true,
+        "averageRating": 4.384615384615385,
+        "baseOptions": [],
+        "images": [],
+        "categories": [
+          {
+            "code": "584",
+            "name": "Hand-held Camcorders"
+          },
+          {
+            "code": "brand_2",
+            "name": "Toshiba"
+          }
+        ],
+        "code": "1776948",
+        "configurable": false,
+        "manufacturer": "Toshiba",
+        "name": "Camileo S10 EU",
+        "purchasable": true,
+        "stock": {
+          "stockLevel": 31,
+          "stockLevelStatus": "inStock"
+        },
+        "url": "/Open-Catalogue/Cameras/Hand-held-Camcorders/Camileo-S10-EU/p/1776948"
+      },
+      "quantity": 1,
+      "totalPrice": {
+        "currencyIso": "USD",
+        "value": 146.88
+      }
     },
-    "user": {
-      "name": "Test User",
-      "uid": "test.user@example.com"
+    {
+      "configurationInfos": [],
+      "entryNumber": 2,
+      "product": {
+        "availableForPickup": true,
+        "averageRating": 4.571428571428571,
+        "baseOptions": [],
+        "images": [],
+        "categories": [
+          {
+            "code": "584",
+            "name": "Hand-held Camcorders"
+          },
+          {
+            "code": "brand_2",
+            "name": "Toshiba"
+          }
+        ],
+        "code": "1432722",
+        "configurable": false,
+        "manufacturer": "Toshiba",
+        "name": "Gigashot K80H",
+        "purchasable": true,
+        "stock": {
+          "stockLevel": 11,
+          "stockLevelStatus": "inStock"
+        },
+        "url": "/Open-Catalogue/Cameras/Hand-held-Camcorders/Gigashot-K80H/p/1432722"
+      },
+      "quantity": 1,
+      "totalPrice": {
+        "currencyIso": "USD",
+        "value": 396.88
+      }
     }
+  ],
+  "guid": "ed529a33-de0e-466e-afbb-683bb87eefa1",
+  "totalItems": 3,
+  "totalPrice": {
+    "currencyIso": "USD",
+    "value": 976.64
+  },
+  "totalPriceWithTax": {
+    "currencyIso": "USD",
+    "value": 976.64
+  },
+  "user": {
+    "name": "Test User",
+    "uid": "test.user@example.com"
   }
+}

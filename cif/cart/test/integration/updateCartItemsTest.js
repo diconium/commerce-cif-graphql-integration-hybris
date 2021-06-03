@@ -59,7 +59,7 @@ describe('Cart Resolver', () => {
 
     it('Mutation: update cart items', () => {
       args.query =
-        'mutation {updateCartItems(input: {cart_id: "00000035", cart_items: [{cart_item_id: "0",quantity: 3}]}){ cart{items {id,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
+        'mutation {updateCartItems(input: {cart_id: "00000035", cart_items: [{cart_item_uid: "0",quantity: 3}]}){ cart{items {uid,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
       //todo check async await support so that this variable can be stored earlier -- Done
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
@@ -80,7 +80,7 @@ describe('Cart Resolver', () => {
 
     it('Mutation: update cart items entry number undefined', () => {
       args.query =
-        'mutation {updateCartItems(input: {cart_id: "00000035", cart_items: [{cart_item_id: 100,quantity: 2}]}){ cart{items {id,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
+        'mutation {updateCartItems(input: {cart_id: "00000035", cart_items: [{cart_item_uid: 100,quantity: 2}]}){ cart{items {uid,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
       args.context.settings.customerId = 'anonymous';
       args.context.settings.bearer = '';
       return resolve(args).then(result => {

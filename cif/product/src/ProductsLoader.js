@@ -83,34 +83,40 @@ class ProductsLoader {
         json: true,
       },
     };
-    let categoryId = params.categoryId ? params.categoryId : '';
-    if (params.filter) {
-      if (params.filter.category_uid || params.filter.category_id) {
-        categoryId = params.filter.category_uid
-          ? params.filter.category_uid.eq
-          : params.filter.category_id.eq;
-      }
-    }
 
-    if (params.search) {
-      let apiHost = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/products/search?currentPage=${params.currentPage}&fields=FULL&pageSize=${params.pageSize}&query=${params.search}`;
-      return axios
-        .get(apiHost, config)
-        .then(response => {
-          return response.data;
-        })
-        .catch(error => {
-          return error;
-        });
-    } else if (categoryId !== '') {
-      /** Text search or fetching of the products of a category */
-      let apiHost = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/products/search?currentPage=${params.currentPage}&fields=FULL&pageSize=${params.pageSize}&query=%3A%3AallCategories%3A${categoryId}`;
+    /** Get a CategoryId by URL or Parameters */
+    let categoryId =
+      params.filter && params.filter.category_uid
+        ? params.filter.category_uid.eq
+        : params.categoryId
+        ? params.categoryId
+        : '';
+
+    if (params.search || categoryId !== '') {
+      /** Get a products by category id or search value */
+
+      /** Creating query and sort params for Hybris Api*/
+      const query = `&query=${
+        params.search ? params.search : `%3A%3AallCategories%3A${categoryId}`
+      }`;
+      let sort = '';
+
+      if (params.sort) {
+        const sortKey = Object.keys(params.sort)[0];
+        const sortValue = Object.values(params.sort)[0]
+          .toString()
+          .toLowerCase(); // Converting value from enum DESC to desc
+        sort = `&sort=${sortKey}-${sortValue}`;
+      }
+
+      let apiHost = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/products/search?currentPage=${params.currentPage}&fields=FULL&pageSize=${params.pageSize}${query}${sort}`;
+
       return axios
         .get(apiHost, config)
         .then(response => {
           response.data.products = response.data.products.filter(
             product => !isNaN(parseInt(product.code))
-          );
+          ); // Removing Product if code contains alphabets
           return response.data;
         })
         .catch(error => {

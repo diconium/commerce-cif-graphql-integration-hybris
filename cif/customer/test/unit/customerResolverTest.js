@@ -71,7 +71,7 @@ describe('Customer Resolver', () => {
       return resolve(args).then(result => {
         let customer = result.data.customer;
         const { errors } = result;
-        assert.equal(customer.firstname, 'Senthil');
+        assert.equal(customer.firstname, 'Test User');
         assert.equal(customer.lastname, '');
         assert.isUndefined(result.errors);
         expect(errors).to.be.undefined;
@@ -96,7 +96,7 @@ describe('Customer Resolver', () => {
       return resolve(args).then(result => {
         let addresses = result.data.customer.addresses;
         let street = addresses[0].street;
-        expect(addresses[0].firstname).to.be.equal('Senthil');
+        expect(addresses[0].firstname).to.be.equal('Test User');
         expect(street[0]).to.be.equal('street name');
         expect(street[1]).to.be.equal('34');
         expect(result.errors).to.be.undefined;

@@ -62,7 +62,6 @@ describe('AddProductToCart', () => {
       args.query =
         'mutation {addSimpleProductsToCart(input:{cart_id: "00000035", cart_items: [{data: {quantity: "1", sku: "3514521" } }]}){cart {items {id,product { name,sku },quantity} }}}';
       return resolve(args).then(result => {
-        console.log(result);
         assert.isUndefined(result.errors);
         assert.equal(AddProduct.callCount, 1);
       });

@@ -77,7 +77,7 @@ class RemoveCouponFromCartLoader {
     return new Promise((resolve, reject) => {
       vouchersList &&
         vouchersList.vouchers.map(({ code }) => {
-          let uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cartId}/vouchers/${code}?fields=DEFAULT`;
+          let uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cartId}/vouchers/${code}?fields=FULL`;
           axios
             .delete(uri, {
               params: {

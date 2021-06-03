@@ -1,39 +1,40 @@
 {
-    "entry": {
-      "configurationInfos": [],
-      "entryNumber": 0,
-      "product": {
-        "availableForPickup": true,
-        "averageRating": 2.375,
-        "baseOptions": [],
-        "categories": [
-          {
-            "code": "578",
-            "name": "Digital SLR"
-          },
-          {
-            "code": "brand_5",
-            "name": "Sony"
-          }
-        ],
-        "code": "3514521",
-        "configurable": false,
-        "manufacturer": "Sony",
-        "name": "DSC-WX1",
-        "purchasable": true,
-        "stock": {
-          "stockLevel": 11,
-          "stockLevelStatus": "inStock"
+  "entry": {
+    "configurationInfos": [],
+    "entryNumber": 0,
+    "product": {
+      "availableForPickup": true,
+      "averageRating": 2.375,
+      "baseOptions": [],
+      "images": [],
+      "categories": [
+        {
+          "code": "578",
+          "name": "Digital SLR"
         },
-        "url": "/Open-Catalogue/Cameras/Digital-Cameras/Digital-SLR/DSC-WX1/p/3514521"
+        {
+          "code": "brand_5",
+          "name": "Sony"
+        }
+      ],
+      "code": "3514521",
+      "configurable": false,
+      "manufacturer": "Sony",
+      "name": "DSC-WX1",
+      "purchasable": true,
+      "stock": {
+        "stockLevel": 11,
+        "stockLevelStatus": "inStock"
       },
-      "quantity": 1,
-      "totalPrice": {
-        "currencyIso": "USD",
-        "value": 1253.3
-      }
+      "url": "/Open-Catalogue/Cameras/Digital-Cameras/Digital-SLR/DSC-WX1/p/3514521"
     },
     "quantity": 1,
-    "quantityAdded": 1,
-    "statusCode": "success"
-  }
+    "totalPrice": {
+      "currencyIso": "USD",
+      "value": 1253.3
+    }
+  },
+  "quantity": 1,
+  "quantityAdded": 1,
+  "statusCode": "success"
+}

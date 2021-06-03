@@ -75,9 +75,8 @@ class RemoveItemFromCartLoader {
       HB_BASESITEID,
     } = actionParameters.context.settings;
 
-    let { cart_id, cart_item_id, cart_item_uid } = cartInput;
-    cart_item_id = cart_item_uid || cart_item_id;
-    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cart_id}/entries/${cart_item_id}?fields=DEFAULT`;
+    let { cart_id, cart_item_uid } = cartInput;
+    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cart_id}/entries/${cart_item_uid}?fields=DEFAULT`;
     return new Promise((resolve, reject) => {
       axios
         .delete(uri, {

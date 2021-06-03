@@ -81,7 +81,7 @@ describe('RemoveItemFromCart', () => {
         .reply(200, hybrisDeliveryModes);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {removeItemFromCart(input:{cart_id: "00000035",cart_item_id: "1"}){cart{items{id,product{name}quantity}prices{grand_total{value,currency}}}}}';
+        'mutation {removeItemFromCart(input:{cart_id: "00000035",cart_item_uid: "1"}){cart{items{uid,product{name}quantity}prices{grand_total{value,currency}}}}}';
       return resolve(args).then(result => {
         let response = result.data.removeItemFromCart.cart;
         const { errors } = result;
@@ -112,7 +112,7 @@ describe('RemoveItemFromCart', () => {
         .reply(200, hybrisDeliveryModes);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {removeItemFromCart(input:{cart_id: "INVALID-CART-ID",cart_item_id: "1"}){cart{items{id,product{name}quantity}prices{grand_total{value,currency}}}}}';
+        'mutation {removeItemFromCart(input:{cart_id: "INVALID-CART-ID",cart_item_uid: "1"}){cart{items{uid,product{name}quantity}prices{grand_total{value,currency}}}}}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({
@@ -146,7 +146,7 @@ describe('RemoveItemFromCart', () => {
         .reply(200, hybrisDeliveryModes);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation {removeItemFromCart(input:{cart_id: "00000035",cart_item_id:"0"}){cart{items{id,product{name}quantity}prices{grand_total{value,currency}}}}}';
+        'mutation {removeItemFromCart(input:{cart_id: "00000035",cart_item_uid:"0"}){cart{items{uid,product{name}quantity}prices{grand_total{value,currency}}}}}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({

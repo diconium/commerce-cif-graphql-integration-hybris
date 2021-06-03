@@ -71,7 +71,6 @@ describe('Countries Resolver', () => {
         .reply(200, hybrisRegionsUS);
       args.query = '{countries{two_letter_abbreviation, full_name_english}}';
       return resolve(args).then(result => {
-        console.log(result);
         const { errors } = result;
         const { countries } = result.data;
         expect(countries).to.exist.and.to.deep.equal(

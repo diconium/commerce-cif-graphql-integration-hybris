@@ -59,15 +59,14 @@ describe('changeCustomerPassword', () => {
       scope
         .put(`${ymlData.HB_API_BASE_PATH}electronics/users/current/password`)
         .query({
-          new: 'Test@123',
-          old: 'Test@123',
+          new: 'Embitel@123',
+          old: 'Embitel@123',
         })
         .reply(202);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation{changeCustomerPassword(currentPassword: "Test@123" newPassword: "Test@123"){id email}}';
+        'mutation{changeCustomerPassword(currentPassword: "Embitel@123" newPassword: "Embitel@123"){id email}}';
       return resolve(args).then(result => {
-        console.log(result);
         assert.isUndefined(result.errors);
       });
     });
@@ -76,13 +75,13 @@ describe('changeCustomerPassword', () => {
       scope
         .put(`${ymlData.HB_API_BASE_PATH}electronics/users/current/password`)
         .query({
-          new: 'Test@123',
+          new: 'Embitel@123',
           old: '1234567890',
         })
         .reply(400);
       args.context.settings.bearer = bearer;
       args.query =
-        'mutation{changeCustomerPassword(currentPassword: "1234567890" newPassword: "Test@123"){id email}}';
+        'mutation{changeCustomerPassword(currentPassword: "1234567890" newPassword: "Embitel@123"){id email}}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({

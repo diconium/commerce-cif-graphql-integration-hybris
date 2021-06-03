@@ -110,7 +110,7 @@ describe('Dispatcher Resolver', () => {
 
     it('Basic category search with product details', () => {
       args.query =
-        '{categoryList(filters:{ids:{eq:"1"}}){id,products{items{sku,name}},name,description,children{id,products{items{sku,name}},name,description,children{id,products{items{sku,name}},name,description}}}}';
+        '{categoryList(filters:{category_uid:{eq:"1"}}){uid,products{items{sku,name}},name,description,children{uid,products{items{sku,name}},name,description,children{id,products{items{sku,name}},name,description}}}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.body.errors); // No GraphQL errors
 

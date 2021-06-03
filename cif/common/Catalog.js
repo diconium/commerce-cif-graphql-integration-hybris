@@ -32,7 +32,7 @@ class CategoryTree {
    * @param {ProductsLoader} [parameters.productsLoader] An optional ProductsLoader, to optimise caching.
    */
   constructor(parameters) {
-    console.log(parameters);
+    /* cateId to get CategoryId from url */
     let cateId =
       parameters.categoryId.url_key !== undefined
         ? parameters.categoryId.url_key.eq
@@ -44,8 +44,6 @@ class CategoryTree {
     this.categoryId =
       parameters.categoryId.category_uid !== undefined
         ? parameters.categoryId.category_uid.eq
-        : parameters.categoryId.ids !== undefined
-        ? parameters.categoryId.ids.eq
         : parameters.categoryId.url_key !== undefined
         ? cateId
         : parameters.categoryId;
@@ -84,7 +82,6 @@ class CategoryTree {
    * @returns {Object} The backend category data converted into a GraphQL "CategoryTree" data.
    */
   __convertData(data) {
-    console.log(data);
     if (!this.urlName && this.urlName === null) {
       this.urlName = data.id;
     }
@@ -162,7 +159,6 @@ class CategoryTree {
         currentPage: 1,
       };
       return this.productsLoader.load(searchKey).then(response => {
-        console.log(response.pagination.totalResults);
         return response.pagination.totalResults;
       });
     });
@@ -225,7 +221,6 @@ class Products {
     console.debug(
       'Loading products for ' + JSON.stringify(this.search, null, 0)
     );
-    console.log(this.search);
     return this.productsLoader.load(this.search);
   }
 
@@ -312,7 +307,6 @@ class Product {
    * @returns {CategoryTree[]}
    */
   get categories() {
-    console.log(this.productData);
     return this.productData.categories.map(categoryId => {
       return new CategoryTree({
         categoryId: categoryId.code,
@@ -411,6 +405,7 @@ class Product {
   }
 
   /**
+   * media_gallery type is interface can't return data directly so created MediaGallery Interface to return Data
    * @returns {*}
    */
   get media_gallery() {
@@ -426,7 +421,6 @@ class Product {
                 url: image.url,
                 disabled: false,
                 label: image.altText || '',
-                // media_type: 'image',
               })
           )
       : [];
@@ -480,7 +474,6 @@ class ProductsBySkus {
    * @returns {Object} The backend products data converted into a GraphQL "Products" data.
    */
   __convertData(data) {
-    console.log(data);
     return {
       total_count: data.length,
       page_info: {
@@ -516,9 +509,14 @@ class ProductsBySkus {
     });
   }
 }
+
 class MediaGallery {
   /**
    * @param {Object} parameters
+   * @param {String} parameters.url Url returns path of image
+   * @param {Integer} parameters.position Position returns position of image .
+   * @param {String} parameters.label Label returns title  of image .
+   *
    */
   constructor(parameters) {
     this.url = `${ymlData.HB_SECURE_BASE_MEDIA_URL}${parameters.url}`;
@@ -535,6 +533,7 @@ class MediaGallery {
     return 'ProductImage';
   }
 }
+
 module.exports.MediaGallery = MediaGallery;
 module.exports.Products = Products;
 module.exports.CategoryTree = CategoryTree;

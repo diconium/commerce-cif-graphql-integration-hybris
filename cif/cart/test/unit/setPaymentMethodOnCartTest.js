@@ -128,7 +128,6 @@ describe('setPaymentMethodOnCart', () => {
       args.query =
         'mutation{setPaymentMethodOnCart(input:{cart_id:"00000005",payment_method:{code:"visa"}}){cart{selected_payment_method{code,title}}}}';
       return resolve(args).then(result => {
-        //console.log(result);
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({
           message: 'Request failed with status code 400',
@@ -166,7 +165,6 @@ describe('setPaymentMethodOnCart', () => {
       args.query =
         'mutation{setPaymentMethodOnCart(input:{cart_id:"00000014",payment_method:{code:"INVALID-PAYMENT-METHOD"}}){cart{selected_payment_method{code,title}}}}';
       return resolve(args).then(result => {
-        //console.log(result);
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({
           message: 'Request failed with status code 400',

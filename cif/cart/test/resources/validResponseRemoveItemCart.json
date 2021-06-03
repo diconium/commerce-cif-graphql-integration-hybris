@@ -1,31 +1,31 @@
 {
-    "items":[
-        {
-            "id":"0",
-            "product":{
-                "name":"HDR-CX105E  Red"
-            },
-            "quantity":1
-        },
-        {
-            "id":"1",
-            "product":{
-                "name":"Camileo S10 EU"
-            },
-            "quantity":1
-        },
-        {
-            "id":"2",
-            "product":{
-                "name":"Gigashot K80H"
-            },
-            "quantity":1
-        }
-    ],
-    "prices":{
-        "grand_total":{
-            "currency":"USD",
-            "value":976.64
-        }
+  "items": [
+    {
+      "uid": "0",
+      "product": {
+        "name": "HDR-CX105E  Red"
+      },
+      "quantity": 1
+    },
+    {
+      "uid": "1",
+      "product": {
+        "name": "Camileo S10 EU"
+      },
+      "quantity": 1
+    },
+    {
+      "uid": "2",
+      "product": {
+        "name": "Gigashot K80H"
+      },
+      "quantity": 1
     }
+  ],
+  "prices": {
+    "grand_total": {
+      "value": 976.64,
+      "currency": "USD"
+    }
+  }
 }

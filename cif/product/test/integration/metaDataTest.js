@@ -52,7 +52,7 @@ describe('Dispatcher Resolver', () => {
 
     it('Basic meta data search', () => {
       args.query =
-        '{customAttributeMetadata(attributes:[{attribute_code:"category_id",entity_type:"4"},{attribute_code:"description",entity_type:"4"},{attribute_code:"name",entity_type:"4"},{attribute_code:"price",entity_type:"4"},{attribute_code:"short_description",entity_type:"4"},{attribute_code:"sku",entity_type:"4"},{attribute_code:"url_key",entity_type:"4"}]){items{attribute_code,attribute_type,input_type}}}';
+        '{customAttributeMetadata(attributes:[{attribute_code:"category_uid",entity_type:"4"},{attribute_code:"description",entity_type:"4"},{attribute_code:"name",entity_type:"4"},{attribute_code:"price",entity_type:"4"},{attribute_code:"short_description",entity_type:"4"},{attribute_code:"sku",entity_type:"4"},{attribute_code:"url_key",entity_type:"4"}]){items{attribute_code,attribute_type,input_type}}}';
 
       return resolve(args).then(result => {
         assert.isUndefined(result.body.errors); // No GraphQL errors

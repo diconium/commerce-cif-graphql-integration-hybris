@@ -38,7 +38,6 @@ class Countries {
       data.map(country => {
         countryCode.push(country.isocode);
       });
-      console.log(countryCode);
       return this.regionLoader.loadMany(countryCode).then(region => {
         Object.keys(data).forEach(function(key) {
           Object.defineProperty(data[key], 'available_regions', {

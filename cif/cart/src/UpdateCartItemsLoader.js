@@ -75,8 +75,7 @@ class UpdateCartItemsLoader {
     const { cart_id, cart_items } = queryInput;
 
     const cart_item = cart_items[0];
-    let { cart_item_id, cart_item_uid, quantity } = cart_item;
-    cart_item_uid = cart_item_uid ? cart_item_uid : cart_item_id;
+    let { cart_item_uid, quantity } = cart_item;
     let body = {
       quantity: quantity,
     };

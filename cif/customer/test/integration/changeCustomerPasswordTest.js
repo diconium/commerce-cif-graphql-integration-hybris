@@ -65,7 +65,7 @@ describe('Change Customer Password', function() {
     // todo move such test to unit test -- Done
     it('Mutation: change customer password response should always contain object', () => {
       args.query =
-        'mutation{changeCustomerPassword(currentPassword: "Test@122" newPassword: "Test@123"){id email}}';
+        'mutation{changeCustomerPassword(currentPassword: "Embitel@123" newPassword: "Embitel@123"){id email}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
         assert.equal(changePassword.callCount, 1);

@@ -62,7 +62,6 @@ describe('CreateEmptyCart', function() {
     it('Mutation: validate response should return new cart id', () => {
       args.query = 'mutation {createEmptyCart}';
       return resolve(args).then(result => {
-        console.log(result);
         const { errors } = result;
         assert.isUndefined(result.errors);
         let responseData = result.data.createEmptyCart;

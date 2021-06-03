@@ -47,8 +47,7 @@ class ChangeCustomerPassword {
    * method used to convert generateCustomerToken hybris data into magento GraphQL response
    * @param {*} data parameter data contains the generateCustomerToken data
    */
-  __convertData(data) {
-    console.log(data);
+  __convertData() {
     return {
       id: true,
       email: true,

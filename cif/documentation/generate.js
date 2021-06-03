@@ -14,7 +14,7 @@
 
 'use strict';
 
-const magentoSchema = require('../resources/magento-schema-modified-2.3.4.min.json');
+const magentoSchema = require('../resources/magento-schema-2.4.2.min.json');
 const SchemaPruner = require('./SchemaPruner.js');
 const gitClone = require('git-clone');
 const fs = require('fs');
@@ -68,7 +68,7 @@ function generate() {
           fs.writeFileSync(
             path.join(
               __dirname,
-              '../resources/magento-schema-2.3.4.pruned.json'
+              '../resources/magento-schema-2.4.2.pruned.json'
             ),
             JSON.stringify(prunedSchema, null, 2)
           );

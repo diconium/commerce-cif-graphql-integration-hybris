@@ -2,7 +2,7 @@
   {
     "__typename": "SimpleProduct",
     "image": {
-      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wxNTg1MXxpbWFnZS9qcGVnfGltYWdlcy9oZWQvaGRhLzg3OTcyNTU3NjE5NTAuanBnfGY3MTcyMTU2NzNkZDY5OTVkYTlhMzE2NjhkNGYzODE1MGM1ZTNmMTkzOGYwNjRkOGE5ZjJiMjBjYjQzZjNiNTc"
+      "url": "https://b2c-accelerator.test.diconium.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wxNTg1MXxpbWFnZS9qcGVnfGltYWdlcy9oZWQvaGRhLzg3OTcyNTU3NjE5NTAuanBnfGY3MTcyMTU2NzNkZDY5OTVkYTlhMzE2NjhkNGYzODE1MGM1ZTNmMTkzOGYwNjRkOGE5ZjJiMjBjYjQzZjNiNTc"
     },
     "name": "DSC-T90",
     "price_range": {
