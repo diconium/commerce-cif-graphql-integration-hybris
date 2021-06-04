@@ -64,7 +64,7 @@ OpenWhisk CLI must be available in your systems PATH and set up correctly to eit
 
 ### Configuration
 To be able to use this CIF connector you will need to provid some Hybris configurations to connect to your Hybris endpoint.
-Under [cif/common/options.json.example](cif/common/options.json.example) you will find an example json file you should use as an example.
+Under [cif/common/options.yml.example](cif/common/options.yml.example) you will find an example yml file you should use as an example.
 
 The example file should look something like this
 ```
@@ -80,7 +80,7 @@ The example file should look something like this
 }
 ```
 
-You should copy the example file to an options.json file under the same path, this will be the real file that will have your configurations.
+You should copy the example file to an options.yml file under the same path, this will be the real file that will have your configurations.
 This file is under .gitignore and should not be commited to the repository since it has client secrets.
 
 
