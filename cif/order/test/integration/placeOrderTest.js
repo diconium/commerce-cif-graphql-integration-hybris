@@ -22,7 +22,6 @@ const { expect } = chai;
 const chaiShallowDeepEqual = require('chai-shallow-deep-equal');
 chai.use(chaiShallowDeepEqual);
 const PlaceOrderLoader = require('../../src/PlaceOrderLoader');
-const ymlData = require('../../../common/options.json');
 
 describe('Place Order', function() {
   let PlaceOrder;
@@ -41,20 +40,14 @@ describe('Place Order', function() {
     PlaceOrder = sinon.spy(PlaceOrderLoader.prototype, '_placeOrder');
   });
 
+  afterEach(() => {
+    PlaceOrder.restore();
+  });
+
   describe('Integration Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
+
     before(async () => {
       args.context.settings.bearer = await TestUtils.getBearer();
     });

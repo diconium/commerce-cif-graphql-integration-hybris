@@ -26,6 +26,7 @@ class SetPaymentMethodOnCart {
    * @param {String} parameters.input input parameter contains the cart_id and payment_method.
    * @param {Object} [parameters.graphqlContext] The optional GraphQL execution context passed to the resolver.
    * @param {Object} [parameters.actionParameters] Some optional actionParameters of the I/O Runtime action, like for example bearer token, query and url info.
+   * LoaderProxy class returns a Proxy to avoid having to implement a getter for all properties.
    */
   constructor(parameters) {
     this.input = parameters.input;
@@ -37,9 +38,6 @@ class SetPaymentMethodOnCart {
     this.cartLoader = new CartLoader(parameters.actionParameters);
     this._addressLoader = new AddressLoader(parameters.actionParameters);
 
-    /**
-     * This class returns a Proxy to avoid having to implement a getter for all properties.
-     */
     return new LoaderProxy(this);
   }
 
@@ -56,14 +54,16 @@ class SetPaymentMethodOnCart {
    * get cart method call cart loader to get the cart entries
    */
   get cart() {
-    return this.__load().then(() => {
-      return new Cart({
-        graphqlContext: this.graphqlContext,
-        actionParameters: this.actionParameters,
-        cartLoader: this.cartLoader,
-        cartId: this.input.cart_id,
-      });
-    });
+    return this.__load()
+      .then(() => {
+        return new Cart({
+          graphqlContext: this.graphqlContext,
+          actionParameters: this.actionParameters,
+          cartLoader: this.cartLoader,
+          cartId: this.input.cart_id,
+        });
+      })
+      .catch(errorOutput => Promise.reject(errorOutput));
   }
 }
 

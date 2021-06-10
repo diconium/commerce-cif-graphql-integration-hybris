@@ -16,13 +16,14 @@
 
 const { graphql } = require('graphql');
 const SchemaBuilder = require('../../common/SchemaBuilder.js');
+const CustomerOrder = require('./CustomerOrder.js');
 const PlaceOrder = require('./PlaceOrder.js');
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 let cachedSchema = null;
 
 function resolve(args) {
   if (cachedSchema == null) {
-    let schemaBuilder = new SchemaBuilder()
+    const schemaBuilder = new SchemaBuilder()
       .filterMutationFields(new Set(['placeOrder']))
       .filterQueryFields(new Set(['customerOrders']));
 
@@ -35,7 +36,7 @@ function resolve(args) {
    * @param {Object} params parameter contains input,graphqlContext and actionParameters
    * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
    */
-  let resolvers = {
+  const resolvers = {
     placeOrder: (params, context) => {
       return new PlaceOrder({
         cartId: params.input.cart_id,
@@ -44,23 +45,9 @@ function resolve(args) {
       });
     },
     customerOrders: () => {
-      return Promise.resolve({
-        items: [
-          {
-            order_number: '000000001',
-            id: 1,
-            created_at: '2019-02-21 00:24:34',
-            grand_total: 36.39,
-            status: 'processing',
-          },
-          {
-            order_number: '000000002',
-            id: 2,
-            created_at: '2019-02-21 00:24:35',
-            grand_total: 39.64,
-            status: 'closed',
-          },
-        ],
+      return new CustomerOrder({
+        graphqlContext: context,
+        actionParameters: args,
       });
     },
   };

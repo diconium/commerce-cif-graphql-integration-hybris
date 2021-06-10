@@ -25,7 +25,6 @@ const CategoryTreeLoader = require('../../../category/src/CategoryTreeLoader.js'
 const CartLoader = require('../../../cart/src/CartLoader.js');
 const ProductLoader = require('../../../product/src/ProductLoader.js');
 const TestUtils = require('../../../utils/TestUtils.js');
-const ymlData = require('../../../common/options.json');
 
 describe('Dispatcher Resolver', () => {
   let resolve;
@@ -85,7 +84,7 @@ describe('Dispatcher Resolver', () => {
 
   describe('Integration Tests', () => {
     let args = {
-      url: `https://${ymlData.HB_API_HOST}`,
+      url: `https://${TestUtils.getYmlData().HB_API_HOST}`,
       __ow_headers: {
         authorization: 'Bearer e771db98-ffa3-49bf-802a-c29a59d03991',
       },
@@ -205,7 +204,7 @@ describe('Dispatcher Resolver', () => {
         assert.equal(items[1].sku, '2278102');
 
         let cart = result.body.data.cart;
-        assert.equal(cart.email, 'test.user@example.com');
+        assert.equal(cart.email, 'test@example.com');
 
         let cartItems = cart.items;
         assert.equal(cartItems.length, 2);

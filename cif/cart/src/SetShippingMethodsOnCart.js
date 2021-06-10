@@ -19,6 +19,13 @@ const CartLoader = require('./CartLoader.js');
 const Cart = require('./Cart.js');
 
 class SetShippingMethodsOnCart {
+  /**
+   * @param {Object} parameters parameter object contains the cartId,shippingAddress,graphqlContext & actionParameters
+   * @param {String} parameters.input parameter contains the cartId ,cart_item_id and quantity
+   * @param {Object} [parameters.graphqlContext] The optional GraphQL execution context passed to the resolver.
+   * @param {Object} [parameters.actionParameters] Some optional parameters of the I/O Runtime action, like for example customerId, bearer token, query and url info.
+   * LoaderProxy class returns a Proxy to avoid having to implement a getter for all properties.
+   */
   constructor(parameters) {
     this.actionParameters = parameters.actionParameters;
     this.graphqlContext = parameters.graphqlContext;
@@ -27,9 +34,7 @@ class SetShippingMethodsOnCart {
       parameters.actionParameters
     );
     this.cartLoader = new CartLoader(parameters.actionParameters);
-    /**
-     * This class returns a Proxy to avoid having to implement a getter for all properties.
-     */
+
     return new LoaderProxy(this);
   }
 
@@ -42,15 +47,17 @@ class SetShippingMethodsOnCart {
   }
 
   get cart() {
-    return this.__load().then(() => {
-      return new Cart({
-        graphqlContext: this.graphqlContext,
-        actionParameters: this.actionParameters,
-        cartLoader: this.cartLoader,
-        cartId: this.input.cart_id,
-        deliveryAddressBoolean: true,
-      });
-    });
+    return this.__load()
+      .then(() => {
+        return new Cart({
+          graphqlContext: this.graphqlContext,
+          actionParameters: this.actionParameters,
+          cartLoader: this.cartLoader,
+          cartId: this.input.cart_id,
+          deliveryAddressBoolean: true,
+        });
+      })
+      .catch(errorOutput => Promise.reject(errorOutput));
   }
 }
 

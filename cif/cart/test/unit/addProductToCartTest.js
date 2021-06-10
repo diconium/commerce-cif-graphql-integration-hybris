@@ -25,13 +25,12 @@ const nock = require('nock');
 const hybrisAddSimpleProductToCart = require('../resources/hybrisAddSimpleProductToCart');
 const validResponseAddSimpleProductToCart = require('../resources/validResponseAddSimpleProductToCart');
 const inValidCart = require('../resources/inValidJsonFileAddSimpleProductToCart.json');
+const AddProductToCartLoader = require('../../../cart/src/AddProductToCartLoader');
 const TestUtils = require('../../../utils/TestUtils.js');
-const bearer = '55af3c02-6dd3-4b45-92c2-38db35a2c43d';
-const ymlData = require('../../../common/options.json');
 
 describe('AddProductToCart', () => {
-  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
-
+  const scope = nock(TestUtils.getHybrisInstance());
+  let addProductToCart;
   before(() => {
     // Disable console debugging
     sinon.stub(console, 'debug');
@@ -43,29 +42,32 @@ describe('AddProductToCart', () => {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    addProductToCart = sinon.spy(
+      AddProductToCartLoader.prototype,
+      '_addProductToCart'
+    );
+  });
+
+  afterEach(() => {
+    addProductToCart.restore();
+  });
+
   describe('Unit Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
+
+    //Returns hybris configured api base path
+    const HB_API_BASE_PATH = TestUtils.getYmlData().HB_API_BASE_PATH;
 
     it('Add products to cart nock test case', () => {
       scope
         .post(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000015/entries`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000015/entries`
         )
         .query({ fields: 'FULL' })
         .reply(200, hybrisAddSimpleProductToCart);
-      args.context.settings.bearer = bearer;
       args.query =
         'mutation {addSimpleProductsToCart(input: {cart_id: "00000015", cart_items: [{data: {quantity: 1.0, sku: "3514521"}}]}) {cart {items {uid, product {name,sku},quantity}}}}';
       return resolve(args).then(result => {
@@ -78,17 +80,18 @@ describe('AddProductToCart', () => {
         assert.equal(items.quantity, testData.quantity);
         assert.equal(items.product.name, testData.product.name);
         assert.equal(items.product.sku, testData.product.sku);
+        // Ensure the create empty cart function is only called once.
+        assert.equal(addProductToCart.callCount, 1);
       });
     });
 
     it('Mutation: validate response should contain cart not found', () => {
       scope
         .post(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/entries`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/entries`
         )
         .query({ fields: 'FULL' })
         .reply(400, inValidCart);
-      args.context.settings.bearer = bearer;
       args.query =
         'mutation {addSimpleProductsToCart(input: {cart_id: "INVALID-CART-ID", cart_items: [{data: {quantity: 1.0, sku: "3514521"}}]}) {cart {items {uid, product {name,sku},quantity}}}}';
       return resolve(args).then(result => {

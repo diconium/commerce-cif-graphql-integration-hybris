@@ -24,7 +24,7 @@ class AddProductToCartResolverLoader {
    */
   constructor(actionParameters) {
     this.actionParameters = actionParameters;
-    let loadingFunction = inputs => {
+    const loadingFunction = inputs => {
       return Promise.resolve(
         inputs.map(input => {
           console.debug(`--> Fetching cart with id ${JSON.stringify(input)}`);
@@ -71,7 +71,7 @@ class AddProductToCartResolverLoader {
     const { cart_id, cart_items } = input;
     const { data } = cart_items[0];
 
-    let body = {
+    const body = {
       product: {
         code: data.sku,
       },

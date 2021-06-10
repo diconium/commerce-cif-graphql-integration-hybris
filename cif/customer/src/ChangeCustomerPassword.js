@@ -22,6 +22,7 @@ class ChangeCustomerPassword {
    * @param {Object} parameters parameter object contains the graphqlContext & actionParameters
    * @param {Object} [parameters.graphqlContext] The optional GraphQL execution context passed to the resolver.
    * @param {Object} [parameters.actionParameters] Some optional parameters of the I/O Runtime action, like for example customerId, bearer token, query and url info.
+   * LoaderProxy class returns a Proxy to avoid having to implement a getter for all properties.
    */
   constructor(parameters) {
     this.graphqlContext = parameters.graphqlContext;
@@ -30,9 +31,6 @@ class ChangeCustomerPassword {
     this.ChangeCustomerPasswordLoader = new ChangeCustomerPasswordLoader(
       parameters.actionParameters
     );
-    /**
-     * This class returns a Proxy to avoid having to implement a getter for all properties.
-     */
     return new LoaderProxy(this);
   }
 

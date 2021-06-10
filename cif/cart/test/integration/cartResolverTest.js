@@ -21,7 +21,6 @@ const CartLoader = require('../../src/CartLoader.js');
 const TestUtils = require('../../../utils/TestUtils.js');
 // The cart resolver
 const resolve = require('../../src/cartResolver.js').main;
-const ymlData = require('../../../common/options.json');
 
 describe('Cart Resolver', () => {
   let getCart;
@@ -42,19 +41,9 @@ describe('Cart Resolver', () => {
   });
 
   describe('Integration Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
+
     before(async () => {
       args.context.settings.bearer = await TestUtils.getBearer();
     });

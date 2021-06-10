@@ -20,7 +20,6 @@ const expect = require('chai').expect;
 const CountryLoader = require('../../src/CountriesLoader.js');
 const resolve = require('../../src/countriesResolver.js').main;
 const TestUtils = require('../../../utils/TestUtils.js');
-const ymlData = require('../../../common/options.json');
 
 describe('Countries Resolver', () => {
   //let resolve;
@@ -41,20 +40,13 @@ describe('Countries Resolver', () => {
     getCountriesList = sinon.spy(CountryLoader.prototype, '__countries');
   });
 
+  afterEach(() => {
+    getCountriesList.restore();
+  });
+
   describe('Integration Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
 
     it('Basic countries search', () => {
       args.query = '{countries{two_letter_abbreviation, full_name_english}}';

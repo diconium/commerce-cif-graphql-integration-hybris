@@ -1,6 +1,6 @@
 
-  HB_CLIENTSECRET: "<CLIENT_SECRET>"
-  HB_CLIENTID: "<CLIENT_ID>"
+  HB_CLIENTSECRET: "<Client_SECRET>"
+  HB_CLIENTID: "<Client_ID>"
   HB_OAUTH_PATH: "/authorizationserver/oauth/token"
   HB_API_HOST: "hybris.example.com"
   HB_API_BASE_PATH: "/occ/v2/"

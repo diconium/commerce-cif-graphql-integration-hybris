@@ -24,13 +24,12 @@ const resolve = require('../../../cart/src/cartResolver.js').main;
 const validResponseSetGuestEmail = require('../resources/validResponseSetGuestEmail.json');
 const cartNotFound = require('../resources/cartNotFound.json');
 const hybrisAuthLoginMock = require('../resources/hybris-token.json');
+const SetGuestEmailLoader = require('../../src/SetGuestEmailOnCartLoader.js');
 const TestUtils = require('../../../utils/TestUtils.js');
-const bearer = '6ca31c1a-925b-4df3-ade7-3e99c8f9c3f2';
-const ymlData = require('../../../common/options.json');
 
 describe('SetGuestEmailOnCart', function() {
-  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
-
+  const scope = nock(TestUtils.getHybrisInstance());
+  let SetGuestEmail;
   before(() => {
     // Disable console debugging
     sinon.stub(console, 'debug');
@@ -42,21 +41,24 @@ describe('SetGuestEmailOnCart', function() {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    SetGuestEmail = sinon.spy(
+      SetGuestEmailLoader.prototype,
+      '_setGuestEmailOnCart'
+    );
+  });
+
+  afterEach(() => {
+    SetGuestEmail.restore();
+  });
+
   describe('Unit Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          customerId: 'anonymous',
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-          HB_OAUTH_PATH: ymlData.HB_OAUTH_PATH,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
+
+    //Returns hybris configured api base path
+    const HB_API_BASE_PATH = TestUtils.getYmlData().HB_API_BASE_PATH;
 
     it('Mutation: set guest email on cart', () => {
       scope
@@ -66,7 +68,7 @@ describe('SetGuestEmailOnCart', function() {
 
       scope
         .put(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/anonymous/carts/96f344f0-367d-4893-92ce-16531e889169/email`
+          `${HB_API_BASE_PATH}electronics/users/anonymous/carts/96f344f0-367d-4893-92ce-16531e889169/email`
         )
         .query({
           email: 'guestemail@test.com',
@@ -78,6 +80,7 @@ describe('SetGuestEmailOnCart', function() {
         'mutation { setGuestEmailOnCart(input: {cart_id: "96f344f0-367d-4893-92ce-16531e889169", email: "guestemail@test.com"}) { cart { email}}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
+        assert.equal(SetGuestEmail.callCount, 1);
         let response = result.data.setGuestEmailOnCart;
         expect(response).to.deep.equals(validResponseSetGuestEmail);
       });
@@ -85,15 +88,13 @@ describe('SetGuestEmailOnCart', function() {
 
     it('Mutation: validate response should contain cart not found', () => {
       scope
-        .put(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/anonymous/carts/22/email`
-        )
+        .put(`${HB_API_BASE_PATH}electronics/users/anonymous/carts/22/email`)
         .query({
           email: 'guestemail@test.com',
           fields: 'DEFAULT',
         })
         .reply(400, cartNotFound);
-      args.context.settings.bearer = bearer;
+
       args.context.settings.customerId = 'anonymous';
       args.query =
         'mutation { setGuestEmailOnCart(input: {cart_id: "22", email: "guestemail@test.com"}) { cart { email}}}';

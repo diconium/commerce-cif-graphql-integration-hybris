@@ -20,15 +20,15 @@ const axios = require('axios');
 class ChangeCustomerPasswordLoader {
   /**
    * @param {Object} [actionParameters] Some optional parameters of the I/O Runtime action, like for example customerId, bearer token, query and url info.
+   * @returns {loadingFunction}  -This loader loads each inputs one by one, but if the 3rd party backend allows it,
+   * it could also fetch all inputs in one single request. In this case, the method
+   *  must still return an Array of inputs with the same order as the input.
+   * @param {Array} [inputs] is an Array of parameters.
    */
   constructor(actionParameters) {
-    // The loading function: "input" is an Array of parameters
-    let loadingFunction = inputs => {
+    const loadingFunction = inputs => {
       return Promise.resolve(
         inputs.map(input => {
-          // This loader loads each inputs one by one, but if the 3rd party backend allows it,
-          // it could also fetch all inputs in one single request. In this case, the method
-          // must still return an Array of inputs with the same order as the input.
           return this._generateCustomerToken(input, actionParameters).catch(
             error => {
               throw new Error(error.message);
@@ -66,14 +66,14 @@ class ChangeCustomerPasswordLoader {
       HB_PROTOCOL,
       HB_BASESITEID,
     } = actionParameters.context.settings;
-    let { currentPassword, newPassword } = input.params;
-    let body = {};
+    const { currentPassword, newPassword } = input.params;
+    const body = {};
     const config = {
       headers: {
         Authorization: `Bearer ${bearer}`,
       },
     };
-    let uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/password?new=${newPassword}&old=${currentPassword}`;
+    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/password?new=${newPassword}&old=${currentPassword}`;
 
     return new Promise((resolve, reject) => {
       axios

@@ -20,9 +20,13 @@ const axios = require('axios');
 class CustomerCartLoader {
   /**
    * @param {Object} actionParameters parameter object contains the bearer and host details
+   * @returns {loadingFunction}  -This loader loads each keys one by one, but if the 3rd party backend allows it,
+   * it could also fetch all keys in one single request. In this case, the method
+   *  must still return an Array of keys with the same order as the input.
+   * @param {Array} [keys] is an Array of parameters.
    */
   constructor(actionParameters) {
-    let loadingFunction = keys => {
+    const loadingFunction = keys => {
       return Promise.resolve(
         keys.map(key => {
           console.debug(`--> Fetching customer cart details with id ${key}`);

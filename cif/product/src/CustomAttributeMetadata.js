@@ -24,6 +24,7 @@ class CustomAttributeMetadata {
    * @param {Object} [parameters.actionParameters] Some optional parameters of the I/O Runtime action, like for example authentication info.
    * @param {CategoryTreeLoader} [parameters.categoryTreeLoader] An optional CategoryTreeLoader, to optimise caching.
    * @param {ProductsLoader} [parameters.productsLoader] An optional ProductsLoader, to optimise caching.
+   * LoaderProxy class returns a Proxy to avoid having to implement a getter for all properties.
    */
   constructor(parameters) {
     this.metaData = parameters.metaData;
@@ -32,9 +33,7 @@ class CustomAttributeMetadata {
     this.CustomAttributeMetadataLoader = new CustomAttributeMetadataLoader(
       parameters.actionParameters
     );
-    /**
-     * This class returns a Proxy to avoid having to implement a getter for all properties.
-     */
+
     return new LoaderProxy(this);
   }
 
@@ -49,7 +48,9 @@ class CustomAttributeMetadata {
   /**
    * Converts some product data from the 3rd-party commerce system into the Magento GraphQL format.
    * @param data
-   * @returns {{image: {label: *, url: string}, thumbnail: {label: *, url: string}, stock_status: string, small_image: {label: *, url: string}, price: {regularPrice: {amount: {currency: *, value: *}}}, name: *, description: {html: (*|string)}, id: number, categories: [], sku: *, url_key: *}}
+   * @returns {{image: {label: *, url: string}, thumbnail: {label: *, url: string}, stock_status: string,
+   *  small_image: {label: *, url: string}, price: {regularPrice: {amount: {currency: *, value: *}}}, name: *,
+   *  description: {html: (*|string)}, id: number, categories: [], sku: *, url_key: *}}
    * @private
    */
   __convertData() {

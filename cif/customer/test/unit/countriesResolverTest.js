@@ -15,6 +15,7 @@
 'use strict';
 
 const sinon = require('sinon');
+const assert = require('chai').assert;
 const resolve = require('../../src/countriesResolver').main;
 const chai = require('chai');
 const expect = require('chai').expect;
@@ -27,11 +28,11 @@ const hybrisCountriesList = require('../resources/hybrisGetCountries');
 const hybrisRegionsAF = require('../resources/hybrisRegionsAF.json');
 const hybrisRegionsUS = require('../resources/hybrisRegionsUS.json');
 const validResponseCountriesList = require('../resources/validResponseCountriesList');
-const ymlData = require('../../../common/options.json');
+const CountryLoader = require('../../src/CountriesLoader.js');
 
 describe('Countries Resolver', () => {
-  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
-
+  const scope = nock(TestUtils.getHybrisInstance());
+  let getCountriesList;
   before(() => {
     // Disable console debugging
     sinon.stub(console, 'debug');
@@ -43,36 +44,40 @@ describe('Countries Resolver', () => {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    getCountriesList = sinon.spy(CountryLoader.prototype, '__countries');
+  });
+
+  afterEach(() => {
+    getCountriesList.restore();
+  });
+
   describe('Unit Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
+
+    //Returns hybris configured api base path
+    const HB_API_BASE_PATH = TestUtils.getYmlData().HB_API_BASE_PATH;
 
     it('Basic countries search', () => {
       scope
-        .get(`${ymlData.HB_API_BASE_PATH}electronics/countries`)
+        .get(`${HB_API_BASE_PATH}electronics/countries`)
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisCountriesList);
       scope
-        .get(`${ymlData.HB_API_BASE_PATH}electronics/countries/AF/regions`)
+        .get(`${HB_API_BASE_PATH}electronics/countries/AF/regions`)
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisRegionsAF);
       scope
-        .get(`${ymlData.HB_API_BASE_PATH}electronics/countries/US/regions`)
+        .get(`${HB_API_BASE_PATH}electronics/countries/US/regions`)
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisRegionsUS);
       args.query = '{countries{two_letter_abbreviation, full_name_english}}';
       return resolve(args).then(result => {
         const { errors } = result;
         const { countries } = result.data;
+        assert.equal(getCountriesList.callCount, 1);
         expect(countries).to.exist.and.to.deep.equal(
           validResponseCountriesList
         );

@@ -26,6 +26,7 @@ const ProductsLoader = require('../../src/ProductsLoader.js');
 const CategoryTreeLoader = require('../../../category/src/CategoryTreeLoader.js');
 const CartLoader = require('../../../cart/src/CartLoader.js');
 const ProductLoader = require('../../../product/src/ProductLoader.js');
+const TestUtils = require('../../../utils/TestUtils.js');
 
 const basicProductSearchHybrisResponse = require('../resources/basicProductSearchHybrisResponse.json');
 const basicProductSearchGraphqlResponse = require('../resources/basicProductSearchGraphqlResponse.json');
@@ -40,10 +41,9 @@ const combinedSearchGraphqlResplonse = require('../resources/combinedSearchGraph
 const multipleSkuSearch898503HybrisResponse = require('../resources/multipleSkuSearch898503HybrisResponse.json');
 const multipleSkuSearch2278102HybrisResponse = require('../resources/multipleSkuSearch2278102HybrisResponse.json');
 const multipleSkuSearchGraphqlResponse = require('../resources/multipleSkuSearchGraphqlResponse.json');
-const ymlData = require('../../../common/options.json');
 
 describe('Dispatcher Resolver', () => {
-  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
+  const scope = nock(TestUtils.getHybrisInstance());
   let resolve;
   let searchProducts;
   let getProductBySku;
@@ -100,10 +100,14 @@ describe('Dispatcher Resolver', () => {
   });
 
   describe('Integration Tests', () => {
+    //Returns hybris configured api base path
+    const HB_API_BASE_PATH = TestUtils.getYmlData().HB_API_BASE_PATH;
     let args = {
-      url: `${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`,
+      url: TestUtils.getHybrisInstance(),
       __ow_headers: {
-        authorization: 'Bearer e771db98-ffa3-49bf-802a-c29a59d03991',
+        authorization: `Bearer ${
+          TestUtils.getContextData().context.settings.bearer
+        }`,
       },
       remoteSchemas: {
         category: {
@@ -132,7 +136,7 @@ describe('Dispatcher Resolver', () => {
         json: true,
       };
       scope
-        .get(`${ymlData.HB_API_BASE_PATH}electronics/products/search`)
+        .get(`${HB_API_BASE_PATH}electronics/products/search`)
         .query(param)
         .reply(200, basicProductSearchHybrisResponse)
         .log(console.log);
@@ -166,7 +170,7 @@ describe('Dispatcher Resolver', () => {
         json: true,
       };
       scope
-        .get(`${ymlData.HB_API_BASE_PATH}electronics/products/search`)
+        .get(`${HB_API_BASE_PATH}electronics/products/search`)
         .query(param)
         .reply(200, searchProductByCategoryIdHybrisResponse)
         .log(console.log);
@@ -188,14 +192,14 @@ describe('Dispatcher Resolver', () => {
         json: true,
       };
       scope
-        .get(`${ymlData.HB_API_BASE_PATH}electronics/products/898503`)
+        .get(`${HB_API_BASE_PATH}electronics/products/898503`)
         .query(param)
         .reply(200, combinedSearchProductbySkuHybrisResponse)
         .log(console.log);
 
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/1`
+          `${HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/1`
         )
         .query(param)
         .reply(200, combinedSearchCategoryHybrisResponse)
@@ -203,7 +207,7 @@ describe('Dispatcher Resolver', () => {
 
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/553`
+          `${HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/553`
         )
         .query(param)
         .reply(200, combinedSearchCategory553HybrisResponse)
@@ -211,7 +215,7 @@ describe('Dispatcher Resolver', () => {
 
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/574`
+          `${HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/574`
         )
         .query(param)
         .reply(200, combinedSearchCategory574HybrisResponse)
@@ -225,7 +229,7 @@ describe('Dispatcher Resolver', () => {
         json: true,
       };
       scope
-        .get(`${ymlData.HB_API_BASE_PATH}electronics/products/search`)
+        .get(`${HB_API_BASE_PATH}electronics/products/search`)
         .query(param)
         .reply(200, combinedSearchProductHybrisResponse)
         .log(console.log);
@@ -261,13 +265,13 @@ describe('Dispatcher Resolver', () => {
         json: true,
       };
       scope
-        .get(`${ymlData.HB_API_BASE_PATH}electronics/products/898503`)
+        .get(`${HB_API_BASE_PATH}electronics/products/898503`)
         .query(param)
         .reply(200, multipleSkuSearch898503HybrisResponse)
         .log(console.log);
 
       scope
-        .get(`${ymlData.HB_API_BASE_PATH}electronics/products/2278102`)
+        .get(`${HB_API_BASE_PATH}electronics/products/2278102`)
         .query(param)
         .reply(200, multipleSkuSearch2278102HybrisResponse)
         .log(console.log);

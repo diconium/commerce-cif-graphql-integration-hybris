@@ -27,13 +27,12 @@ const validResponseRemoveItemCart = require('../resources/validResponseRemoveIte
 const hybrisDeliveryModes = require('../resources/hybrisDeliveryModes.json');
 const cartNotFound = require('../resources/cartNotFound.json');
 const itemNotFound = require('../resources/cartNotFound.json');
+const RemoveItemLoader = require('../../src/RemoveItemFromCartLoader');
 const TestUtils = require('../../../utils/TestUtils.js');
-const bearer = 'df808bac-0353-4883-a7cc-67583ebb2532';
-const ymlData = require('../../../common/options.json');
 
 describe('RemoveItemFromCart', () => {
-  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
-
+  const scope = nock(TestUtils.getHybrisInstance());
+  let RemoveItem;
   before(() => {
     // Disable console debugging
     sinon.stub(console, 'debug');
@@ -45,47 +44,47 @@ describe('RemoveItemFromCart', () => {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    RemoveItem = sinon.spy(RemoveItemLoader.prototype, '_removeItemFromCart');
+  });
+
+  afterEach(() => {
+    RemoveItem.restore();
+  });
+
   describe('Unit Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
+
+    //Returns hybris configured api base path
+    const HB_API_BASE_PATH = TestUtils.getYmlData().HB_API_BASE_PATH;
 
     it('Remove item from cart with valid cartId', () => {
       scope
         .delete(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035/entries/1`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000035/entries/1`
         )
         .query({ fields: 'DEFAULT', query: '' })
         .reply(200);
       scope
-        .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035`
-        )
+        .get(`${HB_API_BASE_PATH}electronics/users/current/carts/00000035`)
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisRemoveItemCart);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymodes`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymodes`
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation {removeItemFromCart(input:{cart_id: "00000035",cart_item_uid: "1"}){cart{items{uid,product{name}quantity}prices{grand_total{value,currency}}}}}';
       return resolve(args).then(result => {
         let response = result.data.removeItemFromCart.cart;
         const { errors } = result;
         assert.isUndefined(result.errors);
+        assert.equal(RemoveItem.callCount, 1);
         expect(errors).to.be.undefined;
         expect(response).to.deep.equals(validResponseRemoveItemCart);
       });
@@ -94,23 +93,26 @@ describe('RemoveItemFromCart', () => {
     it('Mutation: validate response should contain cart not found', () => {
       scope
         .delete(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/entries/1`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/entries/1`
         )
         .query({ fields: 'DEFAULT', query: '' })
         .reply(400, cartNotFound);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID`
         )
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .query({
+          fields: 'DEFAULT',
+          access_token: `${TestUtils.getContextData().context.settings.bearer}`,
+        })
         .reply(200, hybrisRemoveItemCart);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymodes`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymodes`
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation {removeItemFromCart(input:{cart_id: "INVALID-CART-ID",cart_item_uid: "1"}){cart{items{uid,product{name}quantity}prices{grand_total{value,currency}}}}}';
       return resolve(args).then(result => {
@@ -124,27 +126,27 @@ describe('RemoveItemFromCart', () => {
       });
     });
 
-    // todo add test case for entry not found -- Done
     it('Mutation: validate response should contain cart not found', () => {
       scope
         .delete(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035/entries/0`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000035/entries/0`
         )
         .query({ fields: 'DEFAULT', query: '' })
         .reply(400, itemNotFound);
       scope
-        .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035`
-        )
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .get(`${HB_API_BASE_PATH}electronics/users/current/carts/00000035`)
+        .query({
+          fields: 'DEFAULT',
+          access_token: `${TestUtils.getContextData().context.settings.bearer}`,
+        })
         .reply(200, hybrisRemoveItemCart);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymodes`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymodes`
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation {removeItemFromCart(input:{cart_id: "00000035",cart_item_uid:"0"}){cart{items{uid,product{name}quantity}prices{grand_total{value,currency}}}}}';
       return resolve(args).then(result => {

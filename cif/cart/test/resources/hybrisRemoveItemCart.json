@@ -119,7 +119,7 @@
     "value": 976.64
   },
   "user": {
-    "name": "Test User",
-    "uid": "test.user@example.com"
+    "name": "FirstName",
+    "uid": "test@example.com"
   }
 }

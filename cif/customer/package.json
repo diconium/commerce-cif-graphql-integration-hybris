@@ -56,7 +56,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/diconium/commerce-cif-graphql-integration-hybris.git"
+    "url": "https://git.diconium.com/adobe-io/commerce-cif-graphql-integration.git"
   },
   "nyc": {
     "include": [

@@ -23,25 +23,25 @@ let cachedSchema = null;
 
 function resolve(args) {
   if (cachedSchema == null) {
-    let schemaBuilder = new SchemaBuilder()
+    const schemaBuilder = new SchemaBuilder()
       .removeMutationType()
       .filterQueryFields(new Set(['products']));
 
-    // let queryRootType = schemaBuilder.getType('Query');
+    // const queryRootType = schemaBuilder.getType('Query');
 
     /** Remove "sort" unimplemented args of the "products" field */
     // let productsField = queryRootType.fields.find(f => f.name == 'products');
     // productsField.args = productsField.args.filter(a => a.name != 'sort');
     /** Remove all fields from ProductFilterInput except "sku" */
-    let productFilterInput = schemaBuilder.getType('ProductFilterInput');
+    const productFilterInput = schemaBuilder.getType('ProductFilterInput');
     productFilterInput.inputFields = productFilterInput.inputFields.filter(
-      f => f.name == 'sku' || f.name === 'url_key'
+      f => f.name === 'sku' || f.name === 'url_key'
     );
 
     cachedSchema = schemaBuilder.build();
   }
 
-  let resolvers = {
+  const resolvers = {
     products: (params, context) => {
       let skusFlag = false;
       if (params.filter !== undefined) {

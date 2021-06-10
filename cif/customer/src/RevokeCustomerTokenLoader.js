@@ -19,15 +19,15 @@ const DataLoader = require('dataloader');
 class RevokeCustomerTokenLoader {
   /**
    * @param {Object} [actionParameters] Some optional parameters of the I/O Runtime action, like for example customerId, bearer token, query and url info.
+   * @returns {loadingFunction}  - This loader loads each inputs one by one, but if the 3rd party backend allows it,
+   * it could also fetch all inputs in one single request. In this case, the method
+   * must still return an Array of inputs with the same order as the input.
+   * @param {Array} [inputs] is an Array of parameters.
    */
   constructor(actionParameters) {
-    // The loading function: "input" is an Array of parameters
-    let loadingFunction = inputs => {
+    const loadingFunction = inputs => {
       return Promise.resolve(
         inputs.map(() => {
-          // This loader loads each inputs one by one, but if the 3rd party backend allows it,
-          // it could also fetch all inputs in one single request. In this case, the method
-          // must still return an Array of inputs with the same order as the input.
           return this._generateCustomerToken(actionParameters).catch(error => {
             throw new Error(error.message);
           });

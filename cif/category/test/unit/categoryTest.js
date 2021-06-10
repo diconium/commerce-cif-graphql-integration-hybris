@@ -30,10 +30,10 @@ const basicCategorySearchHybrisResponse = require('../resources/basicCategorySea
 const basicCategorySearchGraphqlResponse = require('../resources/basicCategorySearchGraphqlResponse.json');
 const hybrisResponseCategoryId1 = require('../resources/categoryWithProductDetailsHybrisResponse1.json');
 const categoryWithProductDetailsGraphqlResponse = require('../resources/categoryWithProductDetailsGraphqlResponse.json');
-const ymlData = require('../../../common/options.json');
+const TestUtils = require('../../../utils/TestUtils.js');
 
 describe('Dispatcher Resolver', () => {
-  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
+  const scope = nock(TestUtils.getHybrisInstance());
 
   let resolve;
   let searchProducts;
@@ -85,8 +85,10 @@ describe('Dispatcher Resolver', () => {
   });
 
   describe('Integration Tests', () => {
+    //Returns hybris configured api base path
+    const HB_API_BASE_PATH = TestUtils.getYmlData().HB_API_BASE_PATH;
     let args = {
-      url: `${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`,
+      url: TestUtils.getHybrisInstance(),
       __ow_headers: {
         authorization: '',
       },
@@ -111,7 +113,7 @@ describe('Dispatcher Resolver', () => {
       };
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/1`
+          `${HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/1`
         )
         .query(param)
         .reply(200, basicCategorySearchHybrisResponse)
@@ -142,7 +144,7 @@ describe('Dispatcher Resolver', () => {
       };
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/1`
+          `${HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/1`
         )
         .query(param)
         .reply(200, basicCategorySearchHybrisResponse)
@@ -155,7 +157,7 @@ describe('Dispatcher Resolver', () => {
         json: true,
       };
       scope
-        .get(`${ymlData.HB_API_BASE_PATH}electronics/products/search`)
+        .get(`${HB_API_BASE_PATH}electronics/products/search`)
         .query(param)
         .reply(200, hybrisResponseCategoryId1)
         .log(console.log);

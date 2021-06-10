@@ -217,7 +217,7 @@
       "priceType": "BUY",
       "value": 3.09
    },
-   "test.user@example.com": {
+   "user": {
       "name": "test 4",
       "uid": "test4@test.com"
    },

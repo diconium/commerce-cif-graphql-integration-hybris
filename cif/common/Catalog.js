@@ -18,7 +18,7 @@ const ProductsLoader = require('../product/src/ProductsLoader.js');
 const ProductLoader = require('../product/src/ProductLoader.js');
 const CategoryTreeLoader = require('../category/src/CategoryTreeLoader.js');
 const LoaderProxy = require('./LoaderProxy.js');
-const ymlData = require('./../common/options.json');
+const Options = require('./Options.js');
 // This module contains 3 classes because they have cross/cyclic dependencies to each other
 // and it's not possible to have them in separate files because this is not supported by Javascript
 
@@ -30,6 +30,7 @@ class CategoryTree {
    * @param {Object} [parameters.actionParameters] Some optional parameters of the I/O Runtime action, like for example authentication info.
    * @param {CategoryTreeLoader} [parameters.categoryTreeLoader] An optional CategoryTreeLoader, to optimise caching.
    * @param {ProductsLoader} [parameters.productsLoader] An optional ProductsLoader, to optimise caching.
+   * LoaderProxy class returns a Proxy to avoid having to implement a getter for all properties.
    */
   constructor(parameters) {
     /* cateId to get CategoryId from url */
@@ -41,12 +42,14 @@ class CategoryTree {
       cateId = cateId.split('/');
       cateId = cateId[cateId.length - 1];
     }
-    this.categoryId =
-      parameters.categoryId.category_uid !== undefined
-        ? parameters.categoryId.category_uid.eq
-        : parameters.categoryId.url_key !== undefined
-        ? cateId
-        : parameters.categoryId;
+    if (parameters.categoryId.category_uid !== undefined) {
+      this.categoryId = parameters.categoryId.category_uid.eq;
+    } else if (parameters.categoryId.url_key !== undefined) {
+      this.categoryId = cateId;
+    } else {
+      this.categoryId = parameters.categoryId;
+    }
+
     this.urlName = parameters.urlName || null;
     this.graphqlContext = parameters.graphqlContext;
     this.actionParameters = parameters.actionParameters;
@@ -57,9 +60,6 @@ class CategoryTree {
       parameters.productsLoader ||
       new ProductsLoader(parameters.actionParameters);
 
-    /**
-     * This class returns a Proxy to avoid having to implement a getter for all properties.
-     */
     return new LoaderProxy(this);
   }
 
@@ -118,23 +118,25 @@ class CategoryTree {
    * @returns {Promise<T>}
    */
   get children() {
-    return this.__load().then(data => {
-      if (!data.subcategories || data.subcategories.length == 0) {
-        return [];
-      }
-      return data.subcategories.map(category => {
-        this.categoryTreeLoader.prime(category.id, category);
-        return new CategoryTree({
-          categoryId: category.id,
-          urlName:
-            (this.urlName !== null ? this.urlName + '/' : '') + category.id,
-          graphqlContext: this.graphqlContext,
-          actionParameters: this.actionParameters,
-          categoryTreeLoader: this.categoryTreeLoader,
-          productsLoader: this.productsLoader,
+    return this.__load()
+      .then(data => {
+        if (!data.subcategories || data.subcategories.length === 0) {
+          return [];
+        }
+        return data.subcategories.map(category => {
+          this.categoryTreeLoader.prime(category.id, category);
+          return new CategoryTree({
+            categoryId: category.id,
+            urlName:
+              (this.urlName !== null ? `${this.urlName}/` : '') + category.id,
+            graphqlContext: this.graphqlContext,
+            actionParameters: this.actionParameters,
+            categoryTreeLoader: this.categoryTreeLoader,
+            productsLoader: this.productsLoader,
+          });
         });
-      });
-    });
+      })
+      .catch(errorOutput => Promise.reject(errorOutput));
   }
 
   /**
@@ -142,9 +144,11 @@ class CategoryTree {
    * @returns {Promise<T>}
    */
   get children_count() {
-    return this.__load().then(data => {
-      return data.subcategories ? data.subcategories.length : 0;
-    });
+    return this.__load()
+      .then(data => {
+        return data.subcategories ? data.subcategories.length : 0;
+      })
+      .catch(errorOutput => Promise.reject(errorOutput));
   }
 
   /**
@@ -152,16 +156,18 @@ class CategoryTree {
    * @returns {Promise<T>}
    */
   get product_count() {
-    return this.__load().then(data => {
-      let searchKey = {
-        categoryId: data.id,
-        pageSize: 20,
-        currentPage: 1,
-      };
-      return this.productsLoader.load(searchKey).then(response => {
-        return response.pagination.totalResults;
-      });
-    });
+    return this.__load()
+      .then(data => {
+        const searchKey = {
+          categoryId: data.id,
+          pageSize: 20,
+          currentPage: 1,
+        };
+        return this.productsLoader.load(searchKey).then(response => {
+          return response.pagination.totalResults;
+        });
+      })
+      .catch(errorOutput => Promise.reject(errorOutput));
   }
 
   /**
@@ -219,7 +225,7 @@ class Products {
    */
   __load() {
     console.debug(
-      'Loading products for ' + JSON.stringify(this.search, null, 0)
+      `Loading products for ${JSON.stringify(this.search, null, 0)}`
     );
     return this.productsLoader.load(this.search);
   }
@@ -248,21 +254,23 @@ class Products {
    * @returns {Promise<T>}
    */
   get items() {
-    return this.__load().then(() => {
-      if (!this.data.products || this.data.products.length == 0) {
-        return [];
-      }
+    return this.__load()
+      .then(() => {
+        if (!this.data.products || this.data.products.length === 0) {
+          return [];
+        }
 
-      return this.data.products.map(productData => {
-        return new Product({
-          productData: productData,
-          graphqlContext: this.graphqlContext,
-          actionParameters: this.actionParameters,
-          categoryTreeLoader: this.categoryTreeLoader,
-          productsLoader: this.productsLoader,
+        return this.data.products.map(productData => {
+          return new Product({
+            productData: productData,
+            graphqlContext: this.graphqlContext,
+            actionParameters: this.actionParameters,
+            categoryTreeLoader: this.categoryTreeLoader,
+            productsLoader: this.productsLoader,
+          });
         });
-      });
-    });
+      })
+      .catch(errorOutput => Promise.reject(errorOutput));
   }
 }
 
@@ -329,7 +337,9 @@ class Product {
   /**
    * Converts some product data from the 3rd-party commerce system into the Magento GraphQL format.
    * @param data
-   * @returns {{image: {label: *, url: string}, thumbnail: {label: *, url: string}, stock_status: string, small_image: {label: *, url: string}, price: {regularPrice: {amount: {currency: *, value: *}}}, name: *, description: {html: (*|string)}, id: number, categories: [], sku: *, url_key: *}}
+   * @returns {{image: {label: *, url: string}, thumbnail: {label: *, url: string}, stock_status: string,
+   *  small_image: {label: *, url: string}, price: {regularPrice: {amount: {currency: *, value: *}}}, name: *,
+   *  description: {html: (*|string)}, id: number, categories: [], sku: *, url_key: *}}
    * @private
    */
   __convertData(data) {
@@ -461,7 +471,7 @@ class ProductsBySkus {
    * @private
    */
   __load() {
-    console.debug('Loading products for ' + JSON.stringify(this.skus, null, 0));
+    console.debug(`Loading products for ${JSON.stringify(this.skus, null, 0)}`);
     return this.ProductLoader.loadMany(this.skus);
   }
 
@@ -492,21 +502,23 @@ class ProductsBySkus {
    * @returns {Promise<T>}
    */
   get items() {
-    return this.__load().then(() => {
-      if (!this.data || this.data.length == 0) {
-        return [];
-      }
+    return this.__load()
+      .then(() => {
+        if (!this.data || this.data.length === 0) {
+          return [];
+        }
 
-      return this.data.map(productData => {
-        return new Product({
-          productData: productData,
-          graphqlContext: this.graphqlContext,
-          actionParameters: this.actionParameters,
-          categoryTreeLoader: this.categoryTreeLoader,
-          productsLoader: this.productsLoader,
+        return this.data.map(productData => {
+          return new Product({
+            productData: productData,
+            graphqlContext: this.graphqlContext,
+            actionParameters: this.actionParameters,
+            categoryTreeLoader: this.categoryTreeLoader,
+            productsLoader: this.productsLoader,
+          });
         });
-      });
-    });
+      })
+      .catch(errorOutput => Promise.reject(errorOutput));
   }
 }
 
@@ -519,6 +531,7 @@ class MediaGallery {
    *
    */
   constructor(parameters) {
+    const ymlData = Options.get();
     this.url = `${ymlData.HB_SECURE_BASE_MEDIA_URL}${parameters.url}`;
     this.position = parameters.position;
     this.label = parameters.label;

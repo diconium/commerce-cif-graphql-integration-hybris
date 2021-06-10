@@ -23,7 +23,7 @@ let cachedSchema = null;
 
 function resolve(args) {
   if (cachedSchema == null) {
-    let schemaBuilder = new SchemaBuilder()
+    const schemaBuilder = new SchemaBuilder()
       .removeMutationType()
       .filterQueryFields(new Set(['customAttributeMetadata']));
 
@@ -31,7 +31,7 @@ function resolve(args) {
   }
 
   // Builds the resolvers object
-  let resolvers = {
+  const resolvers = {
     customAttributeMetadata: (params, context) => {
       return new CustomAttributeMetadata({
         metaData: params,

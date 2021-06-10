@@ -31,9 +31,9 @@ class RemoteResolverFetcher {
   }
 
   __fetch(params) {
-    let query = print(params.query); // Convert from AST to String
-    let context = params.context ? params.context.graphqlContext : null;
-    let ow = openwhisk();
+    const query = print(params.query); // Convert from AST to String
+    const context = params.context ? params.context.graphqlContext : null;
+    const ow = openwhisk();
     return ow.actions.invoke({
       actionName: this.actionName,
       blocking: true,

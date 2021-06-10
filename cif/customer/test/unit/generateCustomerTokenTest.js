@@ -25,12 +25,12 @@ const assert = require('chai').assert;
 const hybrisGenerateCustomerToken = require('../resources/hybrisGenerateCustomerToken.json');
 const validGenerateCustomerToken = require('../resources/validGenerateCustomerToken.json');
 //const badClientCredentials = require('../resources/badClientCredentials.json');
+const TokenLoader = require('../../src/GenerateCustomerTokenLoader.js');
 const TestUtils = require('../../../utils/TestUtils.js');
-const ymlData = require('../../../common/options.json');
 
 describe('GenerateCustomerToken', () => {
-  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
-
+  const scope = nock(TestUtils.getHybrisInstance());
+  let customerToken;
   before(() => {
     // Disable console debugging
     sinon.stub(console, 'debug');
@@ -42,23 +42,18 @@ describe('GenerateCustomerToken', () => {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    customerToken = sinon.spy(TokenLoader.prototype, '_generateCustomerToken');
+  });
+
+  afterEach(() => {
+    customerToken.restore();
+  });
+
   describe('Unit Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-          HB_CLIENTSECRET: 'adobeio20180605',
-          HB_CLIENTID: ymlData.HB_CLIENTID,
-          HB_OAUTH_PATH: ymlData.HB_OAUTH_PATH,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
 
     it('Mutation: Generate customer token unit', () => {
       scope
@@ -66,10 +61,11 @@ describe('GenerateCustomerToken', () => {
         .query({ operationType: 'oAuth' })
         .reply(200, hybrisGenerateCustomerToken);
       args.query =
-        'mutation {generateCustomerToken(email: "test.user@example.com", password: "123456"){token}}';
+        'mutation {generateCustomerToken(email: "test@example.com", password: "123456"){token}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
         let response = result.data.generateCustomerToken.token;
+        assert.equal(customerToken.callCount, 1);
         expect(response).to.deep.equals(validGenerateCustomerToken.token);
       });
     });

@@ -29,13 +29,12 @@ const hybrisCartData = require('../../../cart/test/resources/hybrisCartQuery.jso
 const hybrisDeliveryModes = require('../resources/hybrisDeliveryModes.json');
 const validResponseSetPaymentMethodOnCart = require('../resources/validResponseSetPaymentMethodOnCart.json');
 const inValidCart = require('../resources/inValidCart.json');
-const bearer = '3d5fde05-abe7-4345-b75e-c0c9405124c3';
+const PaymentMethodLoader = require('../../../customer/src/SetPaymentMethodOnCartLoader');
 const TestUtils = require('../../../utils/TestUtils.js');
-const ymlData = require('../../../common/options.json');
 
 describe('setPaymentMethodOnCart', () => {
-  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
-
+  const scope = nock(TestUtils.getHybrisInstance());
+  let PaymentMethod;
   before(() => {
     // Disable console debugging
     sinon.stub(console, 'debug');
@@ -47,45 +46,47 @@ describe('setPaymentMethodOnCart', () => {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    PaymentMethod = sinon.spy(
+      PaymentMethodLoader.prototype,
+      '_postPaymentMethodOnCart'
+    );
+  });
+
+  afterEach(() => {
+    PaymentMethod.restore();
+  });
+
   describe('Unit Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
+
+    //Returns hybris configured api base path
+    const HB_API_BASE_PATH = TestUtils.getYmlData().HB_API_BASE_PATH;
 
     it('Mutation: validate payment method on cart', () => {
       scope
         .post(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000014/paymentdetails`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000014/paymentdetails`
         )
         .query({ fields: 'DEFAULT' })
         .reply(200, hybrisSetPaymentMethodOnCart);
       scope
-        .get(`${ymlData.HB_API_BASE_PATH}electronics/users/current/addresses`)
+        .get(`${HB_API_BASE_PATH}electronics/users/current/addresses`)
         .query({ fields: 'DEFAULT', query: '' })
         .reply(200, hybrisCustomerAddresses);
       scope
-        .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000014`
-        )
+        .get(`${HB_API_BASE_PATH}electronics/users/current/carts/00000014`)
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisCartData);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000014/deliverymodes`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000014/deliverymodes`
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation{setPaymentMethodOnCart(input:{cart_id:"00000014",payment_method:{code:"visa"}}){cart{selected_payment_method{code,title}}}}';
       return resolve(args).then(result => {
@@ -95,6 +96,7 @@ describe('setPaymentMethodOnCart', () => {
           validResponseSetPaymentMethodOnCart.selected_payment_method;
         const { errors } = result;
         assert.isUndefined(result.errors);
+        assert.equal(PaymentMethod.callCount, 1);
         expect(errors).to.be.undefined;
         assert.equal(res.code, testData.code);
         assert.equal(res.title, testData.title);
@@ -104,27 +106,25 @@ describe('setPaymentMethodOnCart', () => {
     it('Mutation: validate response should contain cart not found', () => {
       scope
         .post(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000005/paymentdetails`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000005/paymentdetails`
         )
         .query({ fields: 'DEFAULT' })
         .reply(400, inValidCart);
       scope
-        .get(`${ymlData.HB_API_BASE_PATH}electronics/users/current/addresses`)
+        .get(`${HB_API_BASE_PATH}electronics/users/current/addresses`)
         .query({ fields: 'DEFAULT', query: '' })
         .reply(200, hybrisCustomerAddresses);
       scope
-        .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000005`
-        )
+        .get(`${HB_API_BASE_PATH}electronics/users/current/carts/00000005`)
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisCartData);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000005/deliverymodes`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000005/deliverymodes`
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation{setPaymentMethodOnCart(input:{cart_id:"00000005",payment_method:{code:"visa"}}){cart{selected_payment_method{code,title}}}}';
       return resolve(args).then(result => {
@@ -141,27 +141,25 @@ describe('setPaymentMethodOnCart', () => {
     it('Mutation: validate Invalid payment method', () => {
       scope
         .post(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000014/paymentdetails`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000014/paymentdetails`
         )
         .query({ fields: 'DEFAULT' })
         .reply(400, invalidpaymentmethod);
       scope
-        .get(`${ymlData.HB_API_BASE_PATH}electronics/users/current/addresses`)
+        .get(`${HB_API_BASE_PATH}electronics/users/current/addresses`)
         .query({ fields: 'DEFAULT', query: '' })
         .reply(200, hybrisCustomerAddresses);
       scope
-        .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000014`
-        )
+        .get(`${HB_API_BASE_PATH}electronics/users/current/carts/00000014`)
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisCartData);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000014/deliverymodes`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000014/deliverymodes`
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation{setPaymentMethodOnCart(input:{cart_id:"00000014",payment_method:{code:"INVALID-PAYMENT-METHOD"}}){cart{selected_payment_method{code,title}}}}';
       return resolve(args).then(result => {

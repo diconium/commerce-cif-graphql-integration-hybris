@@ -27,12 +27,12 @@ const validResponseSetBillingAddress = require('../resources/validResponseSetBil
 const cartNotFound = require('../resources/cartNotFound.json');
 const invalidRegionCode = require('../resources/invalidRegionCode.json');
 const invalidCountryCode = require('../resources/invalidCountryCode.json');
+const BillingAddressLoader = require('../../src/SetBillingAddressOnCartLoader');
 const TestUtils = require('../../../utils/TestUtils.js');
-const bearer = 'a7db795c-b1c2-46d9-a201-16130b6099af';
-const ymlData = require('../../../common/options.json');
 
 describe('SetBillingAddress OnCart', function() {
-  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
+  const scope = nock(TestUtils.getHybrisInstance());
+  let BillingAddress;
   before(() => {
     sinon.stub(console, 'debug');
     sinon.stub(console, 'error');
@@ -43,30 +43,35 @@ describe('SetBillingAddress OnCart', function() {
     console.error.restore();
   });
 
-  let args = {
-    url: TestUtils.getHybrisInstance(),
-    context: {
-      settings: {
-        bearer: '',
-        customerId: 'current',
-        HB_PROTOCOL: ymlData.HB_PROTOCOL,
-        HB_API_HOST: ymlData.HB_API_HOST,
-        HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-        HB_BASESITEID: ymlData.HB_BASESITEID,
-      },
-    },
-  };
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    BillingAddress = sinon.spy(
+      BillingAddressLoader.prototype,
+      '_setBillingAddressOnCart'
+    );
+  });
+
+  afterEach(() => {
+    BillingAddress.restore();
+  });
+
+  //Returns object with hybris url and configuaration data
+  let args = TestUtils.getContextData();
+
+  //Returns hybris configured api base path
+  const HB_API_BASE_PATH = TestUtils.getYmlData().HB_API_BASE_PATH;
 
   it('Mutation: Should successfully post billing address for the cart', () => {
     scope
-      .post(`${ymlData.HB_API_BASE_PATH}electronics/users/current/addresses`)
+      .post(`${HB_API_BASE_PATH}electronics/users/current/addresses`)
       .query({ fields: 'DEFAULT' })
       .reply(200, hybrisBillingAddress);
-    args.context.settings.bearer = bearer;
+
     args.query =
       'mutation {setBillingAddressOnCart(input: {cart_id: "00000035", billing_address: {address: {firstname: "Bob", lastname: "Roll", company: "Magento", street: ["Magento Pkwy", "Main Street"], city: "Austin", region: "US-WA", postcode: "78758", country_code: "US", telephone: "9999998899", save_in_address_book: true}, use_for_shipping: false}}) {cart { billing_address {firstname,lastname,company,street,city, region {code, label}, postcode,telephone,country {code,label}}}}}';
     return resolve(args).then(result => {
       assert.isUndefined(result.errors);
+      assert.equal(BillingAddress.callCount, 1);
       let setBillingAddressesOnCart =
         result.data.setBillingAddressOnCart.cart.billing_address;
       expect(setBillingAddressesOnCart).to.deep.equals(
@@ -77,10 +82,10 @@ describe('SetBillingAddress OnCart', function() {
 
   it('Mutation: validate response should contain cart not found', () => {
     scope
-      .post(`${ymlData.HB_API_BASE_PATH}electronics/users/current/addresses`)
+      .post(`${HB_API_BASE_PATH}electronics/users/current/addresses`)
       .query({ fields: 'DEFAULT' })
       .reply(400, cartNotFound);
-    args.context.settings.bearer = bearer;
+
     args.query =
       'mutation {setBillingAddressOnCart(input: {cart_id: "00000002", billing_address: {address: {firstname: "Bob", lastname: "Roll", company: "Magento", street: ["Magento Pkwy", "Main Street"], city: "Austin", region: "US-WA", postcode: "78758", country_code: "US", telephone: "9999998899", save_in_address_book: true}, use_for_shipping: false}}) {cart { billing_address {firstname,lastname,company,street,city, region {code, label}, postcode,telephone,country {code,label}}}}}';
     return resolve(args).then(result => {
@@ -96,10 +101,10 @@ describe('SetBillingAddress OnCart', function() {
 
   it('Mutation: validate response should contain invalid region code found', () => {
     scope
-      .post(`${ymlData.HB_API_BASE_PATH}electronics/users/current/addresses`)
+      .post(`${HB_API_BASE_PATH}electronics/users/current/addresses`)
       .query({ fields: 'DEFAULT' })
       .reply(400, invalidRegionCode);
-    args.context.settings.bearer = bearer;
+
     args.query =
       'mutation {setBillingAddressOnCart(input: {cart_id: "00000004", billing_address: {address: {firstname: "Bob", lastname: "Roll", company: "Magento", street: ["Magento Pkwy", "Main Street"], city: "Austin", region: "US-WA", postcode: "78758", country_code: "US", telephone: "9999998899", save_in_address_book: true}, use_for_shipping: false}}) {cart { billing_address {firstname,lastname,company,street,city, region {code, label}, postcode,telephone,country {code,label}}}}}';
     return resolve(args).then(result => {
@@ -115,10 +120,10 @@ describe('SetBillingAddress OnCart', function() {
 
   it('Mutation: validate response should contain invalid country code', () => {
     scope
-      .post(`${ymlData.HB_API_BASE_PATH}electronics/users/current/addresses`)
+      .post(`${HB_API_BASE_PATH}electronics/users/current/addresses`)
       .query({ fields: 'DEFAULT' })
       .reply(400, invalidCountryCode);
-    args.context.settings.bearer = bearer;
+
     args.query =
       'mutation {setBillingAddressOnCart(input: {cart_id: "00000004", billing_address: {address: {firstname: "Bob", lastname: "Roll", company: "Magento", street: ["Magento Pkwy", "Main Street"], city: "Austin", region: "US-WA", postcode: "78758", country_code: "US", telephone: "9999998899", save_in_address_book: true}, use_for_shipping: false}}) {cart { billing_address {firstname,lastname,company,street,city, region {code, label}, postcode,telephone,country {code,label}}}}}';
     return resolve(args).then(result => {

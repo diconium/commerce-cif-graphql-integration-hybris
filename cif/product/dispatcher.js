@@ -33,7 +33,7 @@ function resolve(args) {
   if (cachedSchema == null && args.remoteSchemas) {
     // Get all resolver actions to fetch the remote schemas dynamically
     remoteResolvers = Object.values(args.remoteSchemas).map(resolver => {
-      let fetcher = new RemoteResolverFetcher(resolver.action).fetcher;
+      const fetcher = new RemoteResolverFetcher(resolver.action).fetcher;
       return introspectSchema(fetcher).then(schema => {
         return Promise.resolve({
           schema,
@@ -49,11 +49,11 @@ function resolve(args) {
   return Promise.all(remoteResolvers)
     .then(remotes => {
       if (cachedSchema == null) {
-        let remoteExecutableSchemas = [localSchema()];
+        const remoteExecutableSchemas = [localSchema()];
 
         if (args.remoteSchemas) {
           remotes.forEach(remote => {
-            let remoteExecutableSchema = makeRemoteExecutableSchema({
+            const remoteExecutableSchema = makeRemoteExecutableSchema({
               schema: remote.schema,
               fetcher: remote.fetcher,
             });
@@ -68,7 +68,7 @@ function resolve(args) {
           return diff <= 0 ? left : right;
         };
 
-        let finalSchema = mergeSchemas({
+        const finalSchema = mergeSchemas({
           schemas: remoteExecutableSchemas,
           onTypeConflict: onTypeConflict,
         });
@@ -77,13 +77,13 @@ function resolve(args) {
       }
 
       // Passed to all resolver actions, can for example contain an authentication token
-      let context = {
+      const context = {
         user: 'anonymous',
         settings: settings,
       };
 
       // Local resolvers object
-      let resolvers = {
+      const resolvers = {
         storeConfig: () => ({
           secure_base_media_url: '',
         }),
@@ -109,7 +109,7 @@ function resolve(args) {
 }
 
 function localSchema() {
-  let schemaBuilder = new SchemaBuilder()
+  const schemaBuilder = new SchemaBuilder()
     .removeMutationType()
     .filterQueryFields(new Set(['storeConfig']));
 

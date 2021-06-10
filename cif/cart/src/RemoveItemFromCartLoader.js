@@ -19,15 +19,14 @@ const axios = require('axios');
 
 class RemoveItemFromCartLoader {
   /**
-   * @param {Object} [actionParameters] Some optional parameters of the I/O Runtime action, like for example authentication info.
+   * @param {Object} [actionParameters] Some optional parameters of the I/O Runtime action, like for example authentication info
+   * @returns {loadingFunction}  -This loader loads each cart one by one, but if the 3rd party backend allows it,
+   * it could also fetch all carts in one single request. In this case, the method must still return an Array of
+   * carts with the same order as the keys.
+   * @param {Array} [cartInputs] is an Array of cart ids.
    */
   constructor(actionParameters) {
-    let loadingFunction = cartInputs => {
-      /**
-       *This loader loads each cart one by one, but if the 3rd party backend allows it,
-       *it could also fetch all carts in one single request. In this case, the method
-       *must still return an Array of carts with the same order as the keys.
-       */
+    const loadingFunction = cartInputs => {
       return Promise.resolve(
         cartInputs.map(cartInput => {
           console.debug(

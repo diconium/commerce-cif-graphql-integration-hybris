@@ -50,18 +50,21 @@ class ApplyCouponToCart {
 
   /**
    * get cart method call cart loader to get the cart entries
+   * @returns {Promise} a promise return null after resolved successfully other wise return the error.
    */
   get cart() {
     const { cart_id: cartId } = this.input;
 
-    return this.__load().then(() => {
-      return new Cart({
-        graphqlContext: this.graphqlContext,
-        actionParameters: this.actionParameters,
-        cartLoader: this.cartLoader,
-        cartId: cartId,
-      });
-    });
+    return this.__load()
+      .then(() => {
+        return new Cart({
+          graphqlContext: this.graphqlContext,
+          actionParameters: this.actionParameters,
+          cartLoader: this.cartLoader,
+          cartId: cartId,
+        });
+      })
+      .catch(errorOutput => Promise.reject(errorOutput));
   }
 }
 

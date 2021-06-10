@@ -20,9 +20,13 @@ const axios = require('axios');
 class AddressLoader {
   /**
    * @param {Object} actionParameters parameter object contains the bearer and host details
+   * @returns {loadingFunction}  -This loader loads each customer one by one, but if the 3rd party backend allows it,
+   * it could also fetch all customer in one single request. In this case, the method must still return an Array of
+   * customer with the same order as the keys.
+   * @param {Array} [keys] is an Array of customer ids.
    */
   constructor(actionParameters) {
-    let loadingFunction = keys => {
+    const loadingFunction = keys => {
       return Promise.resolve(
         keys.map(key => {
           console.debug(`--> Fetching customer with id ${key}`);

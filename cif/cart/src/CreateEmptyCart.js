@@ -62,7 +62,7 @@ class CreateEmptyCart {
       HB_PROTOCOL,
       HB_BASESITEID,
     } = actionParameters.context.settings;
-    let uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts?fields=DEFAULT`;
+    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts?fields=DEFAULT`;
     const config = {
       headers: {
         Authorization: `Bearer ${bearer}`,

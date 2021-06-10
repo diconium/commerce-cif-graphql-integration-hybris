@@ -32,6 +32,11 @@ module.exports = {
         test: /\.mjs$/,
         type: 'javascript/auto',
       },
+      {
+        test: /\.ya?ml$/,
+        type: 'json',
+        use: 'yaml-loader',
+      },
     ],
   },
   resolve: {

@@ -26,12 +26,12 @@ const hybrisPlaceOrder = require('../resources/hybrisPlaceOrder.json');
 const cartNotFound = require('../../../cart/test/resources/cartNotFound.json');
 const deliveryAddressNotSet = require('../resources/deliveryAddressNotSet.json');
 const paymentInfoNotSet = require('../resources/paymentInfoNotSet.json');
-const bearer = '25ef07a8-2793-4bb9-bb96-b9e1984f9549';
+const PlaceOrderLoader = require('../../src/PlaceOrderLoader');
 const TestUtils = require('../../../utils/TestUtils.js');
-const ymlData = require('../../../common/options.json');
 
 describe('Place order', function() {
-  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
+  const scope = nock(TestUtils.getHybrisInstance());
+  let PlaceOrder;
   before(() => {
     sinon.stub(console, 'debug');
     sinon.stub(console, 'error');
@@ -42,35 +42,37 @@ describe('Place order', function() {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    PlaceOrder = sinon.spy(PlaceOrderLoader.prototype, '_placeOrder');
+  });
+
+  afterEach(() => {
+    PlaceOrder.restore();
+  });
+
   describe('Validation', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
+
+    //Returns hybris configured api base path
+    const HB_API_BASE_PATH = TestUtils.getYmlData().HB_API_BASE_PATH;
 
     it('Mutation: validate response should return valid order id', () => {
       scope
-        .post(`${ymlData.HB_API_BASE_PATH}electronics/users/current/orders`)
+        .post(`${HB_API_BASE_PATH}electronics/users/current/orders`)
         .query({
           fields: 'DEFAULT',
           cartId: '00000040',
-          access_token: `${bearer}`,
+          access_token: `${TestUtils.getContextData().context.settings.bearer}`,
         })
         .reply(200, hybrisPlaceOrder);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation { placeOrder(input: {cart_id: "00000040"}) {order { order_id}}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
+        assert.equal(PlaceOrder.callCount, 1);
         let responseData = result.data.placeOrder.order;
         expect(responseData)
           .to.be.ok.and.to.haveOwnProperty('order_id')
@@ -80,14 +82,14 @@ describe('Place order', function() {
 
     it('Mutation: validate response should contain cart not found', () => {
       scope
-        .post(`${ymlData.HB_API_BASE_PATH}electronics/users/current/orders`)
+        .post(`${HB_API_BASE_PATH}electronics/users/current/orders`)
         .query({
           fields: 'DEFAULT',
           cartId: 'CART NOT FOUND',
-          access_token: `${bearer}`,
+          access_token: `${TestUtils.getContextData().context.settings.bearer}`,
         })
         .reply(400, cartNotFound);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation { placeOrder(input: {cart_id: "CART NOT FOUND"}) {order { order_id}}}';
       return resolve(args).then(result => {
@@ -103,14 +105,14 @@ describe('Place order', function() {
 
     it('Mutation: validate response should contain Delivery mode is not set', () => {
       scope
-        .post(`${ymlData.HB_API_BASE_PATH}electronics/users/current/orders`)
+        .post(`${HB_API_BASE_PATH}electronics/users/current/orders`)
         .query({
           fields: 'DEFAULT',
           cartId: '00000040',
-          access_token: `${bearer}`,
+          access_token: `${TestUtils.getContextData().context.settings.bearer}`,
         })
         .reply(400, deliveryAddressNotSet);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation { placeOrder(input: {cart_id: "00000040"}) {order { order_id}}}';
       return resolve(args).then(result => {
@@ -126,14 +128,14 @@ describe('Place order', function() {
 
     it('Mutation: validate response should contain Payment info is not set', () => {
       scope
-        .post(`${ymlData.HB_API_BASE_PATH}electronics/users/current/orders`)
+        .post(`${HB_API_BASE_PATH}electronics/users/current/orders`)
         .query({
           fields: 'DEFAULT',
           cartId: '00000040',
-          access_token: `${bearer}`,
+          access_token: `${TestUtils.getContextData().context.settings.bearer}`,
         })
         .reply(400, paymentInfoNotSet);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation { placeOrder(input: {cart_id: "00000040"}) {order { order_id}}}';
       return resolve(args).then(result => {

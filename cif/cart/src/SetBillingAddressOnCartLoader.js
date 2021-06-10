@@ -22,17 +22,16 @@ class SetBillingAddressOnCartLoader {
    * @param {Object} parameters parameter object contains the cartId,billingAddress,graphqlContext & actionParameters
    * @param {Object} parameters.billingAddress parameter contains the billingaddress details
    * @param {Object} [parameters.actionParameters] Some optional parameters of the I/O Runtime action, like for example customerId, bearer token, query and url info.
+   * @returns {loadingFunction}  -This loader loads each cart one by one, but if the 3rd party backend allows it,
+   * it could also fetch all carts in one single request. In this case, the method
+   * must still return an Array of carts with the same order as the keys.
+   * @param {Array} [cartIds] is an Array of cart ids
    */
   constructor(parameters) {
     this.billingAddressObj = parameters.billingAddress;
     this.actionParameters = parameters.actionParameters;
-    /** The loading function: "cartIds" is an Array of cart ids */
-    let loadingFunction = cartIds => {
-      /**
-       *This loader loads each cart one by one, but if the 3rd party backend allows it,
-       *it could also fetch all carts in one single request. In this case, the method
-       *must still return an Array of carts with the same order as the keys.
-       */
+
+    const loadingFunction = cartIds => {
       return Promise.resolve(
         cartIds.map(cartId => {
           return this._setBillingAddressOnCart(
@@ -75,8 +74,8 @@ class SetBillingAddressOnCartLoader {
       HB_BASESITEID,
     } = actionParameters.context.settings;
 
-    let setBillingAddressesObj = billingAddress.address;
-    let body = {
+    const setBillingAddressesObj = billingAddress.address;
+    const body = {
       companyName: setBillingAddressesObj.company,
       country: {
         isocode: setBillingAddressesObj.country_code,

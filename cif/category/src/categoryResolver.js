@@ -23,14 +23,14 @@ let cachedSchema = null;
 
 function resolve(args) {
   if (cachedSchema == null) {
-    let schemaBuilder = new SchemaBuilder()
+    const schemaBuilder = new SchemaBuilder()
       .removeMutationType()
       .filterQueryFields(new Set(['category', 'categoryList']));
 
     cachedSchema = schemaBuilder.build();
   }
 
-  let resolvers = {
+  const resolvers = {
     categoryList: (params, context) => {
       return [
         new CategoryTree({

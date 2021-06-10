@@ -1,6 +1,6 @@
 {
   "cart": {
-    "email": "test.user@example.com",
+    "email": "test@example.com",
     "billing_address": null,
     "shipping_addresses": [],
     "items": [

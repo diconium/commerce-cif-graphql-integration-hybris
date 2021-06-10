@@ -5,7 +5,7 @@
         "isocode": "US"
       },
       "defaultAddress": true,
-      "firstName": "Test User",
+      "firstName": "USER_FN",
       "id": "8796125822999",
       "lastName": "Maria",
       "line1": "street name",

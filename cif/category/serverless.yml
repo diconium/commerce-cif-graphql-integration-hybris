@@ -33,8 +33,8 @@ functions:
         categoryList:
           order: 10
           action: hybris-graphql-categoryList/categoryList
-    categoryList:
-      name: hybris-graphql-categoryList/categoryList
-      handler: src/categoryResolver.main
-      concurrency: 200
+  categoryList:
+    name: hybris-graphql-categoryList/categoryList
+    handler: src/categoryResolver.main
+    concurrency: 200
   

@@ -19,13 +19,14 @@ const DataLoader = require('dataloader');
 class CustomAttributeMetadataLoader {
   /**
    * @param {Object} [actionParameters] Some optional parameters of the I/O Runtime action, like for example authentication info.
+   * @param {Object} [parameters.actionParameters] Some optional parameters of the I/O Runtime action, like for example customerId, bearer token, query and url info.
+   * @returns {loadingFunction}  - This loader loads each product one by one, but if the 3rd party backend allows it,
+   * it could also fetch all products in one single request. In this case, the method
+   * must still return an Array of products with the same order as the keys.
+   * @param {Array} [metaDatas]  is an Array of product skus.
    */
   constructor(actionParameters) {
-    // The loading function: "productSkus" is an Array of product skus
-    let loadingFunction = metaDatas => {
-      // This loader loads each product one by one, but if the 3rd party backend allows it,
-      // it could also fetch all products in one single request. In this case, the method
-      // must still return an Array of products with the same order as the keys.
+    const loadingFunction = metaDatas => {
       return Promise.resolve(
         metaDatas.map(metaData => {
           console.debug(`--> Fetching product with sku ${metaData}`);

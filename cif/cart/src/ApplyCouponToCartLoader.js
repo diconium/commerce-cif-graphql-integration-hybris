@@ -21,7 +21,7 @@ class ApplyCouponToCartLoader {
    * @param {Object} [actionParameters] Some optional parameters of the I/O Runtime action, like for example customerId, bearer token, query and url info.
    */
   constructor(actionParameters) {
-    let loadingFunction = inputs => {
+    const loadingFunction = inputs => {
       return Promise.resolve(
         inputs.map(input => {
           console.debug(`--> Fetching cart with id ${JSON.stringify(input)}`);
@@ -65,7 +65,7 @@ class ApplyCouponToCartLoader {
 
     const { cart_id, coupon_code } = input;
     const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cart_id}/vouchers?voucherId=${coupon_code}`;
-    let body = {};
+    const body = {};
     const config = {
       headers: {
         Authorization: `Bearer ${bearer}`,

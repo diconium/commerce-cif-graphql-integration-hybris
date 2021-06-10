@@ -36,6 +36,9 @@ functions:
         customAttributeMetadata:
           order: 20
           action: hybris-graphql-product/customAttributeMetadata
+        categoryList:
+          order: 30
+          action: hybris-graphql-product/categoryList
   product:
     name: hybris-graphql-product/product
     handler: src/productResolver.main
@@ -43,5 +46,9 @@ functions:
   customAttributeMetadata:
     name: hybris-graphql-product/customAttributeMetadata
     handler: src/customAttributeMetadataResolver.main
+    concurrency: 200
+  categoryList:
+    name: hybris-graphql-product/categoryList
+    handler: src/categoryResolver.main
     concurrency: 200
   

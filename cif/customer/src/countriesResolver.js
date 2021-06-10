@@ -27,7 +27,7 @@ let cachedSchema = null;
  */
 function resolve(args) {
   if (cachedSchema == null) {
-    let schemaBuilder = new SchemaBuilder()
+    const schemaBuilder = new SchemaBuilder()
       .removeMutationType()
       .filterQueryFields(new Set(['countries']));
 
@@ -39,7 +39,7 @@ function resolve(args) {
    * @param {Object} params parameter contains input,graphqlContext and actionParameters
    * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
    */
-  let resolvers = {
+  const resolvers = {
     countries: () => {
       return new Countries({
         actionParameters: args,

@@ -10,7 +10,7 @@
     ]
   },
   "cart": {
-    "email": "test.user@example.com",
+    "email": "test@example.com",
     "items": [
       {
         "product": {

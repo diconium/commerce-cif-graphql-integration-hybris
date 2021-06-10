@@ -22,19 +22,17 @@ class UpdateCartItemsLoader {
    * @param {Object} parameters
    * @param {Object} [actionParameters] Some optional parameters of the I/O Runtime action, like for example authentication info.
    * @param {Object} input consist of cartId, cart_item_id and quantity
+   * @returns {loadingFunction}  -This loader loads each cart one by one, but if the 3rd party backend allows it,
+   * it could also fetch all carts in one single request. In this case, the method must still return an Array of
+   * carts with the same order as the keys.
+   * @param {Array} [input] is an Array of cart ids
    */
   constructor(actionParameters) {
-    let loadingFunction = input => {
-      /**
-       *This loader loads each cart one by one, but if the 3rd party backend allows it,
-       *it could also fetch all carts in one single request. In this case, the method
-       *must still return an Array of carts with the same order as the keys.
-       */
+    const loadingFunction = input => {
       return Promise.resolve(
         input.map(queryInput => {
           return this._updateMethod(queryInput, actionParameters).catch(
             error => {
-              //console.error(`Failed loading cart ${queryInput}, got error ${JSON.stringify(error, null, 0)}`);
               throw new Error(error.message);
             }
           );
@@ -74,9 +72,9 @@ class UpdateCartItemsLoader {
 
     const { cart_id, cart_items } = queryInput;
 
-    const cart_item = cart_items[0];
-    let { cart_item_uid, quantity } = cart_item;
-    let body = {
+    const cartItem = cart_items[0];
+    const { cart_item_uid, quantity } = cartItem;
+    const body = {
       quantity: quantity,
     };
     const config = {
