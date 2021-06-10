@@ -62,7 +62,11 @@ class Cart {
    */
   getRegionCode(address) {
     let code = address !== undefined ? address.region.isocode.split('-') : '';
-    code = code !== '' ? (code.length === 2 ? code[1] : code[0]) : '';
+    if (code !== '') {
+      code = code.length === 2 ? code[1] : code[0];
+    } else {
+      code = '';
+    }
     return code;
   }
 
@@ -71,7 +75,7 @@ class Cart {
    * @returns {[]}
    */
   getShippingMethods(deliveryModes) {
-    let shippingMethods = [];
+    const shippingMethods = [];
     deliveryModes.map(shippingMethod => {
       if (shippingMethod.code !== 'pickup') {
         shippingMethods.push({
@@ -116,12 +120,12 @@ class Cart {
       deliveryModes,
       deliveryMode,
     } = data;
-    let regionCode = this.getRegionCode(deliveryAddress);
-    let billingRegionCode =
+    const regionCode = this.getRegionCode(deliveryAddress);
+    const billingRegionCode =
       paymentInfo !== undefined
         ? this.getRegionCode(paymentInfo.billingAddress)
         : '';
-    let availableShippingMethods =
+    const availableShippingMethods =
       deliveryModes !== undefined ? this.getShippingMethods(deliveryModes) : [];
     const { appliedVouchers } = data;
     const { items } = new CartItemInterface(data.entries);

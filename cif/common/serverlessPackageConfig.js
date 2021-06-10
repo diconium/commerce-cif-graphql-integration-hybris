@@ -24,14 +24,14 @@
  * @param {*} serverless The serverless config object passed by the serverless command-line program.
  */
 module.exports = serverless => {
-  let packageName = serverless.processedInput.options['ow-package'];
+  const packageName = serverless.processedInput.options['ow-package'];
 
-  let packageConfig = {};
+  const packageConfig = {};
   if (serverless.processedInput.options['shared']) {
     packageConfig.shared = true;
   }
 
-  let config = {};
+  const config = {};
   config[packageName] = packageConfig;
   return config;
 };

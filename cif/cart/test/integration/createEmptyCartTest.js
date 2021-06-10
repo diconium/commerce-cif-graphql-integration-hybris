@@ -22,7 +22,6 @@ const { expect } = chai;
 const chaiShallowDeepEqual = require('chai-shallow-deep-equal');
 chai.use(chaiShallowDeepEqual);
 const createCartLoader = require('../../src/CreateEmptyCart.js');
-const ymlData = require('../../../common/options.json');
 
 describe('CreateEmptyCart', function() {
   let emptyCart;
@@ -42,19 +41,9 @@ describe('CreateEmptyCart', function() {
   });
 
   describe('Integration Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
+
     before(async () => {
       args.context.settings.bearer = await TestUtils.getBearer();
     });
@@ -76,7 +65,7 @@ describe('CreateEmptyCart', function() {
       args.context.settings.customerId = 'anonymous';
       args.context.settings.HB_CLIENTID = 'client-side';
       args.context.settings.HB_OAUTH_PATH = '/authorizationserver/oauth/token';
-      args.context.settings.HB_CLIENTSECRET = '<CLIENT_SECRET>';
+      args.context.settings.HB_CLIENTSECRET = '<Client_SECRET>';
       return resolve(args).then(result => {
         const { errors } = result;
         assert.isUndefined(result.errors);

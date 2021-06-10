@@ -23,6 +23,7 @@ class CreateCustomer {
    * @param {String} parameters.input input parameter contains the customer details like firstname, lastname, email,  password details
    * @param {Object} [parameters.graphqlContext] The optional GraphQL execution context passed to the resolver.
    * @param {Object} [parameters.actionParameters] Some optional actionParameters of the I/O Runtime action, like for example bearer token, query and url info.
+   * LoaderProxy class returns a Proxy to avoid having to implement a getter for all properties.
    */
   constructor(parameters) {
     this.graphqlContext = parameters.graphqlContext;
@@ -32,9 +33,6 @@ class CreateCustomer {
       parameters.actionParameters
     );
 
-    /**
-     * This class returns a Proxy to avoid having to implement a getter for all properties.
-     */
     return new LoaderProxy(this);
   }
 

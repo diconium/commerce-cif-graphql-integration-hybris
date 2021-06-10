@@ -20,10 +20,14 @@ const axios = require('axios');
 class SetPaymentMethodOnCartLoader {
   /**
    * @param {Object} [actionParameters] Some optional parameters of the I/O Runtime action, like for example customerId, bearer token, query and url info.
+   * @returns {loadingFunction}  - This loader loads each inputs one by one, but if the 3rd party backend allows it,
+   * it could also fetch all inputs in one single request. In this case, the method
+   * must still return an Array of inputs with the same order as the input.
+   * @param {Array} [inputs] is an Array of parameters.
    */
   constructor(actionParameters) {
     this.addresses = {};
-    let loadingFunction = inputs => {
+    const loadingFunction = inputs => {
       return Promise.resolve(
         inputs.map(input => {
           return this._postPaymentMethodOnCart(input, actionParameters).catch(
@@ -72,7 +76,7 @@ class SetPaymentMethodOnCartLoader {
 
     const { cart_id: cartId, payment_method: paymentMethod } = input;
     const { code } = paymentMethod;
-    let billingAddress = this.getBillingAddress(this.addresses);
+    const billingAddress = this.getBillingAddress(this.addresses);
 
     const body = {
       accountHolderName: 'testuser',

@@ -1,0 +1,29 @@
+{
+   "orders" : [ {
+      "code" : "00000003",
+      "guid" : "bd34cedd-8e7a-46a0-949b-84bc9ce4b86c",
+      "placed" : "2021-06-01T08:52:35+0000",
+      "status" : "FRAUD_CHECKED",
+      "statusDisplay" : "processing",
+      "total" : {
+         "currencyIso" : "USD",
+         "formattedValue" : "$101.95",
+         "priceType" : "BUY",
+         "value" : 101.95
+      }
+   } ],
+   "pagination" : {
+      "currentPage" : 0,
+      "pageSize" : 20,
+      "sort" : "byDate",
+      "totalPages" : 1,
+      "totalResults" : 1
+   },
+   "sorts" : [ {
+      "code" : "byDate",
+      "selected" : true
+   }, {
+      "code" : "byOrderNumber",
+      "selected" : false
+   } ]
+}

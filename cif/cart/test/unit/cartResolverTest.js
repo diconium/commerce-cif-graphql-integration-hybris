@@ -21,7 +21,6 @@ const chaiShallowDeepEqual = require('chai-shallow-deep-equal');
 const nock = require('nock');
 chai.use(chaiShallowDeepEqual);
 const { expect } = chai;
-const bearer = 'aaa58f85-d5f5-4303-8a53-272f1868325f';
 const resolve = require('../../src/cartResolver.js').main;
 const hybrisCartData = require('../resources/hybrisCartQuery.json');
 const hybrisCartQueryWithVoucher = require('../resources/hybrisCartQueryWithVoucher.json');
@@ -29,12 +28,14 @@ const hybrisDeliveryModes = require('../resources/hybrisDeliveryModes.json');
 const hybrisEmptyDeliveryModes = require('../resources/hybrisEmptyDeliveryModes.json');
 const validCartQueryData = require('../resources/validCartQueryResponse.json');
 const validCartQueryWithVoucherResponse = require('../resources/validCartQueryWithVoucherResponse.json');
+const CartLoader = require('../../../cart/src/CartLoader');
 const cartNotFound = require('../resources/cartNotFound.json');
-const TestUtils = require('../../../utils/TestUtils.js');
-const ymlData = require('../../../common/options.json');
-describe('Cart Resolver', function() {
-  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
 
+const TestUtils = require('../../../utils/TestUtils.js');
+
+describe('Cart Resolver', function() {
+  const scope = nock(TestUtils.getHybrisInstance());
+  let getCartById;
   before(() => {
     // Disable console debugging
     sinon.stub(console, 'debug');
@@ -46,37 +47,34 @@ describe('Cart Resolver', function() {
     console.error.restore();
   });
 
-  describe('Unit Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    getCartById = sinon.spy(CartLoader.prototype, '__getCartById');
+  });
 
-    // todo this unit test can be broken down into several ones as cart returns lot of data and it would we nice to have the title of the tests for that data
-    // todo for example : Cart query with valid voucher data -- Done
+  afterEach(() => {
+    getCartById.restore();
+  });
+
+  describe('Unit Tests', () => {
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
+
+    //Returns hybris configured api base path
+    const HB_API_BASE_PATH = TestUtils.getYmlData().HB_API_BASE_PATH;
+
     it('Mutation: Cart query unit', () => {
       scope
-        .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035`
-        )
+        .get(`${HB_API_BASE_PATH}electronics/users/current/carts/00000035`)
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisCartData);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymodes`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymodes`
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-      args.context.settings.bearer = bearer;
+
       args.query =
         '{cart(cart_id: "00000035") {email,billing_address {city,country {code,label},firstname,lastname,postcode, region {code,label},street,telephone},shipping_addresses{firstname,lastname,street,city,region{code,label},country{code,label},available_shipping_methods{amount{currency,value},available,carrier_code,carrier_title,error_message,method_code,method_title,price_excl_tax{value,currency},price_incl_tax{value,currency}},selected_shipping_method{amount{value,currency},carrier_code,carrier_title,method_code,method_title}},items{uid,product{name,sku},quantity},available_payment_methods{code,title},selected_payment_method{code,title},applied_coupon{code},prices{grand_total{value,currency}}}}';
       return resolve(args).then(result => {
@@ -88,23 +86,23 @@ describe('Cart Resolver', function() {
 
     it('Mutation: Cart query unit with voucher data', () => {
       scope
-        .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035`
-        )
+        .get(`${HB_API_BASE_PATH}electronics/users/current/carts/00000035`)
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisCartQueryWithVoucher);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymodes`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymodes`
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisEmptyDeliveryModes);
-      args.context.settings.bearer = bearer;
+
       args.query =
         '{cart(cart_id: "00000035") {email,billing_address {city,country {code,label},firstname,lastname,postcode, region {code,label},street,telephone},shipping_addresses{firstname,lastname,street,city,region{code,label},country{code,label},available_shipping_methods{amount{currency,value},available,carrier_code,carrier_title,error_message,method_code,method_title,price_excl_tax{value,currency},price_incl_tax{value,currency}},selected_shipping_method{amount{value,currency},carrier_code,carrier_title,method_code,method_title}},items{uid,product{name,sku},quantity},available_payment_methods{code,title},selected_payment_method{code,title},applied_coupon{code},prices{grand_total{value,currency}}}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
         let response = result.data.cart;
+        // Ensure the create empty cart function is only called once.
+        assert.equal(getCartById.callCount, 1);
         expect(response).to.deep.equals(validCartQueryWithVoucherResponse.cart);
       });
     });
@@ -112,18 +110,18 @@ describe('Cart Resolver', function() {
     it('Mutation: Cart query invalid cart id', () => {
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID`
         )
 
         .query({ fields: 'FULL', query: '' })
         .reply(400, cartNotFound);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/deliverymodes`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/deliverymodes`
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-      args.context.settings.bearer = bearer;
+
       args.query =
         '{cart(cart_id: "INVALID-CART-ID") {email,billing_address {city,country {code,label},firstname,lastname,postcode, region {code,label},street,telephone},shipping_addresses{firstname,lastname,street,city,region{code,label},country{code,label},available_shipping_methods{amount{currency,value},available,carrier_code,carrier_title,error_message,method_code,method_title,price_excl_tax{value,currency},price_incl_tax{value,currency}},selected_shipping_method{amount{value,currency},carrier_code,carrier_title,method_code,method_title}},items{id,product{name,sku},quantity},available_payment_methods{code,title},selected_payment_method{code,title},applied_coupon{code},prices{grand_total{value,currency}}}}';
       return resolve(args).then(result => {

@@ -23,7 +23,6 @@ const chaiShallowDeepEqual = require('chai-shallow-deep-equal');
 chai.use(chaiShallowDeepEqual);
 const TestUtils = require('../../../utils/TestUtils.js');
 const TokenLoader = require('../../src/GenerateCustomerTokenLoader.js');
-const ymlData = require('../../../common/options.json');
 
 describe('GenerateCustomerToken', function() {
   let customerToken;
@@ -42,27 +41,17 @@ describe('GenerateCustomerToken', function() {
     customerToken = sinon.spy(TokenLoader.prototype, '_generateCustomerToken');
   });
 
+  afterEach(() => {
+    customerToken.restore();
+  });
+
   describe('Integration tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-          HB_CLIENTSECRET: ymlData.HB_CLIENTSECRET,
-          HB_CLIENTID: ymlData.HB_CLIENTID,
-          HB_OAUTH_PATH: ymlData.HB_OAUTH_PATH,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
 
     it('Mutation: Validate generate customer token', () => {
       args.query =
-        'mutation {generateCustomerToken(email: "test.user@example.com", password: "Embitel@123"){token}}';
+        'mutation {generateCustomerToken(email: "test@example.com", password: "Embitel@123"){token}}';
       return resolve(args).then(result => {
         const { errors } = result;
         assert.isUndefined(result.errors);

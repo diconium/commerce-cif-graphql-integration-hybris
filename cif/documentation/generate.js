@@ -30,7 +30,7 @@ const path = require('path');
  * it's easy to browse the parts of the schema that have to be implemented by a 3rd-party integration.
  */
 function generate() {
-  let schemaPruner = new SchemaPruner(magentoSchema);
+  const schemaPruner = new SchemaPruner(magentoSchema);
 
   gitClone(
     'https://github.com/adobe/commerce-cif-connector.git',
@@ -64,7 +64,7 @@ function generate() {
             )
           );
 
-          let prunedSchema = schemaPruner.prune();
+          const prunedSchema = schemaPruner.prune();
           fs.writeFileSync(
             path.join(
               __dirname,
@@ -80,8 +80,8 @@ function generate() {
 
 // The file contains multiple single-line queries
 function pruneFile(schemaPruner, filepath) {
-  let data = fs.readFileSync(filepath, 'UTF-8');
-  let lines = data.split(/\r?\n/);
+  const data = fs.readFileSync(filepath, 'UTF-8');
+  const lines = data.split(/\r?\n/);
   lines.forEach(line => {
     if (line.trim().length > 0) {
       schemaPruner.process(line);
@@ -91,9 +91,9 @@ function pruneFile(schemaPruner, filepath) {
 
 // The folder contains multiple files with each file containing a single query
 function pruneFolder(schemaPruner, folderpath) {
-  let files = fs.readdirSync(folderpath);
+  const files = fs.readdirSync(folderpath);
   files.forEach(file => {
-    let query = fs.readFileSync(path.join(folderpath, file), 'UTF-8');
+    const query = fs.readFileSync(path.join(folderpath, file), 'UTF-8');
     schemaPruner.process(query);
   });
 }

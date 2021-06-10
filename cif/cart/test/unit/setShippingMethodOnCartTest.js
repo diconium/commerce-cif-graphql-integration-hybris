@@ -22,7 +22,6 @@ const nock = require('nock');
 const assert = require('chai').assert;
 chai.use(chaiShallowDeepEqual);
 const TestUtils = require('../../../utils/TestUtils.js');
-const bearer = '55af3c02-6dd3-4b45-92c2-38db35a2c43d';
 const { expect } = chai;
 const hybrisSetShippingMethodOnCart = require('../resources/hybrisSetShippingMethodOnCart');
 const validSetShippingMethodOnCart = require('../resources/validSetShippingMethodOnCart');
@@ -30,11 +29,11 @@ const hybrisSetShippingMethodOnCartPremiumGross = require('../resources/hybrisSe
 const hybrisDeliveryModes = require('../resources/hybrisDeliveryModes.json');
 const validSetShippingMethodOnCartPremium = require('../resources/validSetShippingMethodOnCartPremium');
 const cartNotFound = require('../resources/cartNotFound.json');
-const ymlData = require('../../../common/options.json');
+const SetShippingMethodLoader = require('../../src/SetShippingMethodsOnCartLoader');
 
 describe('SetShippingMethodOnCart', () => {
-  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
-
+  const scope = nock(TestUtils.getHybrisInstance());
+  let SetShippingMethod;
   before(() => {
     // Disable console debugging
     sinon.stub(console, 'debug');
@@ -46,25 +45,29 @@ describe('SetShippingMethodOnCart', () => {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    SetShippingMethod = sinon.spy(
+      SetShippingMethodLoader.prototype,
+      '_setShippingMethod'
+    );
+  });
+
+  afterEach(() => {
+    SetShippingMethod.restore();
+  });
+
   describe('Unit Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
+
+    //Returns hybris configured api base path
+    const HB_API_BASE_PATH = TestUtils.getYmlData().HB_API_BASE_PATH;
 
     it('Mutation: set shipping method on cart deliveryModeId:standard-gross', () => {
       scope
         .put(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymode`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymode`
         )
         .query({
           fields: 'DEFAULT',
@@ -72,22 +75,21 @@ describe('SetShippingMethodOnCart', () => {
         })
         .reply(200);
       scope
-        .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035`
-        )
+        .get(`${HB_API_BASE_PATH}electronics/users/current/carts/00000035`)
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisSetShippingMethodOnCart);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymodes`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymodes`
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation {setShippingMethodsOnCart(input: {cart_id: "00000035", shipping_methods: [{carrier_code: "standard-gross", method_code: "bestway"}]}) {cart {shipping_addresses {selected_shipping_method { carrier_code,carrier_title,method_code,method_title,amount {value,currency}}}}}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
+        assert.equal(SetShippingMethod.callCount, 1);
         let response = result.data.setShippingMethodsOnCart;
         expect(response.cart.shipping_addresses).to.deep.equals(
           validSetShippingMethodOnCart.cart.shipping_addresses
@@ -98,7 +100,7 @@ describe('SetShippingMethodOnCart', () => {
     it('Mutation: set shipping method on cart with deliveryModeId:premium-gross', () => {
       scope
         .put(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymode`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymode`
         )
         .query({
           fields: 'DEFAULT',
@@ -106,18 +108,16 @@ describe('SetShippingMethodOnCart', () => {
         })
         .reply(200);
       scope
-        .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035`
-        )
+        .get(`${HB_API_BASE_PATH}electronics/users/current/carts/00000035`)
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisSetShippingMethodOnCartPremiumGross);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymodes`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymodes`
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation {setShippingMethodsOnCart(input: {cart_id: "00000035", shipping_methods: [{carrier_code: "premium-gross", method_code: "bestway"}]}) {cart {shipping_addresses {selected_shipping_method { carrier_code,carrier_title,method_code,method_title,amount {value,currency}}}}}}';
       return resolve(args).then(result => {
@@ -133,7 +133,7 @@ describe('SetShippingMethodOnCart', () => {
     it('Mutation: Set shipping method on cart validate response should contain cart not found', () => {
       scope
         .put(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/deliverymode`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/deliverymode`
         )
         .query({
           fields: 'DEFAULT',
@@ -142,17 +142,17 @@ describe('SetShippingMethodOnCart', () => {
         .reply(400, cartNotFound);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID`
         )
         .query({ fields: 'DEFAULT', query: '' })
         .reply(200, hybrisSetShippingMethodOnCart);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/deliverymodes`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/deliverymodes`
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation {setShippingMethodsOnCart(input: {cart_id: "INVALID-CART-ID", shipping_methods: [{carrier_code: "standard-gross", method_code: "bestway"}]}) {cart {shipping_addresses {selected_shipping_method { carrier_code,carrier_title,method_code,method_title,amount {value,currency}}}}}}';
       return resolve(args).then(result => {

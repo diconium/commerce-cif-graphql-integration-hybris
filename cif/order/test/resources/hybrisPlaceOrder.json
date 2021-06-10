@@ -198,8 +198,8 @@
       "value": "7.13"
    },
    "user": {
-      "name": "Test User",
-      "uid": "test.user@example.com"
+      "name": "USER_FN",
+      "uid": "test@example.com"
    },
    "cancellable": "true",
    "created": "2020-07-13T06:20:50+0000",

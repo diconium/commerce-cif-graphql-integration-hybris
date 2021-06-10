@@ -1452,8 +1452,8 @@
     "value": 93.78
   },
   "user": {
-    "name": "Test User",
-    "uid": "test.user@example.com"
+    "name": "User1",
+    "uid": "test@example.com"
   },
   "potentialOrderPromotions": [],
   "potentialProductPromotions": [],

@@ -20,17 +20,21 @@ const axios = require('axios');
 class ProductsLoader {
   /**
    * @param {Object} [actionParameters] Some optional parameters of the I/O Runtime action, like for example authentication info.
+   * @returns {loadingFunction}  - This loader loads each product one by one, but if the 3rd party backend allows it,
+   * it could also fetch all products in one single request. In this case, the method
+   * must still return an Array of products with the same order as the keys.
+   * @param {Object} [key]   the "key" is actually an object with search parameters.
+   * @param {Array} [keys]  is array of parameters.
+   * cacheKeyFunction is a custom function to generate custom cache keys, simply serializing the key
    */
   constructor(actionParameters) {
-    /** A custom function to generate custom cache keys, simply serializing the key.*/
-    let cacheKeyFunction = key => JSON.stringify(key, null, 0);
+    const cacheKeyFunction = key => JSON.stringify(key, null, 0);
 
-    /** The loading function: the "key" is actually an object with search parameters */
-    let loadingFunction = keys => {
+    const loadingFunction = keys => {
       return Promise.resolve(
         keys.map(key => {
           console.debug(
-            '--> Performing a search with ' + JSON.stringify(key, null, 0)
+            `--> Performing a search with ${JSON.stringify(key, null, 0)}`
           );
           return this.__searchProducts(key, actionParameters).catch(error => {
             console.error(
@@ -78,7 +82,7 @@ class ProductsLoader {
       HB_BASESITEID,
     } = actionParameters.context.settings;
 
-    let config = {
+    const config = {
       params: {
         json: true,
       },
@@ -109,7 +113,7 @@ class ProductsLoader {
         sort = `&sort=${sortKey}-${sortValue}`;
       }
 
-      let apiHost = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/products/search?currentPage=${params.currentPage}&fields=FULL&pageSize=${params.pageSize}${query}${sort}`;
+      const apiHost = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/products/search?currentPage=${params.currentPage}&fields=FULL&pageSize=${params.pageSize}${query}${sort}`;
 
       return axios
         .get(apiHost, config)
@@ -123,13 +127,13 @@ class ProductsLoader {
           return error;
         });
     } else if (params.filter && (params.filter.url_key || params.filter.sku)) {
-      let productCode =
+      const productCode =
         params.filter.sku !== undefined
           ? params.filter.sku.eq
           : params.filter.url_key.eq;
       /** Get a product by sku */
       if (productCode) {
-        let apiHost = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/products/${productCode}?fields=FULL`;
+        const apiHost = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/products/${productCode}?fields=FULL`;
         return axios
           .get(apiHost, config)
           .then(response => ({

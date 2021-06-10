@@ -20,7 +20,6 @@ const assert = require('chai').assert;
 const resolve = require('.././../src/cartResolver.js').main;
 const TestUtils = require('../../../utils/TestUtils.js');
 const AddProductLoader = require('../../src/AddProductToCartLoader');
-const ymlData = require('../../../common/options.json');
 
 describe('AddProductToCart', () => {
   let AddProduct;
@@ -40,27 +39,16 @@ describe('AddProductToCart', () => {
   });
 
   describe('Integration Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
+
     before(async () => {
       args.context.settings.bearer = await TestUtils.getBearer();
     });
 
     it('Add products to cart', () => {
-      //3514521 1298094
       args.query =
-        'mutation {addSimpleProductsToCart(input:{cart_id: "00000035", cart_items: [{data: {quantity: "1", sku: "3514521" } }]}){cart {items {id,product { name,sku },quantity} }}}';
+        'mutation {addSimpleProductsToCart(input:{cart_id: "00000035", cart_items: [{data: {quantity: 1.0, sku: "3514521" } }]}){cart {items {id,product { name,sku },quantity} }}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
         assert.equal(AddProduct.callCount, 1);

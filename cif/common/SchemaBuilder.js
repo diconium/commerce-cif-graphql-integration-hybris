@@ -37,30 +37,30 @@ class SchemaBuilder {
    * @returns {GraphQLSchema} A GraphQLSchema that can be used by all graphql-js tools.
    */
   build(sortOrder) {
-    let queryRootType = this.schema.data.__schema.types.find(
-      t => t.name == 'Query'
+    const queryRootType = this.schema.data.__schema.types.find(
+      t => t.name === 'Query'
     );
-    let mutationRootType = this.schema.data.__schema.types.find(
-      t => t.name == 'Mutation'
+    const mutationRootType = this.schema.data.__schema.types.find(
+      t => t.name === 'Mutation'
     );
 
     // Remove "Query" root type if it doesn't have any field
-    if (queryRootType && queryRootType.fields.length == 0) {
+    if (queryRootType && queryRootType.fields.length === 0) {
       delete this.schema.data.__schema.queryType;
       this.schema.data.__schema.types = this.schema.data.__schema.types.filter(
-        t => t.name != 'Query'
+        t => t.name !== 'Query'
       );
     }
 
     // Remove "Mutation" root type if it doesn't have any field
-    if (mutationRootType && mutationRootType.fields.length == 0) {
+    if (mutationRootType && mutationRootType.fields.length === 0) {
       delete this.schema.data.__schema.mutationType;
       this.schema.data.__schema.types = this.schema.data.__schema.types.filter(
-        t => t.name != 'Mutation'
+        t => t.name !== 'Mutation'
       );
     }
 
-    let clientSchema = buildClientSchema(this.schema.data);
+    const clientSchema = buildClientSchema(this.schema.data);
     clientSchema.sortOrder = sortOrder || 1000;
     return clientSchema;
   }
@@ -72,7 +72,7 @@ class SchemaBuilder {
    */
   removeMutationType() {
     this.schema.data.__schema.types = this.schema.data.__schema.types.filter(
-      t => t.name != 'Mutation'
+      t => t.name !== 'Mutation'
     );
     delete this.schema.data.__schema.mutationType;
     return this;
@@ -85,7 +85,7 @@ class SchemaBuilder {
    */
   removeQueryType() {
     this.schema.data.__schema.types = this.schema.data.__schema.types.filter(
-      t => t.name != 'Query'
+      t => t.name !== 'Query'
     );
     delete this.schema.data.__schema.queryType;
     return this;
@@ -99,7 +99,7 @@ class SchemaBuilder {
    */
   filterQueryFields(queryFields) {
     let queryRootType = this.schema.data.__schema.types.find(
-      t => t.name == 'Query'
+      t => t.name === 'Query'
     );
     queryRootType.fields = queryRootType.fields.filter(f =>
       queryFields.has(f.name)
@@ -114,8 +114,8 @@ class SchemaBuilder {
    * @returns The builder itself.
    */
   filterMutationFields(mutationFields) {
-    let mutationRootType = this.schema.data.__schema.types.find(
-      t => t.name == 'Mutation'
+    const mutationRootType = this.schema.data.__schema.types.find(
+      t => t.name === 'Mutation'
     );
     mutationRootType.fields = mutationRootType.fields.filter(f =>
       mutationFields.has(f.name)
@@ -131,7 +131,7 @@ class SchemaBuilder {
    * @returns {GraphQLType} The GraphQL type object.
    */
   getType(typeName) {
-    return this.schema.data.__schema.types.find(t => t.name == typeName);
+    return this.schema.data.__schema.types.find(t => t.name === typeName);
   }
 
   /**
@@ -145,7 +145,7 @@ class SchemaBuilder {
     ) {
       return 'SCALAR';
     } else {
-      let t = this.getType(fieldType);
+      const t = this.getType(fieldType);
       return t ? t.kind : null;
     }
   }
@@ -172,8 +172,8 @@ class SchemaBuilder {
    * @param {Boolean} [isList] Set to true if the new field is an Array. In this case, fieldTypeName specifies the type of the elements of the array.
    */
   addFieldToType(typeName, name, description, fieldTypeName, isList = false) {
-    let type = this.getType(typeName);
-    let newField = {
+    const type = this.getType(typeName);
+    const newField = {
       name: name,
       description: description,
       args: [],
@@ -184,9 +184,9 @@ class SchemaBuilder {
     type.fields.push(newField);
     type.fields.sort((a, b) => a.name.localeCompare(b.name));
 
-    if (type.kind == 'INTERFACE' && type.possibleTypes) {
+    if (type.kind === 'INTERFACE' && type.possibleTypes) {
       type.possibleTypes.forEach(possibleType => {
-        let t = this.getType(possibleType.name);
+        const t = this.getType(possibleType.name);
         t.fields.push(newField);
         t.fields.sort((a, b) => a.name.localeCompare(b.name));
       });
@@ -199,9 +199,9 @@ class SchemaBuilder {
    * @param {String} sdl The SDL describing the schema extension(s).
    */
   extend(sdl) {
-    let ast = parse(sdl);
-    let graphQLSchema = buildClientSchema(this.schema.data);
-    let extendedGraphQLSchema = extendSchema(graphQLSchema, ast, {
+    const ast = parse(sdl);
+    const graphQLSchema = buildClientSchema(this.schema.data);
+    const extendedGraphQLSchema = extendSchema(graphQLSchema, ast, {
       commentDescriptions: true,
     });
     this.schema = graphqlSync(extendedGraphQLSchema, introspectionQuery);

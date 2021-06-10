@@ -21,10 +21,14 @@ const TokenUtils = require('../../common/TokenUtils.js');
 class CreateCustomerLoader {
   /**
    * @param {Object} actionParameters parameter object contains the bearer and host details
+   * @returns {loadingFunction}  -This loader loads each keys one by one, but if the 3rd party backend allows it,
+   * it could also fetch all keys in one single request. In this case, the method
+   *  must still return an Array of keys with the same order as the input.
+   * @param {Array} [keys] is an Array of parameters.
    */
 
   constructor(actionParameters) {
-    let loadingFunction = keys => {
+    const loadingFunction = keys => {
       return Promise.resolve(
         keys.map(key => {
           return this._createCustomer(key, actionParameters).catch(error => {
@@ -77,7 +81,7 @@ class CreateCustomerLoader {
       HB_BASESITEID,
     } = actionParameters.context.settings;
 
-    let body = {
+    const body = {
       firstName: key.firstname,
       lastName: key.lastname,
       password: key.password,

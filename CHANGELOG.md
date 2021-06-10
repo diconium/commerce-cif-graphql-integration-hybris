@@ -3,7 +3,17 @@
 
 # 3rd-Party GraphQL integration with AEM Commerce and CIF on Adobe I/O Runtime
 
-## 2.2 (Unreleased)
+## 2.3 (Unreleased)
+
+## 2.2 (June 11, 2021)
+##### ENHANCEMENTS: 
+  * Functionality for Individual Package deployments are added to store the node modules independently with respect to each module.
+  * Added Sinon Spies for data loaders in order to test function callback handing.
+  * Code Optimisation and improvisation on security code check 
+  
+##### BUGFIXES:
+  * Sonar fixes on Code smell issues.
+  
 
 ## 2.1 (June 3, 2021)
 

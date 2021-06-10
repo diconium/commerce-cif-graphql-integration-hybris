@@ -21,7 +21,6 @@ const chaiShallowDeepEqual = require('chai-shallow-deep-equal');
 chai.use(chaiShallowDeepEqual);
 const TestUtils = require('../../../utils/TestUtils.js');
 const resolve = require('../../src/customAttributeMetadataResolver.js').main;
-const ymlData = require('../../../common/options.json');
 
 describe('Dispatcher Resolver', () => {
   before(() => {
@@ -36,19 +35,8 @@ describe('Dispatcher Resolver', () => {
   });
 
   describe('Integration Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
 
     it('Basic meta data search', () => {
       args.query =

@@ -29,12 +29,12 @@ const cartNotFound = require('../resources/cartNotFound.json');
 const couponAlreadyExist = require('../resources/couponAlreadyExist.json');
 const invalidCouponCode = require('../resources/invalidCouponCode.json');
 const inActiveCouponCode = require('../resources/inActiveCouponCode.json');
+const ApplyCouponToCartLoader = require('../../../cart/src/ApplyCouponToCartLoader');
 const TestUtils = require('../../../utils/TestUtils.js');
-const bearer = '1049a531-a218-4b67-a831-e94b68c37f73';
-const ymlData = require('../../../common/options.json');
 
 describe('ApplyCouponOnCart', function() {
-  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
+  const scope = nock(TestUtils.getHybrisInstance());
+  let applyCouponToCart;
   before(() => {
     sinon.stub(console, 'debug');
     sinon.stub(console, 'error');
@@ -45,46 +45,49 @@ describe('ApplyCouponOnCart', function() {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    applyCouponToCart = sinon.spy(
+      ApplyCouponToCartLoader.prototype,
+      '_applyCouponToCart'
+    );
+  });
+
+  afterEach(() => {
+    applyCouponToCart.restore();
+  });
+
   describe('Unit Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
+
+    //Returns hybris configured api base path
+    const HB_API_BASE_PATH = TestUtils.getYmlData().HB_API_BASE_PATH;
 
     it('Mutation: validate apply coupon to cart', () => {
       scope
         .post(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/vouchers`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000016/vouchers`
         )
         .query({ voucherId: 'BUYMORE16' })
         .reply(200);
       scope
-        .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016`
-        )
+        .get(`${HB_API_BASE_PATH}electronics/users/current/carts/00000016`)
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisApplyCoupon);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/deliverymodes`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000016/deliverymodes`
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-      args.context.settings.bearer = bearer;
       args.query =
         'mutation {applyCouponToCart(input: {cart_id: "00000016",coupon_code: "BUYMORE16"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
         let response = result.data.applyCouponToCart.cart;
+        // Ensure the create empty cart function is only called once.
+        assert.equal(applyCouponToCart.callCount, 1);
         expect(response).to.deep.equals(validResponseApplyCouponToCart);
       });
     });
@@ -92,23 +95,26 @@ describe('ApplyCouponOnCart', function() {
     it('Mutation: validate response should contain cart not found', () => {
       scope
         .post(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/vouchers`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/vouchers`
         )
         .query({ voucherId: 'BUYMORE16' })
         .reply(400, cartNotFound);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID`
         )
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .query({
+          fields: 'DEFAULT',
+          access_token: `${TestUtils.getContextData().context.settings.bearer}`,
+        })
         .reply(200, hybrisApplyCoupon);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/deliverymodes`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000016/deliverymodes`
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation {applyCouponToCart(input: {cart_id: "INVALID-CART-ID",coupon_code: "BUYMORE16"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
       return resolve(args).then(result => {
@@ -125,23 +131,24 @@ describe('ApplyCouponOnCart', function() {
     it('Mutation: validate response should contain coupon already exist for cart', () => {
       scope
         .post(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/vouchers`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000016/vouchers`
         )
         .query({ voucherId: 'BUYMORE16' })
         .reply(400, couponAlreadyExist);
       scope
-        .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016`
-        )
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .get(`${HB_API_BASE_PATH}electronics/users/current/carts/00000016`)
+        .query({
+          fields: 'DEFAULT',
+          access_token: `${TestUtils.getContextData().context.settings.bearer}`,
+        })
         .reply(200, hybrisApplyCoupon);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/deliverymodes`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000016/deliverymodes`
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation {applyCouponToCart(input: {cart_id: "00000016",coupon_code: "BUYMORE16"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
       return resolve(args).then(result => {
@@ -158,23 +165,24 @@ describe('ApplyCouponOnCart', function() {
     it('Mutation: validate response should contain coupon is inactive', () => {
       scope
         .post(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/vouchers`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000016/vouchers`
         )
         .query({ voucherId: 'WINTER16' })
         .reply(400, inActiveCouponCode);
       scope
-        .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016`
-        )
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .get(`${HB_API_BASE_PATH}electronics/users/current/carts/00000016`)
+        .query({
+          fields: 'DEFAULT',
+          access_token: `${TestUtils.getContextData().context.settings.bearer}`,
+        })
         .reply(200, hybrisApplyCoupon);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/deliverymodes`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000016/deliverymodes`
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation {applyCouponToCart(input: {cart_id: "00000016",coupon_code: "WINTER16"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
       return resolve(args).then(result => {
@@ -191,23 +199,21 @@ describe('ApplyCouponOnCart', function() {
     it('Mutation: validate response should contain coupon is invalid', () => {
       scope
         .post(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/vouchers`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000016/vouchers`
         )
         .query({ voucherId: 'SUMMER69' })
         .reply(400, invalidCouponCode);
       scope
-        .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016`
-        )
+        .get(`${HB_API_BASE_PATH}electronics/users/current/carts/00000016`)
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisApplyCoupon);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/deliverymodes`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000016/deliverymodes`
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation {applyCouponToCart(input: {cart_id: "00000016",coupon_code: "SUMMER69"}){cart{items{product{name}quantity}applied_coupon{code}prices{grand_total{value,currency}}}}}';
       return resolve(args).then(result => {
