@@ -1,7 +1,7 @@
 {
     "type": "userWsDTO",
-    "name": "Amaresh muni",
-    "uid": "amar@test.com",
+    "name": "Complete Name",
+    "uid": "test@example.com",
     "currency": {
       "active": true,
       "isocode": "USD",
@@ -9,13 +9,13 @@
       "symbol": "$"
     },
     "customerId": "b19758fa-bada-4f71-a7eb-8fb26d24211d",
-    "displayUid": "amar@test.com",
-    "firstName": "Amaresh",
+    "displayUid": "test@example.com",
+    "firstName": "First Name",
     "language": {
       "active": true,
       "isocode": "en",
       "name": "English",
       "nativeName": "English"
     },
-    "lastName": "muni"
+    "lastName": "Last Name"
   }

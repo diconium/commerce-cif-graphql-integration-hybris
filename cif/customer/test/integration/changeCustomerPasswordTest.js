@@ -54,7 +54,7 @@ describe('Change Customer Password', function() {
 
     it('Mutation: change customer password response should always contain object', () => {
       args.query =
-        'mutation{changeCustomerPassword(currentPassword: "Embitel@123" newPassword: "Embitel@123"){id email}}';
+        'mutation{changeCustomerPassword(currentPassword: "Example@123" newPassword: "Example@123"){id email}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
         assert.equal(changePassword.callCount, 1);

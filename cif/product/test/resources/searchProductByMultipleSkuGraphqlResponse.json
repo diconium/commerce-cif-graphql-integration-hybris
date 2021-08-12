@@ -5,7 +5,7 @@
     "name": "32GB SDHC Card",
     "thumbnail": {
       "label": "32GB SDHC Card",
-      "url": "https://b2c-accelerator.test.diconium.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wzNTg5OHxpbWFnZS9qcGVnfGltYWdlcy9oMjAvaDA0Lzg3OTcyNjUxMzM1OTguanBnfDA1ODI0ZGM4MDEwMzRmN2YwMDk5ZTAyOTYyMmYxYmU1MTM1OTIxYTliN2RmMzJiMDEyNzI1YzhmYjY3MWFjM2Y"
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wzNTg5OHxpbWFnZS9qcGVnfGltYWdlcy9oMjAvaDA0Lzg3OTcyNjUxMzM1OTguanBnfDA1ODI0ZGM4MDEwMzRmN2YwMDk5ZTAyOTYyMmYxYmU1MTM1OTIxYTliN2RmMzJiMDEyNzI1YzhmYjY3MWFjM2Y"
     },
     "url_key": "4205436",
     "price_range": {
@@ -31,7 +31,7 @@
     "name": "8GB SD Card",
     "thumbnail": {
       "label": "8GB SD Card",
-      "url": "https://b2c-accelerator.test.diconium.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyODcyNHxpbWFnZS9qcGVnfGltYWdlcy9oMDgvaDdhLzg3OTcyNjcwMzQxNDIuanBnfDU1MjFjYTA5ZTkwZjQ1MTY2YzJkNzRlMThmMzMxOWQxMzVjNGUyMGFjMTg1MTZmZTRjYWE4YzI3MDRhZTY4MTQ"
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyODcyNHxpbWFnZS9qcGVnfGltYWdlcy9oMDgvaDdhLzg3OTcyNjcwMzQxNDIuanBnfDU1MjFjYTA5ZTkwZjQ1MTY2YzJkNzRlMThmMzMxOWQxMzVjNGUyMGFjMTg1MTZmZTRjYWE4YzI3MDRhZTY4MTQ"
     },
     "url_key": "4852405",
     "price_range": {
@@ -57,7 +57,7 @@
     "name": "LEGRIA HF S100",
     "thumbnail": {
       "label": "LEGRIA HF S100",
-      "url": "https://b2c-accelerator.test.diconium.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNjU1MnxpbWFnZS9qcGVnfGltYWdlcy9oNjIvaGU4Lzg3OTcyNTQ5MDk5ODIuanBnfDQ1ZTM2MGNjMDM4NmVkMWExMzJiOWI3YWZmYzVhY2ZlNWFlOTBiODRkYmI5ZjlkYjkyZWRkYmRkOGJkNTQwNGQ"
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNjU1MnxpbWFnZS9qcGVnfGltYWdlcy9oNjIvaGU4Lzg3OTcyNTQ5MDk5ODIuanBnfDQ1ZTM2MGNjMDM4NmVkMWExMzJiOWI3YWZmYzVhY2ZlNWFlOTBiODRkYmI5ZjlkYjkyZWRkYmRkOGJkNTQwNGQ"
     },
     "url_key": "1986316",
     "price_range": {
@@ -83,7 +83,7 @@
     "name": "DSC-T90",
     "thumbnail": {
       "label": "DSC-T90",
-      "url": "https://b2c-accelerator.test.diconium.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wxNTg1MXxpbWFnZS9qcGVnfGltYWdlcy9oZWQvaGRhLzg3OTcyNTU3NjE5NTAuanBnfGY3MTcyMTU2NzNkZDY5OTVkYTlhMzE2NjhkNGYzODE1MGM1ZTNmMTkzOGYwNjRkOGE5ZjJiMjBjYjQzZjNiNTc"
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wxNTg1MXxpbWFnZS9qcGVnfGltYWdlcy9oZWQvaGRhLzg3OTcyNTU3NjE5NTAuanBnfGY3MTcyMTU2NzNkZDY5OTVkYTlhMzE2NjhkNGYzODE1MGM1ZTNmMTkzOGYwNjRkOGE5ZjJiMjBjYjQzZjNiNTc"
     },
     "url_key": "1992693",
     "price_range": {
@@ -109,7 +109,7 @@
     "name": "Photosmart E317 Digital Camera",
     "thumbnail": {
       "label": "Photosmart E317 Digital Camera",
-      "url": "https://b2c-accelerator.test.diconium.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wxMzkzNnxpbWFnZS9qcGVnfGltYWdlcy9oMmYvaDQyLzg3OTcyNjEzMzI1MTAuanBnfDU3N2E3MDViMTEyMmQzNjZjMmIwNjhmZTUyZGU5NzM1ZmNmZmFiMTliNGY3Y2MwZjQzM2Y5MGEwZGVhZGE4MzU"
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wxMzkzNnxpbWFnZS9qcGVnfGltYWdlcy9oMmYvaDQyLzg3OTcyNjEzMzI1MTAuanBnfDU3N2E3MDViMTEyMmQzNjZjMmIwNjhmZTUyZGU5NzM1ZmNmZmFiMTliNGY3Y2MwZjQzM2Y5MGEwZGVhZGE4MzU"
     },
     "url_key": "300938",
     "price_range": {

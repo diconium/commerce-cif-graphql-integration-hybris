@@ -8,11 +8,11 @@
     },
     "image": {
       "label": "32GB SDHC Card",
-      "url": "https://b2c-accelerator.test.diconium.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wzNTg5OHxpbWFnZS9qcGVnfGltYWdlcy9oMjAvaDA0Lzg3OTcyNjUxMzM1OTguanBnfDA1ODI0ZGM4MDEwMzRmN2YwMDk5ZTAyOTYyMmYxYmU1MTM1OTIxYTliN2RmMzJiMDEyNzI1YzhmYjY3MWFjM2Y"
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wzNTg5OHxpbWFnZS9qcGVnfGltYWdlcy9oMjAvaDA0Lzg3OTcyNjUxMzM1OTguanBnfDA1ODI0ZGM4MDEwMzRmN2YwMDk5ZTAyOTYyMmYxYmU1MTM1OTIxYTliN2RmMzJiMDEyNzI1YzhmYjY3MWFjM2Y"
     },
     "thumbnail": {
       "label": "32GB SDHC Card",
-      "url": "https://b2c-accelerator.test.diconium.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wzNTg5OHxpbWFnZS9qcGVnfGltYWdlcy9oMjAvaDA0Lzg3OTcyNjUxMzM1OTguanBnfDA1ODI0ZGM4MDEwMzRmN2YwMDk5ZTAyOTYyMmYxYmU1MTM1OTIxYTliN2RmMzJiMDEyNzI1YzhmYjY3MWFjM2Y"
+      "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wzNTg5OHxpbWFnZS9qcGVnfGltYWdlcy9oMjAvaDA0Lzg3OTcyNjUxMzM1OTguanBnfDA1ODI0ZGM4MDEwMzRmN2YwMDk5ZTAyOTYyMmYxYmU1MTM1OTIxYTliN2RmMzJiMDEyNzI1YzhmYjY3MWFjM2Y"
     },
     "url_key": "4205436",
     "stock_status": "IN_STOCK",
@@ -39,42 +39,42 @@
       {
         "__typename": "ProductImage",
         "disabled": false,
-        "url": "https://b2c-accelerator.test.diconium.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wzNTg5OHxpbWFnZS9qcGVnfGltYWdlcy9oMjAvaDA0Lzg3OTcyNjUxMzM1OTguanBnfDA1ODI0ZGM4MDEwMzRmN2YwMDk5ZTAyOTYyMmYxYmU1MTM1OTIxYTliN2RmMzJiMDEyNzI1YzhmYjY3MWFjM2Y",
+        "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wzNTg5OHxpbWFnZS9qcGVnfGltYWdlcy9oMjAvaDA0Lzg3OTcyNjUxMzM1OTguanBnfDA1ODI0ZGM4MDEwMzRmN2YwMDk5ZTAyOTYyMmYxYmU1MTM1OTIxYTliN2RmMzJiMDEyNzI1YzhmYjY3MWFjM2Y",
         "label": "32GB SDHC Card",
         "position": 0
       },
       {
         "__typename": "ProductImage",
         "disabled": false,
-        "url": "https://b2c-accelerator.test.diconium.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3w3NzkwM3xpbWFnZS9qcGVnfGltYWdlcy9oZTAvaGRlLzg3OTcyOTE0MTM1MzQuanBnfGVmNmI1NmJjZDgxZWZkZDI3YTc1M2JiMGRmODI4MWM1ZmFiMzY3NmNjNTdiYjU1ZDExNzcxYTI4MDM4OTRhNjg",
+        "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3w3NzkwM3xpbWFnZS9qcGVnfGltYWdlcy9oZTAvaGRlLzg3OTcyOTE0MTM1MzQuanBnfGVmNmI1NmJjZDgxZWZkZDI3YTc1M2JiMGRmODI4MWM1ZmFiMzY3NmNjNTdiYjU1ZDExNzcxYTI4MDM4OTRhNjg",
         "label": "32GB SDHC Card",
         "position": 1
       },
       {
         "__typename": "ProductImage",
         "disabled": false,
-        "url": "https://b2c-accelerator.test.diconium.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wzNTg5OHxpbWFnZS9qcGVnfGltYWdlcy9oMjAvaDA0Lzg3OTcyNjUxMzM1OTguanBnfDA1ODI0ZGM4MDEwMzRmN2YwMDk5ZTAyOTYyMmYxYmU1MTM1OTIxYTliN2RmMzJiMDEyNzI1YzhmYjY3MWFjM2Y",
+        "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wzNTg5OHxpbWFnZS9qcGVnfGltYWdlcy9oMjAvaDA0Lzg3OTcyNjUxMzM1OTguanBnfDA1ODI0ZGM4MDEwMzRmN2YwMDk5ZTAyOTYyMmYxYmU1MTM1OTIxYTliN2RmMzJiMDEyNzI1YzhmYjY3MWFjM2Y",
         "label": "32GB SDHC Card",
         "position": 2
       },
       {
         "__typename": "ProductImage",
         "disabled": false,
-        "url": "https://b2c-accelerator.test.diconium.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3w3NzkwM3xpbWFnZS9qcGVnfGltYWdlcy9oZTAvaGRlLzg3OTcyOTE0MTM1MzQuanBnfGVmNmI1NmJjZDgxZWZkZDI3YTc1M2JiMGRmODI4MWM1ZmFiMzY3NmNjNTdiYjU1ZDExNzcxYTI4MDM4OTRhNjg",
+        "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3w3NzkwM3xpbWFnZS9qcGVnfGltYWdlcy9oZTAvaGRlLzg3OTcyOTE0MTM1MzQuanBnfGVmNmI1NmJjZDgxZWZkZDI3YTc1M2JiMGRmODI4MWM1ZmFiMzY3NmNjNTdiYjU1ZDExNzcxYTI4MDM4OTRhNjg",
         "label": "32GB SDHC Card",
         "position": 3
       },
       {
         "__typename": "ProductImage",
         "disabled": false,
-        "url": "https://b2c-accelerator.test.diconium.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNzE4MHxpbWFnZS9qcGVnfGltYWdlcy9oYzcvaDE5Lzg3OTcyNjUxOTkxMzQuanBnfDkxNGRjM2ExMzQ1NzdjYzI0M2U0ZTQxMTZmMzlhNjg3MGM2ZDc5NDAyMmRkNTQwMzAyNDA0NWQyZDQwZjFmMzQ",
+        "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNzE4MHxpbWFnZS9qcGVnfGltYWdlcy9oYzcvaDE5Lzg3OTcyNjUxOTkxMzQuanBnfDkxNGRjM2ExMzQ1NzdjYzI0M2U0ZTQxMTZmMzlhNjg3MGM2ZDc5NDAyMmRkNTQwMzAyNDA0NWQyZDQwZjFmMzQ",
         "label": "32GB SDHC Card",
         "position": 4
       },
       {
         "__typename": "ProductImage",
         "disabled": false,
-        "url": "https://b2c-accelerator.test.diconium.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3w2NjQ5MHxpbWFnZS9qcGVnfGltYWdlcy9oZGIvaGFjLzg3OTcyOTE0NzkwNzAuanBnfGY5NzYyZGJkNWI2MTU5MDI2Yjk2YTRiOWU1NjJhMjk0ZTNkZGY4MWY2MmIzMGYzNzIxMjg2ODM4YWRlZjAzNWU",
+        "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3w2NjQ5MHxpbWFnZS9qcGVnfGltYWdlcy9oZGIvaGFjLzg3OTcyOTE0NzkwNzAuanBnfGY5NzYyZGJkNWI2MTU5MDI2Yjk2YTRiOWU1NjJhMjk0ZTNkZGY4MWY2MmIzMGYzNzIxMjg2ODM4YWRlZjAzNWU",
         "label": "32GB SDHC Card",
         "position": 5
       }

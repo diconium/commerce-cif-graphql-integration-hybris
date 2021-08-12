@@ -62,13 +62,13 @@ describe('changeCustomerPassword', () => {
       scope
         .put(`${HB_API_BASE_PATH}electronics/users/current/password`)
         .query({
-          new: 'Embitel@123',
-          old: 'Embitel@123',
+          new: 'Example@123',
+          old: 'Example@123',
         })
         .reply(202);
 
       args.query =
-        'mutation{changeCustomerPassword(currentPassword: "Embitel@123" newPassword: "Embitel@123"){id email}}';
+        'mutation{changeCustomerPassword(currentPassword: "Example@123" newPassword: "Example@123"){id email}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
         assert.equal(changePassword.callCount, 1);
@@ -79,13 +79,13 @@ describe('changeCustomerPassword', () => {
       scope
         .put(`${HB_API_BASE_PATH}electronics/users/current/password`)
         .query({
-          new: 'Embitel@123',
+          new: 'Example@123',
           old: '1234567890',
         })
         .reply(400);
 
       args.query =
-        'mutation{changeCustomerPassword(currentPassword: "1234567890" newPassword: "Embitel@123"){id email}}';
+        'mutation{changeCustomerPassword(currentPassword: "1234567890" newPassword: "Example@123"){id email}}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({

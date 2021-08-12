@@ -73,7 +73,7 @@ describe('Create Customer Resolver', function() {
         .reply(200, createCustomerHybris);
 
       args.query =
-        'mutation {createCustomerV2(input: {firstname: "Amaresh", lastname: "muni", email: "amar@test.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
+        'mutation {createCustomerV2(input: {firstname: "First Name", lastname: "Last Name", email: "test@example.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
       return resolve(args).then(result => {
         let response = result.data.createCustomerV2.customer;
         assert.equal(createCustomer.callCount, 1);
@@ -95,7 +95,7 @@ describe('Create Customer Resolver', function() {
         .reply(200, createCustomerHybris);
 
       args.query =
-        'mutation {createCustomerV2(input: {firstname: "Amaresh", lastname: "muni", email: "amar@test.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
+        'mutation {createCustomerV2(input: {firstname: "First Name", lastname: "Last Name", email: "test@example.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
       return resolve(args).then(result => {
         let response = result.data.createCustomerV2.customer;
         assert.ok(response.firstname);
@@ -116,7 +116,7 @@ describe('Create Customer Resolver', function() {
         .reply(200, createCustomerHybris);
 
       args.query =
-        'mutation {createCustomerV2(input: {firstname: "Amaresh", lastname: "muni", email: "amar@test.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
+        'mutation {createCustomerV2(input: {firstname: "First Name", lastname: "Last Name", email: "test@example.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
         let response = result.data.createCustomerV2;

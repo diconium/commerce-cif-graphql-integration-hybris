@@ -32,7 +32,7 @@ class TestUtils {
   static getUserData() {
     return {
       username: 'test@example.com',
-      password: 'Embitel@123',
+      password: 'Example@123',
       client_secret: 'adobeio20180605',
       client_id: '<Client_ID>',
       type: 'application/x-www-form-urlencoded',
