@@ -23,7 +23,6 @@ const ShippingAddressLoader = require('../../src/SetShippingAddressOnCartLoader'
 
 // The cart resolver
 const resolve = require('../../src/cartResolver.js').main;
-const ymlData = require('../../../common/options.json');
 
 describe('Shipping Address on Cart', () => {
   let ShippingAddress;
@@ -45,27 +44,21 @@ describe('Shipping Address on Cart', () => {
     );
   });
 
+  afterEach(() => {
+    ShippingAddress.restore();
+  });
+
   describe('Integration Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
+
     before(async () => {
       args.context.settings.bearer = await TestUtils.getBearer();
     });
 
     it('Mutation: set shipping address on cart', () => {
       args.query =
-        'mutation {setShippingAddressesOnCart(input: {cart_id: "00000035", shipping_addresses: [{address: {firstname: "Test User", lastname: "Roll", company: "Magento", street: ["Magento shipping", "Main Street"], city: "Austin", region: "WA", postcode: "78758", country_code: "US", telephone: "9999998899", save_in_address_book: false}}]}) { cart {shipping_addresses {firstname,lastname,company,street,city,region {code,label},postcode,telephone,country {code,label} }}}}';
+        'mutation {setShippingAddressesOnCart(input: {cart_id: "00000035", shipping_addresses: [{address: {firstname: "USER_FN", lastname: "Roll", company: "Magento", street: ["Magento shipping", "Main Street"], city: "Austin", region: "WA", postcode: "78758", country_code: "US", telephone: "9999998899", save_in_address_book: false}}]}) { cart {shipping_addresses {firstname,lastname,company,street,city,region {code,label},postcode,telephone,country {code,label} }}}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors); // No GraphQL errors
         assert.equal(ShippingAddress.callCount, 1);

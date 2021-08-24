@@ -64,7 +64,7 @@ OpenWhisk CLI must be available in your systems PATH and set up correctly to eit
 
 ### Configuration
 To be able to use this CIF connector you will need to provid some Hybris configurations to connect to your Hybris endpoint.
-Under [cif/common/options.json.example](cif/common/options.json.example) you will find an example json file you should use as an example.
+Under [cif/common/options.yml.example](cif/common/options.yml.example) you will find an example yml file you should use as an example.
 
 The example file should look something like this
 ```
@@ -80,7 +80,7 @@ The example file should look something like this
 }
 ```
 
-You should copy the example file to an options.json file under the same path, this will be the real file that will have your configurations.
+You should copy the example file to an options.yml file under the same path, this will be the real file that will have your configurations.
 This file is under .gitignore and should not be commited to the repository since it has client secrets.
 
 
@@ -92,12 +92,17 @@ $ npm install
 $ npm test
 ```
 
+To deploy the actions on the Adobe I/O Runtime platform, we use the [serverless](https://serverless.com/framework/docs/providers/openwhisk/) framework. The deployment of independent packages and actions is defined in each package `serverless.yml` file. To deploy everything individually, simply run:
+```
+$ npm run deploy-packages
+```
+
 To deploy the actions on the Adobe I/O Runtime platform, we use the [serverless](https://serverless.com/framework/docs/providers/openwhisk/) framework. The deployment of packages and actions is defined in the `serverless.yml` file. To deploy everything, simply run:
 ```
 $ npm run deploy
 ```
 
-This will deploy the `graphql-reference/dispatcher` and all other actions like cart, oder etc in your namespace (Complete list in serverless.yml file). The dispatcher is a web action that is accessible with the URL `https://adobeioruntime.net/api/v1/web/NAMESPACE/graphql-reference/dispatcher`. To test the GraphQL endpoint, you can for example use the `GraphiQL` plugin in the Chrome browser.
+This will deploy the `hybris-graphql/dispatcher` and all other actions like cart, oder etc in your namespace (Complete list in serverless.yml file). The dispatcher is a web action that is accessible with the URL `https://adobeioruntime.net/api/v1/web/NAMESPACE/graphql-reference/dispatcher`. To test the GraphQL endpoint, you can for example use the `GraphiQL` plugin in the Chrome browser.
 
 ### Contributing
 

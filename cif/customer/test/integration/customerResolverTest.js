@@ -22,7 +22,6 @@ const AddressLoader = require('../../src/AddressLoader.js');
 const CustomerCartLoader = require('../../src/CustomerCartLoader.js');
 const TestUtils = require('../../../utils/TestUtils.js');
 const expect = require('chai').expect;
-const ymlData = require('../../../common/options.json');
 
 describe('Customer Resolver', () => {
   let customerDetails;
@@ -46,20 +45,15 @@ describe('Customer Resolver', () => {
     customerCart = sinon.spy(CustomerCartLoader.prototype, 'getCustomerCart');
   });
 
+  afterEach(() => {
+    customerDetails.restore();
+    addressDetails.restore();
+    customerCart.restore();
+  });
   describe('Integration Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
+
     before(async () => {
       args.context.settings.bearer = await TestUtils.getBearer();
     });
@@ -69,7 +63,6 @@ describe('Customer Resolver', () => {
       //todo check async await support so that this variable can be stored earlier -- Done
 
       return resolve(args).then(result => {
-        // todo add more integration related use cases here - Done
         assert.isUndefined(result.errors);
         let responseData = result.data;
         assert.notEqual(responseData, null);
@@ -84,7 +77,6 @@ describe('Customer Resolver', () => {
         '{customer{firstname, lastname, addresses{firstname, lastname, street}}}';
       //todo check async await support so that this variable can be stored earlier -- Done
       return resolve(args).then(result => {
-        // todo add more integration related use cases here - Done
         assert.isUndefined(result.errors);
         let responseData = result.data;
         assert.notEqual(responseData, null);

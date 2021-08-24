@@ -27,11 +27,9 @@ const resolve = require('../../../customer/src/customerResolver.js').main;
 chai.use(chaiShallowDeepEqual);
 const TestUtils = require('../../../utils/TestUtils.js');
 const createCustomerLoader = require('../../src/CreateCustomerLoader.js');
-const bearer = 'a7db795c-b1c2-46d9-a201-16130b6099af';
-const ymlData = require('../../../common/options.json');
 
 describe('Create Customer Resolver', function() {
-  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
+  const scope = nock(TestUtils.getHybrisInstance());
   let createCustomer;
   before(() => {
     // Disable console debugging
@@ -57,22 +55,11 @@ describe('Create Customer Resolver', function() {
   });
 
   describe('Unit Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          HB_CLIENTID: 'client-side',
-          HB_CLIENTSECRET: 'adobeio20180605',
-          customerId: 'anonymous',
-          HB_OAUTH_PATH: ymlData.HB_OAUTH_PATH,
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
+
+    //Returns hybris configured api base path
+    const HB_API_BASE_PATH = TestUtils.getYmlData().HB_API_BASE_PATH;
 
     it('Create customer mutation', () => {
       scope
@@ -81,14 +68,15 @@ describe('Create Customer Resolver', function() {
         .reply(200, hybrisAuthLoginMock);
 
       scope
-        .post(`${ymlData.HB_API_BASE_PATH}electronics/users`)
+        .post(`${HB_API_BASE_PATH}electronics/users`)
         .query({ fields: 'DEFAULT' })
         .reply(200, createCustomerHybris);
-      args.context.settings.bearer = bearer;
+
       args.query =
-        'mutation {createCustomerV2(input: {firstname: "Amaresh", lastname: "muni", email: "amar@test.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
+        'mutation {createCustomerV2(input: {firstname: "First Name", lastname: "Last Name", email: "test@example.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
       return resolve(args).then(result => {
         let response = result.data.createCustomerV2.customer;
+        assert.equal(createCustomer.callCount, 1);
         expect(response).to.exist.and.to.deep.equal(
           customerDataGraphqlResponse.customer
         );
@@ -102,12 +90,12 @@ describe('Create Customer Resolver', function() {
         .reply(200, hybrisAuthLoginMock);
 
       scope
-        .post(`${ymlData.HB_API_BASE_PATH}electronics/users`)
+        .post(`${HB_API_BASE_PATH}electronics/users`)
         .query({ fields: 'DEFAULT' })
         .reply(200, createCustomerHybris);
-      args.context.settings.bearer = bearer;
+
       args.query =
-        'mutation {createCustomerV2(input: {firstname: "Amaresh", lastname: "muni", email: "amar@test.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
+        'mutation {createCustomerV2(input: {firstname: "First Name", lastname: "Last Name", email: "test@example.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
       return resolve(args).then(result => {
         let response = result.data.createCustomerV2.customer;
         assert.ok(response.firstname);
@@ -123,12 +111,12 @@ describe('Create Customer Resolver', function() {
         .reply(200, hybrisAuthLoginMock);
 
       scope
-        .post(`${ymlData.HB_API_BASE_PATH}electronics/users`)
+        .post(`${HB_API_BASE_PATH}electronics/users`)
         .query({ fields: 'DEFAULT' })
         .reply(200, createCustomerHybris);
-      args.context.settings.bearer = bearer;
+
       args.query =
-        'mutation {createCustomerV2(input: {firstname: "Amaresh", lastname: "muni", email: "amar@test.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
+        'mutation {createCustomerV2(input: {firstname: "First Name", lastname: "Last Name", email: "test@example.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
         let response = result.data.createCustomerV2;

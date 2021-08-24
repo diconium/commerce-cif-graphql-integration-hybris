@@ -19,7 +19,6 @@ const assert = require('chai').assert;
 const resolve = require('../../../customer/src/customerResolver.js').main;
 const TestUtils = require('../../../utils/TestUtils.js');
 const ChangePasswordLoader = require('../../src/ChangeCustomerPasswordLoader.js');
-const ymlData = require('../../../common/options.json');
 
 describe('Change Customer Password', function() {
   let changePassword;
@@ -42,30 +41,20 @@ describe('Change Customer Password', function() {
     );
   });
 
+  afterEach(() => {
+    changePassword.restore();
+  });
+
   describe('Integration Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          HB_CLIENTID: ymlData.HB_CLIENTID,
-          HB_CLIENTSECRET: ymlData.HB_CLIENTSECRET,
-          customerId: 'current',
-          HB_OAUTH_PATH: ymlData.HB_OAUTH_PATH,
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
     before(async () => {
       args.context.settings.bearer = await TestUtils.getBearer();
     });
-    // todo move such test to unit test -- Done
+
     it('Mutation: change customer password response should always contain object', () => {
       args.query =
-        'mutation{changeCustomerPassword(currentPassword: "Embitel@123" newPassword: "Embitel@123"){id email}}';
+        'mutation{changeCustomerPassword(currentPassword: "Example@123" newPassword: "Example@123"){id email}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
         assert.equal(changePassword.callCount, 1);

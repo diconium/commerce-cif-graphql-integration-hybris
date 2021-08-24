@@ -27,5 +27,14 @@ module.exports = {
     path: path.resolve(__dirname, '.webpack'),
     filename: '[name].js',
   },
+    module: {
+    rules: [
+      {
+        test: /\.ya?ml$/,
+        type: 'json',
+        use: 'yaml-loader',
+      },
+    ],
+  },
   mode: 'development',
 };

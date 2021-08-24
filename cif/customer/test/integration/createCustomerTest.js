@@ -20,7 +20,6 @@ const expect = require('chai').expect;
 const resolve = require('../../../customer/src/customerResolver.js').main;
 const TestUtils = require('../../../utils/TestUtils.js');
 const createCustomerLoader = require('../../src/CreateCustomerLoader.js');
-const ymlData = require('../../../common/options.json');
 
 describe('Create Customer Resolver', function() {
   let createCustomer;
@@ -43,27 +42,16 @@ describe('Create Customer Resolver', function() {
     );
   });
 
+  afterEach(() => {
+    createCustomer.restore();
+  });
+
   describe('Integration Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          HB_CLIENTID: ymlData.HB_CLIENTID,
-          HB_CLIENTSECRET: ymlData.HB_CLIENTSECRET,
-          customerId: 'anonymous',
-          HB_OAUTH_PATH: ymlData.HB_OAUTH_PATH,
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
-    // todo move such test to unit test -- Done
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
     it('Mutation: create customer response should always contain object', () => {
       args.query =
-        'mutation {createCustomer(input: {firstname: "Amaresh1", lastname: "muni", email: "surya1@embitel.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
+        'mutation {createCustomer(input: {firstname: "First Name", lastname: "Last Name", email: "test@example.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
         let customer = result.data.createCustomer;

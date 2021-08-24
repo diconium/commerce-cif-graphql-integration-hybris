@@ -24,6 +24,7 @@ class SetShippingAddressesOnCart {
    * @param {Object} parameters.shippingAddress parameter contains the shippingaddress details
    * @param {Object} [parameters.graphqlContext] The optional GraphQL execution context passed to the resolver.
    * @param {Object} [parameters.actionParameters] Some optional parameters of the I/O Runtime action, like for example customerId, bearer token, query and url info.
+   * LoaderProxy class returns a Proxy to avoid having to implement a getter for all properties.
    */
   constructor(parameters) {
     this.cartId = parameters.cartId;
@@ -36,9 +37,6 @@ class SetShippingAddressesOnCart {
     this.shippingMethodsLoader = new ShippingMethodsLoader(
       parameters.actionParameters
     );
-    /**
-     * This class returns a Proxy to avoid having to implement a getter for all properties.
-     */
     return new LoaderProxy(this);
   }
 
@@ -59,7 +57,7 @@ class SetShippingAddressesOnCart {
    * @returns {[]}
    */
   getShippingMethods(deliveryModes) {
-    let shippingMethods = [];
+    const shippingMethods = [];
     deliveryModes.map(shippingMethod => {
       if (shippingMethod.code !== 'pickup') {
         shippingMethods.push({
@@ -97,7 +95,7 @@ class SetShippingAddressesOnCart {
   __convertData(data) {
     let regionCode = data.region.isocode.split('-');
     regionCode = regionCode.length === 2 ? regionCode[1] : regionCode[0];
-    let availableShippingMethods =
+    const availableShippingMethods =
       data.deliveryModes !== undefined
         ? this.getShippingMethods(data.deliveryModes)
         : [];

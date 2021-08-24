@@ -239,7 +239,7 @@
         "name": "United States"
       },
       "defaultAddress": false,
-      "email": "test.user@example.com",
+      "email": "test@example.com",
       "firstName": "test",
       "formattedAddress": "Strasse 11, 70376, stuttgart, Germany",
       "id": "8796130770967",
@@ -312,8 +312,8 @@
     "value": 23.69
   },
   "user": {
-    "name": "Test User",
-    "uid": "test.user@example.com"
+    "name": "USER_FN",
+    "uid": "test@example.com"
   },
   "potentialOrderPromotions": [],
   "potentialProductPromotions": [],

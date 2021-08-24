@@ -20,7 +20,7 @@ const mockRequire = require('mock-require');
 const ProductsLoader = require('../../../product/src/ProductsLoader.js');
 const CategoryTreeLoader = require('../../src/CategoryTreeLoader.js');
 const ProductLoader = require('../../../product/src/ProductLoader.js');
-const ymlData = require('../../../common/options.json');
+const TestUtils = require('../../../utils/TestUtils');
 
 describe('Dispatcher Resolver', () => {
   let resolve;
@@ -74,7 +74,7 @@ describe('Dispatcher Resolver', () => {
 
   describe('Integration Tests', () => {
     let args = {
-      url: `${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`,
+      url: TestUtils.getHybrisInstance(),
       __ow_headers: {
         authorization: '',
       },
@@ -92,7 +92,7 @@ describe('Dispatcher Resolver', () => {
 
     it('Basic category search', () => {
       args.query =
-        '{categoryList(filters:{ids:{eq:"1"}}){id,name,url_path,url_key,product_count,children_count,children{id,name,url_path,url_key,product_count,children_count}}}';
+        '{categoryList(filters:{category_uid:{eq:"1"}}){id,name,url_path,url_key,product_count,children_count,children{id,name,url_path,url_key,product_count,children_count}}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.body.errors); // No GraphQL errors
 

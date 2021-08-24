@@ -29,7 +29,7 @@ class LoaderProxy {
           return object[property]; // The object has that property
         }
 
-        let prototype = Object.getPrototypeOf(object);
+        const prototype = Object.getPrototypeOf(object);
         if (Object.getOwnPropertyDescriptor(prototype, property)) {
           return object[property]; // The object class has that property
         }

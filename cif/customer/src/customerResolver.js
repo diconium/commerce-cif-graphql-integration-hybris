@@ -29,7 +29,7 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
 function resolve(args) {
   if (cachedSchema == null) {
-    let schemaBuilder = new SchemaBuilder()
+    const schemaBuilder = new SchemaBuilder()
       .filterMutationFields(
         new Set([
           'createCustomerV2',
@@ -44,7 +44,7 @@ function resolve(args) {
     cachedSchema = schemaBuilder.build();
   }
 
-  let resolvers = {
+  const resolvers = {
     customer: (params, context) => {
       return new Customer({
         graphqlContext: context,

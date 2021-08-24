@@ -22,20 +22,18 @@ const chaiShallowDeepEqual = require('chai-shallow-deep-equal');
 const resolve = require('../../../cart/src/cartResolver.js').main;
 const nock = require('nock');
 
-const bearer = '55af3c02-6dd3-4b45-92c2-38db35a2c43d';
-
 const TestUtils = require('../../../utils/TestUtils.js');
 const hybrisUpdateCartItems = require('../resources/hybrisUpdateCartItems');
 const validUpdateCartItems = require('../resources/validUpdateCartItems');
 const cartNotFound = require('../resources/cartNotFound');
 const entryNotFoundUpdateCartItems = require('../resources/entryNotFoundUpdateCartItems');
-const ymlData = require('../../../common/options.json');
+const UpdateCartLoader = require('../../src/UpdateCartItemsLoader');
 
 chai.use(chaiShallowDeepEqual);
 
 describe('Update Cart Items Resolver', () => {
-  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
-
+  const scope = nock(TestUtils.getHybrisInstance());
+  let UpdateCart;
   before(() => {
     // Disable console debugging
     sinon.stub(console, 'debug');
@@ -47,30 +45,30 @@ describe('Update Cart Items Resolver', () => {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    UpdateCart = sinon.spy(UpdateCartLoader.prototype, '_updateMethod');
+  });
+
+  afterEach(() => {
+    UpdateCart.restore();
+  });
+
   describe('Unit Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
+
+    //Returns hybris configured api base path
+    const HB_API_BASE_PATH = TestUtils.getYmlData().HB_API_BASE_PATH;
 
     it('Update cart items unit test case', () => {
       scope
         .patch(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/entries/0`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000016/entries/0`
         )
         .query({ fields: 'FULL' })
         .reply(200, hybrisUpdateCartItems);
 
-      args.context.settings.bearer = bearer;
       args.query =
         'mutation {updateCartItems(input: {cart_id: "00000016", cart_items: [{cart_item_uid: "0",quantity: 3}]}){ cart{items {uid,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
       return resolve(args).then(result => {
@@ -78,6 +76,7 @@ describe('Update Cart Items Resolver', () => {
         const { errors } = result;
         assert.isUndefined(result.errors);
         expect(errors).to.be.undefined;
+        assert.equal(UpdateCart.callCount, 1);
         expect(response).to.deep.equals(validUpdateCartItems);
       });
     });
@@ -85,11 +84,11 @@ describe('Update Cart Items Resolver', () => {
     it('Mutation: Cart not found', () => {
       scope
         .patch(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/entries/0`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/entries/0`
         )
         .query({ fields: 'FULL' })
         .reply(400, cartNotFound);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation {updateCartItems(input: {cart_id: "INVALID-CART-ID", cart_items: [{cart_item_uid: "0",quantity: 3}]}){ cart{items {uid,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
       return resolve(args).then(result => {
@@ -106,11 +105,11 @@ describe('Update Cart Items Resolver', () => {
     it('Mutation: Entry not found', () => {
       scope
         .patch(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/entries/10`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000016/entries/10`
         )
         .query({ fields: 'FULL' })
         .reply(400, entryNotFoundUpdateCartItems);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation {updateCartItems(input: {cart_id: "00000016", cart_items: [{cart_item_uid:"10",quantity: 3}]}){ cart{items {uid,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
       return resolve(args).then(result => {

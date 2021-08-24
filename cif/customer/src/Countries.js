@@ -34,7 +34,7 @@ class Countries {
    */
   get countries() {
     return this.countriesLoader.load(this.actionParameters.query).then(data => {
-      let countryCode = [];
+      const countryCode = [];
       data.map(country => {
         countryCode.push(country.isocode);
       });

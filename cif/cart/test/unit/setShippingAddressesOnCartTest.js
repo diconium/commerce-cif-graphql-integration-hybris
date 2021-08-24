@@ -27,13 +27,13 @@ const cartNotFound = require('../resources/cartNotFound.json');
 const invalidRegionCode = require('../resources/invalidRegionCode.json');
 const invalidCountryCode = require('../resources/invalidCountryCode.json');
 const TestUtils = require('../../../utils/TestUtils.js');
-const bearer = '55af3c02-6dd3-4b45-92c2-38db35a2c43d';
 const chaiShallowDeepEqual = require('chai-shallow-deep-equal');
 chai.use(chaiShallowDeepEqual);
-const ymlData = require('../../../common/options.json');
+const ShippingAddressLoader = require('../../src/SetShippingAddressOnCartLoader');
 
 describe('SetShippingAddress OnCart', function() {
-  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
+  const scope = nock(TestUtils.getHybrisInstance());
+  let ShippingAddress;
   before(() => {
     sinon.stub(console, 'debug');
     sinon.stub(console, 'error');
@@ -44,39 +44,47 @@ describe('SetShippingAddress OnCart', function() {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    ShippingAddress = sinon.spy(
+      ShippingAddressLoader.prototype,
+      '_setShippingAddressOnCart'
+    );
+  });
+
+  afterEach(() => {
+    ShippingAddress.restore();
+  });
+
   describe('Validation', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
+
+    //Returns hybris configured api base path
+    const HB_API_BASE_PATH = TestUtils.getYmlData().HB_API_BASE_PATH;
 
     it('Mutation: Should successfully post shipping address for the cart', () => {
       scope
         .post(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/addresses/delivery`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000016/addresses/delivery`
         )
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .query({
+          fields: 'DEFAULT',
+          access_token: `${TestUtils.getContextData().context.settings.bearer}`,
+        })
         .reply(200, hybrisShippingAddress);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/deliverymodes`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000016/deliverymodes`
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation {setShippingAddressesOnCart(input: {cart_id: "00000016", shipping_addresses: [{address: {firstname: "Bob", lastname: "Roll", company: "Magento", street: ["Magento Pkwy", "Main Street"], city: "Austin", region: "US-WA", postcode: "78758", country_code: "US", telephone: "9999998899", save_in_address_book: false}}]}) { cart {shipping_addresses {firstname,lastname,company,street,city,region {code,label},postcode,telephone,country {code,label} }}}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
+        assert.equal(ShippingAddress.callCount, 1);
         let setShippingAddressesOnCart =
           result.data.setShippingAddressesOnCart.cart.shipping_addresses[0];
         expect(setShippingAddressesOnCart).to.deep.equals(
@@ -88,17 +96,20 @@ describe('SetShippingAddress OnCart', function() {
     it('Mutation: validate response should contain cart not found', () => {
       scope
         .post(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/addresses/delivery`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/addresses/delivery`
         )
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .query({
+          fields: 'DEFAULT',
+          access_token: `${TestUtils.getContextData().context.settings.bearer}`,
+        })
         .reply(400, cartNotFound);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/deliverymodes`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/INVALID-CART-ID/deliverymodes`
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation {setShippingAddressesOnCart(input: {cart_id: "INVALID-CART-ID", shipping_addresses: [{address: {firstname: "Bob", lastname: "Roll", company: "Magento", street: ["Magento Pkwy", "Main Street"], city: "Austin", region: "US-WA", postcode: "78758", country_code: "US", telephone: "9999998899", save_in_address_book: false}}]}) { cart {shipping_addresses {firstname,lastname,company,street,city,region {code,label},postcode,telephone,country {code,label} }}}}';
       return resolve(args).then(result => {
@@ -115,17 +126,20 @@ describe('SetShippingAddress OnCart', function() {
     it('Mutation: validate response should contain invalid region code found', () => {
       scope
         .post(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/addresses/delivery`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000016/addresses/delivery`
         )
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .query({
+          fields: 'DEFAULT',
+          access_token: `${TestUtils.getContextData().context.settings.bearer}`,
+        })
         .reply(400, invalidRegionCode);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/deliverymodes`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000016/deliverymodes`
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation {setShippingAddressesOnCart(input: {cart_id: "00000016", shipping_addresses: [{address: {firstname: "Bob", lastname: "Roll", company: "Magento", street: ["Magento Pkwy", "Main Street"], city: "Austin", region: "US-W", postcode: "78758", country_code: "US", telephone: "9999998899", save_in_address_book: false}}]}) { cart {shipping_addresses {firstname,lastname,company,street,city,region {code,label},postcode,telephone,country {code,label} }}}}';
       return resolve(args).then(result => {
@@ -142,17 +156,20 @@ describe('SetShippingAddress OnCart', function() {
     it('Mutation: validate response should contain invalid country code', () => {
       scope
         .post(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/addresses/delivery`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000016/addresses/delivery`
         )
-        .query({ fields: 'DEFAULT', access_token: `${bearer}` })
+        .query({
+          fields: 'DEFAULT',
+          access_token: `${TestUtils.getContextData().context.settings.bearer}`,
+        })
         .reply(400, invalidCountryCode);
       scope
         .get(
-          `${ymlData.HB_API_BASE_PATH}electronics/users/current/carts/00000016/deliverymodes`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000016/deliverymodes`
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-      args.context.settings.bearer = bearer;
+
       args.query =
         'mutation {setShippingAddressesOnCart(input: {cart_id: "00000016", shipping_addresses: [{address: {firstname: "Bob", lastname: "Roll", company: "Magento", street: ["Magento Pkwy", "Main Street"], city: "Austin", region: "US-WA", postcode: "78758", country_code: "U", telephone: "9999998899", save_in_address_book: false}}]}) { cart {shipping_addresses {firstname,lastname,company,street,city,region {code,label},postcode,telephone,country {code,label} }}}}';
       return resolve(args).then(result => {

@@ -20,15 +20,13 @@ const axios = require('axios');
 class ProductLoader {
   /**
    * @param {Object} [actionParameters] Some optional parameters of the I/O Runtime action, like for example authentication info.
+   * @returns {loadingFunction}  - This loader loads each product one by one, but if the 3rd party backend allows it,
+   * it could also fetch all products in one single request. In this case, the method
+   * must still return an Array of products with the same order as the keys.
+   * @param {Array} [productSkus]  is an Array of product skus.
    */
   constructor(actionParameters) {
-    /**The loading function: "productSkus" is an Array of product skus */
-    let loadingFunction = productSkus => {
-      /**
-       *This loader loads each product one by one, but if the 3rd party backend allows it,
-       *it could also fetch all products in one single request. In this case, the method
-       *must still return an Array of products with the same order as the keys.
-       */
+    const loadingFunction = productSkus => {
       return Promise.resolve(
         productSkus.map(productSku => {
           console.debug(`--> Fetching product with sku ${productSku}`);
@@ -78,8 +76,8 @@ class ProductLoader {
       HB_BASESITEID,
     } = actionParameters.context.settings;
 
-    let apiHost = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/products/${productSku}?fields=FULL`;
-    let config = {
+    const apiHost = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/products/${productSku}?fields=FULL`;
+    const config = {
       params: {
         json: true,
       },

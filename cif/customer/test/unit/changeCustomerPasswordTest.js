@@ -22,13 +22,12 @@ const nock = require('nock');
 const assert = require('chai').assert;
 chai.use(chaiShallowDeepEqual);
 const TestUtils = require('../../../utils/TestUtils.js');
-const bearer = '55af3c02-6dd3-4b45-92c2-38db35a2c43d';
 const { expect } = chai;
-const ymlData = require('../../../common/options.json');
+const ChangePasswordLoader = require('../../src/ChangeCustomerPasswordLoader.js');
 
 describe('changeCustomerPassword', () => {
-  const scope = nock(`${ymlData.HB_PROTOCOL}://${ymlData.HB_API_HOST}`);
-
+  const scope = nock(TestUtils.getHybrisInstance());
+  let changePassword;
   before(() => {
     // Disable console debugging
     sinon.stub(console, 'debug');
@@ -40,48 +39,53 @@ describe('changeCustomerPassword', () => {
     console.error.restore();
   });
 
+  beforeEach(() => {
+    // We "spy" all the loading functions
+    changePassword = sinon.spy(
+      ChangePasswordLoader.prototype,
+      '_generateCustomerToken'
+    );
+  });
+
+  afterEach(() => {
+    changePassword.restore();
+  });
+
   describe('Unit Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
+
+    //Returns hybris configured api base path
+    const HB_API_BASE_PATH = TestUtils.getYmlData().HB_API_BASE_PATH;
 
     it('Mutation: change customer password', () => {
       scope
-        .put(`${ymlData.HB_API_BASE_PATH}electronics/users/current/password`)
+        .put(`${HB_API_BASE_PATH}electronics/users/current/password`)
         .query({
-          new: 'Embitel@123',
-          old: 'Embitel@123',
+          new: 'Example@123',
+          old: 'Example@123',
         })
         .reply(202);
-      args.context.settings.bearer = bearer;
+
       args.query =
-        'mutation{changeCustomerPassword(currentPassword: "Embitel@123" newPassword: "Embitel@123"){id email}}';
+        'mutation{changeCustomerPassword(currentPassword: "Example@123" newPassword: "Example@123"){id email}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
+        assert.equal(changePassword.callCount, 1);
       });
     });
 
     it('Mutation: old password mismatch response', () => {
       scope
-        .put(`${ymlData.HB_API_BASE_PATH}electronics/users/current/password`)
+        .put(`${HB_API_BASE_PATH}electronics/users/current/password`)
         .query({
-          new: 'Embitel@123',
+          new: 'Example@123',
           old: '1234567890',
         })
         .reply(400);
-      args.context.settings.bearer = bearer;
+
       args.query =
-        'mutation{changeCustomerPassword(currentPassword: "1234567890" newPassword: "Embitel@123"){id email}}';
+        'mutation{changeCustomerPassword(currentPassword: "1234567890" newPassword: "Example@123"){id email}}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({

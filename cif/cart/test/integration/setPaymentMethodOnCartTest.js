@@ -18,7 +18,6 @@ const assert = require('chai').assert;
 const resolve = require('../../../customer/src/customerResolver.js').main;
 const TestUtils = require('../../../utils/TestUtils.js');
 const PaymentMethodLoader = require('../../../customer/src/SetPaymentMethodOnCartLoader');
-const ymlData = require('../../../common/options.json');
 
 describe('Set Payment method on Cart', () => {
   let PaymentMethod;
@@ -42,20 +41,14 @@ describe('Set Payment method on Cart', () => {
     );
   });
 
+  afterEach(() => {
+    PaymentMethod.restore();
+  });
+
   describe('Integration Tests', () => {
-    let args = {
-      url: TestUtils.getHybrisInstance(),
-      context: {
-        settings: {
-          bearer: '',
-          customerId: 'current',
-          HB_PROTOCOL: ymlData.HB_PROTOCOL,
-          HB_API_HOST: ymlData.HB_API_HOST,
-          HB_API_BASE_PATH: ymlData.HB_API_BASE_PATH,
-          HB_BASESITEID: ymlData.HB_BASESITEID,
-        },
-      },
-    };
+    //Returns object with hybris url and configuaration data
+    let args = TestUtils.getContextData();
+
     before(async () => {
       args.context.settings.bearer = await TestUtils.getBearer();
     });

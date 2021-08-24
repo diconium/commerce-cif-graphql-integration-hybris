@@ -30,7 +30,7 @@ const tar = require('tar');
 const serverless = yaml.safeLoad(fs.readFileSync('serverless.yml', 'utf8'));
 
 // Parse module dependencies
-let dependencies = new Set();
+const dependencies = new Set();
 for (let action in serverless.functions) {
   const a = serverless.functions[action];
   // eslint-disable-next-line no-prototype-builtins
@@ -42,7 +42,7 @@ for (let action in serverless.functions) {
 // Provision dependencies
 for (let dependency of dependencies) {
   // Download dependencies, unpack them and install their production dependencies
-  let tarball = child_process
+  const tarball = child_process
     .execSync(`npm pack ${dependency}`)
     .toString()
     .trim();
