@@ -24,7 +24,7 @@
     "graphql": "^14.5.8",
     "graphql-tools": "3.1.1",
     "jq": "^1.7.2",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^3.1.1",
     "openwhisk": "^3.19.0",
     "request": "2.88.0",
     "yaml": "^1.10.0"
