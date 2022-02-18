@@ -11,8 +11,10 @@ jobs:
       - node/install-packages
       - run:
           command: npm run test
+      - store_test_results:
+          path: test/results/unit/results.xml
 
 workflows:
-  test_my_app:
+  tests:
     jobs:
       - test
