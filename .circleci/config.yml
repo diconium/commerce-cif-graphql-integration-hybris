@@ -12,9 +12,9 @@ jobs:
       - run:
           command: npm run test
       - store_test_results:
-          path: test/results/unit/results.xml
+          path: test
       - store_artifacts:
-          path: ./coverage/lcov.info
+          path: coverage
 workflows:
   tests:
     jobs:
