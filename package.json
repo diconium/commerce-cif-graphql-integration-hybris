@@ -59,14 +59,14 @@
   ],
   "nyc": {
     "include": [
-      "src/**"
+      "cif/**"
     ],
     "exclude": [
-      "src/resources"
+      "cif/resources"
     ],
     "check-coverage": true,
     "per-file": false,
-    "lines": 80,
+    "lines": 60,
     "all": true
   }
 }
