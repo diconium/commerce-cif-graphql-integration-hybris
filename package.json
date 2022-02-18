@@ -52,21 +52,21 @@
     "serverless-webpack": "^5.3.1",
     "sinon": "^7.5.0",
     "webpack": "^4.39.1",
-	"yaml-loader":"^0.6.0"
+    "yaml-loader": "^0.6.0"
   },
   "workspaces": [
     "cif/*"
   ],
   "nyc": {
     "include": [
-      "src/**"
+      "cif/**"
     ],
     "exclude": [
-      "src/resources"
+      "cif/resources"
     ],
     "check-coverage": true,
     "per-file": false,
-    "lines": 80,
+    "lines": 60,
     "all": true
   }
 }
