@@ -42,7 +42,7 @@ module.exports = {
         'prettier'
     ],
     'parserOptions': {
-        'ecmaVersion': 6
+        'ecmaVersion': 8
     },
     'extends': [
         "prettier",

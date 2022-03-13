@@ -1,20 +1,86 @@
 {
-  "city": "Austin",
-  "company": null,
-  "country": {
-    "code": "US",
-    "label": "US"
-  },
-  "firstname": "Bob",
-  "lastname": "Roll",
-  "postcode": "78758",
-  "region": {
-    "code": "WA",
-    "label": "WA"
-  },
-  "street": [
-    "Magento Pkwy",
-    "Main Street"
-  ],
-  "telephone": "9999998899"
+  "data": {
+    "setBillingAddressOnCart": {
+      "cart": {
+        "id": "00000035",
+        "billing_address": {
+          "firstname": "abc",
+          "lastname": "Roll",
+          "country": {
+            "code": "US",
+            "__typename": "CartAddressCountry"
+          },
+          "street": [
+            "Magento Pkwy, Main Street, Washington, Austin, 78758"
+          ],
+          "city": "Austin",
+          "region": {
+            "code": "WA",
+            "__typename": "CartAddressRegion"
+          },
+          "postcode": "78758",
+          "telephone": "9999998899",
+          "__typename": "BillingCartAddress"
+        },
+        "items": [
+          {
+            "id": "0",
+            "quantity": 3,
+            "__typename": "SimpleCartItem"
+          }
+        ],
+        "shipping_addresses": [
+          {
+            "selected_shipping_method": {
+              "amount": {
+                "currency": "USD",
+                "value": 11.99,
+                "__typename": "Money"
+              },
+              "__typename": "SelectedShippingMethod"
+            },
+            "street": [
+              "Magento Pkwy, Main Street, Washington, Austin, 78758"
+            ],
+            "__typename": "ShippingCartAddress"
+          }
+        ],
+        "__typename": "Cart",
+        "prices": {
+          "applied_taxes": [],
+          "__typename": "CartPrices",
+          "discounts": [
+            {
+              "amount": {
+                "currency": "USD",
+                "value": 20,
+                "__typename": "Money"
+              },
+              "label": "",
+              "__typename": "Discount"
+            }
+          ],
+          "grand_total": {
+            "currency": "USD",
+            "value": 497.55,
+            "__typename": "Money"
+          },
+          "subtotal_excluding_tax": {
+            "currency": "USD",
+            "value": 473.86,
+            "__typename": "Money"
+          }
+        },
+        "applied_gift_cards": [],
+        "available_payment_methods": [
+          {
+            "code": "visa",
+            "title": "Visa",
+            "__typename": "AvailablePaymentMethod"
+          }
+        ]
+      },
+      "__typename": "SetBillingAddressOnCartOutput"
+    }
+  }
 }

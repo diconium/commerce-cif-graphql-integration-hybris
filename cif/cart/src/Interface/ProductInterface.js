@@ -50,6 +50,15 @@ class ProductInterface {
             // media_type: 'image',
           })
         : null,
+      small_image: thumbnail
+        ? new MediaGallery({
+            position: 0,
+            url: thumbnail.url,
+            label: thumbnail.altText,
+            disabled: false,
+            // media_type: 'image',
+          })
+        : null,
     };
   }
 }

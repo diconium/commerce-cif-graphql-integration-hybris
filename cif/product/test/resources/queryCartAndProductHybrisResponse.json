@@ -23,10 +23,10 @@
       "name": "United States"
     },
     "defaultAddress": false,
-    "firstName": "First Name",
+    "firstName": "abc",
     "formattedAddress": "dsdssssdsd, testtt, Connecticut, testcity, 12345",
     "id": "8796125855767",
-    "lastName": "Last Name",
+    "lastName": "xyz",
     "line1": "dsdssssdsd",
     "line2": "testtt",
     "phone": "1234567890",
@@ -389,11 +389,11 @@
         "name": "United States"
       },
       "defaultAddress": false,
-      "email": "test@example.com",
-      "firstName": "First Name",
+      "email": "abc.xyz@123.com",
+      "firstName": "abc",
       "formattedAddress": "dsdssssdsd, testtt, Connecticut, testcity, 12345",
       "id": "8796125888535",
-      "lastName": "Last Name",
+      "lastName": "xyz",
       "line1": "dsdssssdsd",
       "line2": "testtt",
       "phone": "1234567890",
@@ -462,8 +462,8 @@
     "value": 201.76
   },
   "user": {
-    "name": "USER_FN",
-    "uid": "test@example.com"
+    "name": "abc xyz",
+    "uid": "abc.xyz@123.com"
   },
   "potentialOrderPromotions": [],
   "potentialProductPromotions": [],

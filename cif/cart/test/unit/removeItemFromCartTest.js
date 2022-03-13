@@ -86,7 +86,9 @@ describe('RemoveItemFromCart', () => {
         assert.isUndefined(result.errors);
         assert.equal(RemoveItem.callCount, 1);
         expect(errors).to.be.undefined;
-        expect(response).to.deep.equals(validResponseRemoveItemCart);
+        expect(response).to.deep.equals(
+          validResponseRemoveItemCart.data.removeItemFromCart.cart
+        );
       });
     });
 

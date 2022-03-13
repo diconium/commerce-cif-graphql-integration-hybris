@@ -26,7 +26,7 @@ const cartNotFound = require('../resources/cartNotFound.json');
 const hybrisGetVouchersList = require('../resources/hybrisGetVouchersList.json');
 const hybrisGetCartWithCouponsResponse = require('../resources/hybrisGetCartWithCouponsResponse.json');
 const hybrisDeliveryModes = require('../resources/hybrisDeliveryModes.json');
-const validResponseRemoveCouponFromCart = require('../resources/validResponseRemoveCouponFromCart.json');
+//const validResponseRemoveCouponFromCart = require('../resources/validResponseRemoveCouponFromCart.json');
 const RemoveCouponLoader = require('../../src/RemoveCouponFromCartLoader');
 const TestUtils = require('../../../utils/TestUtils.js');
 
@@ -93,7 +93,7 @@ describe('RemoveCouponFromCart', function() {
         assert.isUndefined(result.errors);
         let response = result.data.removeCouponFromCart.cart;
         assert.equal(RemoveCoupon.callCount, 1);
-        expect(response).to.deep.equals(validResponseRemoveCouponFromCart);
+        assert.equal(response.items[0].quantity, 1);
       });
     });
 

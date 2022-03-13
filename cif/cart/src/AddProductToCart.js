@@ -15,9 +15,8 @@
 'use strict';
 
 const LoaderProxy = require('../../common/LoaderProxy.js');
-const CartItemInterface = require('./Interface/CartItemInterface');
 const AddProductToCartLoader = require('./AddProductToCartLoader.js');
-
+const Cart = require('./Cart.js');
 class AddProductToCart {
   /**
    * @param {Object} parameters parameters object contains the cartId,Items to be added,graphqlContext & actionParameters
@@ -50,12 +49,14 @@ class AddProductToCart {
    * @param {Object} data parameter data contains details from hybris
    * @returns {Object} convert the hybris data into magento graphQL schema and return the object
    */
-  __convertData(data) {
-    const { items } = new CartItemInterface([data.entry]);
+  __convertData() {
     return {
-      cart: {
-        items,
-      },
+      cart: new Cart({
+        cartId: this.input.cart_id,
+        graphqlContext: this.graphqlContext,
+        actionParameters: this.actionParameters,
+        add: true,
+      }),
     };
   }
 }

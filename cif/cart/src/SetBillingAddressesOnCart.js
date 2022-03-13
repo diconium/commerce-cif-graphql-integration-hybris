@@ -14,6 +14,7 @@
 
 'use strict';
 const LoaderProxy = require('../../common/LoaderProxy.js');
+const Cart = require('./Cart.js');
 const SetBillingAddressOnCartLoader = require('./SetBillingAddressOnCartLoader.js');
 
 class SetBillingAddressesOnCart {
@@ -48,29 +49,21 @@ class SetBillingAddressesOnCart {
    * @param {Object} data parameter data contains billingAddress details from hybris
    * @returns {Object} convert the hybris data into magento graphQL schema and return the billingAddresss object
    */
-  __convertData(data) {
-    let regionCode = data.region.isocode.split('-');
-    regionCode = regionCode.length === 2 ? regionCode[1] : regionCode[0];
-    return {
-      cart: {
-        billing_address: {
-          firstname: data.firstName,
-          lastname: data.lastName,
-          street: [data.line1, data.line2],
-          city: data.town,
-          region: {
-            code: regionCode,
-            label: regionCode,
-          },
-          postcode: data.postalCode,
-          telephone: data.phone,
-          country: {
-            code: data.country.isocode,
-            label: data.country.isocode,
-          },
-        },
-      },
-    };
+
+  /**
+   * get cart method call cart loader to get the cart entries
+   * @returns {Promise} a promise return null after resolved successfully other wise return the error.
+   */
+  get cart() {
+    return this.__load()
+      .then(() => {
+        return new Cart({
+          graphqlContext: this.graphqlContext,
+          actionParameters: this.actionParameters,
+          cartId: this.cartId,
+        });
+      })
+      .catch(errorOutput => Promise.reject(errorOutput));
   }
 }
 

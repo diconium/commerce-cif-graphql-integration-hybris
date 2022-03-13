@@ -51,6 +51,7 @@ class CreateCustomer {
   __convertData(data) {
     return {
       customer: {
+        id: 1,
         firstname: data.firstName,
         lastname: data.lastName,
         email: data.uid,

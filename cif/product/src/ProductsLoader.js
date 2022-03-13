@@ -90,7 +90,11 @@ class ProductsLoader {
 
     /** Get a CategoryId by URL or Parameters */
     let categoryId =
-      params.filter && params.filter.category_uid
+      params.filters && params.filters.parent_category_uid
+        ? params.filters.parent_category_uid.eq
+        : params.filters && params.filters.category_uid
+        ? params.filters.category_uid.eq
+        : params.filter && params.filter.category_uid
         ? params.filter.category_uid.eq
         : params.categoryId
         ? params.categoryId
@@ -100,9 +104,7 @@ class ProductsLoader {
       /** Get a products by category id or search value */
 
       /** Creating query and sort params for Hybris Api*/
-      const query = `&query=${
-        params.search ? params.search : `%3A%3AallCategories%3A${categoryId}`
-      }`;
+      const query = `&query=${params.search ? params.search : `${categoryId}`}`;
       let sort = '';
 
       if (params.sort) {

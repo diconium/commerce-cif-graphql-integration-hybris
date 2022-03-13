@@ -15,6 +15,8 @@
 'use strict';
 
 const LoaderProxy = require('../../common/LoaderProxy.js');
+const AddressLoader = require('../../customer/src/AddressLoader.js');
+const SetPaymentMethodOnCartLoader = require('../../customer/src/SetPaymentMethodOnCartLoader.js');
 const PlaceOrderLoader = require('./PlaceOrderLoader.js');
 
 class PlaceOrder {
@@ -27,9 +29,15 @@ class PlaceOrder {
    */
   constructor(parameters) {
     this.cartId = parameters.cartId;
+    this.input = parameters.input;
     this.graphqlContext = parameters.graphqlContext;
     this.actionParameters = parameters.actionParameters;
     this.placeOrderLoader = new PlaceOrderLoader(parameters);
+    this.setPaymentMethodOnCartLoader = new SetPaymentMethodOnCartLoader(
+      parameters.actionParameters
+    );
+    this._addressLoader = new AddressLoader(parameters.actionParameters);
+
     return new LoaderProxy(this);
   }
 
@@ -37,7 +45,13 @@ class PlaceOrder {
    * method used to call load method from placeorder loader class
    */
   __load() {
-    return this.placeOrderLoader.load(this.cartId);
+    return this._addressLoader.load(this.cartId).then(address => {
+      return this.setPaymentMethodOnCartLoader
+        .load(this.input, address)
+        .then(payment => {
+          return this.placeOrderLoader.load(this.cartId, payment);
+        });
+    });
   }
 
   /**
@@ -49,6 +63,7 @@ class PlaceOrder {
     return {
       order: {
         order_id: data.code,
+        order_number: data.code,
       },
     };
   }

@@ -1,23 +1,27 @@
 {
-  "name": "commerce-cif-graphql-integration-hybris",
-  "version": "2.0.0",
-  "description": "Reference implementation showcasing a GraphQL integration on Adobe I/O Runtime with a Hybris commerce system",
-  "author": "diconium digital solutions",
+  "name": "commerce-cif-graphql-integration-reference",
+  "version": "1.0.0",
+  "description": "Reference implementation showcasing a GraphQL integration on Adobe I/O Runtime with a dummy 3rd-party commerce system",
+  "author": "Adobe",
   "license": "Apache-2.0",
   "private": true,
   "hybrishost": "https://hybris.example.com/",
   "scripts": {
-    "lint": "eslint -f table --ignore-path ./.eslintignore .",
+    "build": "npm install",
+
+    "lint": "lerna run lint --",
     "linter:fix": "eslint --ext .js . --fix",
     "test": "npm run lint && npm run test-cov",
     "test-cov": "nyc npm run unit && npm run lcov-report",
     "lcov-report": "nyc report --reporter=lcov",
     "run-doc": "npm run doc",
     "unit": "mocha cif/*/test/unit/*Test.js --reporter mocha-multi-reporters --reporter-options configFile=mocha-unit.json",
-    "deploy": "serverless deploy"
+    "deploy": "serverless deploy",
+    "deploy-packages": "lerna run deploy -- ",
+    "doc": "node cif/documentation/generate.js  && jq . < cif/resources/magento-schema-2.4.3.pruned.json > cif/resources/magento-schema-2.4.3.pruned.min.json"
   },
   "dependencies": {
-    "@adobe/aio-lib-state": "^1.0.4",
+    "@adobe/aio-lib-state": "1.0.4",
     "axios": "^0.19.2",
     "dataloader": "^1.4.0",
     "git-clone": "^0.1.0",
@@ -52,7 +56,8 @@
     "serverless-webpack": "^5.3.1",
     "sinon": "^7.5.0",
     "webpack": "^4.39.1",
-	"yaml-loader":"^0.6.0"
+    "winston": "2.4.5",
+    "yaml-loader": "^0.6.0"
   },
   "workspaces": [
     "cif/*"

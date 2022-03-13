@@ -40,6 +40,7 @@ class CartItemInterface {
       return {
         __typename: this.__typename,
         uid: item.entryNumber,
+        id: item.entryNumber,
         prices: {
           price: {
             currency: item.totalPrice.currencyIso,

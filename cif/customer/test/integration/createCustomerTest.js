@@ -51,7 +51,7 @@ describe('Create Customer Resolver', function() {
     let args = TestUtils.getContextData();
     it('Mutation: create customer response should always contain object', () => {
       args.query =
-        'mutation {createCustomer(input: {firstname: "First Name", lastname: "Last Name", email: "test@example.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
+        'mutation {createCustomer(input: {firstname: "abc", lastname: "xyz", email: "abc.xyz@123.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
         let customer = result.data.createCustomer;

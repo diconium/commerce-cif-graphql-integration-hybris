@@ -1,8 +1,48 @@
-{"items" : [{
-    "uid":"0",
-    "product":{
-        "name":"DSC-WX1",
-        "sku":"3514521"
-    },
-    "quantity":1
-}]}
+{
+    "data": {
+      "addSimpleProductsToCart": {
+        "__typename": "AddSimpleProductsToCartOutput",
+        "cart": {
+          "__typename": "Cart",
+          "id": "00000015",
+          "items": [
+            {
+              "__typename": "SimpleCartItem",
+              "id": "0",
+              "prices": {
+                "__typename": "CartItemPrices",
+                "price": {
+                  "__typename": "Money",
+                  "currency": "USD",
+                  "value": 86.24
+                }
+              },
+              "product": {
+                "__typename": "SimpleProduct",
+                "id": null,
+                "name": "AC-VQ900AM",
+                "stock_status": null,
+                "thumbnail": {
+                  "__typename": "ProductImage",
+                  "url": "/Open-Catalogue/Cameras/Digital-Cameras/Digital-SLR/DSC-WX1/p/3514521"
+                },
+                "url_key": null,
+                "url_suffix": null
+              },
+              "quantity": 3,
+              "uid": "0"
+            }
+          ],
+          "prices": {
+            "__typename": "CartPrices",
+            "subtotal_excluding_tax": {
+              "__typename": "Money",
+              "currency": "USD",
+              "value": 86.24
+            }
+          },
+          "total_quantity": 4
+        }
+      }
+    }
+  }

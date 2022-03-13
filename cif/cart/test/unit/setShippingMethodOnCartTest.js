@@ -27,7 +27,6 @@ const hybrisSetShippingMethodOnCart = require('../resources/hybrisSetShippingMet
 const validSetShippingMethodOnCart = require('../resources/validSetShippingMethodOnCart');
 const hybrisSetShippingMethodOnCartPremiumGross = require('../resources/hybrisSetShippingMethodOnCartPremium');
 const hybrisDeliveryModes = require('../resources/hybrisDeliveryModes.json');
-const validSetShippingMethodOnCartPremium = require('../resources/validSetShippingMethodOnCartPremium');
 const cartNotFound = require('../resources/cartNotFound.json');
 const SetShippingMethodLoader = require('../../src/SetShippingMethodsOnCartLoader');
 
@@ -73,7 +72,7 @@ describe('SetShippingMethodOnCart', () => {
           fields: 'DEFAULT',
           deliveryModeId: 'standard-gross',
         })
-        .reply(200);
+        .reply(200, hybrisDeliveryModes);
       scope
         .get(`${HB_API_BASE_PATH}electronics/users/current/carts/00000035`)
         .query({ fields: 'FULL', query: '' })
@@ -84,15 +83,22 @@ describe('SetShippingMethodOnCart', () => {
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-
+      args.variables = {
+        cartId: '00000035',
+        shippingMethod: {
+          carrier_code: 'standard-gross',
+          method_code: 'standard-gross',
+        },
+      };
       args.query =
-        'mutation {setShippingMethodsOnCart(input: {cart_id: "00000035", shipping_methods: [{carrier_code: "standard-gross", method_code: "bestway"}]}) {cart {shipping_addresses {selected_shipping_method { carrier_code,carrier_title,method_code,method_title,amount {value,currency}}}}}}';
+        'mutation SetShippingMethod($cartId:String!$shippingMethod:ShippingMethodInput!){setShippingMethodsOnCart(input:{cart_id:$cartId shipping_methods:[$shippingMethod]}){cart{id available_payment_methods{code title __typename}...SelectedShippingMethodCheckoutFragment ...PriceSummaryFragment ...ShippingInformationFragment ...AvailableShippingMethodsCheckoutFragment __typename}__typename}}fragment AvailableShippingMethodsCheckoutFragment on Cart{id shipping_addresses{available_shipping_methods{amount{currency value __typename}available carrier_code carrier_title method_code method_title __typename}street __typename}__typename}fragment SelectedShippingMethodCheckoutFragment on Cart{id shipping_addresses{selected_shipping_method{amount{currency value __typename}carrier_code method_code method_title __typename}street __typename}__typename}fragment PriceSummaryFragment on Cart{id items{id quantity __typename}...ShippingSummaryFragment prices{...TaxSummaryFragment ...DiscountSummaryFragment ...GrandTotalFragment subtotal_excluding_tax{currency value __typename}__typename}...GiftCardSummaryFragment __typename}fragment DiscountSummaryFragment on CartPrices{discounts{amount{currency value __typename}label __typename}__typename}fragment GiftCardSummaryFragment on Cart{id applied_gift_cards{code applied_balance{value currency __typename}__typename}__typename}fragment GrandTotalFragment on CartPrices{grand_total{currency value __typename}__typename}fragment ShippingSummaryFragment on Cart{id shipping_addresses{selected_shipping_method{amount{currency value __typename}__typename}street __typename}__typename}fragment TaxSummaryFragment on CartPrices{applied_taxes{amount{currency value __typename}__typename}__typename}fragment ShippingInformationFragment on Cart{id email shipping_addresses{city country{code label __typename}firstname lastname postcode region{code label region_id __typename}street telephone __typename}__typename}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
         assert.equal(SetShippingMethod.callCount, 1);
         let response = result.data.setShippingMethodsOnCart;
         expect(response.cart.shipping_addresses).to.deep.equals(
-          validSetShippingMethodOnCart.cart.shipping_addresses
+          validSetShippingMethodOnCart.data.setShippingMethodsOnCart.cart
+            .shipping_addresses
         );
       });
     });
@@ -106,7 +112,7 @@ describe('SetShippingMethodOnCart', () => {
           fields: 'DEFAULT',
           deliveryModeId: 'premium-gross',
         })
-        .reply(200);
+        .reply(200, hybrisDeliveryModes);
       scope
         .get(`${HB_API_BASE_PATH}electronics/users/current/carts/00000035`)
         .query({ fields: 'FULL', query: '' })
@@ -117,16 +123,20 @@ describe('SetShippingMethodOnCart', () => {
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-
+      args.variables = {
+        cartId: '00000035',
+        shippingMethod: {
+          carrier_code: 'premium-gross',
+          method_code: 'premium-gross',
+        },
+      };
       args.query =
-        'mutation {setShippingMethodsOnCart(input: {cart_id: "00000035", shipping_methods: [{carrier_code: "premium-gross", method_code: "bestway"}]}) {cart {shipping_addresses {selected_shipping_method { carrier_code,carrier_title,method_code,method_title,amount {value,currency}}}}}}';
+        'mutation SetShippingMethod($cartId:String!$shippingMethod:ShippingMethodInput!){setShippingMethodsOnCart(input:{cart_id:$cartId shipping_methods:[$shippingMethod]}){cart{id available_payment_methods{code title __typename}...SelectedShippingMethodCheckoutFragment ...PriceSummaryFragment ...ShippingInformationFragment ...AvailableShippingMethodsCheckoutFragment __typename}__typename}}fragment AvailableShippingMethodsCheckoutFragment on Cart{id shipping_addresses{available_shipping_methods{amount{currency value __typename}available carrier_code carrier_title method_code method_title __typename}street __typename}__typename}fragment SelectedShippingMethodCheckoutFragment on Cart{id shipping_addresses{selected_shipping_method{amount{currency value __typename}carrier_code method_code method_title __typename}street __typename}__typename}fragment PriceSummaryFragment on Cart{id items{id quantity __typename}...ShippingSummaryFragment prices{...TaxSummaryFragment ...DiscountSummaryFragment ...GrandTotalFragment subtotal_excluding_tax{currency value __typename}__typename}...GiftCardSummaryFragment __typename}fragment DiscountSummaryFragment on CartPrices{discounts{amount{currency value __typename}label __typename}__typename}fragment GiftCardSummaryFragment on Cart{id applied_gift_cards{code applied_balance{value currency __typename}__typename}__typename}fragment GrandTotalFragment on CartPrices{grand_total{currency value __typename}__typename}fragment ShippingSummaryFragment on Cart{id shipping_addresses{selected_shipping_method{amount{currency value __typename}__typename}street __typename}__typename}fragment TaxSummaryFragment on CartPrices{applied_taxes{amount{currency value __typename}__typename}__typename}fragment ShippingInformationFragment on Cart{id email shipping_addresses{city country{code label __typename}firstname lastname postcode region{code label region_id __typename}street telephone __typename}__typename}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
-        let response = result.data.setShippingMethodsOnCart.cart;
+        let response = result.data.setShippingMethodsOnCart;
         assert.equal(typeof response !== 'undefined', true);
-        expect(response).to.deep.equals(
-          validSetShippingMethodOnCartPremium.cart
-        );
+        assert.equal(response.cart.id, '00000035');
       });
     });
 
@@ -152,9 +162,15 @@ describe('SetShippingMethodOnCart', () => {
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-
+      args.variables = {
+        cartId: 'INVALID-CART-ID',
+        shippingMethod: {
+          carrier_code: 'standard-gross',
+          method_code: 'standard-gross',
+        },
+      };
       args.query =
-        'mutation {setShippingMethodsOnCart(input: {cart_id: "INVALID-CART-ID", shipping_methods: [{carrier_code: "standard-gross", method_code: "bestway"}]}) {cart {shipping_addresses {selected_shipping_method { carrier_code,carrier_title,method_code,method_title,amount {value,currency}}}}}}';
+        'mutation SetShippingMethod($cartId:String!$shippingMethod:ShippingMethodInput!){setShippingMethodsOnCart(input:{cart_id:$cartId shipping_methods:[$shippingMethod]}){cart{id available_payment_methods{code title __typename}...SelectedShippingMethodCheckoutFragment ...PriceSummaryFragment ...ShippingInformationFragment ...AvailableShippingMethodsCheckoutFragment __typename}__typename}}fragment AvailableShippingMethodsCheckoutFragment on Cart{id shipping_addresses{available_shipping_methods{amount{currency value __typename}available carrier_code carrier_title method_code method_title __typename}street __typename}__typename}fragment SelectedShippingMethodCheckoutFragment on Cart{id shipping_addresses{selected_shipping_method{amount{currency value __typename}carrier_code method_code method_title __typename}street __typename}__typename}fragment PriceSummaryFragment on Cart{id items{id quantity __typename}...ShippingSummaryFragment prices{...TaxSummaryFragment ...DiscountSummaryFragment ...GrandTotalFragment subtotal_excluding_tax{currency value __typename}__typename}...GiftCardSummaryFragment __typename}fragment DiscountSummaryFragment on CartPrices{discounts{amount{currency value __typename}label __typename}__typename}fragment GiftCardSummaryFragment on Cart{id applied_gift_cards{code applied_balance{value currency __typename}__typename}__typename}fragment GrandTotalFragment on CartPrices{grand_total{currency value __typename}__typename}fragment ShippingSummaryFragment on Cart{id shipping_addresses{selected_shipping_method{amount{currency value __typename}__typename}street __typename}__typename}fragment TaxSummaryFragment on CartPrices{applied_taxes{amount{currency value __typename}__typename}__typename}fragment ShippingInformationFragment on Cart{id email shipping_addresses{city country{code label __typename}firstname lastname postcode region{code label region_id __typename}street telephone __typename}__typename}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({

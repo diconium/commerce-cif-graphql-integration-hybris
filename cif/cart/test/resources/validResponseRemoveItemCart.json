@@ -1,31 +1,23 @@
 {
-  "items": [
-    {
-      "uid": "0",
-      "product": {
-        "name": "HDR-CX105E  Red"
-      },
-      "quantity": 1
-    },
-    {
-      "uid": "1",
-      "product": {
-        "name": "Camileo S10 EU"
-      },
-      "quantity": 1
-    },
-    {
-      "uid": "2",
-      "product": {
-        "name": "Gigashot K80H"
-      },
-      "quantity": 1
-    }
-  ],
-  "prices": {
-    "grand_total": {
-      "value": 976.64,
-      "currency": "USD"
+  "data": {
+    "removeItemFromCart": {
+      "cart": {
+        "items": [
+          {
+            "uid": "0",
+            "product": {
+              "name": "EF-S 60mm f/2.8 USM Macro"
+            },
+            "quantity": 1
+          }
+        ],
+        "prices": {
+          "grand_total": {
+            "value": 446.88,
+            "currency": "USD"
+          }
+        }
+      }
     }
   }
 }

@@ -28,17 +28,16 @@ class SetShippingAddressOnCartLoader {
    * @param {Array} [cartIds] is an Array of cart ids
    */
   constructor(parameters) {
-    this.shippingAddressObj = parameters.shippingAddress;
     this.actionParameters = parameters.actionParameters;
     const loadingFunction = cartIds => {
       return Promise.resolve(
         cartIds.map(cartId => {
           return this._setShippingAddressOnCart(
             cartId,
-            this.shippingAddressObj,
+            this.address,
             this.actionParameters
           ).catch(error => {
-            throw new Error(error.message);
+            throw new Error(JSON.stringify(error.message));
           });
         })
       );
@@ -51,7 +50,8 @@ class SetShippingAddressOnCartLoader {
    * @param {*} cartId parameter cartId
    * @returns {Promise} a promise return shippingAddress after resolved successfully other wise return the error.
    */
-  load(cartId) {
+  load(cartId, address) {
+    this.address = address;
     return this.loader.load(cartId);
   }
 
@@ -63,7 +63,7 @@ class SetShippingAddressOnCartLoader {
    * @param {Object} [parameters.actionParameters] Some optional parameters of the I/O Runtime action, like for example customerId, bearer token, query and url info.
    * @returns {Promise} a promise with the shippingaddress data.
    */
-  _setShippingAddressOnCart(cartId, shippingAddress, actionParameters) {
+  _setShippingAddressOnCart(cartId, address, actionParameters) {
     const {
       customerId,
       bearer,
@@ -73,26 +73,7 @@ class SetShippingAddressOnCartLoader {
       HB_BASESITEID,
     } = actionParameters.context.settings;
 
-    const setShippingAddressesObj = shippingAddress[0].address;
-    const body = {
-      companyName: setShippingAddressesObj.company,
-      country: {
-        isocode: setShippingAddressesObj.country_code,
-      },
-      firstName: setShippingAddressesObj.firstname,
-      lastName: setShippingAddressesObj.lastname,
-      line1: setShippingAddressesObj.street[0],
-      line2: setShippingAddressesObj.street[1],
-      phone: setShippingAddressesObj.telephone,
-      postalCode: setShippingAddressesObj.postcode,
-      region: {
-        countryIso: setShippingAddressesObj.country_code,
-        isocode: `${setShippingAddressesObj.country_code}-${setShippingAddressesObj.region}`,
-      },
-      shippingAddress: true,
-      town: setShippingAddressesObj.city,
-      visibleInAddressBook: setShippingAddressesObj.save_in_address_book,
-    };
+    const body = address;
     const config = {
       headers: {
         Authorization: `Bearer ${bearer}`,

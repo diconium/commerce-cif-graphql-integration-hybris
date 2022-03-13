@@ -1,7 +1,7 @@
 {
   "type": "userWsDTO",
-  "name": "USER_FN",
-  "uid": "test@example.com",
+  "name": "abc",
+  "uid": "abc.xyz@123.com",
   "currency": {
     "active": true,
     "isocode": "USD",
@@ -13,7 +13,7 @@
       "isocode": "US"
     },
     "defaultAddress": false,
-    "firstName": "USER_FN",
+    "firstName": "abc",
     "id": "8796127297559",
     "lastName": "Roll",
     "line1": "Magento shipping",
@@ -25,8 +25,8 @@
     },
     "town": "Austin"
   },
-  "displayUid": "test@example.com",
-  "firstName": "USER_FN",
+  "displayUid": "abc.xyz@123.com",
+  "firstName": "abc",
   "language": {
     "active": true,
     "isocode": "en",

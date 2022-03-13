@@ -28,6 +28,8 @@ const deliveryAddressNotSet = require('../resources/deliveryAddressNotSet.json')
 const paymentInfoNotSet = require('../resources/paymentInfoNotSet.json');
 const PlaceOrderLoader = require('../../src/PlaceOrderLoader');
 const TestUtils = require('../../../utils/TestUtils.js');
+const hybrisGetCustomerAddress = require('../../../customer/test/resources/hybrisGetCustomerAddress.json');
+const hybrisSetPaymentMethodOnCart = require('../../../cart/test/resources/hybrisSetPaymentMethodOnCart.json');
 
 describe('Place order', function() {
   const scope = nock(TestUtils.getHybrisInstance());
@@ -60,6 +62,16 @@ describe('Place order', function() {
 
     it('Mutation: validate response should return valid order id', () => {
       scope
+        .get(`${HB_API_BASE_PATH}electronics/users/current/addresses`)
+        .query({ fields: 'DEFAULT', query: '' })
+        .reply(200, hybrisGetCustomerAddress);
+      scope
+        .post(
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000040/paymentdetails`
+        )
+        .query({ fields: 'DEFAULT' })
+        .reply(200, hybrisSetPaymentMethodOnCart);
+      scope
         .post(`${HB_API_BASE_PATH}electronics/users/current/orders`)
         .query({
           fields: 'DEFAULT',
@@ -67,31 +79,46 @@ describe('Place order', function() {
           access_token: `${TestUtils.getContextData().context.settings.bearer}`,
         })
         .reply(200, hybrisPlaceOrder);
-
+      args.variables = {
+        cartId: '00000040',
+      };
       args.query =
-        'mutation { placeOrder(input: {cart_id: "00000040"}) {order { order_id}}}';
+        'mutation placeOrder($cartId:String!){placeOrder(input:{cart_id:$cartId}){order{order_number __typename}__typename}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
         assert.equal(PlaceOrder.callCount, 1);
         let responseData = result.data.placeOrder.order;
         expect(responseData)
-          .to.be.ok.and.to.haveOwnProperty('order_id')
+          .to.be.ok.and.to.haveOwnProperty('order_number')
           .and.to.equal('00000041');
       });
     });
 
     it('Mutation: validate response should contain cart not found', () => {
       scope
+        .get(`${HB_API_BASE_PATH}electronics/users/current/addresses`)
+        .query({ fields: 'DEFAULT', query: '' })
+        .reply(200, hybrisGetCustomerAddress);
+      scope
+        .post(
+          `${HB_API_BASE_PATH}electronics/users/current/carts/CART-NOT-FOUND/paymentdetails`
+        )
+        .query({ fields: 'DEFAULT' })
+        .reply(200, hybrisSetPaymentMethodOnCart);
+      scope
         .post(`${HB_API_BASE_PATH}electronics/users/current/orders`)
         .query({
           fields: 'DEFAULT',
-          cartId: 'CART NOT FOUND',
+          cartId: 'CART-NOT-FOUND',
           access_token: `${TestUtils.getContextData().context.settings.bearer}`,
         })
         .reply(400, cartNotFound);
 
+      args.variables = {
+        cartId: 'CART-NOT-FOUND',
+      };
       args.query =
-        'mutation { placeOrder(input: {cart_id: "CART NOT FOUND"}) {order { order_id}}}';
+        'mutation placeOrder($cartId:String!){placeOrder(input:{cart_id:$cartId}){order{order_number __typename}__typename}}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({
@@ -104,6 +131,16 @@ describe('Place order', function() {
     });
 
     it('Mutation: validate response should contain Delivery mode is not set', () => {
+      scope
+        .get(`${HB_API_BASE_PATH}electronics/users/current/addresses`)
+        .query({ fields: 'DEFAULT', query: '' })
+        .reply(200, hybrisGetCustomerAddress);
+      scope
+        .post(
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000040/paymentdetails`
+        )
+        .query({ fields: 'DEFAULT' })
+        .reply(200, hybrisSetPaymentMethodOnCart);
       scope
         .post(`${HB_API_BASE_PATH}electronics/users/current/orders`)
         .query({
@@ -127,6 +164,16 @@ describe('Place order', function() {
     });
 
     it('Mutation: validate response should contain Payment info is not set', () => {
+      scope
+        .get(`${HB_API_BASE_PATH}electronics/users/current/addresses`)
+        .query({ fields: 'DEFAULT', query: '' })
+        .reply(200, hybrisGetCustomerAddress);
+      scope
+        .post(
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000040/paymentdetails`
+        )
+        .query({ fields: 'DEFAULT' })
+        .reply(200, hybrisSetPaymentMethodOnCart);
       scope
         .post(`${HB_API_BASE_PATH}electronics/users/current/orders`)
         .query({

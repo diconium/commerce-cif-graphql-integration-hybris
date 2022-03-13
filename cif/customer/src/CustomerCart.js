@@ -16,8 +16,8 @@
 
 const LoaderProxy = require('../../common/LoaderProxy.js');
 const CustomerCartLoader = require('./CustomerCartLoader.js');
-const CartItemInterface = require('../../cart/src/Interface/CartItemInterface.js');
 const CreateEmptyCart = require('../../cart/src/CreateEmptyCart.js');
+const Cart = require('../../cart/src/Cart.js');
 
 class CustomerCart {
   /**
@@ -62,11 +62,11 @@ class CustomerCart {
    * @returns {Object} convert the hybris data into magento graphQL schema and return the customer cart object
    */
   __convertData(data) {
-    const { items } = new CartItemInterface(data.entries);
-    return {
-      id: data.code,
-      items,
-    };
+    return new Cart({
+      graphqlContext: this.graphqlContext,
+      actionParameters: this.actionParameters,
+      cartId: data.code,
+    });
   }
 }
 

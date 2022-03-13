@@ -65,6 +65,15 @@ function resolve(args) {
         });
       }
     },
+    categories: (params, context) => {
+      return new Products({
+        search: params,
+        categoryId: params.filters,
+        graphqlContext: context,
+        actionParameters: args,
+        categories: true,
+      });
+    },
   };
 
   return graphql(

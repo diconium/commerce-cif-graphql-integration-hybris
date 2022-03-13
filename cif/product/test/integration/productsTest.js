@@ -204,7 +204,7 @@ describe('Dispatcher Resolver', () => {
         assert.equal(items[1].sku, '2278102');
 
         let cart = result.body.data.cart;
-        assert.equal(cart.email, 'test@example.com');
+        assert.equal(cart.email, 'abc.xyz@123.com');
 
         let cartItems = cart.items;
         assert.equal(cartItems.length, 2);

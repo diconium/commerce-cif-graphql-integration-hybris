@@ -49,12 +49,36 @@ class Address {
       return [];
     }
 
-    return data.map(address => {
-      const { firstName, lastName, line1, line2 } = address;
+    return data.map((address, index) => {
+      const {
+        firstName,
+        lastName,
+        line1,
+        line2,
+        town: city,
+        country,
+        defaultAddress,
+        postalCode: postcode,
+        region,
+        phone: telephone,
+      } = address;
       return {
         firstname: firstName,
         lastname: lastName,
         street: [line1, line2],
+        id: index,
+        city,
+        country_code: country.isocode,
+        default_shipping: defaultAddress,
+        postcode,
+        region: {
+          region_id: 1,
+          label: region.isocode,
+          code: region.isocode,
+          region_code: region.isocode,
+          region: region.isocode,
+        },
+        telephone,
       };
     });
   }

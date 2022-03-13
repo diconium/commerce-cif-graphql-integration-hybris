@@ -14,6 +14,8 @@
 
 'use strict';
 const LoaderProxy = require('../../common/LoaderProxy.js');
+const AddressLoader = require('../../customer/src/AddressLoader.js');
+const Cart = require('./Cart.js');
 const SetShippingAddressOnCartLoader = require('./SetShippingAddressOnCartLoader.js');
 const ShippingMethodsLoader = require('./ShippingMethodsLoader.js');
 
@@ -34,6 +36,7 @@ class SetShippingAddressesOnCart {
     this.setShippingAddressOnCartLoader = new SetShippingAddressOnCartLoader(
       parameters
     );
+    this.addressLoader = new AddressLoader(parameters.actionParameters);
     this.shippingMethodsLoader = new ShippingMethodsLoader(
       parameters.actionParameters
     );
@@ -44,84 +47,32 @@ class SetShippingAddressesOnCart {
    * method used to call load method from setshippingaddressoncart loader class
    */
   __load() {
-    return this.setShippingAddressOnCartLoader.load(this.cartId).then(data => {
-      return this.shippingMethodsLoader.load(this.cartId).then(result => {
-        data.deliveryModes = result.deliveryModes;
-        return data;
-      });
-    });
-  }
-
-  /**
-   * @param deliveryModes
-   * @returns {[]}
-   */
-  getShippingMethods(deliveryModes) {
-    const shippingMethods = [];
-    deliveryModes.map(shippingMethod => {
-      if (shippingMethod.code !== 'pickup') {
-        shippingMethods.push({
-          amount: {
-            currency: shippingMethod.deliveryCost.currencyIso,
-            value: shippingMethod.deliveryCost.value,
-          },
-          available: true,
-          carrier_code: shippingMethod.code,
-          carrier_title: shippingMethod.description
-            ? shippingMethod.description
-            : shippingMethod.code,
-          error_message: '',
-          method_code: shippingMethod.code,
-          method_title: shippingMethod.name,
-          price_excl_tax: {
-            value: shippingMethod.deliveryCost.value,
-            currency: shippingMethod.deliveryCost.currencyIso,
-          },
-          price_incl_tax: {
-            value: shippingMethod.deliveryCost.value,
-            currency: shippingMethod.deliveryCost.currencyIso,
-          },
+    return this.addressLoader.load(this.cartId).then(address => {
+      return this.setShippingAddressOnCartLoader
+        .load(this.cartId, address[0])
+        .then(data => {
+          return this.shippingMethodsLoader.load(this.cartId).then(result => {
+            data.deliveryModes = result.deliveryModes;
+            return data;
+          });
         });
-      }
     });
-    return shippingMethods;
   }
 
   /**
-   * Converts shipping Address data from the 3rd-party commerce system into the Magento GraphQL format.
-   * @param {Object} data parameter data contains shippingAddress details from hybris
-   * @returns {Object} convert the hybris data into magento graphQL schema and return the shippingAddresss object
+   * get cart method call cart loader to get the cart entries
+   * @returns {Promise} a promise return null after resolved successfully other wise return the error.
    */
-  __convertData(data) {
-    let regionCode = data.region.isocode.split('-');
-    regionCode = regionCode.length === 2 ? regionCode[1] : regionCode[0];
-    const availableShippingMethods =
-      data.deliveryModes !== undefined
-        ? this.getShippingMethods(data.deliveryModes)
-        : [];
-    return {
-      cart: {
-        shipping_addresses: [
-          {
-            firstname: data.firstName,
-            lastname: data.lastName,
-            street: [data.line1, data.line2],
-            city: data.town,
-            region: {
-              code: regionCode,
-              label: regionCode,
-            },
-            postcode: data.postalCode,
-            telephone: data.phone,
-            country: {
-              code: data.country.isocode,
-              label: data.country.isocode,
-            },
-            available_shipping_methods: availableShippingMethods,
-          },
-        ],
-      },
-    };
+  get cart() {
+    return this.__load()
+      .then(() => {
+        return new Cart({
+          graphqlContext: this.graphqlContext,
+          actionParameters: this.actionParameters,
+          cartId: this.cartId,
+        });
+      })
+      .catch(errorOutput => Promise.reject(errorOutput));
   }
 }
 

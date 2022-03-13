@@ -51,7 +51,7 @@ describe('GenerateCustomerToken', function() {
 
     it('Mutation: Validate generate customer token', () => {
       args.query =
-        'mutation {generateCustomerToken(email: "test@example.com", password: "Example@123"){token}}';
+        'mutation {generateCustomerToken(email: "abc.xyz@123.com", password: "123@123"){token}}';
       return resolve(args).then(result => {
         const { errors } = result;
         assert.isUndefined(result.errors);
