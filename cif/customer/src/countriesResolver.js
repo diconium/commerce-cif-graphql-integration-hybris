@@ -29,7 +29,7 @@ function resolve(args) {
   if (cachedSchema == null) {
     const schemaBuilder = new SchemaBuilder()
       .removeMutationType()
-      .filterQueryFields(new Set(['countries']));
+      .filterQueryFields(new Set(['countries', 'country']));
 
     cachedSchema = schemaBuilder.build();
   }
@@ -44,6 +44,13 @@ function resolve(args) {
       return new Countries({
         actionParameters: args,
       });
+    },
+    country: params => {
+      const country = new Countries({
+        countryCode: params.id,
+        actionParameters: args,
+      });
+      return country;
     },
   };
 

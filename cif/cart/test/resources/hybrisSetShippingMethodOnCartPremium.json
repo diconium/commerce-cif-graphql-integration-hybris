@@ -23,7 +23,7 @@
       "name": "United States"
     },
     "defaultAddress": false,
-    "firstName": "Bob",
+    "firstName": "abc",
     "formattedAddress": "Magento Pkwy, Main Street, Washington, Austin, 78758",
     "id": "8796130508823",
     "lastName": "Roll",
@@ -239,7 +239,7 @@
         "name": "United States"
       },
       "defaultAddress": false,
-      "email": "test@example.com",
+      "email": "abc.xyz@123.com",
       "firstName": "test",
       "formattedAddress": "Strasse 11, 70376, stuttgart, Germany",
       "id": "8796130770967",
@@ -312,8 +312,8 @@
     "value": 23.69
   },
   "user": {
-    "name": "USER_FN",
-    "uid": "test@example.com"
+    "name": "abc",
+    "uid": "abc.xyz@123.com"
   },
   "potentialOrderPromotions": [],
   "potentialProductPromotions": [],

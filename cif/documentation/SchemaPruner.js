@@ -15,7 +15,7 @@
 'use strict';
 
 const { parse } = require('graphql');
-
+const prettier = require('prettier');
 class SchemaPruner {
   /**
    * @param {*} jsonSchema The schema in JSON format, as returned by an introspection query.
@@ -27,17 +27,50 @@ class SchemaPruner {
   }
 
   /**
+   * Remove Comments and get query from javascript file, Example mutation.setBilling.graphql.js
+   *
+   * @param {String} jsCodeStr A Javascript code string.
+   */
+  processJs(jsCodeStr) {
+    const options = {
+      printWidth: 160,
+      singleQuote: true,
+      trailingComma: 'none',
+    };
+    options.parser = (text, { babel }) => {
+      const ast = babel(text);
+      delete ast.comments;
+      return ast;
+    };
+
+    const query = prettier
+      .format(jsCodeStr, options)
+      //eslint-disable-next-line
+       .replace(/(\r\n|\n|\r)/gm, '')
+      //eslint-disable-next-line
+        .match(/\`(.*)\`/)
+      .pop();
+      this.process(query);
+  }
+  /**
    * Processes a query and adds it to the internal list of fields being queried.
    *
-   * @param {String} query A GraphQL query.
+   * @param {String} query A Javascript Graphql code.
    */
+
   process(query) {
-    const ast = parse(query);
-    ast.definitions.forEach(def => {
-      const op = def.operation.charAt(0).toUpperCase() + def.operation.slice(1);
-      const parentType = this.__getType(op);
-      this.__extractTypeFields(parentType, def);
-    });
+    try {
+      console.log(query);
+      let ast = parse(query);
+      ast.definitions.forEach(def => {
+        const op =
+          def.operation.charAt(0).toUpperCase() + def.operation.slice(1);
+        const parentType = this.__getType(op);
+        this.__extractTypeFields(parentType, def);
+      });
+    } catch (ex) {
+      console.error(ex);
+    }
   }
 
   /**

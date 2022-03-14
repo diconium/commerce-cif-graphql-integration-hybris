@@ -106,7 +106,7 @@ describe('Dispatcher Resolver', () => {
 
     it('Basic category search', () => {
       args.query =
-        '{categoryList(filters:{category_uid:{eq:"1"}}){uid,name,url_path,url_key,children_count,children{uid,name,url_path,url_key,children_count}}}';
+        '{categoryList(filters:{category_uid:{eq:"1"}}){uid,name,url_path,position,include_in_menu,children{uid,name,url_path,position,include_in_menu,children{uid,name,url_path,position,include_in_menu}}}}';
       const param = {
         fields: 'FULL',
         json: true,
@@ -131,7 +131,9 @@ describe('Dispatcher Resolver', () => {
 
         // Ensure the category loading function is only called once for each category being fetched
         assert.equal(getCategoryById.callCount, 1);
-        expect(category).to.deep.equals(basicCategorySearchGraphqlResponse);
+        expect(category).to.deep.equals(
+          basicCategorySearchGraphqlResponse.data.categoryList[0]
+        );
       });
     });
 
@@ -171,7 +173,6 @@ describe('Dispatcher Resolver', () => {
 
         let children = category.children;
         assert.equal(children.length, 4);
-        assert.equal(category.products.items.length, 20);
 
         // Ensure the category loading function is only called once for each category being fetched
         assert.equal(getCategoryById.callCount, 1);
@@ -190,11 +191,11 @@ describe('Dispatcher Resolver', () => {
         .stub(CategoryTreeLoader.prototype, '__getCategoryById')
         .returns(Promise.reject('Connection failed'));
 
-      args.query = '{categoryList(filters:{category_uid:{eq:"1"}}){id}}';
+      args.query = '{categoryList(filters:{category_uid:{eq:"1"}}){uid}}';
       return resolve(args).then(result => {
         assert.equal(result.body.errors.length, 1);
         assert.equal(result.body.errors[0].message, 'Backend data is null');
-        expect(result.body.errors[0].path).to.eql(['categoryList', 0, 'id']);
+        expect(result.body.errors[0].path).to.eql(['categoryList', 0, 'uid']);
       });
     });
   });

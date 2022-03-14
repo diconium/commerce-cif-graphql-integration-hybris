@@ -49,8 +49,10 @@ class Cart {
   __load() {
     console.debug(`Loading cart for ${this.cartId}`);
     return this.cartLoader.load(this.cartId).then(data => {
+      //throw new Error(JSON.stringify(data));
       return this.shippingMethodsLoader.load(this.cartId).then(result => {
         data.deliveryModes = result.deliveryModes;
+        data.cartId = this.cartId;
         return data;
       });
     });
@@ -62,7 +64,7 @@ class Cart {
    */
   getRegionCode(address) {
     let code = address !== undefined ? address.region.isocode.split('-') : '';
-    if (code !== '') {
+    if (code && code.length) {
       code = code.length === 2 ? code[1] : code[0];
     } else {
       code = '';
@@ -131,9 +133,11 @@ class Cart {
     const { items } = new CartItemInterface(data.entries);
     return {
       items: items,
+      id: data.cartId,
       email: user && user.uid,
       is_virtual: false,
       total_quantity: data.totalUnitCount,
+      applied_gift_cards: [],
       billing_address: paymentInfo &&
         paymentInfo.billingAddress && {
           email: data.paymentInfo.billingAddress.email,
@@ -195,31 +199,33 @@ class Cart {
           code:
             paymentInfo && paymentInfo.cardType && paymentInfo.cardType.code
               ? paymentInfo.cardType.code
-              : 'visa',
+              : 'free',
           title:
             paymentInfo && paymentInfo.cardType && paymentInfo.cardType.name
               ? paymentInfo.cardType.name
-              : 'Credit Card',
+              : 'Free',
         },
       ],
       selected_payment_method: {
         code:
           paymentInfo && paymentInfo.cardType && paymentInfo.cardType.code
             ? paymentInfo.cardType.code
-            : '',
+            : 'free',
         title:
           paymentInfo && paymentInfo.cardType && paymentInfo.cardType.code
             ? paymentInfo.cardType.code
-            : '',
+            : 'Free',
       },
-      applied_coupon: {
-        code:
-          (appliedVouchers &&
-            appliedVouchers.length > 0 &&
-            appliedVouchers[0].code) ||
-          '',
-      },
+      applied_coupons:
+        appliedVouchers && appliedVouchers.length > 0 && appliedVouchers[0].code
+          ? [
+              {
+                code: appliedVouchers[0].code,
+              },
+            ]
+          : [],
       prices: {
+        applied_taxes: [],
         grand_total: {
           value: totalPrice && data.totalPrice.value,
           currency: totalPrice && data.totalPrice.currencyIso,

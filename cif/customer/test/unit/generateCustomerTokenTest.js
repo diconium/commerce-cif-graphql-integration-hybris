@@ -61,7 +61,7 @@ describe('GenerateCustomerToken', () => {
         .query({ operationType: 'oAuth' })
         .reply(200, hybrisGenerateCustomerToken);
       args.query =
-        'mutation {generateCustomerToken(email: "test@example.com", password: "123456"){token}}';
+        'mutation {generateCustomerToken(email: "abc.xyz@123.com", password: "123456"){token}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
         let response = result.data.generateCustomerToken.token;

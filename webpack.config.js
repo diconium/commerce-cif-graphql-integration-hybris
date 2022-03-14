@@ -27,7 +27,7 @@ module.exports = {
     path: path.resolve(__dirname, '.webpack'),
     filename: '[name].js',
   },
-    module: {
+  module: {
     rules: [
       {
         test: /\.ya?ml$/,

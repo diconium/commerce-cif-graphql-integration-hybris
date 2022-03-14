@@ -71,14 +71,20 @@ describe('Create Customer Resolver', function() {
         .post(`${HB_API_BASE_PATH}electronics/users`)
         .query({ fields: 'DEFAULT' })
         .reply(200, createCustomerHybris);
-
+      args.variables = {
+        email: 'abc.xyz@123.com',
+        firstname: 'abc',
+        lastname: 'k',
+        password: 'abc.xyz@',
+        is_subscribed: false,
+      };
       args.query =
-        'mutation {createCustomerV2(input: {firstname: "First Name", lastname: "Last Name", email: "test@example.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
+        'mutation CreateAccount($email:String!$firstname:String!$lastname:String!$password:String!$is_subscribed:Boolean!){createCustomer(input:{email:$email firstname:$firstname lastname:$lastname password:$password is_subscribed:$is_subscribed}){customer{id firstname lastname email __typename}__typename}}';
       return resolve(args).then(result => {
-        let response = result.data.createCustomerV2.customer;
+        let response = result.data.createCustomer.customer;
         assert.equal(createCustomer.callCount, 1);
         expect(response).to.exist.and.to.deep.equal(
-          customerDataGraphqlResponse.customer
+          customerDataGraphqlResponse.data.createCustomer.customer
         );
       });
     });
@@ -94,10 +100,17 @@ describe('Create Customer Resolver', function() {
         .query({ fields: 'DEFAULT' })
         .reply(200, createCustomerHybris);
 
+      args.variables = {
+        email: 'abc.xyz@123.com',
+        firstname: 'abc',
+        lastname: 'k',
+        password: 'abc.xyz@',
+        is_subscribed: false,
+      };
       args.query =
-        'mutation {createCustomerV2(input: {firstname: "First Name", lastname: "Last Name", email: "test@example.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
+        'mutation CreateAccount($email:String!$firstname:String!$lastname:String!$password:String!$is_subscribed:Boolean!){createCustomer(input:{email:$email firstname:$firstname lastname:$lastname password:$password is_subscribed:$is_subscribed}){customer{id firstname lastname email __typename}__typename}}';
       return resolve(args).then(result => {
-        let response = result.data.createCustomerV2.customer;
+        let response = result.data.createCustomer.customer;
         assert.ok(response.firstname);
         assert.ok(response.lastname);
         assert.ok(response.email);
@@ -115,16 +128,23 @@ describe('Create Customer Resolver', function() {
         .query({ fields: 'DEFAULT' })
         .reply(200, createCustomerHybris);
 
+      args.variables = {
+        email: 'abc.xyz@123.com',
+        firstname: 'abc',
+        lastname: 'k',
+        password: 'abc.xyz@',
+        is_subscribed: false,
+      };
       args.query =
-        'mutation {createCustomerV2(input: {firstname: "First Name", lastname: "Last Name", email: "test@example.com", password: "Test@1234", is_subscribed: true}) {customer {firstname,lastname,email,is_subscribed}}}';
+        'mutation CreateAccount($email:String!$firstname:String!$lastname:String!$password:String!$is_subscribed:Boolean!){createCustomer(input:{email:$email firstname:$firstname lastname:$lastname password:$password is_subscribed:$is_subscribed}){customer{id firstname lastname email __typename}__typename}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
-        let response = result.data.createCustomerV2;
+        let response = result.data.createCustomer;
         assert.notEqual(response, null);
         expect(response).to.be.not.empty;
         assert.equal(createCustomer.callCount, 1);
         expect(response).to.exist.and.to.deep.equal(
-          customerDataGraphqlResponse
+          customerDataGraphqlResponse.data.createCustomer
         );
         expect(response.customer).to.be.an('object');
       });

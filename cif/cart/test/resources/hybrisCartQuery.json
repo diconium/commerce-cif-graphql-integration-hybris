@@ -23,7 +23,7 @@
       "name": "United States"
     },
     "defaultAddress": false,
-    "firstName": "Bob",
+    "firstName": "abc",
     "formattedAddress": "Magento Pkwy, Main Street, Washington, Austin, 78758",
     "id": "8796130508823",
     "lastName": "Roll",
@@ -239,13 +239,15 @@
         "name": "United States"
       },
       "defaultAddress": false,
-      "email": "test@example.com",
-      "firstName": "test",
-      "formattedAddress": "Strasse 11, 70376, stuttgart, Germany",
-      "id": "8796130770967",
-      "lastName": "user",
-      "line1": "Strasse 11",
-      "postalCode": "70376",
+      "email": "abc.xyz@123.com",
+      "firstName": "abc",
+      "formattedAddress": "Magento Pkwy, Main Street, Washington, Austin, 78758",
+      "id": "8796130508823",
+      "lastName": "Roll",
+      "line1": "Magento Pkwy",
+      "line2": "Main Street",
+      "phone": "9999998899",
+      "postalCode": "78758",
       "region": {
         "countryIso": "US",
         "isocode": "US-WA",
@@ -255,7 +257,7 @@
       "shippingAddress": false,
       "title": "Mr.",
       "titleCode": "mr",
-      "town": "stuttgart",
+      "town": "Austin",
       "visibleInAddressBook": true
     },
     "cardNumber": "************1234",
@@ -312,8 +314,8 @@
     "value": 23.69
   },
   "user": {
-    "name": "USER_FN",
-    "uid": "test@example.com"
+    "name": "abc",
+    "uid": "abc.xyz@123.com"
   },
   "potentialOrderPromotions": [],
   "potentialProductPromotions": [],

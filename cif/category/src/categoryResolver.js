@@ -25,7 +25,7 @@ function resolve(args) {
   if (cachedSchema == null) {
     const schemaBuilder = new SchemaBuilder()
       .removeMutationType()
-      .filterQueryFields(new Set(['category', 'categoryList']));
+      .filterQueryFields(new Set(['category', 'categoryList', 'categories']));
 
     cachedSchema = schemaBuilder.build();
   }
@@ -43,6 +43,13 @@ function resolve(args) {
     category: (params, context) => {
       return new CategoryTree({
         categoryId: params.id,
+        graphqlContext: context,
+        actionParameters: args,
+      });
+    },
+    categories: (params, context) => {
+      return new CategoryTree({
+        categoryId: params.filters,
         graphqlContext: context,
         actionParameters: args,
       });

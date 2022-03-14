@@ -1,22 +1,26 @@
 {
   "addresses": [
     {
+      "cellphone": "string",
       "country": {
         "isocode": "US"
       },
       "defaultAddress": true,
-      "firstName": "USER_FN",
-      "id": "8796125822999",
-      "lastName": "Maria",
-      "line1": "street name",
-      "line2": "34",
-      "phone": "23324",
-      "postalCode": "23345",
+      "district": "string",
+      "email": "abc.xyz@123.com",
+      "firstName": "abc",
+      "formattedAddress": "Magento Shipping, string, Washington, Austin, 123456",
+      "id": "8796127559703",
+      "lastName": "K",
+      "line1": "Magento Shipping",
+      "line2": "string",
+      "phone": "123456789",
+      "postalCode": "123456",
       "region": {
-        "isocode": "US-CA"
+        "isocode": "US-WA"
       },
       "titleCode": "mr",
-      "town": "London"
+      "town": "Austin"
     }
   ]
 }

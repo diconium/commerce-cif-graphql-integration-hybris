@@ -28,6 +28,8 @@ const validUpdateCartItems = require('../resources/validUpdateCartItems');
 const cartNotFound = require('../resources/cartNotFound');
 const entryNotFoundUpdateCartItems = require('../resources/entryNotFoundUpdateCartItems');
 const UpdateCartLoader = require('../../src/UpdateCartItemsLoader');
+const hybrisCartData = require('../resources/hybrisCartQuery.json');
+const hybrisDeliveryModes = require('../resources/hybrisDeliveryModes.json');
 
 chai.use(chaiShallowDeepEqual);
 
@@ -68,6 +70,16 @@ describe('Update Cart Items Resolver', () => {
         )
         .query({ fields: 'FULL' })
         .reply(200, hybrisUpdateCartItems);
+      scope
+        .get(`${HB_API_BASE_PATH}electronics/users/current/carts/00000016`)
+        .query({ fields: 'FULL', query: '' })
+        .reply(200, hybrisCartData);
+      scope
+        .get(
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000016/deliverymodes`
+        )
+        .query({ fields: 'FULL', query: '' })
+        .reply(200, hybrisDeliveryModes);
 
       args.query =
         'mutation {updateCartItems(input: {cart_id: "00000016", cart_items: [{cart_item_uid: "0",quantity: 3}]}){ cart{items {uid,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
@@ -77,7 +89,9 @@ describe('Update Cart Items Resolver', () => {
         assert.isUndefined(result.errors);
         expect(errors).to.be.undefined;
         assert.equal(UpdateCart.callCount, 1);
-        expect(response).to.deep.equals(validUpdateCartItems);
+        expect(response).to.deep.equals(
+          validUpdateCartItems.data.updateCartItems.cart
+        );
       });
     });
 

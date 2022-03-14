@@ -76,25 +76,32 @@ function generate() {
       );
     }
   );
+
 }
 
 // The file contains multiple single-line queries
 function pruneFile(schemaPruner, filepath) {
-  const data = fs.readFileSync(filepath, 'UTF-8');
-  const lines = data.split(/\r?\n/);
-  lines.forEach(line => {
-    if (line.trim().length > 0) {
-      schemaPruner.process(line);
-    }
-  });
+  try {
+    const data = fs.readFileSync(filepath, 'UTF-8', 'r');
+    const lines = data.split(/\r?\n/);
+    lines.forEach(line => {
+      if (line.trim().length > 0) {
+        schemaPruner.process(line);
+      }
+    });
+  } catch (Exception) {
+    console.error(Exception);
+  }
 }
 
 // The folder contains multiple files with each file containing a single query
 function pruneFolder(schemaPruner, folderpath) {
-  const files = fs.readdirSync(folderpath);
+  let files = fs.readdirSync(folderpath);
   files.forEach(file => {
-    const query = fs.readFileSync(path.join(folderpath, file), 'UTF-8');
-    schemaPruner.process(query);
+    if (path.extname(file) == '.js') {
+      const query = fs.readFileSync(path.join(folderpath, file), 'UTF-8');
+      schemaPruner.processJs(query);
+    }
   });
 }
 

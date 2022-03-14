@@ -1,17 +1,17 @@
 {
-    "applied_coupon": {
-        "code": ""
-    },
-    "items":[
-        {
-            "product":{"name":"EF-S 60mm f/2.8 USM Macro"},
-            "quantity":1
-        }
+    "applied_coupon": null,
+    "items": [
+      {
+        "product": {
+          "name": "EF-S 60mm f/2.8 USM Macro"
+        },
+        "quantity": 1
+      }
     ],
-    "prices":{
-        "grand_total":{
-            "currency":"USD",
-            "value":446.88
-        }
+    "prices": {
+      "grand_total": {
+        "currency": "USD",
+        "value": 446.88
+      }
     }
-}
+  }

@@ -52,6 +52,7 @@ class Customer {
       firstname: data.firstName,
       lastname: data.lastName,
       email: data.uid,
+      default_shipping: 0,
     };
   }
 

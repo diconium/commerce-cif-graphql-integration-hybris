@@ -43,9 +43,15 @@ class CategoryTree {
       cateId = cateId[cateId.length - 1];
     }
     if (parameters.categoryId.category_uid !== undefined) {
-      this.categoryId = parameters.categoryId.category_uid.eq;
+      if(parameters.categoryId.category_uid.eq)
+        this.categoryId = parameters.categoryId.category_uid.eq;
+      else if(parameters.categoryId.category_uid.in){
+        this.categoryId = parameters.categoryId.category_uid.in.toString();
+      }
     } else if (parameters.categoryId.url_key !== undefined) {
       this.categoryId = cateId;
+    } else if (parameters.categoryId.parent_category_uid !== undefined) {
+      this.categoryId = parameters.categoryId.parent_category_uid.eq;
     } else {
       this.categoryId = parameters.categoryId;
     }
@@ -101,6 +107,11 @@ class CategoryTree {
       url_path: this.urlName === null ? null : this.urlName,
       updated_at: data.lastModified,
       position: 0,
+      staged: true,
+      page_info: {
+        total_pages: 1,
+      },
+      total_count: 1,
     };
   }
 
@@ -138,7 +149,41 @@ class CategoryTree {
       })
       .catch(errorOutput => Promise.reject(errorOutput));
   }
-
+  get items() {
+    return this.__load()
+      .then(data => {
+        if (data.subcategories.length)
+          return data.subcategories.map(category => {
+            this.categoryTreeLoader.prime(category.id, category);
+            return new CategoryTree({
+              categoryId: category.id,
+              urlName:
+                (this.urlName !== null ? `${this.urlName}/` : '') + category.id,
+              graphqlContext: this.graphqlContext,
+              actionParameters: this.actionParameters,
+              categoryTreeLoader: this.categoryTreeLoader,
+              productsLoader: this.productsLoader,
+            });
+          });
+        else if (data.id) {
+          this.categoryTreeLoader.prime(data.id, data);
+          return [
+            new CategoryTree({
+              categoryId: data.id,
+              urlName:
+                (this.urlName !== null ? `${this.urlName}/` : '') + data.id,
+              graphqlContext: this.graphqlContext,
+              actionParameters: this.actionParameters,
+              categoryTreeLoader: this.categoryTreeLoader,
+              productsLoader: this.productsLoader,
+            }),
+          ];
+        } else if (!data.subcategories || data.subcategories.length === 0) {
+          return [];
+        }
+      })
+      .catch(errorOutput => Promise.reject(errorOutput));
+  }
   /**
    * Get children category count
    * @returns {Promise<T>}
@@ -203,6 +248,7 @@ class Products {
    */
   constructor(parameters) {
     this.search = parameters.search;
+    this.categories = parameters.categories;
     this.graphqlContext = parameters.graphqlContext;
     this.actionParameters = parameters.actionParameters;
     this.productsLoader =
@@ -227,7 +273,7 @@ class Products {
     console.debug(
       `Loading products for ${JSON.stringify(this.search, null, 0)}`
     );
-    return this.productsLoader.load(this.search);
+    return this.productsLoader.load(this.search)
   }
 
   /**
@@ -267,6 +313,7 @@ class Products {
             actionParameters: this.actionParameters,
             categoryTreeLoader: this.categoryTreeLoader,
             productsLoader: this.productsLoader,
+            categories: this.categories,
           });
         });
       })
@@ -285,6 +332,7 @@ class Product {
    */
   constructor(parameters) {
     this.productData = parameters.productData;
+    this.categoriesQuery = parameters.categories;
     this.graphqlContext = parameters.graphqlContext;
     this.actionParameters = parameters.actionParameters;
     this.HB_SECURE_BASE_MEDIA_URL = this.actionParameters.context.settings.HB_SECURE_BASE_MEDIA_URL;
@@ -343,12 +391,17 @@ class Product {
    * @private
    */
   __convertData(data) {
+    const imageUrl =
+      data.images && data.images.length > 0
+        ? `${this.HB_SECURE_BASE_MEDIA_URL}${data.images[0].url}`
+        : '';
     return {
       sku: data.code,
       id: data.code,
       uid: data.code,
       url_key: data.code,
       name: data.name,
+      staged: true,
       description: {
         html: data.description || '',
       },
@@ -380,16 +433,15 @@ class Product {
           },
         },
       },
-      image: {
-        url:
-          data.images && data.images.length > 0
-            ? `${this.HB_SECURE_BASE_MEDIA_URL}${data.images[0].url}`
-            : '',
-        label:
-          data.images && data.images.length > 0
-            ? data.images[0].altText || ''
-            : '',
-      },
+      image: this.categoriesQuery
+        ? imageUrl
+        : {
+            url: imageUrl,
+            label:
+              data.images && data.images.length > 0
+                ? data.images[0].altText || ''
+                : '',
+          },
       small_image: {
         url:
           data.images && data.images.length > 0

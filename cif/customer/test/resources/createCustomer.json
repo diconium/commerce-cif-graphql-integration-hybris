@@ -1,8 +1,14 @@
 {
-    "customer": {
-        "email": "test@example.com",
-        "firstname": "First Name",
-        "is_subscribed": true,
-        "lastname": "Last Name"
+    "data": {
+        "createCustomer": {
+            "__typename": "CustomerOutput",
+            "customer": {
+                "__typename": "Customer",
+                "email": "abc.xyz@123.com",
+                "firstname": "abc",
+                "id": 1,
+                "lastname": "k"
+            }
+        }
     }
 }

@@ -1,27 +1,27 @@
 {
   "cart": {
-    "email": "test@example.com",
+    "email": "abc.xyz@123.com",
     "billing_address": {
-      "city": "stuttgart",
+      "city": "Austin",
       "country": {
         "code": "US",
         "label": "United States"
       },
-      "firstname": "test",
-      "lastname": "user",
-      "postcode": "70376",
+      "firstname": "abc",
+      "lastname": "Roll",
+      "postcode": "78758",
       "region": {
         "code": "WA",
         "label": "Washington"
       },
       "street": [
-        "Strasse 11, 70376, stuttgart, Germany"
+        "Magento Pkwy, Main Street, Washington, Austin, 78758"
       ],
-      "telephone": ""
+      "telephone": "9999998899"
     },
     "shipping_addresses": [
       {
-        "firstname": "Bob",
+        "firstname": "abc",
         "lastname": "Roll",
         "street": [
           "Magento Pkwy, Main Street, Washington, Austin, 78758"
@@ -109,9 +109,7 @@
       "code": "visa",
       "title": "visa"
     },
-    "applied_coupon": {
-      "code": ""
-    },
+    "applied_coupon": null,
     "prices": {
       "grand_total": {
         "value": 497.55,

@@ -1,8 +1,52 @@
-[
-  {
-    "sku": "898503"
-  },
-  {
-    "sku": "2278102"
+{
+  "data": {
+    "products": {
+      "items": [
+        {
+          "__typename": "SimpleProduct",
+          "categories": [
+            {
+              "__typename": "CategoryTree",
+              "breadcrumbs": null,
+              "name": "Film cameras",
+              "uid": "574",
+              "url_path": "574"
+            },
+            {
+              "__typename": "CategoryTree",
+              "breadcrumbs": null,
+              "name": "Canon",
+              "uid": "553",
+              "url_path": "553"
+            }
+          ],
+          "name": "1V",
+          "sku": "898503",
+          "url_key": "898503"
+        },
+        {
+          "__typename": "SimpleProduct",
+          "categories": [
+            {
+              "__typename": "CategoryTree",
+              "breadcrumbs": null,
+              "name": "Blank Video Tapes",
+              "uid": "604",
+              "url_path": "604"
+            },
+            {
+              "__typename": "CategoryTree",
+              "breadcrumbs": null,
+              "name": "TDK",
+              "uid": "562",
+              "url_path": "562"
+            }
+          ],
+          "name": "miniDV Head Cleaner",
+          "sku": "2278102",
+          "url_key": "2278102"
+        }
+      ]
+    }
   }
-]
+}

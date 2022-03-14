@@ -16,7 +16,7 @@
 
 const LoaderProxy = require('../../common/LoaderProxy.js');
 const UpdateCartItemsLoader = require('./UpdateCartItemsLoader.js');
-const CartItemInterface = require('./Interface/CartItemInterface');
+const Cart = require('./Cart.js');
 
 class UpdateCartItems {
   /**
@@ -50,21 +50,15 @@ class UpdateCartItems {
    * @param {Object} data parameter data contains customer details from hybris
    * @returns {Object} convert the hybris data into magento graphQL schema and return the customer object
    */
-  __convertData(data) {
-    const { entry } = data;
-    const { totalPrice } = entry;
-    const { value, currencyIso } = totalPrice;
-    const { items } = new CartItemInterface([data.entry]);
+
+  __convertData() {
     return {
-      cart: {
-        items,
-        prices: {
-          grand_total: {
-            value,
-            currency: currencyIso,
-          },
-        },
-      },
+      cart: new Cart({
+        cartId: this.input.cart_id,
+        graphqlContext: this.graphqlContext,
+        actionParameters: this.actionParameters,
+        add: true,
+      }),
     };
   }
 }

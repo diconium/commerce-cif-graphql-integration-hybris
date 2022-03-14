@@ -1,18 +1,24 @@
 {
-  "items": [
-    {
-      "uid": "1",
-      "product": {
-        "name": "Monopod 100 - Floor Standing Monopod",
-        "sku": "1099285"
-      },
-      "quantity": 3
-    }
-  ],
-  "prices": {
-    "grand_total": {
-      "value": 71.73,
-      "currency": "USD"
+  "data": {
+    "updateCartItems": {
+      "cart": {
+        "items": [
+          {
+            "uid": "0",
+            "product": {
+              "name": "AC Power Adapter ACK-E2",
+              "sku": "594471"
+            },
+            "quantity": 1
+          }
+        ],
+        "prices": {
+          "grand_total": {
+            "value": 64.92,
+            "currency": "USD"
+          }
+        }
+      }
     }
   }
 }

@@ -30,7 +30,7 @@ function resolve(args) {
   const settings = new InputSettings(args);
 
   let remoteResolvers = [];
-  if (cachedSchema == null && args.remoteSchemas) {
+  if (!cachedSchema && args.remoteSchemas) {
     // Get all resolver actions to fetch the remote schemas dynamically
     remoteResolvers = Object.values(args.remoteSchemas).map(resolver => {
       const fetcher = new RemoteResolverFetcher(resolver.action).fetcher;
@@ -48,7 +48,7 @@ function resolve(args) {
 
   return Promise.all(remoteResolvers)
     .then(remotes => {
-      if (cachedSchema == null) {
+      if (!cachedSchema) {
         const remoteExecutableSchemas = [localSchema()];
 
         if (args.remoteSchemas) {

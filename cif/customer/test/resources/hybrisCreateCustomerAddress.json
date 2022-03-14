@@ -1,0 +1,21 @@
+{
+    "cellphone": "string",
+    "country": {
+      "isocode": "US"
+    },
+    "defaultAddress": true,
+    "district": "string",
+    "email": "abc.xyz@123.com",
+    "firstName": "abc",
+    "id": "8796127559703",
+    "lastName": "Roll",
+    "line1": "Magento Shipping",
+    "line2": "string",
+    "phone": "9999998899",
+    "postalCode": "78756",
+    "region": {
+      "isocode": "US-WA"
+    },
+    "titleCode": "mr",
+    "town": "Austin"
+  }

@@ -1,20 +1,115 @@
 {
-  "city": "Austin",
-  "company": null,
-  "country": {
-    "code": "US",
-    "label": "US"
-  },
-  "firstname": "Bob",
-  "lastname": "Roll",
-  "postcode": "78758",
-  "region": {
-    "code": "WA",
-    "label": "WA"
-  },
-  "street": [
-    "Magento Pkwy",
-    "Main Street"
-  ],
-  "telephone": "9999998899"
+  "data": {
+    "setShippingAddressesOnCart": {
+      "cart": {
+        "id": "00000035",
+        "email": "abc.xyz@123.com",
+        "shipping_addresses": [
+          {
+            "city": "Austin",
+            "country": {
+              "code": "US",
+              "label": "United States",
+              "__typename": "CartAddressCountry"
+            },
+            "firstname": "abc",
+            "lastname": "Roll",
+            "postcode": "78758",
+            "region": {
+              "code": "WA",
+              "label": "Washington",
+              "region_id": null,
+              "__typename": "CartAddressRegion"
+            },
+            "street": [
+              "Magento Pkwy, Main Street, Washington, Austin, 78758"
+            ],
+            "telephone": "9999998899",
+            "__typename": "ShippingCartAddress",
+            "available_shipping_methods": [
+              {
+                "amount": {
+                  "currency": "USD",
+                  "value": 11.99,
+                  "__typename": "Money"
+                },
+                "available": true,
+                "carrier_code": "standard-gross",
+                "carrier_title": "3-5 business days",
+                "method_code": "standard-gross",
+                "method_title": "Standard Delivery",
+                "__typename": "AvailableShippingMethod"
+              },
+              {
+                "amount": {
+                  "currency": "USD",
+                  "value": 19.99,
+                  "__typename": "Money"
+                },
+                "available": true,
+                "carrier_code": "premium-gross",
+                "carrier_title": "1-2 business days",
+                "method_code": "premium-gross",
+                "method_title": "Premium Delivery",
+                "__typename": "AvailableShippingMethod"
+              }
+            ],
+            "selected_shipping_method": {
+              "amount": {
+                "currency": "USD",
+                "value": 11.99,
+                "__typename": "Money"
+              },
+              "carrier_code": "standard-gross",
+              "method_code": "standard-gross",
+              "method_title": "Standard Delivery",
+              "__typename": "SelectedShippingMethod"
+            }
+          }
+        ],
+        "__typename": "Cart",
+        "items": [
+          {
+            "id": "0",
+            "quantity": 3,
+            "__typename": "SimpleCartItem"
+          }
+        ],
+        "prices": {
+          "applied_taxes": [],
+          "__typename": "CartPrices",
+          "discounts": [
+            {
+              "amount": {
+                "currency": "USD",
+                "value": 20,
+                "__typename": "Money"
+              },
+              "label": "",
+              "__typename": "Discount"
+            }
+          ],
+          "grand_total": {
+            "currency": "USD",
+            "value": 497.55,
+            "__typename": "Money"
+          },
+          "subtotal_excluding_tax": {
+            "currency": "USD",
+            "value": 473.86,
+            "__typename": "Money"
+          }
+        },
+        "applied_gift_cards": [],
+        "available_payment_methods": [
+          {
+            "code": "visa",
+            "title": "Visa",
+            "__typename": "AvailablePaymentMethod"
+          }
+        ]
+      },
+      "__typename": "SetShippingAddressesOnCartOutput"
+    }
+  }
 }

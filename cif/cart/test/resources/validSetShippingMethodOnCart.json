@@ -1,18 +1,102 @@
 {
-    "cart": {
-        "shipping_addresses": [
-            {
-                "selected_shipping_method": {
-                    "carrier_code": "standard-gross",
-                    "carrier_title": "3-5 business days",
-                    "method_code": "standard-gross",
-                    "method_title": "Standard Delivery",
-                    "amount": {
-                        "value": 11.99,
-                        "currency": "USD"
-                    }
-                }
-            }
-        ]
+  "data": {
+    "setShippingMethodsOnCart": {
+      "__typename": "SetShippingMethodsOnCartOutput",
+      "cart": {
+        "__typename": "Cart",
+        "applied_gift_cards": [],
+        "available_payment_methods": [{
+          "__typename": "AvailablePaymentMethod",
+          "code": "free",
+          "title": "Free"
+        }],
+        "email": "abc.xyz@123.com",
+        "id": "00000043",
+        "items": [{
+          "__typename": "SimpleCartItem",
+          "id": "0",
+          "quantity": 2
+        }],
+        "prices": {
+          "__typename": "CartPrices",
+          "applied_taxes": [],
+          "discounts": [{
+            "__typename": "Discount",
+            "amount": {
+              "__typename": "Money",
+              "currency": "USD",
+              "value": 0
+            },
+            "label": ""
+          }],
+          "grand_total": {
+            "__typename": "Money",
+            "currency": "USD",
+            "value": 55.11
+          },
+          "subtotal_excluding_tax": {
+            "__typename": "Money",
+            "currency": "USD",
+            "value": 55.11
+          }
+        },
+        "shipping_addresses": [{
+          "__typename": "ShippingCartAddress",
+          "available_shipping_methods": [{
+            "__typename": "AvailableShippingMethod",
+            "amount": {
+              "__typename": "Money",
+              "currency": "USD",
+              "value": 11.99
+            },
+            "available": true,
+            "carrier_code": "standard-gross",
+            "carrier_title": "3-5 business days",
+            "method_code": "standard-gross",
+            "method_title": "Standard Delivery"
+          }, {
+            "__typename": "AvailableShippingMethod",
+            "amount": {
+              "__typename": "Money",
+              "currency": "USD",
+              "value": 19.99
+            },
+            "available": true,
+            "carrier_code": "premium-gross",
+            "carrier_title": "1-2 business days",
+            "method_code": "premium-gross",
+            "method_title": "Premium Delivery"
+          }],
+          "city": "Austin",
+          "country": {
+            "__typename": "CartAddressCountry",
+            "code": "US",
+            "label": "United States"
+          },
+          "firstname": "abc",
+          "lastname": "Roll",
+          "postcode": "78758",
+          "region": {
+            "__typename": "CartAddressRegion",
+            "code": "WA",
+            "label": "Washington",
+            "region_id": null
+          },
+          "selected_shipping_method": {
+            "__typename": "SelectedShippingMethod",
+            "amount": {
+              "__typename": "Money",
+              "currency": "USD",
+              "value": 11.99
+            },
+            "carrier_code": "standard-gross",
+            "method_code": "standard-gross",
+            "method_title": "Standard Delivery"
+          },
+          "street": ["Magento Pkwy, Main Street, Washington, Austin, 78758"],
+          "telephone": "9999998899"
+        }]
+      }
     }
+  }
 }

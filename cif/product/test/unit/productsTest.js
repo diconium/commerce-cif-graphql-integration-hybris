@@ -33,9 +33,11 @@ const basicProductSearchGraphqlResponse = require('../resources/basicProductSear
 const searchProductByCategoryIdHybrisResponse = require('../resources/searchProductByCategoryIdHybrisResponse.json');
 const searchProductByCategoryIdGraphqlResponse = require('../resources/searchProductByCategoryIdGraphqlResponse.json');
 const combinedSearchProductbySkuHybrisResponse = require('../resources/combinedSearchProductbySkuHybrisResponse.json');
-const combinedSearchCategoryHybrisResponse = require('../resources/combinedSearchCategoryHybrisResponse.json');
+//const combinedSearchCategoryHybrisResponse = require('../resources/combinedSearchCategoryHybrisResponse.json');
 const combinedSearchCategory553HybrisResponse = require('../resources/combinedSearchCategory553HybrisResponse.json');
 const combinedSearchCategory574HybrisResponse = require('../resources/combinedSearchCategory574HybrisResponse.json');
+const combinedSearchCategory604HybrisResponse = require('../resources/combinedSearchCategory604HybrisResponse.json');
+const combinedSearchCategory562HybrisResponse = require('../resources/combinedSearchCategory562HybrisResponse.json');
 const combinedSearchProductHybrisResponse = require('../resources/combinedSearchProductHybrisResponse.json');
 const combinedSearchGraphqlResplonse = require('../resources/combinedSearchGraphqlResplonse.json');
 const multipleSkuSearch898503HybrisResponse = require('../resources/multipleSkuSearch898503HybrisResponse.json');
@@ -127,11 +129,11 @@ describe('Dispatcher Resolver', () => {
 
     it('Basic products search', () => {
       args.query =
-        '{products(search: "short", currentPage: 1){total_count,page_info{current_page,page_size},items{sku,name,description{html},price{regularPrice{amount{currency,value}}}}}}';
+        '{products(currentPage:1,pageSize:6,search:"short",filter:{category_uid:{eq:"1"}}){total_count,items{__typename,sku,name,small_image{url},url_key,url_path,url_rewrites{url},price_range{minimum_price{regular_price{value,currency},final_price{value,currency},discount{amount_off,percent_off}}},... on ConfigurableProduct{price_range{maximum_price{regular_price{value,currency},final_price{value,currency},discount{amount_off,percent_off}}}},... on BundleProduct{price_range{maximum_price{regular_price{value,currency},final_price{value,currency},discount{amount_off,percent_off}}}},staged},aggregations{options{count,label,value},attribute_code,count,label}}}';
       const param = {
         currentPage: 1,
         fields: 'FULL',
-        pageSize: 20,
+        pageSize: 6,
         query: 'short',
         json: true,
       };
@@ -146,47 +148,50 @@ describe('Dispatcher Resolver', () => {
         let products = result.body.data.products;
         assert.equal(products.total_count, 90);
 
-        let pageInfo = products.page_info;
-        assert.equal(pageInfo.current_page, 1);
-        assert.equal(pageInfo.page_size, 20);
-
         let items = products.items;
         assert.equal(items.length, 20);
 
         // Ensure the Products search function is only called once
         assert.equal(searchProducts.callCount, 1);
-        expect(products).to.deep.equals(basicProductSearchGraphqlResponse);
+        expect(products).to.deep.equals(
+          basicProductSearchGraphqlResponse.data.products
+        );
       });
     });
 
     it('Search products by category id', () => {
       args.query =
-        '{products(filter:{category_uid:{eq:"1"}}, currentPage:1){items{sku,name,stock_status,image{url,label}}}}';
-      const param = {
-        currentPage: 1,
-        fields: 'FULL',
-        pageSize: 20,
-        query: '::allCategories:1',
-        json: true,
-      };
+        '{products(currentPage:1,pageSize:6,filter:{category_uid:{eq:"1"}},sort:{price:ASC}){total_count,items{__typename,sku,name,small_image{url},url_key,url_path,url_rewrites{url},price_range{minimum_price{regular_price{value,currency},final_price{value,currency},discount{amount_off,percent_off}}},... on ConfigurableProduct{price_range{maximum_price{regular_price{value,currency},final_price{value,currency},discount{amount_off,percent_off}}}},... on BundleProduct{price_range{maximum_price{regular_price{value,currency},final_price{value,currency},discount{amount_off,percent_off}}}},staged},aggregations{options{count,label,value},attribute_code,count,label}}}';
+      //'{products(filter:{category_uid:{eq:"1"}}, currentPage:1){items{sku,name,stock_status,image{url,label}}}}';
+      // const param = {
+      //   currentPage: 1,
+      //   fields: 'FULL',
+      //   pageSize: 6,
+      //   query: '1',
+      //   json: true,
+      //   sort: 'price-asc',
+      // };
       scope
-        .get(`${HB_API_BASE_PATH}electronics/products/search`)
-        .query(param)
+        .get(
+          `${HB_API_BASE_PATH}electronics/products/search?currentPage=1&fields=FULL&pageSize=6&query=1&sort=price-asc&json=true`
+        )
         .reply(200, searchProductByCategoryIdHybrisResponse)
         .log(console.log);
       return resolve(args).then(result => {
         assert.isUndefined(result.body.errors); // No GraphQL errors
 
         let items = result.body.data.products.items;
-        assert.equal(items.length, 20);
-        assert.equal(items[0].sku, '898503');
-        expect(items).to.deep.equals(searchProductByCategoryIdGraphqlResponse);
+        assert.equal(items[0].sku, '834955');
+        expect(items).to.deep.equals(
+          searchProductByCategoryIdGraphqlResponse.data.products.items
+        );
       });
     });
 
     it('Combined products and category search', () => {
       args.query =
-        '{products(filter:{sku:{eq:"898503"}}, currentPage:1){items{sku,categories{uid}}}, categoryList(filters:{category_uid:{eq:"1"}}){uid,products{items{sku}}}}';
+        '{products(filter:{sku:{eq:"898503"}}){items{__typename,sku,url_key,name,categories{__typename,uid,url_path,name,breadcrumbs{category_uid,category_url_path,category_name}}}}}';
+
       let param = {
         fields: 'FULL',
         json: true,
@@ -196,15 +201,13 @@ describe('Dispatcher Resolver', () => {
         .query(param)
         .reply(200, combinedSearchProductbySkuHybrisResponse)
         .log(console.log);
-
       scope
         .get(
-          `${HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/1`
+          `${HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/574`
         )
         .query(param)
-        .reply(200, combinedSearchCategoryHybrisResponse)
+        .reply(200, combinedSearchCategory574HybrisResponse)
         .log(console.log);
-
       scope
         .get(
           `${HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/553`
@@ -213,19 +216,10 @@ describe('Dispatcher Resolver', () => {
         .reply(200, combinedSearchCategory553HybrisResponse)
         .log(console.log);
 
-      scope
-        .get(
-          `${HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/574`
-        )
-        .query(param)
-        .reply(200, combinedSearchCategory574HybrisResponse)
-        .log(console.log);
-
       param = {
         currentPage: 1,
         fields: 'FULL',
         pageSize: 20,
-        query: '::allCategories:1',
         json: true,
       };
       scope
@@ -244,22 +238,20 @@ describe('Dispatcher Resolver', () => {
         let categories = items[0].categories;
         assert.equal(categories.length, 2);
 
-        let products = result.body.data.categoryList[0].products;
-        assert.equal(products.items.length, 20);
-
-        // Ensure the Products search function is called once for the "search by sku"
-        // and once for the category products
-        assert(searchProducts.calledTwice);
+        let products = result.body.data.products;
+        assert.equal(products.items.length, 1);
 
         // Ensure the category loading function is only called once for each category being fetched
-        assert.equal(getCategoryById.callCount, 3);
-        expect(result.body.data).to.deep.equals(combinedSearchGraphqlResplonse);
+        assert.equal(getCategoryById.callCount, 2);
+        expect(result.body.data).to.deep.equals(
+          combinedSearchGraphqlResplonse.data
+        );
       });
     });
 
     it('Query multiple sku remote resolver', () => {
       args.query =
-        '{products(filter:{sku:{in:["898503", "2278102"]}}, currentPage:1){items{sku}}}';
+        '{products(filter:{sku:{in:["898503","2278102",]}}){items{__typename,sku,url_key,name,categories{__typename,uid,url_path,name,breadcrumbs{category_uid,category_url_path,category_name}}}}}';
       let param = {
         fields: 'FULL',
         json: true,
@@ -269,11 +261,49 @@ describe('Dispatcher Resolver', () => {
         .query(param)
         .reply(200, multipleSkuSearch898503HybrisResponse)
         .log(console.log);
-
+      scope
+        .get(
+          `${HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/574`
+        )
+        .query(param)
+        .reply(200, combinedSearchCategory574HybrisResponse)
+        .log(console.log);
+      scope
+        .get(
+          `${HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/553`
+        )
+        .query(param)
+        .reply(200, combinedSearchCategory553HybrisResponse)
+        .log(console.log);
       scope
         .get(`${HB_API_BASE_PATH}electronics/products/2278102`)
         .query(param)
         .reply(200, multipleSkuSearch2278102HybrisResponse)
+        .log(console.log);
+      scope
+        .get(
+          `${HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/604`
+        )
+        .query(param)
+        .reply(200, combinedSearchCategory604HybrisResponse)
+        .log(console.log);
+      scope
+        .get(
+          `${HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/562`
+        )
+        .query(param)
+        .reply(200, combinedSearchCategory562HybrisResponse)
+        .log(console.log);
+      param = {
+        currentPage: 1,
+        fields: 'FULL',
+        pageSize: 20,
+        json: true,
+      };
+      scope
+        .get(`${HB_API_BASE_PATH}electronics/products/search`)
+        .query(param)
+        .reply(200, combinedSearchProductHybrisResponse)
         .log(console.log);
 
       return resolve(args).then(result => {
@@ -287,7 +317,9 @@ describe('Dispatcher Resolver', () => {
         // Ensure the product loading function is only called twice, once for each product sku
         // (we dont check the 'args' parameter because this is modified by graphql-tools)
         assert(getProductBySku.calledTwice);
-        expect(items).to.deep.equals(multipleSkuSearchGraphqlResponse);
+        expect(items).to.deep.equals(
+          multipleSkuSearchGraphqlResponse.data.products.items
+        );
       });
     });
 
@@ -298,11 +330,12 @@ describe('Dispatcher Resolver', () => {
         .stub(ProductsLoader.prototype, '__searchProducts')
         .returns(Promise.reject('Connection failed'));
 
-      args.query = '{products(search: "short", currentPage: 1){total_count}}';
+      args.query =
+        '{products(currentPage:1,pageSize:6,search:"short",filter:{category_uid:{eq:"1"}}){total_count,items{__typename,sku,name,small_image{url},url_key,url_path,url_rewrites{url},price_range{minimum_price{regular_price{value,currency},final_price{value,currency},discount{amount_off,percent_off}}},... on ConfigurableProduct{price_range{maximum_price{regular_price{value,currency},final_price{value,currency},discount{amount_off,percent_off}}}},... on BundleProduct{price_range{maximum_price{regular_price{value,currency},final_price{value,currency},discount{amount_off,percent_off}}}},staged},aggregations{options{count,label,value},attribute_code,count,label}}}';
       return resolve(args).then(result => {
-        assert.equal(result.body.errors.length, 1);
-        assert.equal(result.body.errors[0].message, 'Backend data is null');
-        expect(result.body.errors[0].path).to.eql(['products', 'total_count']);
+        let error = result.body.errors;
+        assert.equal(error[0].message, 'Backend data is null');
+        expect(error[0].path).to.eql(['products', 'total_count']);
       });
     });
   });

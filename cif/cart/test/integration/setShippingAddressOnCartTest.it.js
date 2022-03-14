@@ -58,7 +58,7 @@ describe('Shipping Address on Cart', () => {
 
     it('Mutation: set shipping address on cart', () => {
       args.query =
-        'mutation {setShippingAddressesOnCart(input: {cart_id: "00000035", shipping_addresses: [{address: {firstname: "USER_FN", lastname: "Roll", company: "Magento", street: ["Magento shipping", "Main Street"], city: "Austin", region: "WA", postcode: "78758", country_code: "US", telephone: "9999998899", save_in_address_book: false}}]}) { cart {shipping_addresses {firstname,lastname,company,street,city,region {code,label},postcode,telephone,country {code,label} }}}}';
+        'mutation {setShippingAddressesOnCart(input: {cart_id: "00000035", shipping_addresses: [{address: {firstname: "abc", lastname: "Roll", company: "Magento", street: ["Magento shipping", "Main Street"], city: "Austin", region: "WA", postcode: "78758", country_code: "US", telephone: "9999998899", save_in_address_book: false}}]}) { cart {shipping_addresses {firstname,lastname,company,street,city,region {code,label},postcode,telephone,country {code,label} }}}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors); // No GraphQL errors
         assert.equal(ShippingAddress.callCount, 1);

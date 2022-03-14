@@ -1,8 +1,94 @@
 {
   "cart": {
-    "email": "test@example.com",
-    "billing_address": null,
-    "shipping_addresses": [],
+    "email": "abc.xyz@123.com",
+    "billing_address": {
+      "city": "Austin",
+      "country": {
+        "code": "US",
+        "label": "United States"
+      },
+      "firstname": "abc",
+      "lastname": "Roll",
+      "postcode": "78758",
+      "region": {
+        "code": "WA",
+        "label": "Washington"
+      },
+      "street": [
+        "Magento Pkwy, Main Street, Washington, Austin, 78758"
+      ],
+      "telephone": "9999998899"
+    },
+    "shipping_addresses": [
+      {
+        "firstname": "abc",
+        "lastname": "Roll",
+        "street": [
+          "Magento Pkwy, Main Street, Washington, Austin, 78758"
+        ],
+        "city": "Austin",
+        "region": {
+          "code": "WA",
+          "label": "Washington"
+        },
+        "country": {
+          "code": "US",
+          "label": "United States"
+        },
+        "available_shipping_methods": [
+          {
+            "amount": {
+              "currency": "USD",
+              "value": 11.99
+            },
+            "available": true,
+            "carrier_code": "standard-gross",
+            "carrier_title": "3-5 business days",
+            "error_message": "",
+            "method_code": "standard-gross",
+            "method_title": "Standard Delivery",
+            "price_excl_tax": {
+              "value": 11.99,
+              "currency": "USD"
+            },
+            "price_incl_tax": {
+              "value": 11.99,
+              "currency": "USD"
+            }
+          },
+          {
+            "amount": {
+              "currency": "USD",
+              "value": 19.99
+            },
+            "available": true,
+            "carrier_code": "premium-gross",
+            "carrier_title": "1-2 business days",
+            "error_message": "",
+            "method_code": "premium-gross",
+            "method_title": "Premium Delivery",
+            "price_excl_tax": {
+              "value": 19.99,
+              "currency": "USD"
+            },
+            "price_incl_tax": {
+              "value": 19.99,
+              "currency": "USD"
+            }
+          }
+        ],
+        "selected_shipping_method": {
+          "amount": {
+            "value": 11.99,
+            "currency": "USD"
+          },
+          "carrier_code": "standard-gross",
+          "carrier_title": "3-5 business days",
+          "method_code": "standard-gross",
+          "method_title": "Standard Delivery"
+        }
+      }
+    ],
     "items": [
       {
         "uid": "0",
@@ -10,89 +96,23 @@
           "name": "AC-VQ900AM",
           "sku": "1298094"
         },
-        "quantity": 1
-      },
-      {
-        "uid": "1",
-        "product": {
-          "name": "InfoLITHIUM Battery, NP-FM55H",
-          "sku": "482105"
-        },
-        "quantity": 1
-      },
-      {
-       "uid": "2",
-        "product": {
-          "name": "AC Adapter",
-          "sku": "847942"
-        },
-        "quantity": 1
-      },
-      {
-       "uid": "3",
-        "product": {
-          "name": "EF-S 60mm f/2.8 USM Macro",
-          "sku": "832382"
-        },
-        "quantity": 1
-      },
-      {
-       "uid": "4",
-        "product": {
-          "name": "Adapter AC Infolithium f Cybershot",
-          "sku": "266899"
-        },
-        "quantity": 1
-      },
-      {
-       "uid": "5",
-        "product": {
-          "name": "32GB SDHC Card",
-          "sku": "4205436"
-        },
-        "quantity": 1
-      },
-      {
-       "uid": "6",
-        "product": {
-          "name": "EOS450D + 18-55 IS Kit",
-          "sku": "1382080"
-        },
-        "quantity": 1
-      },
-      {
-       "uid": "7",
-        "product": {
-          "name": "2GB SD Card",
-          "sku": "443175"
-        },
-        "quantity": 1
-      },
-      {
-       "uid": "8",
-        "product": {
-          "name": "SD High Capacity Card 8GB",
-          "sku": "1366053"
-        },
-        "quantity": 1
+        "quantity": 3
       }
     ],
     "available_payment_methods": [
       {
         "code": "visa",
-        "title": "Credit Card"
+        "title": "Visa"
       }
     ],
     "selected_payment_method": {
-      "code": "",
-      "title": ""
+      "code": "visa",
+      "title": "visa"
     },
-    "applied_coupon": {
-      "code": "BUYMORE16"
-    },
+    "applied_coupon": null,
     "prices": {
       "grand_total": {
-        "value": 1969.29,
+        "value": 497.55,
         "currency": "USD"
       }
     }

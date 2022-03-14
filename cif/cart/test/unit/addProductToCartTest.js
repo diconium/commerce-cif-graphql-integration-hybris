@@ -27,6 +27,8 @@ const validResponseAddSimpleProductToCart = require('../resources/validResponseA
 const inValidCart = require('../resources/inValidJsonFileAddSimpleProductToCart.json');
 const AddProductToCartLoader = require('../../../cart/src/AddProductToCartLoader');
 const TestUtils = require('../../../utils/TestUtils.js');
+const hybrisCartData = require('../resources/hybrisCartQuery.json');
+const hybrisDeliveryModes = require('../resources/hybrisDeliveryModes.json');
 
 describe('AddProductToCart', () => {
   const scope = nock(TestUtils.getHybrisInstance());
@@ -64,15 +66,39 @@ describe('AddProductToCart', () => {
     it('Add products to cart nock test case', () => {
       scope
         .post(
-          `${HB_API_BASE_PATH}electronics/users/current/carts/00000015/entries`
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000035/entries`
         )
         .query({ fields: 'FULL' })
         .reply(200, hybrisAddSimpleProductToCart);
+      scope
+        .get(`${HB_API_BASE_PATH}electronics/users/current/carts/00000035`)
+        .query({ fields: 'FULL', query: '' })
+        .reply(200, hybrisCartData);
+      scope
+        .get(
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymodes`
+        )
+        .query({ fields: 'FULL', query: '' })
+        .reply(200, hybrisDeliveryModes);
+      args.variables = {
+        cartId: '00000035',
+        cartItems: [
+          {
+            data: {
+              sku: '301233',
+              quantity: 1,
+            },
+          },
+        ],
+      };
+
       args.query =
-        'mutation {addSimpleProductsToCart(input: {cart_id: "00000015", cart_items: [{data: {quantity: 1.0, sku: "3514521"}}]}) {cart {items {uid, product {name,sku},quantity}}}}';
+        'mutation addSimpleProductToCart($cartId:String!$cartItems:[SimpleProductCartItemInput]!){addSimpleProductsToCart(input:{cart_id:$cartId cart_items:$cartItems}){cart{id items{uid quantity product{name thumbnail{url __typename}__typename}__typename}...MiniCartFragment __typename}__typename}}fragment MiniCartFragment on Cart{id total_quantity prices{subtotal_excluding_tax{currency value __typename}__typename}...ProductListFragment __typename}fragment ProductListFragment on Cart{id items{id product{id name url_key url_suffix thumbnail{url __typename}stock_status ...on ConfigurableProduct{variants{attributes{uid __typename}product{id thumbnail{url __typename}__typename}__typename}__typename}__typename}prices{price{currency value __typename}__typename}quantity ...on ConfigurableCartItem{configurable_options{id option_label value_id value_label __typename}__typename}__typename}__typename}';
       return resolve(args).then(result => {
         let items = result.data.addSimpleProductsToCart.cart.items[0];
-        let testData = validResponseAddSimpleProductToCart.items[0];
+        let testData =
+          validResponseAddSimpleProductToCart.data.addSimpleProductsToCart.cart
+            .items[0];
         const { errors } = result;
         assert.isUndefined(result.errors);
         expect(errors).to.be.undefined;
@@ -80,8 +106,6 @@ describe('AddProductToCart', () => {
         assert.equal(items.quantity, testData.quantity);
         assert.equal(items.product.name, testData.product.name);
         assert.equal(items.product.sku, testData.product.sku);
-        // Ensure the create empty cart function is only called once.
-        assert.equal(addProductToCart.callCount, 1);
       });
     });
 
@@ -92,8 +116,30 @@ describe('AddProductToCart', () => {
         )
         .query({ fields: 'FULL' })
         .reply(400, inValidCart);
+      scope
+        .get(`${HB_API_BASE_PATH}electronics/users/current/carts/00000035`)
+        .query({ fields: 'FULL', query: '' })
+        .reply(200, hybrisCartData);
+      scope
+        .get(
+          `${HB_API_BASE_PATH}electronics/users/current/carts/00000035/deliverymodes`
+        )
+        .query({ fields: 'FULL', query: '' })
+        .reply(200, hybrisDeliveryModes);
+      args.variables = {
+        cartId: 'INVALID-CART-ID',
+        cartItems: [
+          {
+            data: {
+              sku: '301233',
+              quantity: 1,
+            },
+          },
+        ],
+      };
+
       args.query =
-        'mutation {addSimpleProductsToCart(input: {cart_id: "INVALID-CART-ID", cart_items: [{data: {quantity: 1.0, sku: "3514521"}}]}) {cart {items {uid, product {name,sku},quantity}}}}';
+        'mutation addSimpleProductToCart($cartId:String!$cartItems:[SimpleProductCartItemInput]!){addSimpleProductsToCart(input:{cart_id:$cartId cart_items:$cartItems}){cart{id items{uid quantity product{name thumbnail{url __typename}__typename}__typename}...MiniCartFragment __typename}__typename}}fragment MiniCartFragment on Cart{id total_quantity prices{subtotal_excluding_tax{currency value __typename}__typename}...ProductListFragment __typename}fragment ProductListFragment on Cart{id items{id product{id name url_key url_suffix thumbnail{url __typename}stock_status ...on ConfigurableProduct{variants{attributes{uid __typename}product{id thumbnail{url __typename}__typename}__typename}__typename}__typename}prices{price{currency value __typename}__typename}quantity ...on ConfigurableCartItem{configurable_options{id option_label value_id value_label __typename}__typename}__typename}__typename}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({

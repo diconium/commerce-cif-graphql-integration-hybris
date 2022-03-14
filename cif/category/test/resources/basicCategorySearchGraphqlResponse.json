@@ -1,37 +1,99 @@
 {
-  "uid": "1",
-  "name": "Open Catalogue",
-  "url_path": "1",
-  "url_key": "open-catalogue",
-  "children_count": "4",
-  "children": [
-    {
-      "uid": "106",
-      "name": "Components",
-      "url_path": "1/106",
-      "url_key": "components",
-      "children_count": "1"
-    },
-    {
-      "uid": "206",
-      "name": "Data storage",
-      "url_path": "1/206",
-      "url_key": "data-storage",
-      "children_count": "1"
-    },
-    {
-      "uid": "571",
-      "name": "Cameras",
-      "url_path": "1/571",
-      "url_key": "cameras",
-      "children_count": "5"
-    },
-    {
-      "uid": "1421",
-      "name": "Binoculars",
-      "url_path": "1/1421",
-      "url_key": "binoculars",
-      "children_count": "0"
-    }
-  ]
+  "data": {
+    "categoryList": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "include_in_menu": null,
+                "name": "Power Supplies",
+                "position": 0,
+                "uid": "816",
+                "url_path": "1/106/816"
+              }
+            ],
+            "include_in_menu": null,
+            "name": "Components",
+            "position": 0,
+            "uid": "106",
+            "url_path": "1/106"
+          },
+          {
+            "children": [
+              {
+                "include_in_menu": null,
+                "name": "Flash Memory",
+                "position": 0,
+                "uid": "902",
+                "url_path": "1/206/902"
+              }
+            ],
+            "include_in_menu": null,
+            "name": "Data storage",
+            "position": 0,
+            "uid": "206",
+            "url_path": "1/206"
+          },
+          {
+            "children": [
+              {
+                "include_in_menu": null,
+                "name": "Film cameras",
+                "position": 0,
+                "uid": "574",
+                "url_path": "1/571/574"
+              },
+              {
+                "include_in_menu": null,
+                "name": "Digital Cameras",
+                "position": 0,
+                "uid": "575",
+                "url_path": "1/571/575"
+              },
+              {
+                "include_in_menu": null,
+                "name": "Webcams",
+                "position": 0,
+                "uid": "577",
+                "url_path": "1/571/577"
+              },
+              {
+                "include_in_menu": null,
+                "name": "Hand-held Camcorders",
+                "position": 0,
+                "uid": "584",
+                "url_path": "1/571/584"
+              },
+              {
+                "include_in_menu": null,
+                "name": "Camera Accessories & Supplies",
+                "position": 0,
+                "uid": "585",
+                "url_path": "1/571/585"
+              }
+            ],
+            "include_in_menu": null,
+            "name": "Cameras",
+            "position": 0,
+            "uid": "571",
+            "url_path": "1/571"
+          },
+          {
+            "children": [],
+            "include_in_menu": null,
+            "name": "Binoculars",
+            "position": 0,
+            "uid": "1421",
+            "url_path": "1/1421"
+          }
+        ],
+        "include_in_menu": null,
+        "name": "Open Catalogue",
+        "position": 0,
+        "uid": "1",
+        "url_path": "1"
+      }
+    ]
+  }
 }

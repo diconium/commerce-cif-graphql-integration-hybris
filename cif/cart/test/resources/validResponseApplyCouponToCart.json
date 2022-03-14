@@ -1,7 +1,5 @@
 {
-    "applied_coupon": {
-        "code": "BUYMORE16"
-    },
+    "applied_coupon": null,
     "items":[
         {
             "product":{"name":"AC Power Adapter ACK-E2"},

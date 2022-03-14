@@ -38,8 +38,11 @@ function resolve(args) {
    */
   const resolvers = {
     placeOrder: (params, context) => {
+      const { input } = params;
+
       return new PlaceOrder({
         cartId: params.input.cart_id,
+        input,
         graphqlContext: context,
         actionParameters: args,
       });

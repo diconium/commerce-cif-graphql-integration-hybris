@@ -74,8 +74,8 @@ class SetPaymentMethodOnCartLoader {
       HB_BASESITEID,
     } = actionParameters.context.settings;
 
-    const { cart_id: cartId, payment_method: paymentMethod } = input;
-    const { code } = paymentMethod;
+    const { cart_id: cartId } = input;
+    //const { code } = paymentMethod;
     const billingAddress = this.getBillingAddress(this.addresses);
 
     const body = {
@@ -85,7 +85,7 @@ class SetPaymentMethodOnCartLoader {
       billingAddress: billingAddress,
       cardNumber: `************1234`,
       cardType: {
-        code: code,
+        code: 'visa',
       },
     };
     const config = {
