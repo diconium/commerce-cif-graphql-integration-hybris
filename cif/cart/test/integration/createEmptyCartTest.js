@@ -65,7 +65,7 @@ describe('CreateEmptyCart', function() {
       args.context.settings.customerId = 'anonymous';
       args.context.settings.HB_CLIENTID = 'client-side';
       args.context.settings.HB_OAUTH_PATH = '/authorizationserver/oauth/token';
-      args.context.settings.HB_CLIENTSECRET = 'ADOBE_123';
+      args.context.settings.HB_CLIENTSECRET = '<client_secret>';
       return resolve(args).then(result => {
         const { errors } = result;
         assert.isUndefined(result.errors);

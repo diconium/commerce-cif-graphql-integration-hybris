@@ -3,6 +3,18 @@
 
 # 3rd-Party GraphQL integration with AEM Commerce and CIF on Adobe I/O Runtime
 
+## 2.4 (May 4 2022)
+##### ENHANCEMENTS: 
+  * Changes updated as Latest Adobe CIF release 2.7.2 and Latest Storefront 
+  * Category Search functionality implementation
+  * Addressed all queries and mutations with respect to latest CIF and Venia 31st March 2022 release
+  * Code Optimisation and improvisation on security code check 
+
+ ##### BUGFIXES:
+  * Commerce.html, Category Picker and Product Picker components fixes as per latest Schema
+
+  
+
 ## 2.3 (March 14 2022)
 ##### ENHANCEMENTS: 
   * Latest Magento Schema Update 
@@ -11,8 +23,7 @@
 
  ##### BUGFIXES:
   * Commerce.html, Category Picker and Product Picker components fixes as per latest Schema
-  NOTE : Category Search in category picker will be implemented in the next release.  
-
+  NOTE : Category Search in category picker will be implemented in the next release. 
 
 ## 2.2 (June 11, 2021)
 ##### ENHANCEMENTS: 

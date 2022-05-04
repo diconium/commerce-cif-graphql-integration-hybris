@@ -1,0 +1,35 @@
+{
+  "data": {
+    "customer": {
+      "id": 1,
+      "orders": {
+        "items": [
+          {
+            "billing_address": null,
+            "id": "bd34cedd-8e7a-46a0-949b-84bc9ce4b86c",
+            "invoices": [
+              {
+                "id": "bd34cedd-8e7a-46a0-949b-84bc9ce4b86c",
+                "__typename": "Invoice"
+              }
+            ],
+            "items": null,
+            "number": "00000003",
+            "order_date": "2021-06-01T08:52:35+0000",
+            "payment_methods": null,
+            "shipments": null,
+            "shipping_address": null,
+            "shipping_method": null,
+            "status": "FRAUD_CHECKED",
+            "total": null,
+            "__typename": "CustomerOrder"
+          }
+        ],
+        "page_info": null,
+        "total_count": null,
+        "__typename": "CustomerOrders"
+      },
+      "__typename": "Customer"
+    }
+  }
+}

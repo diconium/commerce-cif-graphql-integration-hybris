@@ -7,7 +7,7 @@
 
 The [CIF (Commerce Integration Framework) GraphQL connector](https://github.com/adobe/commerce-cif-connector) and the [AEM CIF Core Components](https://github.com/adobe/aem-core-cif-components) offer authoring and frontend integration between AEM (Adobe Experience Manager) and Magento. This integration is based on the [Magento GraphQL API](https://devdocs.magento.com/guides/v2.3/graphql/index.html) which offers a very flexible and efficient integration point between AEM and Magento.
 
-In order to support other 3rd-party "non-Magento" commerce platforms, this project implements an example "reference" implementation that demonstrates how a 3rd-party commerce platform can be integrated with the CIF GraphQL connector and the AEM CIF Core Components via the Magento GraphQL API. Note that the integration is currently based on the GraphQL API of Magento 2.3.2.
+In order to support other 3rd-party "non-Magento" commerce platforms, this project implements an example "reference" implementation that demonstrates how a 3rd-party commerce platform can be integrated with the CIF GraphQL connector and the AEM CIF Core Components via the Magento GraphQL API. Note that the integration is currently based on the GraphQL API of Magento 2.7.2.
 
 This enables customers to reuse our existing connector and components in their project by simply exposing the Magento GraphQL API on top of any 3rd-party commerce platform. To offer maximum flexibility and scalability, this "adaptation layer" is deployed on the serverless [Adobe I/O Runtime](https://www.adobe.io/apis/experienceplatform/runtime.html) platform.
 
@@ -76,13 +76,6 @@ $ npm run deploy
 
 
 This will deploy the `graphql-reference/dispatcher` and `graphql-reference/cart` actions in your namespace. The dispatcher is a web action that is accessible with the URL `https://adobeioruntime.net/api/v1/web/NAMESPACE/graphql-reference/dispatcher`. To test the GraphQL endpoint, you can for example use the `GraphiQL` plugin in the Chrome browser. 
-
-Post deployment 
-
-1. Install Latest venia aem-cif-guides-venia.all-2022.02.24-classic.zip for classic AEM or cloud.
-2. Build and Install Latest CIF 2.6.0 on AEM with build package core-cif-components-all-2.6.0 in your   package manager
-3. Include the connector server URL in cif configuration with required server details. 
-4. Please refer https://experienceleague.adobe.com/docs/experience-manager-cloud-service/content/content-and-commerce/home.html for more details on configuration. 
 
 ## Developing a real 3rd-party integration
 

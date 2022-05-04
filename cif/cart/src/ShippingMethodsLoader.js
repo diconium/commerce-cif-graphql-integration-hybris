@@ -75,6 +75,10 @@ class CartLoader {
       HB_PROTOCOL,
       HB_BASESITEID,
     } = actionParameters.context.settings;
+    cartId =
+      cartId.destination_cart_id != undefined
+        ? cartId.destination_cart_id
+        : cartId;
 
     const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cartId}/deliverymodes?fields=FULL`;
     return new Promise((resolve, reject) => {

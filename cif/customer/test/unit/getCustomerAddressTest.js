@@ -22,11 +22,13 @@ const chaiShallowDeepEqual = require('chai-shallow-deep-equal');
 const nock = require('nock');
 const validResponseGetCustomerAddress = require('../resources/validResponseGetCustomerAddress.json');
 const hybrisGetCustomerAddress = require('../../../customer/test/resources/hybrisGetCustomerAddress.json');
+// const hybrisAuthLoginMock = require('../resources/hybris-token.json');
 const resolve = require('../../../customer/src/customerResolver.js').main;
 chai.use(chaiShallowDeepEqual);
 const TestUtils = require('../../../utils/TestUtils.js');
 const AddressLoader = require('../../src/AddressLoader.js');
-
+// const invalidRegionCode = require('../../../cart/test/resources/invalidRegionCode.json');
+// const invalidCountryCode = require('../../../cart/test/resources/invalidCountryCode.json');
 
 describe('Get Customer Address Resolver', function() {
   const scope = nock(TestUtils.getHybrisInstance());

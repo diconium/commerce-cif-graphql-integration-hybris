@@ -73,13 +73,19 @@ class ChangeCustomerPasswordLoader {
         Authorization: `Bearer ${bearer}`,
       },
     };
-    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/password?new=${newPassword}&old=${currentPassword}`;
+    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/password?new=${encodeURIComponent(
+      newPassword
+    )}&old=${encodeURIComponent(currentPassword)}`;
 
     return new Promise((resolve, reject) => {
       axios
         .put(uri, body, config)
-        .then(() => {
-          resolve(true);
+        .then(response => {
+          if (response) {
+            resolve(response);
+          } else {
+            reject(false);
+          }
         })
         .catch(error => {
           reject(error);

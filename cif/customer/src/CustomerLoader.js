@@ -94,5 +94,4 @@ class CustomerLoader {
     });
   }
 }
-
 module.exports = CustomerLoader;

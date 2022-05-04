@@ -1,29 +1,47 @@
 {
-   "orders" : [ {
-      "code" : "00000003",
-      "guid" : "bd34cedd-8e7a-46a0-949b-84bc9ce4b86c",
-      "placed" : "2021-06-01T08:52:35+0000",
-      "status" : "FRAUD_CHECKED",
-      "statusDisplay" : "processing",
-      "total" : {
-         "currencyIso" : "USD",
-         "formattedValue" : "$101.95",
-         "priceType" : "BUY",
-         "value" : 101.95
-      }
-   } ],
-   "pagination" : {
-      "currentPage" : 0,
-      "pageSize" : 20,
-      "sort" : "byDate",
-      "totalPages" : 1,
-      "totalResults" : 1
+   "orders": [
+     {
+       "code": "00000063",
+       "guid": "d6a4dc09-ab25-407c-b300-c0b86a28d18d",
+       "placed": "2022-04-22T10:46:50+0000",
+       "status": "FRAUD_CHECKED",
+       "statusDisplay": "processing",
+       "total": {
+         "currencyIso": "USD",
+         "formattedValue": "$133.87",
+         "priceType": "BUY",
+         "value": 133.87
+       }
+     },
+     {
+       "code": "00000058",
+       "guid": "b5d9ef81-d18e-4629-969c-431eaab8281d",
+       "placed": "2022-04-22T04:42:18+0000",
+       "status": "FRAUD_CHECKED",
+       "statusDisplay": "processing",
+       "total": {
+         "currencyIso": "USD",
+         "formattedValue": "$19.99",
+         "priceType": "BUY",
+         "value": 19.99
+       }
+     }
+   ],
+   "pagination": {
+     "currentPage": 0,
+     "pageSize": 20,
+     "sort": "byDate",
+     "totalPages": 1,
+     "totalResults": 2
    },
-   "sorts" : [ {
-      "code" : "byDate",
-      "selected" : true
-   }, {
-      "code" : "byOrderNumber",
-      "selected" : false
-   } ]
-}
+   "sorts": [
+     {
+       "code": "byDate",
+       "selected": true
+     },
+     {
+       "code": "byOrderNumber",
+       "selected": false
+     }
+   ]
+ }

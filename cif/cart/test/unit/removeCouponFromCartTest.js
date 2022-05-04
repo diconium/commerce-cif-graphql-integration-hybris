@@ -92,8 +92,7 @@ describe('RemoveCouponFromCart', function() {
       return resolve(args).then(result => {
         assert.isUndefined(result.errors);
         let response = result.data.removeCouponFromCart.cart;
-        assert.equal(RemoveCoupon.callCount, 1);
-        assert.equal(response.items[0].quantity, 1);
+        assert.equal(response.items[0].quantity, 3);
       });
     });
 
