@@ -27,6 +27,7 @@ const UpdateCartItems = require('./UpdateCartItems.js');
 const AddProductToCart = require('./AddProductToCart.js');
 const RemoveItemFromCart = require('./RemoveItemFromCart.js');
 const SetShippingMethodsOnCart = require('./SetShippingMethodsOnCart.js');
+const ApplyGiftCardToCart = require('./ApplyGiftCardToCart.js');
 
 let cachedSchema = null;
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
@@ -46,6 +47,8 @@ function resolve(args) {
           'addSimpleProductsToCart',
           'removeItemFromCart',
           'setShippingMethodsOnCart',
+          'mergeCarts',
+          'applyGiftCardToCart',
         ])
       )
       .filterQueryFields(new Set(['cart']));
@@ -57,6 +60,18 @@ function resolve(args) {
     cart: (params, context) => {
       return new Cart({
         cartId: params.cart_id,
+        graphqlContext: context,
+        actionParameters: args,
+      });
+    },
+    /**
+     * method used to get the cart
+     * @param {Object} params parameter contains input,graphqlContext and actionParameters
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
+    mergeCarts: (params, context) => {
+      return new Cart({
+        cartId: params,
         graphqlContext: context,
         actionParameters: args,
       });
@@ -140,6 +155,20 @@ function resolve(args) {
       const { input } = params;
       return new VoucherList({
         input,
+        graphqlContext: context,
+        actionParameters: args,
+      });
+    },
+    /**
+     * method used to apply gift Card to cart
+     * @param {Object} params parameter contains input,graphqlContext and actionParameters
+     * @param {Object} context parameter contains the context of the GraphQL Schema
+     */
+    applyGiftCardToCart: (params, context) => {
+      const { input } = params;
+      return new ApplyGiftCardToCart({
+        input,
+        couponCode: params.input.gift_card_code,
         graphqlContext: context,
         actionParameters: args,
       });

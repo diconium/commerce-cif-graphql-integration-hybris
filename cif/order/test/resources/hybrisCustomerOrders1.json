@@ -1,0 +1,434 @@
+{
+  "type": "orderWsDTO",
+  "appliedOrderPromotions": [],
+  "appliedProductPromotions": [],
+  "appliedVouchers": [],
+  "calculated": true,
+  "code": "00000063",
+  "deliveryAddress": {
+    "country": {
+      "isocode": "US",
+      "name": "United States"
+    },
+    "defaultAddress": false,
+    "firstName": " abc",
+    "formattedAddress": "Magento Shipping, New York, Austin, 752345, New York, Austin, 752345",
+    "id": "8796127035415",
+    "lastName": "k",
+    "line1": "Magento Shipping, New York, Austin, 752345",
+    "phone": "1234567890",
+    "postalCode": "752345",
+    "region": {
+      "countryIso": "US",
+      "isocode": "US-NY",
+      "isocodeShort": "NY",
+      "name": "New York"
+    },
+    "shippingAddress": true,
+    "town": "Austin",
+    "visibleInAddressBook": true
+  },
+  "deliveryCost": {
+    "currencyIso": "USD",
+    "formattedValue": "$11.99",
+    "priceType": "BUY",
+    "value": 11.99
+  },
+  "deliveryItemsQuantity": 1,
+  "deliveryMode": {
+    "code": "standard-gross",
+    "deliveryCost": {
+      "currencyIso": "USD",
+      "formattedValue": "$11.99",
+      "priceType": "BUY",
+      "value": 11.99
+    },
+    "description": "3-5 business days",
+    "name": "Standard Delivery"
+  },
+  "deliveryOrderGroups": [
+    {
+      "entries": [
+        {
+          "basePrice": {
+            "currencyIso": "USD",
+            "formattedValue": "$121.88",
+            "priceType": "BUY",
+            "value": 121.88
+          },
+          "cancellableQuantity": 1,
+          "configurationInfos": [],
+          "entryNumber": 0,
+          "product": {
+            "availableForPickup": true,
+            "averageRating": 2.44,
+            "baseOptions": [],
+            "categories": [
+              {
+                "code": "576",
+                "name": "Digital Compacts",
+                "url": "/Open-Catalogue/Cameras/Digital-Cameras/Digital-Compacts/c/576"
+              },
+              {
+                "code": "brand_5",
+                "name": "Sony",
+                "url": "/Brands/Sony/c/brand_5"
+              }
+            ],
+            "code": "3357724",
+            "configurable": false,
+            "images": [
+              {
+                "altText": "DSC-W180",
+                "format": "zoom",
+                "imageType": "PRIMARY",
+                "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyMTY5N3xpbWFnZS9qcGVnfGltYWdlcy9oZTcvaDg5Lzg3OTcyNTUwNDEwNTQuanBnfDgzODcwODFkZmQ4ZGUzMmNlMTU1OTMxYTE4YTc1NmQ5Njg3MjJmNGVmNWM1MWUyNGVlMmM0OTdhOThkYWI1NzU"
+              },
+              {
+                "altText": "DSC-W180",
+                "format": "product",
+                "imageType": "PRIMARY",
+                "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxMDQ4MXxpbWFnZS9qcGVnfGltYWdlcy9oOTgvaGE0Lzg3OTcyODEzMjA5OTAuanBnfDRkOGMzOWYwNmJjMTAwYmViNzY4N2VmZDMzZjAyMTBiMWQ1ODg5ZjcyN2U5MTM1YjgwYmIxNjIxMzMyNDU0ZTc"
+              },
+              {
+                "altText": "DSC-W180",
+                "format": "thumbnail",
+                "imageType": "PRIMARY",
+                "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyMzY1fGltYWdlL2pwZWd8aW1hZ2VzL2g3Mi9oZDcvODc5NzMwNzY2NjQ2Mi5qcGd8MWU3ZWVmMTU3NTA3NWQ3YmZjMmI5MzE1ODFkZTZkMGUyZDJjNGZkYzkzYWRiZmM1MWJlZjkyMzRhNWUyNmFkOA"
+              },
+              {
+                "altText": "DSC-W180",
+                "format": "cartIcon",
+                "imageType": "PRIMARY",
+                "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxNTU2fGltYWdlL2pwZWd8aW1hZ2VzL2g1MC9oNDIvODc5NzMzNDAxMTkzNC5qcGd8ZTcwZWE4ZDAwYjFhMTk4NmViOGFmYzA5OGE4NmM5MGYyYjViYWZkNGQwMTAyMmIwMGZlN2ZiYThhNGFjOWVhOQ"
+              }
+            ],
+            "manufacturer": "Sony",
+            "name": "DSC-W180",
+            "purchasable": true,
+            "stock": {
+              "isValueRounded": false,
+              "stockLevel": 288,
+              "stockLevelStatus": "inStock"
+            },
+            "url": "/Open-Catalogue/Cameras/Digital-Cameras/Digital-Compacts/DSC-W180/p/3357724"
+          },
+          "quantity": 1,
+          "returnableQuantity": 0,
+          "statusSummaryList": [],
+          "totalPrice": {
+            "currencyIso": "USD",
+            "formattedValue": "$121.88",
+            "priceType": "BUY",
+            "value": 121.88
+          },
+          "updateable": true
+        }
+      ],
+      "totalPriceWithTax": {
+        "currencyIso": "USD",
+        "formattedValue": "$121.88",
+        "priceType": "BUY",
+        "value": 121.88
+      }
+    }
+  ],
+  "entries": [
+    {
+      "basePrice": {
+        "currencyIso": "USD",
+        "formattedValue": "$121.88",
+        "priceType": "BUY",
+        "value": 121.88
+      },
+      "cancellableQuantity": 1,
+      "configurationInfos": [],
+      "entryNumber": 0,
+      "product": {
+        "availableForPickup": true,
+        "averageRating": 2.44,
+        "baseOptions": [],
+        "categories": [
+          {
+            "code": "576",
+            "name": "Digital Compacts",
+            "url": "/Open-Catalogue/Cameras/Digital-Cameras/Digital-Compacts/c/576"
+          },
+          {
+            "code": "brand_5",
+            "name": "Sony",
+            "url": "/Brands/Sony/c/brand_5"
+          }
+        ],
+        "code": "3357724",
+        "configurable": false,
+        "images": [
+          {
+            "altText": "DSC-W180",
+            "format": "zoom",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyMTY5N3xpbWFnZS9qcGVnfGltYWdlcy9oZTcvaDg5Lzg3OTcyNTUwNDEwNTQuanBnfDgzODcwODFkZmQ4ZGUzMmNlMTU1OTMxYTE4YTc1NmQ5Njg3MjJmNGVmNWM1MWUyNGVlMmM0OTdhOThkYWI1NzU"
+          },
+          {
+            "altText": "DSC-W180",
+            "format": "product",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxMDQ4MXxpbWFnZS9qcGVnfGltYWdlcy9oOTgvaGE0Lzg3OTcyODEzMjA5OTAuanBnfDRkOGMzOWYwNmJjMTAwYmViNzY4N2VmZDMzZjAyMTBiMWQ1ODg5ZjcyN2U5MTM1YjgwYmIxNjIxMzMyNDU0ZTc"
+          },
+          {
+            "altText": "DSC-W180",
+            "format": "thumbnail",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyMzY1fGltYWdlL2pwZWd8aW1hZ2VzL2g3Mi9oZDcvODc5NzMwNzY2NjQ2Mi5qcGd8MWU3ZWVmMTU3NTA3NWQ3YmZjMmI5MzE1ODFkZTZkMGUyZDJjNGZkYzkzYWRiZmM1MWJlZjkyMzRhNWUyNmFkOA"
+          },
+          {
+            "altText": "DSC-W180",
+            "format": "cartIcon",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxNTU2fGltYWdlL2pwZWd8aW1hZ2VzL2g1MC9oNDIvODc5NzMzNDAxMTkzNC5qcGd8ZTcwZWE4ZDAwYjFhMTk4NmViOGFmYzA5OGE4NmM5MGYyYjViYWZkNGQwMTAyMmIwMGZlN2ZiYThhNGFjOWVhOQ"
+          }
+        ],
+        "manufacturer": "Sony",
+        "name": "DSC-W180",
+        "purchasable": true,
+        "stock": {
+          "isValueRounded": false,
+          "stockLevel": 288,
+          "stockLevelStatus": "inStock"
+        },
+        "url": "/Open-Catalogue/Cameras/Digital-Cameras/Digital-Compacts/DSC-W180/p/3357724"
+      },
+      "quantity": 1,
+      "returnableQuantity": 0,
+      "statusSummaryList": [],
+      "totalPrice": {
+        "currencyIso": "USD",
+        "formattedValue": "$121.88",
+        "priceType": "BUY",
+        "value": 121.88
+      },
+      "updateable": true
+    }
+  ],
+  "guid": "d6a4dc09-ab25-407c-b300-c0b86a28d18d",
+  "net": false,
+  "orderDiscounts": {
+    "currencyIso": "USD",
+    "formattedValue": "$0.00",
+    "priceType": "BUY",
+    "value": 0
+  },
+  "paymentInfo": {
+    "accountHolderName": "testuser",
+    "billingAddress": {
+      "country": {
+        "isocode": "US",
+        "name": "United States"
+      },
+      "defaultAddress": false,
+      "email": "abc.xyz@123.com",
+      "firstName": " abc",
+      "formattedAddress": "Magento Shipping, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345",
+      "id": "8796127100951",
+      "lastName": "k",
+      "line1": "Magento Shipping, New York, Austin, 752345, New York, Austin, 752345",
+      "postalCode": "752345",
+      "region": {
+        "countryIso": "US",
+        "isocode": "US-NY",
+        "isocodeShort": "NY",
+        "name": "New York"
+      },
+      "shippingAddress": false,
+      "town": "Austin",
+      "visibleInAddressBook": true
+    },
+    "cardNumber": "************1234",
+    "cardType": {
+      "code": "visa",
+      "name": "Visa"
+    },
+    "defaultPayment": false,
+    "expiryMonth": "11",
+    "expiryYear": "2027",
+    "id": "8796093349930",
+    "saved": false,
+    "subscriptionId": "MockedSubscriptionID"
+  },
+  "pickupItemsQuantity": 0,
+  "pickupOrderGroups": [],
+  "productDiscounts": {
+    "currencyIso": "USD",
+    "formattedValue": "$0.00",
+    "priceType": "BUY",
+    "value": 0
+  },
+  "site": "electronics",
+  "store": "electronics",
+  "subTotal": {
+    "currencyIso": "USD",
+    "formattedValue": "$121.88",
+    "priceType": "BUY",
+    "value": 121.88
+  },
+  "totalDiscounts": {
+    "currencyIso": "USD",
+    "formattedValue": "$0.00",
+    "priceType": "BUY",
+    "value": 0
+  },
+  "totalItems": 1,
+  "totalPrice": {
+    "currencyIso": "USD",
+    "formattedValue": "$133.87",
+    "priceType": "BUY",
+    "value": 133.87
+  },
+  "totalPriceWithTax": {
+    "currencyIso": "USD",
+    "formattedValue": "$133.87",
+    "priceType": "BUY",
+    "value": 133.87
+  },
+  "totalTax": {
+    "currencyIso": "USD",
+    "formattedValue": "$0.00",
+    "priceType": "BUY",
+    "value": 0
+  },
+  "user": {
+    "name": " abc xyz",
+    "uid": "abc.xyz@123.com"
+  },
+  "cancellable": true,
+  "consignments": [],
+  "created": "2022-04-22T10:46:50+0000",
+  "guestCustomer": false,
+  "orgCustomer": {
+    "name": " abc xyz",
+    "uid": "abc.xyz@123.com",
+    "active": false,
+    "currency": {
+      "active": true,
+      "isocode": "USD",
+      "name": "US Dollar",
+      "symbol": "$"
+    },
+    "customerId": "2342e972-96e2-48a6-9926-7dc5ee8ee009",
+    "defaultAddress": {
+      "country": {
+        "isocode": "US",
+        "name": "United States"
+      },
+      "defaultAddress": false,
+      "firstName": " abc",
+      "formattedAddress": "Magento Shipping, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345",
+      "id": "8796128051223",
+      "lastName": "k",
+      "line1": "Magento Shipping, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345",
+      "phone": "1234567890",
+      "postalCode": "752345",
+      "region": {
+        "countryIso": "US",
+        "isocode": "US-NY",
+        "isocodeShort": "NY",
+        "name": "New York"
+      },
+      "shippingAddress": true,
+      "town": "Austin",
+      "visibleInAddressBook": true
+    },
+    "displayUid": "abc.xyz@123.com",
+    "firstName": " abc",
+    "language": {
+      "active": true,
+      "isocode": "en",
+      "name": "English",
+      "nativeName": "English"
+    },
+    "lastName": " abc",
+    "selected": false
+  },
+  "permissionResults": [],
+  "returnable": false,
+  "status": "FRAUD_CHECKED",
+  "statusDisplay": "processing",
+  "totalUnitCount": 1,
+  "unconsignedEntries": [
+    {
+      "basePrice": {
+        "currencyIso": "USD",
+        "formattedValue": "$121.88",
+        "priceType": "BUY",
+        "value": 121.88
+      },
+      "cancellableQuantity": 0,
+      "configurationInfos": [],
+      "entryNumber": 0,
+      "product": {
+        "availableForPickup": true,
+        "averageRating": 2.44,
+        "baseOptions": [],
+        "categories": [
+          {
+            "code": "576",
+            "name": "Digital Compacts",
+            "url": "/Open-Catalogue/Cameras/Digital-Cameras/Digital-Compacts/c/576"
+          },
+          {
+            "code": "brand_5",
+            "name": "Sony",
+            "url": "/Brands/Sony/c/brand_5"
+          }
+        ],
+        "code": "3357724",
+        "configurable": false,
+        "images": [
+          {
+            "altText": "DSC-W180",
+            "format": "zoom",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyMTY5N3xpbWFnZS9qcGVnfGltYWdlcy9oZTcvaDg5Lzg3OTcyNTUwNDEwNTQuanBnfDgzODcwODFkZmQ4ZGUzMmNlMTU1OTMxYTE4YTc1NmQ5Njg3MjJmNGVmNWM1MWUyNGVlMmM0OTdhOThkYWI1NzU"
+          },
+          {
+            "altText": "DSC-W180",
+            "format": "product",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxMDQ4MXxpbWFnZS9qcGVnfGltYWdlcy9oOTgvaGE0Lzg3OTcyODEzMjA5OTAuanBnfDRkOGMzOWYwNmJjMTAwYmViNzY4N2VmZDMzZjAyMTBiMWQ1ODg5ZjcyN2U5MTM1YjgwYmIxNjIxMzMyNDU0ZTc"
+          },
+          {
+            "altText": "DSC-W180",
+            "format": "thumbnail",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyMzY1fGltYWdlL2pwZWd8aW1hZ2VzL2g3Mi9oZDcvODc5NzMwNzY2NjQ2Mi5qcGd8MWU3ZWVmMTU3NTA3NWQ3YmZjMmI5MzE1ODFkZTZkMGUyZDJjNGZkYzkzYWRiZmM1MWJlZjkyMzRhNWUyNmFkOA"
+          },
+          {
+            "altText": "DSC-W180",
+            "format": "cartIcon",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxNTU2fGltYWdlL2pwZWd8aW1hZ2VzL2g1MC9oNDIvODc5NzMzNDAxMTkzNC5qcGd8ZTcwZWE4ZDAwYjFhMTk4NmViOGFmYzA5OGE4NmM5MGYyYjViYWZkNGQwMTAyMmIwMGZlN2ZiYThhNGFjOWVhOQ"
+          }
+        ],
+        "manufacturer": "Sony",
+        "name": "DSC-W180",
+        "purchasable": true,
+        "stock": {
+          "isValueRounded": false,
+          "stockLevel": 288,
+          "stockLevelStatus": "inStock"
+        },
+        "url": "/Open-Catalogue/Cameras/Digital-Cameras/Digital-Compacts/DSC-W180/p/3357724"
+      },
+      "quantity": 1,
+      "returnableQuantity": 0,
+      "statusSummaryList": [],
+      "totalPrice": {
+        "currencyIso": "USD",
+        "formattedValue": "$121.88",
+        "priceType": "BUY",
+        "value": 121.88
+      },
+      "updateable": true
+    }
+  ]
+}

@@ -52,7 +52,7 @@
           },
           "sku": "1438465",
           "small_image": {
-            "url": "https://hybris.example.com/storefront/medias/?context=bWFzdGVyfGltYWdlc3wyMDk2fGltYWdlL2pwZWd8aW1hZ2VzL2hhNS9oZDUvODc5Njg1NzA3MzY5NC5qcGd8ZDdmMTUyMWYxYWI0M2U1YWFiZDQxNDE1ODk2MmY4N2QyZWIwOTk0OTVkMWIzZmRhMmY5NWY5NTY0NjFmYTU0ZQ"
+            "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMDk2fGltYWdlL2pwZWd8aW1hZ2VzL2hhNS9oZDUvODc5Njg1NzA3MzY5NC5qcGd8ZDdmMTUyMWYxYWI0M2U1YWFiZDQxNDE1ODk2MmY4N2QyZWIwOTk0OTVkMWIzZmRhMmY5NWY5NTY0NjFmYTU0ZQ"
           },
           "staged": true,
           "url_key": "1438465",
@@ -80,7 +80,7 @@
           },
           "sku": "1438466",
           "small_image": {
-            "url": "https://hybris.example.com/storefront/medias/?context=bWFzdGVyfGltYWdlc3wyMDgzfGltYWdlL2pwZWd8aW1hZ2VzL2g3YS9oYzEvODc5Njg1NzEzOTIzMC5qcGd8ZDE1ZjliYWEyZTRiYmNmN2VmZDA2YzVlZDcxMmQ4ZjM5OGExMGUxMjUzZjM2YWIxYzM4ZjBiZTJiMzllZDcyNw"
+            "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMDgzfGltYWdlL2pwZWd8aW1hZ2VzL2g3YS9oYzEvODc5Njg1NzEzOTIzMC5qcGd8ZDE1ZjliYWEyZTRiYmNmN2VmZDA2YzVlZDcxMmQ4ZjM5OGExMGUxMjUzZjM2YWIxYzM4ZjBiZTJiMzllZDcyNw"
           },
           "staged": true,
           "url_key": "1438466",
@@ -108,7 +108,7 @@
           },
           "sku": "1446509",
           "small_image": {
-            "url": "https://hybris.example.com/storefront/medias/?context=bWFzdGVyfGltYWdlc3wyMzIwfGltYWdlL2pwZWd8aW1hZ2VzL2gyZS9oZGIvODc5Njg1NzI3MDMwMi5qcGd8MjRiNWNkMjJmZGEzNjI3ZTMwMmYwNmI0ZDBhMTg3YmMwYTBlNDdmYjFkNWViNGM1ZjA3NGI5OWNiYTViZjFkYg"
+            "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMzIwfGltYWdlL2pwZWd8aW1hZ2VzL2gyZS9oZGIvODc5Njg1NzI3MDMwMi5qcGd8MjRiNWNkMjJmZGEzNjI3ZTMwMmYwNmI0ZDBhMTg3YmMwYTBlNDdmYjFkNWViNGM1ZjA3NGI5OWNiYTViZjFkYg"
           },
           "staged": true,
           "url_key": "1446509",
@@ -136,7 +136,7 @@
           },
           "sku": "3514519",
           "small_image": {
-            "url": "https://hybris.example.com/storefront/medias/?context=bWFzdGVyfGltYWdlc3wyMTM2fGltYWdlL2pwZWd8aW1hZ2VzL2gzOC9oYWUvODc5Njg3MDI0NjQzMC5qcGd8MTI1MzliZmFlYjEzOGI3ZTdiNmM5YzdkMTdmN2U3NmQ4YWI5OWVkODUzMzY3YmMyODc3ZTY2MTEyYTQ3ZjQ2Mw"
+            "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMTM2fGltYWdlL2pwZWd8aW1hZ2VzL2gzOC9oYWUvODc5Njg3MDI0NjQzMC5qcGd8MTI1MzliZmFlYjEzOGI3ZTdiNmM5YzdkMTdmN2U3NmQ4YWI5OWVkODUzMzY3YmMyODc3ZTY2MTEyYTQ3ZjQ2Mw"
           },
           "staged": true,
           "url_key": "3514519",
@@ -164,7 +164,7 @@
           },
           "sku": "3514520",
           "small_image": {
-            "url": "https://hybris.example.com/storefront/medias/?context=bWFzdGVyfGltYWdlc3wyMjM5fGltYWdlL2pwZWd8aW1hZ2VzL2gxMC9oYzAvODc5Njg3MDM3NzUwMi5qcGd8ZGMzYTBkNmU1ZDg5ODQ4YWNlYjI1NTBjYjM5YTAyODg1NGIwOTVlNzI3NjIwOWM4NTNiMTFmMDNiNjU2NDQwZQ"
+            "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMjM5fGltYWdlL2pwZWd8aW1hZ2VzL2gxMC9oYzAvODc5Njg3MDM3NzUwMi5qcGd8ZGMzYTBkNmU1ZDg5ODQ4YWNlYjI1NTBjYjM5YTAyODg1NGIwOTVlNzI3NjIwOWM4NTNiMTFmMDNiNjU2NDQwZQ"
           },
           "staged": true,
           "url_key": "3514520",
@@ -192,7 +192,7 @@
           },
           "sku": "3514521",
           "small_image": {
-            "url": "https://hybris.example.com/storefront/medias/?context=bWFzdGVyfGltYWdlc3wyNDQ2fGltYWdlL2pwZWd8aW1hZ2VzL2hjOS9oMjIvODc5Njg3MDUwODU3NC5qcGd8MmVmNTZiMDc4YTc5YmE2ZTJlNGMzZmE5OThkZmY1MzdmODhhNjIyMjhhNzExZDY1MWIzYjU1NGY3ZmVkN2MwYw"
+            "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNDQ2fGltYWdlL2pwZWd8aW1hZ2VzL2hjOS9oMjIvODc5Njg3MDUwODU3NC5qcGd8MmVmNTZiMDc4YTc5YmE2ZTJlNGMzZmE5OThkZmY1MzdmODhhNjIyMjhhNzExZDY1MWIzYjU1NGY3ZmVkN2MwYw"
           },
           "staged": true,
           "url_key": "3514521",
@@ -220,7 +220,7 @@
           },
           "sku": "1934796",
           "small_image": {
-            "url": "https://hybris.example.com/storefront/medias/?context=bWFzdGVyfGltYWdlc3wxODk3fGltYWdlL2pwZWd8aW1hZ2VzL2hmYS9oODcvODc5Njg2MDQ4MTU2Ni5qcGd8ZmMyOGQwNmY3MjI5MGY5Mzk3MDg3MTlmOThkZjgzZGQzODZjMWZiZDk0YzQ5YjYyNTExZDRmNGQ0M2RlNGVmZQ"
+            "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wxODk3fGltYWdlL2pwZWd8aW1hZ2VzL2hmYS9oODcvODc5Njg2MDQ4MTU2Ni5qcGd8ZmMyOGQwNmY3MjI5MGY5Mzk3MDg3MTlmOThkZjgzZGQzODZjMWZiZDk0YzQ5YjYyNTExZDRmNGQ0M2RlNGVmZQ"
           },
           "staged": true,
           "url_key": "1934796",
@@ -248,7 +248,7 @@
           },
           "sku": "1934793",
           "small_image": {
-            "url": "https://hybris.example.com/storefront/medias/?context=bWFzdGVyfGltYWdlc3wyODg1fGltYWdlL2pwZWd8aW1hZ2VzL2hmMC9oMjkvODc5Njg1OTU2NDA2Mi5qcGd8MmYwZWJkZjg1NmQzYzkzMzE1MTNjYjEzMjBiMzk2MTM4ZmRlOTE4MmIwZjE1MzliNDExNDQyNzFjMGQ3MGUyMQ"
+            "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyODg1fGltYWdlL2pwZWd8aW1hZ2VzL2hmMC9oMjkvODc5Njg1OTU2NDA2Mi5qcGd8MmYwZWJkZjg1NmQzYzkzMzE1MTNjYjEzMjBiMzk2MTM4ZmRlOTE4MmIwZjE1MzliNDExNDQyNzFjMGQ3MGUyMQ"
           },
           "staged": true,
           "url_key": "1934793",
@@ -276,7 +276,7 @@
           },
           "sku": "1934794",
           "small_image": {
-            "url": "https://hybris.example.com/storefront/medias/?context=bWFzdGVyfGltYWdlc3wyODg0fGltYWdlL2pwZWd8aW1hZ2VzL2g0Ny9oYjMvODc5Njg1OTgyNjIwNi5qcGd8NjRkNzU2NWMyYWM4YTRkODY0MjlmZmYzNmUwNDhlOTI4ZTZkMzAxM2JlZjQxMjA5NTI1NjE1YTBkNWQyNzRjZQ"
+            "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyODg0fGltYWdlL2pwZWd8aW1hZ2VzL2g0Ny9oYjMvODc5Njg1OTgyNjIwNi5qcGd8NjRkNzU2NWMyYWM4YTRkODY0MjlmZmYzNmUwNDhlOTI4ZTZkMzAxM2JlZjQxMjA5NTI1NjE1YTBkNWQyNzRjZQ"
           },
           "staged": true,
           "url_key": "1934794",
@@ -304,7 +304,7 @@
           },
           "sku": "1934795",
           "small_image": {
-            "url": "https://hybris.example.com/storefront/medias/?context=bWFzdGVyfGltYWdlc3wyNTYzfGltYWdlL2pwZWd8aW1hZ2VzL2g1ZS9oYWMvODc5Njg2MDA4ODM1MC5qcGd8Zjc3ZjcyNTRhMzBmN2RhNWZmMDFkZjQ1NGRjNjkzN2FiNTM1MTEyYjZkYjllZTgwZTJmZTk4YTc5ODZjOTRjMQ"
+            "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNTYzfGltYWdlL2pwZWd8aW1hZ2VzL2g1ZS9oYWMvODc5Njg2MDA4ODM1MC5qcGd8Zjc3ZjcyNTRhMzBmN2RhNWZmMDFkZjQ1NGRjNjkzN2FiNTM1MTEyYjZkYjllZTgwZTJmZTk4YTc5ODZjOTRjMQ"
           },
           "staged": true,
           "url_key": "1934795",
@@ -332,7 +332,7 @@
           },
           "sku": "1298094",
           "small_image": {
-            "url": "https://hybris.example.com/storefront/medias/?context=bWFzdGVyfGltYWdlc3wyMTU5fGltYWdlL2pwZWd8aW1hZ2VzL2gxMy9oMTgvODc5Njg1NDg0NTQ3MC5qcGd8MzAzOTUwNWVhODE0NGM2ZGU0OGFjNGVmMDFiOTc4MTZlMjRkZTNkZGY0MjZmYjljMDk5MDAxYjNjZWE1NGFmMw"
+            "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMTU5fGltYWdlL2pwZWd8aW1hZ2VzL2gxMy9oMTgvODc5Njg1NDg0NTQ3MC5qcGd8MzAzOTUwNWVhODE0NGM2ZGU0OGFjNGVmMDFiOTc4MTZlMjRkZTNkZGY0MjZmYjljMDk5MDAxYjNjZWE1NGFmMw"
           },
           "staged": true,
           "url_key": "1298094",
@@ -360,7 +360,7 @@
           },
           "sku": "1391319",
           "small_image": {
-            "url": "https://hybris.example.com/storefront/medias/?context=bWFzdGVyfGltYWdlc3wxODY3fGltYWdlL2pwZWd8aW1hZ2VzL2g5My9oZmUvODc5Njg1NjY4MDQ3OC5qcGd8MzRhNTRkMTk4ZjNmZDhlOTlmMTY4MWU5MWI0OGYzNDI1Y2Y5YjE5YmUzZDg0YWY0NjlhYzYxNzIwZjQxYzM1MA"
+            "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wxODY3fGltYWdlL2pwZWd8aW1hZ2VzL2g5My9oZmUvODc5Njg1NjY4MDQ3OC5qcGd8MzRhNTRkMTk4ZjNmZDhlOTlmMTY4MWU5MWI0OGYzNDI1Y2Y5YjE5YmUzZDg0YWY0NjlhYzYxNzIwZjQxYzM1MA"
           },
           "staged": true,
           "url_key": "1391319",
@@ -388,7 +388,7 @@
           },
           "sku": "1366053",
           "small_image": {
-            "url": "https://hybris.example.com/storefront/medias/?context=bWFzdGVyfGltYWdlc3wzMDUzfGltYWdlL2pwZWd8aW1hZ2VzL2hhMi9oZTMvODc5Njg1NTc2Mjk3NC5qcGd8OWY3YjU2NTYyNTZmMzRiOTY3ZDVmNTU3ODNhZDc1MmMxYTc5YjAxZDk3ZGYyZGE5ZWIxNTIwYTE1MjQ5ZWU4Yg"
+            "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wzMDUzfGltYWdlL2pwZWd8aW1hZ2VzL2hhMi9oZTMvODc5Njg1NTc2Mjk3NC5qcGd8OWY3YjU2NTYyNTZmMzRiOTY3ZDVmNTU3ODNhZDc1MmMxYTc5YjAxZDk3ZGYyZGE5ZWIxNTIwYTE1MjQ5ZWU4Yg"
           },
           "staged": true,
           "url_key": "1366053",
@@ -416,7 +416,7 @@
           },
           "sku": "1366001",
           "small_image": {
-            "url": "https://hybris.example.com/storefront/medias/?context=bWFzdGVyfGltYWdlc3wzMDI5fGltYWdlL2pwZWd8aW1hZ2VzL2g1MS9oZDIvODc5Njg1NTYzMTkwMi5qcGd8NTNlYjQyNDllNjg4YWU0NDhhMmVkMjk2ZWQwYWU4YTBlYzIyMjk2ZjIwN2U2YmNjYTljZGZiMzI4Mjc2Y2JiYg"
+            "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wzMDI5fGltYWdlL2pwZWd8aW1hZ2VzL2g1MS9oZDIvODc5Njg1NTYzMTkwMi5qcGd8NTNlYjQyNDllNjg4YWU0NDhhMmVkMjk2ZWQwYWU4YTBlYzIyMjk2ZjIwN2U2YmNjYTljZGZiMzI4Mjc2Y2JiYg"
           },
           "staged": true,
           "url_key": "1366001",
@@ -444,7 +444,7 @@
           },
           "sku": "872912",
           "small_image": {
-            "url": "https://hybris.example.com/storefront/medias/?context=bWFzdGVyfGltYWdlc3wyNjA2fGltYWdlL2pwZWd8aW1hZ2VzL2g5Mi9oYjgvODc5Njg3OTQ4NzAwNi5qcGd8MDI3OGRmYWQ5ZWU2N2Q3N2FjOWI1YjVhNDhjZjU0MWMwNGM0OTdmNTlkYTE3MmY3NjZmNGYxMWM1ZTNhZjhmMQ"
+            "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNjA2fGltYWdlL2pwZWd8aW1hZ2VzL2g5Mi9oYjgvODc5Njg3OTQ4NzAwNi5qcGd8MDI3OGRmYWQ5ZWU2N2Q3N2FjOWI1YjVhNDhjZjU0MWMwNGM0OTdmNTlkYTE3MmY3NjZmNGYxMWM1ZTNhZjhmMQ"
           },
           "staged": true,
           "url_key": "872912",
@@ -472,7 +472,7 @@
           },
           "sku": "1325806",
           "small_image": {
-            "url": "https://hybris.example.com/storefront/medias/?context=bWFzdGVyfGltYWdlc3wyNjg4fGltYWdlL2pwZWd8aW1hZ2VzL2g5OS9oNDAvODc5Njg1NTUwMDgzMC5qcGd8ZDM1ZGJlNjlkMjAzNmI0YzBjNWY1MGQ0YjVlNDYzZjM3OWUyY2NmY2RhZWQ2ODNhOTNjZWI0NGVkY2MzNGFkOQ"
+            "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNjg4fGltYWdlL2pwZWd8aW1hZ2VzL2g5OS9oNDAvODc5Njg1NTUwMDgzMC5qcGd8ZDM1ZGJlNjlkMjAzNmI0YzBjNWY1MGQ0YjVlNDYzZjM3OWUyY2NmY2RhZWQ2ODNhOTNjZWI0NGVkY2MzNGFkOQ"
           },
           "staged": true,
           "url_key": "1325806",
@@ -500,7 +500,7 @@
           },
           "sku": "1990255",
           "small_image": {
-            "url": "https://hybris.example.com/storefront/medias/?context=bWFzdGVyfGltYWdlc3wyNzkxfGltYWdlL2pwZWd8aW1hZ2VzL2gzMi9oMDIvODc5Njg2MTkyMzM1OC5qcGd8MjJhNWU2OGM0ZWE2ZDRhOTg0ZTI5YmU0MjA4N2NmZjg4NTE4YTJmZDY0ZmNmNDk3ZTBjMDg1ODVjZmNjZGY0Mg"
+            "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNzkxfGltYWdlL2pwZWd8aW1hZ2VzL2gzMi9oMDIvODc5Njg2MTkyMzM1OC5qcGd8MjJhNWU2OGM0ZWE2ZDRhOTg0ZTI5YmU0MjA4N2NmZjg4NTE4YTJmZDY0ZmNmNDk3ZTBjMDg1ODVjZmNjZGY0Mg"
           },
           "staged": true,
           "url_key": "1990255",
@@ -528,7 +528,7 @@
           },
           "sku": "3595723",
           "small_image": {
-            "url": "https://hybris.example.com/storefront/medias/?context=bWFzdGVyfGltYWdlc3wxNzUxfGltYWdlL2pwZWd8aW1hZ2VzL2g3OS9oNWYvODc5Njg3MTM2MDU0Mi5qcGd8ZjIyYmRmMDM4NTMzN2VjZmFiZmUzOTg2NGZmNTVmNjBlYjcwMWM4YThlNTAzNGM0MDEzNzA4YzA0MGE5OWM0NA"
+            "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wxNzUxfGltYWdlL2pwZWd8aW1hZ2VzL2g3OS9oNWYvODc5Njg3MTM2MDU0Mi5qcGd8ZjIyYmRmMDM4NTMzN2VjZmFiZmUzOTg2NGZmNTVmNjBlYjcwMWM4YThlNTAzNGM0MDEzNzA4YzA0MGE5OWM0NA"
           },
           "staged": true,
           "url_key": "3595723",
@@ -556,7 +556,7 @@
           },
           "sku": "1715477",
           "small_image": {
-            "url": "https://hybris.example.com/storefront/medias/?context=bWFzdGVyfGltYWdlc3wyMDczfGltYWdlL2pwZWd8aW1hZ2VzL2gwYy9oNWUvODc5Njg1ODMxODg3OC5qcGd8OGY4YTVkMGEzZTVkOWRiNzMwMzQ2NjBjMTU4Njc4ZDIzN2VhOWM2ZGEzNDg4ODVlNmRhMGU0MzY3ZDhjZWRhNg"
+            "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMDczfGltYWdlL2pwZWd8aW1hZ2VzL2gwYy9oNWUvODc5Njg1ODMxODg3OC5qcGd8OGY4YTVkMGEzZTVkOWRiNzMwMzQ2NjBjMTU4Njc4ZDIzN2VhOWM2ZGEzNDg4ODVlNmRhMGU0MzY3ZDhjZWRhNg"
           },
           "staged": true,
           "url_key": "1715477",

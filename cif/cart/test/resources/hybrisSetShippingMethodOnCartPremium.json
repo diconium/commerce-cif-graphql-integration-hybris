@@ -23,7 +23,7 @@
       "name": "United States"
     },
     "defaultAddress": false,
-    "firstName": "abc",
+    "firstName": "Bob",
     "formattedAddress": "Magento Pkwy, Main Street, Washington, Austin, 78758",
     "id": "8796130508823",
     "lastName": "Roll",
@@ -312,7 +312,7 @@
     "value": 23.69
   },
   "user": {
-    "name": "abc",
+    "name": "xyz",
     "uid": "abc.xyz@123.com"
   },
   "potentialOrderPromotions": [],

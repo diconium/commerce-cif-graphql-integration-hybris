@@ -1,6 +1,6 @@
 {
   "type": "userWsDTO",
-  "name": "abc",
+  "name": "xyz",
   "uid": "abc.xyz@123.com",
   "currency": {
     "active": true,
@@ -13,7 +13,7 @@
       "isocode": "US"
     },
     "defaultAddress": false,
-    "firstName": "abc",
+    "firstName": "xyz",
     "id": "8796127297559",
     "lastName": "Roll",
     "line1": "Magento shipping",
@@ -26,7 +26,7 @@
     "town": "Austin"
   },
   "displayUid": "abc.xyz@123.com",
-  "firstName": "abc",
+  "firstName": "xyz",
   "language": {
     "active": true,
     "isocode": "en",

@@ -52,7 +52,9 @@ class Cart {
       //throw new Error(JSON.stringify(data));
       return this.shippingMethodsLoader.load(this.cartId).then(result => {
         data.deliveryModes = result.deliveryModes;
-        data.cartId = this.cartId;
+        data.cartId = this.cartId.destination_cart_id
+          ? this.cartId.destination_cart_id
+          : this.cartId;
         return data;
       });
     });

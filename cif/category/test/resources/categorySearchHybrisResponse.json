@@ -1,0 +1,357 @@
+{
+  "catalogs": [
+    {
+      "id": "electronicsProductCatalog",
+      "name": "Electronics Product Catalog",
+      "url": "/electronicsProductCatalog",
+      "catalogVersions": [
+        {
+          "id": "Staged",
+          "url": "/electronicsProductCatalog/Staged",
+          "categories": []
+        },
+        {
+          "id": "Online",
+          "url": "/electronicsProductCatalog/Online",
+          "categories": [
+            {
+              "id": "brands",
+              "name": "Brands",
+              "url": "/Brands/c/brands",
+              "subcategories": [
+                {
+                  "id": "brand_1",
+                  "name": "HP",
+                  "url": "/Brands/HP/c/brand_1",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_2",
+                  "name": "Toshiba",
+                  "url": "/Brands/Toshiba/c/brand_2",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_5",
+                  "name": "Sony",
+                  "url": "/Brands/Sony/c/brand_5",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_10",
+                  "name": "Canon",
+                  "url": "/Brands/Canon/c/brand_10",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_18",
+                  "name": "Kingston",
+                  "url": "/Brands/Kingston/c/brand_18",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_26",
+                  "name": "Samsung",
+                  "url": "/Brands/Samsung/c/brand_26",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_75",
+                  "name": "Fujifilm",
+                  "url": "/Brands/Fujifilm/c/brand_75",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_88",
+                  "name": "Kodak",
+                  "url": "/Brands/Kodak/c/brand_88",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_91",
+                  "name": "Logitech",
+                  "url": "/Brands/Logitech/c/brand_91",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_103",
+                  "name": "NEC",
+                  "url": "/Brands/NEC/c/brand_103",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_128",
+                  "name": "Targus",
+                  "url": "/Brands/Targus/c/brand_128",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_251",
+                  "name": "TDK",
+                  "url": "/Brands/TDK/c/brand_251",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_702",
+                  "name": "Sweex",
+                  "url": "/Brands/Sweex/c/brand_702",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_745",
+                  "name": "Canyon",
+                  "url": "/Brands/Canyon/c/brand_745",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_750",
+                  "name": "Dane-Elec",
+                  "url": "/Brands/Dane-Elec/c/brand_750",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_2171",
+                  "name": "ICIDU",
+                  "url": "/Brands/ICIDU/c/brand_2171",
+                  "subcategories": []
+                }
+              ]
+            },
+            {
+              "id": "B2C_Color",
+              "name": "Color",
+              "url": "/Color/c/B2C_Color",
+              "subcategories": [
+                {
+                  "id": "B2C_Red",
+                  "name": "Red",
+                  "url": "/Color/Red/c/B2C_Red",
+                  "subcategories": []
+                },
+                {
+                  "id": "B2C_Green",
+                  "name": "Green",
+                  "url": "/Color/Green/c/B2C_Green",
+                  "subcategories": []
+                },
+                {
+                  "id": "B2C_Blue",
+                  "name": "Blue",
+                  "url": "/Color/Blue/c/B2C_Blue",
+                  "subcategories": []
+                }
+              ]
+            },
+            {
+              "id": "1",
+              "name": "Open Catalogue",
+              "url": "/Open-Catalogue/c/1",
+              "subcategories": [
+                {
+                  "id": "106",
+                  "name": "Components",
+                  "url": "/Open-Catalogue/Components/c/106",
+                  "subcategories": [
+                    {
+                      "id": "816",
+                      "name": "Power Supplies",
+                      "url": "/Open-Catalogue/Components/Power-Supplies/c/816",
+                      "subcategories": [
+                        {
+                          "id": "814",
+                          "name": "Rechargeable Batteries",
+                          "url": "/Open-Catalogue/Components/Power-Supplies/Rechargeable-Batteries/c/814",
+                          "subcategories": []
+                        },
+                        {
+                          "id": "827",
+                          "name": "Power Adapters & Inverters",
+                          "url": "/Open-Catalogue/Components/Power-Supplies/Power-Adapters-%26-Inverters/c/827",
+                          "subcategories": []
+                        },
+                        {
+                          "id": "829",
+                          "name": "Battery Chargers",
+                          "url": "/Open-Catalogue/Components/Power-Supplies/Battery-Chargers/c/829",
+                          "subcategories": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "206",
+                  "name": "Data storage",
+                  "url": "/Open-Catalogue/Data-storage/c/206",
+                  "subcategories": [
+                    {
+                      "id": "902",
+                      "name": "Flash Memory",
+                      "url": "/Open-Catalogue/Data-storage/Flash-Memory/c/902",
+                      "subcategories": []
+                    }
+                  ]
+                },
+                {
+                  "id": "571",
+                  "name": "Cameras",
+                  "url": "/Open-Catalogue/Cameras/c/571",
+                  "subcategories": [
+                    {
+                      "id": "574",
+                      "name": "Film cameras",
+                      "url": "/Open-Catalogue/Cameras/Film-cameras/c/574",
+                      "subcategories": []
+                    },
+                    {
+                      "id": "575",
+                      "name": "Digital Cameras",
+                      "url": "/Open-Catalogue/Cameras/Digital-Cameras/c/575",
+                      "subcategories": [
+                        {
+                          "id": "576",
+                          "name": "Digital Compacts",
+                          "url": "/Open-Catalogue/Cameras/Digital-Cameras/Digital-Compacts/c/576",
+                          "subcategories": []
+                        },
+                        {
+                          "id": "578",
+                          "name": "Digital SLR",
+                          "url": "/Open-Catalogue/Cameras/Digital-Cameras/Digital-SLR/c/578",
+                          "subcategories": [
+                            {
+                              "id": "587",
+                              "name": "Tripods",
+                              "url": "/Open-Catalogue/Cameras/Digital-Cameras/Digital-SLR/Tripods/c/587",
+                              "subcategories": []
+                            },
+                            {
+                              "id": "588",
+                              "name": "Camera Lenses",
+                              "url": "/Open-Catalogue/Cameras/Digital-Cameras/Digital-SLR/Camera-Lenses/c/588",
+                              "subcategories": []
+                            },
+                            {
+                              "id": "1288",
+                              "name": "Camera Kits",
+                              "url": "/Open-Catalogue/Cameras/Digital-Cameras/Digital-SLR/Camera-Kits/c/1288",
+                              "subcategories": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "577",
+                      "name": "Webcams",
+                      "url": "/Open-Catalogue/Cameras/Webcams/c/577",
+                      "subcategories": []
+                    },
+                    {
+                      "id": "584",
+                      "name": "Hand-held Camcorders",
+                      "url": "/Open-Catalogue/Cameras/Hand-held-Camcorders/c/584",
+                      "subcategories": []
+                    },
+                    {
+                      "id": "585",
+                      "name": "Camera Accessories & Supplies",
+                      "url": "/Open-Catalogue/Cameras/Camera-Accessories-%26-Supplies/c/585",
+                      "subcategories": [
+                        {
+                          "id": "586",
+                          "name": "Camera Flashes",
+                          "url": "/Open-Catalogue/Cameras/Camera-Accessories-%26-Supplies/Camera-Flashes/c/586",
+                          "subcategories": []
+                        },
+                        {
+                          "id": "597",
+                          "name": "Colour Films",
+                          "url": "/Open-Catalogue/Cameras/Camera-Accessories-%26-Supplies/Colour-Films/c/597",
+                          "subcategories": []
+                        },
+                        {
+                          "id": "598",
+                          "name": "Black & White Films",
+                          "url": "/Open-Catalogue/Cameras/Camera-Accessories-%26-Supplies/Black-%26-White-Films/c/598",
+                          "subcategories": []
+                        },
+                        {
+                          "id": "604",
+                          "name": "Blank Video Tapes",
+                          "url": "/Open-Catalogue/Cameras/Camera-Accessories-%26-Supplies/Blank-Video-Tapes/c/604",
+                          "subcategories": []
+                        },
+                        {
+                          "id": "934",
+                          "name": "Camera Cables",
+                          "url": "/Open-Catalogue/Cameras/Camera-Accessories-%26-Supplies/Camera-Cables/c/934",
+                          "subcategories": []
+                        },
+                        {
+                          "id": "1201",
+                          "name": "Fixatives",
+                          "url": "/Open-Catalogue/Cameras/Camera-Accessories-%26-Supplies/Fixatives/c/1201",
+                          "subcategories": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "1421",
+                  "name": "Binoculars",
+                  "url": "/Open-Catalogue/Binoculars/c/1421",
+                  "subcategories": []
+                }
+              ]
+            },
+            {
+              "id": "configurations",
+              "url": "//c/configurations",
+              "subcategories": [
+                {
+                  "id": "engraving_powershot",
+                  "url": "///c/engraving_powershot",
+                  "subcategories": []
+                },
+                {
+                  "id": "chargers",
+                  "url": "///c/chargers",
+                  "subcategories": []
+                },
+                {
+                  "id": "engraving",
+                  "url": "///c/engraving",
+                  "subcategories": [
+                    {
+                      "id": "engraving_largeFont",
+                      "url": "////c/engraving_largeFont",
+                      "subcategories": []
+                    },
+                    {
+                      "id": "engraving_extraLargeFont",
+                      "url": "////c/engraving_extraLargeFont",
+                      "subcategories": []
+                    },
+                    {
+                      "id": "engraving_smallFont",
+                      "url": "////c/engraving_smallFont",
+                      "subcategories": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "CPQConfigurableCategory",
+              "name": "CPQ Configurable Category",
+              "url": "/CPQ-Configurable-Category/c/CPQConfigurableCategory",
+              "subcategories": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -73,9 +73,9 @@ describe('Create Customer Resolver', function() {
         .reply(200, createCustomerHybris);
       args.variables = {
         email: 'abc.xyz@123.com',
-        firstname: 'abc',
+        firstname: ' abc',
         lastname: 'k',
-        password: 'abc.xyz@',
+        password: ' abc123@',
         is_subscribed: false,
       };
       args.query =
@@ -102,9 +102,9 @@ describe('Create Customer Resolver', function() {
 
       args.variables = {
         email: 'abc.xyz@123.com',
-        firstname: 'abc',
+        firstname: ' abc',
         lastname: 'k',
-        password: 'abc.xyz@',
+        password: ' abc123@',
         is_subscribed: false,
       };
       args.query =
@@ -130,9 +130,9 @@ describe('Create Customer Resolver', function() {
 
       args.variables = {
         email: 'abc.xyz@123.com',
-        firstname: 'abc',
+        firstname: ' abc',
         lastname: 'k',
-        password: 'abc.xyz@',
+        password: ' abc123@',
         is_subscribed: false,
       };
       args.query =

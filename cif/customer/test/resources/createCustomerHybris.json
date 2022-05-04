@@ -1,6 +1,6 @@
 {
     "type": "userWsDTO",
-    "name": "abc K",
+    "name": " abc xyz",
     "uid": "abc.xyz@123.com",
     "currency": {
       "active": true,
@@ -10,7 +10,7 @@
     },
     "customerId": "b19758fa-bada-4f71-a7eb-8fb26d24211d",
     "displayUid": "abc.xyz@123.com",
-    "firstName": "abc",
+    "firstName": " abc",
     "language": {
       "active": true,
       "isocode": "en",

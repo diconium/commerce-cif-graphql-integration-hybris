@@ -17,6 +17,7 @@
 const { graphql } = require('graphql');
 const SchemaBuilder = require('../../common/SchemaBuilder.js');
 const { CategoryTree } = require('../../common/Catalog.js');
+const CategorySearch = require('./CategorySearch.js');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 let cachedSchema = null;
@@ -48,11 +49,24 @@ function resolve(args) {
       });
     },
     categories: (params, context) => {
-      return new CategoryTree({
-        categoryId: params.filters,
-        graphqlContext: context,
-        actionParameters: args,
-      });
+      if (params.filters && params.filters.name) {
+        return new CategorySearch({
+          categoryId: params.filters,
+          params,
+          limit: params.pageSize,
+          offset: params.currentPage,
+          graphqlContext: context,
+          actionParameters: args,
+        });
+      } else
+        return new CategoryTree({
+          categoryId: params.filters,
+          params,
+          limit: params.pageSize,
+          offset: params.currentPage,
+          graphqlContext: context,
+          actionParameters: args,
+        });
     },
   };
 

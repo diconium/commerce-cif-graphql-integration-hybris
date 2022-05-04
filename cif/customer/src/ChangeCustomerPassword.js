@@ -47,8 +47,8 @@ class ChangeCustomerPassword {
    */
   __convertData() {
     return {
-      id: true,
-      email: true,
+      id: 1,
+      email: null,
     };
   }
 }

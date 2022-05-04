@@ -33,7 +33,7 @@
               "label": "United States",
               "__typename": "CartAddressCountry"
             },
-            "firstname": "abc",
+            "firstname": "Bob",
             "lastname": "Roll",
             "postcode": "78758",
             "region": {
