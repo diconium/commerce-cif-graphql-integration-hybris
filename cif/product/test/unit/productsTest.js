@@ -162,15 +162,6 @@ describe('Dispatcher Resolver', () => {
     it('Search products by category id', () => {
       args.query =
         '{products(currentPage:1,pageSize:6,filter:{category_uid:{eq:"1"}},sort:{price:ASC}){total_count,items{__typename,sku,name,small_image{url},url_key,url_path,url_rewrites{url},price_range{minimum_price{regular_price{value,currency},final_price{value,currency},discount{amount_off,percent_off}}},... on ConfigurableProduct{price_range{maximum_price{regular_price{value,currency},final_price{value,currency},discount{amount_off,percent_off}}}},... on BundleProduct{price_range{maximum_price{regular_price{value,currency},final_price{value,currency},discount{amount_off,percent_off}}}},staged},aggregations{options{count,label,value},attribute_code,count,label}}}';
-      //'{products(filter:{category_uid:{eq:"1"}}, currentPage:1){items{sku,name,stock_status,image{url,label}}}}';
-      // const param = {
-      //   currentPage: 1,
-      //   fields: 'FULL',
-      //   pageSize: 6,
-      //   query: '1',
-      //   json: true,
-      //   sort: 'price-asc',
-      // };
       scope
         .get(
           `${HB_API_BASE_PATH}electronics/products/search?currentPage=1&fields=FULL&pageSize=6&query=1&sort=price-asc&json=true`

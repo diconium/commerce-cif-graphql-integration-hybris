@@ -24,6 +24,7 @@ const RevokeCustomerToken = require('./RevokeCustomerToken.js');
 const CustomerCart = require('./CustomerCart.js');
 const ChangeCustomerPassword = require('./ChangeCustomerPassword.js');
 const CreateCustomerAddress = require('./CreateCustomerAddress.js');
+const UpdateCustomer = require('./UpdateCustomer');
 
 let cachedSchema = null;
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
@@ -40,6 +41,7 @@ function resolve(args) {
           'setPaymentMethodOnCart',
           'createCustomerAddress',
           'changeCustomerPassword',
+          'updateCustomer',
         ])
       )
       .filterQueryFields(new Set(['customer', 'customerCart']));
@@ -95,6 +97,18 @@ function resolve(args) {
         actionParameters: args,
       });
     },
+    /**
+     * method used to update customer
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
+    updateCustomer: (params, context) => {
+      return new UpdateCustomer({
+        input: params.input,
+        graphqlContext: context,
+        actionParameters: args,
+      });
+    },
+
     /**
      * method used to generateCustomerToken in hybris
      * @param {Object} params parameter contains input,graphqlContext and actionParameters

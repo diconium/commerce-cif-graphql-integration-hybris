@@ -71,7 +71,7 @@ describe('Create Customer Address Resolver', function() {
         .reply(200, createCustomerAddressHybris);
       args.variables = {
         address: {
-          firstname: 'abc',
+          firstname: 'Bob',
           lastname: 'Roll',
           street: ['Magento Shipping'],
           telephone: '9999998899',
@@ -102,7 +102,7 @@ describe('Create Customer Address Resolver', function() {
         .reply(400, invalidRegionCode);
       args.variables = {
         address: {
-          firstname: 'abc',
+          firstname: ' abc',
           lastname: 'k',
           street: ['Magento Shipping'],
           telephone: '123456789',
@@ -129,7 +129,7 @@ describe('Create Customer Address Resolver', function() {
         .reply(400, invalidCountryCode);
       args.variables = {
         address: {
-          firstname: 'abc',
+          firstname: ' abc',
           lastname: 'k',
           street: ['Magento Shipping'],
           telephone: '123456789',

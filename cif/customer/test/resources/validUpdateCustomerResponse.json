@@ -1,0 +1,14 @@
+{
+    "data": {
+      "updateCustomer": {
+        "customer": {
+          "id": 1,
+          "firstname": " abc",
+          "lastname": " abc",
+          "email": "abc.xyz@123.com",
+          "__typename": "Customer"
+        },
+        "__typename": "CustomerOutput"
+      }
+    }
+  }

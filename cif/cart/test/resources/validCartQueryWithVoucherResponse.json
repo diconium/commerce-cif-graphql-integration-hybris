@@ -7,7 +7,7 @@
         "code": "US",
         "label": "United States"
       },
-      "firstname": "abc",
+      "firstname": "Bob",
       "lastname": "Roll",
       "postcode": "78758",
       "region": {
@@ -21,7 +21,7 @@
     },
     "shipping_addresses": [
       {
-        "firstname": "abc",
+        "firstname": "Bob",
         "lastname": "Roll",
         "street": [
           "Magento Pkwy, Main Street, Washington, Austin, 78758"

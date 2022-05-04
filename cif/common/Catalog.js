@@ -43,9 +43,9 @@ class CategoryTree {
       cateId = cateId[cateId.length - 1];
     }
     if (parameters.categoryId.category_uid !== undefined) {
-      if(parameters.categoryId.category_uid.eq)
+      if (parameters.categoryId.category_uid.eq)
         this.categoryId = parameters.categoryId.category_uid.eq;
-      else if(parameters.categoryId.category_uid.in){
+      else if (parameters.categoryId.category_uid.in) {
         this.categoryId = parameters.categoryId.category_uid.in.toString();
       }
     } else if (parameters.categoryId.url_key !== undefined) {
@@ -273,7 +273,7 @@ class Products {
     console.debug(
       `Loading products for ${JSON.stringify(this.search, null, 0)}`
     );
-    return this.productsLoader.load(this.search)
+    return this.productsLoader.load(this.search);
   }
 
   /**

@@ -1,0 +1,20 @@
+{
+  "data": {
+    "categories": {
+      "items": [
+        {
+          "id": 571,
+          "image": null,
+          "name": "Cameras",
+          "uid": "571",
+          "url_key": null,
+          "url_path": "/Open-Catalogue/Cameras/c/571",
+          "__typename": "CategoryTree",
+          "children_count": null
+        }
+      ],
+      "total_count": 10,
+      "__typename": "CategoryResult"
+    }
+  }
+}

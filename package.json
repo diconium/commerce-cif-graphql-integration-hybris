@@ -8,7 +8,6 @@
   "hybrishost": "https://hybris.example.com/",
   "scripts": {
     "build": "npm install",
-
     "lint": "lerna run lint --",
     "linter:fix": "eslint --ext .js . --fix",
     "test": "npm run lint && npm run test-cov",
@@ -18,7 +17,7 @@
     "unit": "mocha cif/*/test/unit/*Test.js --reporter mocha-multi-reporters --reporter-options configFile=mocha-unit.json",
     "deploy": "serverless deploy",
     "deploy-packages": "lerna run deploy -- ",
-    "doc": "node cif/documentation/generate.js  && jq . < cif/resources/magento-schema-2.4.3.pruned.json > cif/resources/magento-schema-2.4.3.pruned.min.json"
+    "doc": "node cif/documentation/generate.js  && jq . < cif/resources/magento-schema-2.4.2.pruned.json > cif/resources/magento-schema-2.4.2.pruned.min.json"
   },
   "dependencies": {
     "@adobe/aio-lib-state": "1.0.4",

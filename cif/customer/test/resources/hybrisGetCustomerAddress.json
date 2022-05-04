@@ -8,7 +8,7 @@
       "defaultAddress": true,
       "district": "string",
       "email": "abc.xyz@123.com",
-      "firstName": "abc",
+      "firstName": " abc",
       "formattedAddress": "Magento Shipping, string, Washington, Austin, 123456",
       "id": "8796127559703",
       "lastName": "K",

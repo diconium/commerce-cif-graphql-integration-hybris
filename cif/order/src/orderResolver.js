@@ -16,8 +16,9 @@
 
 const { graphql } = require('graphql');
 const SchemaBuilder = require('../../common/SchemaBuilder.js');
-const CustomerOrder = require('./CustomerOrder.js');
+const CustomerOrders = require('./CustomerOrders.js');
 const PlaceOrder = require('./PlaceOrder.js');
+
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 let cachedSchema = null;
 
@@ -48,7 +49,7 @@ function resolve(args) {
       });
     },
     customerOrders: () => {
-      return new CustomerOrder({
+      return new CustomerOrders({
         graphqlContext: context,
         actionParameters: args,
       });

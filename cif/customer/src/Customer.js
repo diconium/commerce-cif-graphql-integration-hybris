@@ -18,6 +18,7 @@ const LoaderProxy = require('../../common/LoaderProxy.js');
 const CustomerLoader = require('./CustomerLoader.js');
 const AddressLoader = require('./AddressLoader.js');
 const Address = require('./Address.js');
+const CustomerOrders = require('../../order/src/CustomerOrders.js');
 
 class Customer {
   /**
@@ -31,7 +32,6 @@ class Customer {
     this.actionParameters = parameters.actionParameters;
     this.customerLoader = new CustomerLoader(parameters.actionParameters);
     this.addressLoader = new AddressLoader(parameters.actionParameters);
-
     return new LoaderProxy(this);
   }
 
@@ -49,10 +49,15 @@ class Customer {
    */
   __convertData(data) {
     return {
+      id: 1,
       firstname: data.firstName,
       lastname: data.lastName,
       email: data.uid,
       default_shipping: 0,
+      orders: new CustomerOrders({
+        graphqlContext: this.graphqlContext,
+        actionParameters: this.actionParameters,
+      }),
     };
   }
 

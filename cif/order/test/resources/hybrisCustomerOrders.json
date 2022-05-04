@@ -1,0 +1,434 @@
+{
+  "type": "orderWsDTO",
+  "appliedOrderPromotions": [],
+  "appliedProductPromotions": [],
+  "appliedVouchers": [],
+  "calculated": true,
+  "code": "00000058",
+  "deliveryAddress": {
+    "country": {
+      "isocode": "US",
+      "name": "United States"
+    },
+    "defaultAddress": false,
+    "firstName": " abc",
+    "formattedAddress": "Magento Shipping, New York, Austin, 752345",
+    "id": "8796126806039",
+    "lastName": "k",
+    "line1": "Magento Shipping",
+    "phone": "1234567890",
+    "postalCode": "752345",
+    "region": {
+      "countryIso": "US",
+      "isocode": "US-NY",
+      "isocodeShort": "NY",
+      "name": "New York"
+    },
+    "shippingAddress": true,
+    "town": "Austin",
+    "visibleInAddressBook": true
+  },
+  "deliveryCost": {
+    "currencyIso": "USD",
+    "formattedValue": "$11.99",
+    "priceType": "BUY",
+    "value": 11.99
+  },
+  "deliveryItemsQuantity": 1,
+  "deliveryMode": {
+    "code": "standard-gross",
+    "deliveryCost": {
+      "currencyIso": "USD",
+      "formattedValue": "$11.99",
+      "priceType": "BUY",
+      "value": 11.99
+    },
+    "description": "3-5 business days",
+    "name": "Standard Delivery"
+  },
+  "deliveryOrderGroups": [
+    {
+      "entries": [
+        {
+          "basePrice": {
+            "currencyIso": "USD",
+            "formattedValue": "$8.00",
+            "priceType": "BUY",
+            "value": 8
+          },
+          "cancellableQuantity": 1,
+          "configurationInfos": [],
+          "entryNumber": 0,
+          "product": {
+            "availableForPickup": true,
+            "averageRating": 3.6666666666666665,
+            "baseOptions": [],
+            "categories": [
+              {
+                "code": "604",
+                "name": "Blank Video Tapes",
+                "url": "/Open-Catalogue/Cameras/Camera-Accessories-%26-Supplies/Blank-Video-Tapes/c/604"
+              },
+              {
+                "code": "brand_5",
+                "name": "Sony",
+                "url": "/Brands/Sony/c/brand_5"
+              }
+            ],
+            "code": "137220",
+            "configurable": false,
+            "images": [
+              {
+                "altText": "Camcordertape DV 60min (2)",
+                "format": "zoom",
+                "imageType": "PRIMARY",
+                "url": "/medias/?context=bWFzdGVyfGltYWdlc3wzMjYyM3xpbWFnZS9qcGVnfGltYWdlcy9oZTkvaGExLzg3OTcyNDIxOTU5OTguanBnfDBhZjVmZTQ5MTI2YWRkOGUzZjFiMjE2NGM3NzczM2U1YWFhNWE2YWY2NmEwMjM2Y2NhZjdhZDIxYmVhYzkzMjc"
+              },
+              {
+                "altText": "Camcordertape DV 60min (2)",
+                "format": "product",
+                "imageType": "PRIMARY",
+                "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxMzg0NXxpbWFnZS9qcGVnfGltYWdlcy9oNGIvaDNiLzg3OTcyNjg1NDE0NzAuanBnfGQ3MDllNjI2MmVmNzk2MmQ0OWU2NzA5ZTc1ZDFmODNiNjljNmI5MDc0NGQ0ZGJiNmZlZjQzNWY2M2U2MWM1MzY"
+              },
+              {
+                "altText": "Camcordertape DV 60min (2)",
+                "format": "thumbnail",
+                "imageType": "PRIMARY",
+                "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyODA4fGltYWdlL2pwZWd8aW1hZ2VzL2g0NC9oZWMvODc5NzI5NDgyMTQwNi5qcGd8YTRmYWUyMzllMzgyNTBiY2ViZjE0MzljNjQ0OWViNzE2ZDM3NzU0NTg1N2ViN2QyNjBhMzc4NTNjMzM2NTZjZA"
+              },
+              {
+                "altText": "Camcordertape DV 60min (2)",
+                "format": "cartIcon",
+                "imageType": "PRIMARY",
+                "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxNzcxfGltYWdlL2pwZWd8aW1hZ2VzL2hlNy9oMWIvODc5NzMyMTE2Njg3OC5qcGd8YjE0ZTZkMzNiYzIxZGRhOGI5MjcwOTI1MjJlYzJmMDg0NjI4ZWNlMThlMThmMzU0NjE1MWE4ZWE3NmFhOWVlMA"
+              }
+            ],
+            "manufacturer": "Sony",
+            "name": "Camcordertape DV 60min (2)",
+            "purchasable": true,
+            "stock": {
+              "isValueRounded": false,
+              "stockLevel": 260,
+              "stockLevelStatus": "inStock"
+            },
+            "url": "/Open-Catalogue/Cameras/Camera-Accessories-%26-Supplies/Blank-Video-Tapes/Camcordertape-DV-60min-%282%29/p/137220"
+          },
+          "quantity": 1,
+          "returnableQuantity": 0,
+          "statusSummaryList": [],
+          "totalPrice": {
+            "currencyIso": "USD",
+            "formattedValue": "$8.00",
+            "priceType": "BUY",
+            "value": 8
+          },
+          "updateable": true
+        }
+      ],
+      "totalPriceWithTax": {
+        "currencyIso": "USD",
+        "formattedValue": "$8.00",
+        "priceType": "BUY",
+        "value": 8
+      }
+    }
+  ],
+  "entries": [
+    {
+      "basePrice": {
+        "currencyIso": "USD",
+        "formattedValue": "$8.00",
+        "priceType": "BUY",
+        "value": 8
+      },
+      "cancellableQuantity": 1,
+      "configurationInfos": [],
+      "entryNumber": 0,
+      "product": {
+        "availableForPickup": true,
+        "averageRating": 3.6666666666666665,
+        "baseOptions": [],
+        "categories": [
+          {
+            "code": "604",
+            "name": "Blank Video Tapes",
+            "url": "/Open-Catalogue/Cameras/Camera-Accessories-%26-Supplies/Blank-Video-Tapes/c/604"
+          },
+          {
+            "code": "brand_5",
+            "name": "Sony",
+            "url": "/Brands/Sony/c/brand_5"
+          }
+        ],
+        "code": "137220",
+        "configurable": false,
+        "images": [
+          {
+            "altText": "Camcordertape DV 60min (2)",
+            "format": "zoom",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wzMjYyM3xpbWFnZS9qcGVnfGltYWdlcy9oZTkvaGExLzg3OTcyNDIxOTU5OTguanBnfDBhZjVmZTQ5MTI2YWRkOGUzZjFiMjE2NGM3NzczM2U1YWFhNWE2YWY2NmEwMjM2Y2NhZjdhZDIxYmVhYzkzMjc"
+          },
+          {
+            "altText": "Camcordertape DV 60min (2)",
+            "format": "product",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxMzg0NXxpbWFnZS9qcGVnfGltYWdlcy9oNGIvaDNiLzg3OTcyNjg1NDE0NzAuanBnfGQ3MDllNjI2MmVmNzk2MmQ0OWU2NzA5ZTc1ZDFmODNiNjljNmI5MDc0NGQ0ZGJiNmZlZjQzNWY2M2U2MWM1MzY"
+          },
+          {
+            "altText": "Camcordertape DV 60min (2)",
+            "format": "thumbnail",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyODA4fGltYWdlL2pwZWd8aW1hZ2VzL2g0NC9oZWMvODc5NzI5NDgyMTQwNi5qcGd8YTRmYWUyMzllMzgyNTBiY2ViZjE0MzljNjQ0OWViNzE2ZDM3NzU0NTg1N2ViN2QyNjBhMzc4NTNjMzM2NTZjZA"
+          },
+          {
+            "altText": "Camcordertape DV 60min (2)",
+            "format": "cartIcon",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxNzcxfGltYWdlL2pwZWd8aW1hZ2VzL2hlNy9oMWIvODc5NzMyMTE2Njg3OC5qcGd8YjE0ZTZkMzNiYzIxZGRhOGI5MjcwOTI1MjJlYzJmMDg0NjI4ZWNlMThlMThmMzU0NjE1MWE4ZWE3NmFhOWVlMA"
+          }
+        ],
+        "manufacturer": "Sony",
+        "name": "Camcordertape DV 60min (2)",
+        "purchasable": true,
+        "stock": {
+          "isValueRounded": false,
+          "stockLevel": 260,
+          "stockLevelStatus": "inStock"
+        },
+        "url": "/Open-Catalogue/Cameras/Camera-Accessories-%26-Supplies/Blank-Video-Tapes/Camcordertape-DV-60min-%282%29/p/137220"
+      },
+      "quantity": 1,
+      "returnableQuantity": 0,
+      "statusSummaryList": [],
+      "totalPrice": {
+        "currencyIso": "USD",
+        "formattedValue": "$8.00",
+        "priceType": "BUY",
+        "value": 8
+      },
+      "updateable": true
+    }
+  ],
+  "guid": "b5d9ef81-d18e-4629-969c-431eaab8281d",
+  "net": false,
+  "orderDiscounts": {
+    "currencyIso": "USD",
+    "formattedValue": "$0.00",
+    "priceType": "BUY",
+    "value": 0
+  },
+  "paymentInfo": {
+    "accountHolderName": "testuser",
+    "billingAddress": {
+      "country": {
+        "isocode": "US",
+        "name": "United States"
+      },
+      "defaultAddress": false,
+      "email": "abc.xyz@123.com",
+      "firstName": " abc",
+      "formattedAddress": "Magento Shipping, New York, Austin, 752345, New York, Austin, 752345",
+      "id": "8796126871575",
+      "lastName": "k",
+      "line1": "Magento Shipping, New York, Austin, 752345",
+      "postalCode": "752345",
+      "region": {
+        "countryIso": "US",
+        "isocode": "US-NY",
+        "isocodeShort": "NY",
+        "name": "New York"
+      },
+      "shippingAddress": false,
+      "town": "Austin",
+      "visibleInAddressBook": true
+    },
+    "cardNumber": "************1234",
+    "cardType": {
+      "code": "visa",
+      "name": "Visa"
+    },
+    "defaultPayment": false,
+    "expiryMonth": "11",
+    "expiryYear": "2027",
+    "id": "8796093284394",
+    "saved": false,
+    "subscriptionId": "MockedSubscriptionID"
+  },
+  "pickupItemsQuantity": 0,
+  "pickupOrderGroups": [],
+  "productDiscounts": {
+    "currencyIso": "USD",
+    "formattedValue": "$0.00",
+    "priceType": "BUY",
+    "value": 0
+  },
+  "site": "electronics",
+  "store": "electronics",
+  "subTotal": {
+    "currencyIso": "USD",
+    "formattedValue": "$8.00",
+    "priceType": "BUY",
+    "value": 8
+  },
+  "totalDiscounts": {
+    "currencyIso": "USD",
+    "formattedValue": "$0.00",
+    "priceType": "BUY",
+    "value": 0
+  },
+  "totalItems": 1,
+  "totalPrice": {
+    "currencyIso": "USD",
+    "formattedValue": "$19.99",
+    "priceType": "BUY",
+    "value": 19.99
+  },
+  "totalPriceWithTax": {
+    "currencyIso": "USD",
+    "formattedValue": "$19.99",
+    "priceType": "BUY",
+    "value": 19.99
+  },
+  "totalTax": {
+    "currencyIso": "USD",
+    "formattedValue": "$0.00",
+    "priceType": "BUY",
+    "value": 0
+  },
+  "user": {
+    "name": " abc xyz",
+    "uid": "abc.xyz@123.com"
+  },
+  "cancellable": true,
+  "consignments": [],
+  "created": "2022-04-22T04:42:18+0000",
+  "guestCustomer": false,
+  "orgCustomer": {
+    "name": " abc xyz",
+    "uid": "abc.xyz@123.com",
+    "active": false,
+    "currency": {
+      "active": true,
+      "isocode": "USD",
+      "name": "US Dollar",
+      "symbol": "$"
+    },
+    "customerId": "2342e972-96e2-48a6-9926-7dc5ee8ee009",
+    "defaultAddress": {
+      "country": {
+        "isocode": "US",
+        "name": "United States"
+      },
+      "defaultAddress": false,
+      "firstName": " abc",
+      "formattedAddress": "Magento Shipping, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345",
+      "id": "8796128051223",
+      "lastName": "k",
+      "line1": "Magento Shipping, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345",
+      "phone": "1234567890",
+      "postalCode": "752345",
+      "region": {
+        "countryIso": "US",
+        "isocode": "US-NY",
+        "isocodeShort": "NY",
+        "name": "New York"
+      },
+      "shippingAddress": true,
+      "town": "Austin",
+      "visibleInAddressBook": true
+    },
+    "displayUid": "abc.xyz@123.com",
+    "firstName": " abc",
+    "language": {
+      "active": true,
+      "isocode": "en",
+      "name": "English",
+      "nativeName": "English"
+    },
+    "lastName": " abc",
+    "selected": false
+  },
+  "permissionResults": [],
+  "returnable": false,
+  "status": "FRAUD_CHECKED",
+  "statusDisplay": "processing",
+  "totalUnitCount": 1,
+  "unconsignedEntries": [
+    {
+      "basePrice": {
+        "currencyIso": "USD",
+        "formattedValue": "$8.00",
+        "priceType": "BUY",
+        "value": 8
+      },
+      "cancellableQuantity": 0,
+      "configurationInfos": [],
+      "entryNumber": 0,
+      "product": {
+        "availableForPickup": true,
+        "averageRating": 3.6666666666666665,
+        "baseOptions": [],
+        "categories": [
+          {
+            "code": "604",
+            "name": "Blank Video Tapes",
+            "url": "/Open-Catalogue/Cameras/Camera-Accessories-%26-Supplies/Blank-Video-Tapes/c/604"
+          },
+          {
+            "code": "brand_5",
+            "name": "Sony",
+            "url": "/Brands/Sony/c/brand_5"
+          }
+        ],
+        "code": "137220",
+        "configurable": false,
+        "images": [
+          {
+            "altText": "Camcordertape DV 60min (2)",
+            "format": "zoom",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wzMjYyM3xpbWFnZS9qcGVnfGltYWdlcy9oZTkvaGExLzg3OTcyNDIxOTU5OTguanBnfDBhZjVmZTQ5MTI2YWRkOGUzZjFiMjE2NGM3NzczM2U1YWFhNWE2YWY2NmEwMjM2Y2NhZjdhZDIxYmVhYzkzMjc"
+          },
+          {
+            "altText": "Camcordertape DV 60min (2)",
+            "format": "product",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxMzg0NXxpbWFnZS9qcGVnfGltYWdlcy9oNGIvaDNiLzg3OTcyNjg1NDE0NzAuanBnfGQ3MDllNjI2MmVmNzk2MmQ0OWU2NzA5ZTc1ZDFmODNiNjljNmI5MDc0NGQ0ZGJiNmZlZjQzNWY2M2U2MWM1MzY"
+          },
+          {
+            "altText": "Camcordertape DV 60min (2)",
+            "format": "thumbnail",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wyODA4fGltYWdlL2pwZWd8aW1hZ2VzL2g0NC9oZWMvODc5NzI5NDgyMTQwNi5qcGd8YTRmYWUyMzllMzgyNTBiY2ViZjE0MzljNjQ0OWViNzE2ZDM3NzU0NTg1N2ViN2QyNjBhMzc4NTNjMzM2NTZjZA"
+          },
+          {
+            "altText": "Camcordertape DV 60min (2)",
+            "format": "cartIcon",
+            "imageType": "PRIMARY",
+            "url": "/medias/?context=bWFzdGVyfGltYWdlc3wxNzcxfGltYWdlL2pwZWd8aW1hZ2VzL2hlNy9oMWIvODc5NzMyMTE2Njg3OC5qcGd8YjE0ZTZkMzNiYzIxZGRhOGI5MjcwOTI1MjJlYzJmMDg0NjI4ZWNlMThlMThmMzU0NjE1MWE4ZWE3NmFhOWVlMA"
+          }
+        ],
+        "manufacturer": "Sony",
+        "name": "Camcordertape DV 60min (2)",
+        "purchasable": true,
+        "stock": {
+          "isValueRounded": false,
+          "stockLevel": 260,
+          "stockLevelStatus": "inStock"
+        },
+        "url": "/Open-Catalogue/Cameras/Camera-Accessories-%26-Supplies/Blank-Video-Tapes/Camcordertape-DV-60min-%282%29/p/137220"
+      },
+      "quantity": 1,
+      "returnableQuantity": 0,
+      "statusSummaryList": [],
+      "totalPrice": {
+        "currencyIso": "USD",
+        "formattedValue": "$8.00",
+        "priceType": "BUY",
+        "value": 8
+      },
+      "updateable": true
+    }
+  ]
+}

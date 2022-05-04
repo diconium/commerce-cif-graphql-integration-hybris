@@ -80,7 +80,7 @@ describe('SetBillingAddress OnCart', function() {
       .reply(200, hybrisDeliveryModes);
     args.variables = {
       cartId: '00000035',
-      firstname: 'abc',
+      firstname: 'Bob',
       lastname: 'Roll',
       street: ['Magento Pkwy', 'Main Street'],
       city: 'Austin',
@@ -116,7 +116,7 @@ describe('SetBillingAddress OnCart', function() {
 
     args.variables = {
       cartId: '00000035',
-      firstname: 'abc',
+      firstname: 'Bob',
       lastname: 'Roll',
       street: ['Magento Pkwy', 'Main Street'],
       city: 'Austin',
@@ -155,7 +155,7 @@ describe('SetBillingAddress OnCart', function() {
       .reply(200, hybrisDeliveryModes);
     args.variables = {
       cartId: '00000035',
-      firstname: 'abc',
+      firstname: 'Bob',
       lastname: 'Roll',
       street: ['Magento Pkwy', 'Main Street'],
       city: 'Austin',
@@ -194,7 +194,7 @@ describe('SetBillingAddress OnCart', function() {
       .reply(200, hybrisDeliveryModes);
     args.variables = {
       cartId: '00000035',
-      firstname: 'abc',
+      firstname: 'Bob',
       lastname: 'Roll',
       street: ['Magento Pkwy', 'Main Street'],
       city: 'Austin',
