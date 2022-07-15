@@ -15,109 +15,6 @@
           "url": "/electronicsProductCatalog/Online",
           "categories": [
             {
-              "id": "brands",
-              "name": "Brands",
-              "url": "/Brands/c/brands",
-              "subcategories": [
-                {
-                  "id": "brand_1",
-                  "name": "HP",
-                  "url": "/Brands/HP/c/brand_1",
-                  "subcategories": []
-                },
-                {
-                  "id": "brand_2",
-                  "name": "Toshiba",
-                  "url": "/Brands/Toshiba/c/brand_2",
-                  "subcategories": []
-                },
-                {
-                  "id": "brand_5",
-                  "name": "Sony",
-                  "url": "/Brands/Sony/c/brand_5",
-                  "subcategories": []
-                },
-                {
-                  "id": "brand_10",
-                  "name": "Canon",
-                  "url": "/Brands/Canon/c/brand_10",
-                  "subcategories": []
-                },
-                {
-                  "id": "brand_18",
-                  "name": "Kingston",
-                  "url": "/Brands/Kingston/c/brand_18",
-                  "subcategories": []
-                },
-                {
-                  "id": "brand_26",
-                  "name": "Samsung",
-                  "url": "/Brands/Samsung/c/brand_26",
-                  "subcategories": []
-                },
-                {
-                  "id": "brand_75",
-                  "name": "Fujifilm",
-                  "url": "/Brands/Fujifilm/c/brand_75",
-                  "subcategories": []
-                },
-                {
-                  "id": "brand_88",
-                  "name": "Kodak",
-                  "url": "/Brands/Kodak/c/brand_88",
-                  "subcategories": []
-                },
-                {
-                  "id": "brand_91",
-                  "name": "Logitech",
-                  "url": "/Brands/Logitech/c/brand_91",
-                  "subcategories": []
-                },
-                {
-                  "id": "brand_103",
-                  "name": "NEC",
-                  "url": "/Brands/NEC/c/brand_103",
-                  "subcategories": []
-                },
-                {
-                  "id": "brand_128",
-                  "name": "Targus",
-                  "url": "/Brands/Targus/c/brand_128",
-                  "subcategories": []
-                },
-                {
-                  "id": "brand_251",
-                  "name": "TDK",
-                  "url": "/Brands/TDK/c/brand_251",
-                  "subcategories": []
-                },
-                {
-                  "id": "brand_702",
-                  "name": "Sweex",
-                  "url": "/Brands/Sweex/c/brand_702",
-                  "subcategories": []
-                },
-                {
-                  "id": "brand_745",
-                  "name": "Canyon",
-                  "url": "/Brands/Canyon/c/brand_745",
-                  "subcategories": []
-                },
-                {
-                  "id": "brand_750",
-                  "name": "Dane-Elec",
-                  "url": "/Brands/Dane-Elec/c/brand_750",
-                  "subcategories": []
-                },
-                {
-                  "id": "brand_2171",
-                  "name": "ICIDU",
-                  "url": "/Brands/ICIDU/c/brand_2171",
-                  "subcategories": []
-                }
-              ]
-            },
-            {
               "id": "B2C_Color",
               "name": "Color",
               "url": "/Color/c/B2C_Color",
@@ -302,6 +199,109 @@
                   "id": "1421",
                   "name": "Binoculars",
                   "url": "/Open-Catalogue/Binoculars/c/1421",
+                  "subcategories": []
+                }
+              ]
+            },
+            {
+              "id": "brands",
+              "name": "Brands",
+              "url": "/Brands/c/brands",
+              "subcategories": [
+                {
+                  "id": "brand_1",
+                  "name": "HP",
+                  "url": "/Brands/HP/c/brand_1",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_2",
+                  "name": "Toshiba",
+                  "url": "/Brands/Toshiba/c/brand_2",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_5",
+                  "name": "Sony",
+                  "url": "/Brands/Sony/c/brand_5",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_10",
+                  "name": "Canon",
+                  "url": "/Brands/Canon/c/brand_10",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_18",
+                  "name": "Kingston",
+                  "url": "/Brands/Kingston/c/brand_18",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_26",
+                  "name": "Samsung",
+                  "url": "/Brands/Samsung/c/brand_26",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_75",
+                  "name": "Fujifilm",
+                  "url": "/Brands/Fujifilm/c/brand_75",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_88",
+                  "name": "Kodak",
+                  "url": "/Brands/Kodak/c/brand_88",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_91",
+                  "name": "Logitech",
+                  "url": "/Brands/Logitech/c/brand_91",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_103",
+                  "name": "NEC",
+                  "url": "/Brands/NEC/c/brand_103",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_128",
+                  "name": "Targus",
+                  "url": "/Brands/Targus/c/brand_128",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_251",
+                  "name": "TDK",
+                  "url": "/Brands/TDK/c/brand_251",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_702",
+                  "name": "Sweex",
+                  "url": "/Brands/Sweex/c/brand_702",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_745",
+                  "name": "Canyon",
+                  "url": "/Brands/Canyon/c/brand_745",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_750",
+                  "name": "Dane-Elec",
+                  "url": "/Brands/Dane-Elec/c/brand_750",
+                  "subcategories": []
+                },
+                {
+                  "id": "brand_2171",
+                  "name": "ICIDU",
+                  "url": "/Brands/ICIDU/c/brand_2171",
                   "subcategories": []
                 }
               ]

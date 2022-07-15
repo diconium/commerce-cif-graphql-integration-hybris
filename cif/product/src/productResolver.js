@@ -42,6 +42,11 @@ function resolve(args) {
   }
 
   const resolvers = {
+    /**
+     * method used to get the products
+     * @param {Object} params parameter contains filter,graphqlContext and actionParameters
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
     products: (params, context) => {
       let skusFlag = false;
       if (params.filter !== undefined) {
@@ -50,7 +55,16 @@ function resolve(args) {
             skusFlag = true;
           }
         }
+        // if there is url_key as input
+        else if (params.filter.url_key && params.filter.url_key.in) {
+          skusFlag = true;
+          const skus = params.filter.url_key.in.map(urlKey => {
+            return urlKey.split('/').pop();
+          });
+          params.filter.sku = { in: skus };
+        }
       }
+      //if filter contains skus as input
       if (skusFlag) {
         return new ProductsBySkus({
           search: params,
@@ -65,6 +79,11 @@ function resolve(args) {
         });
       }
     },
+    /**
+     * method used to get the categories
+     * @param {Object} params parameter contains filter,graphqlContext and actionParameters
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
     categories: (params, context) => {
       return new Products({
         search: params,

@@ -137,6 +137,31 @@ describe('Dispatcher Resolver', () => {
       });
     });
 
+    it('Basic category search using url_path', () => {
+      args.query = '{categoryList(filters:{url_path:{eq:"1/106"}}){uid}}';
+      const param = {
+        fields: 'FULL',
+        json: true,
+      };
+      scope
+        .get(
+          `${HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/106`
+        )
+        .query(param)
+        .reply(200, basicCategorySearchHybrisResponse)
+        .log(console.log);
+
+      return resolve(args).then(result => {
+        assert.isUndefined(result.body.errors); // No GraphQL errors
+
+        let category = result.body.data.categoryList[0];
+        assert.equal(category.uid, 1);
+
+        // Ensure the category loading function is only called once for each category being fetched
+        assert.equal(getCategoryById.callCount, 1);
+      });
+    });
+
     it('Basic category search with product details', () => {
       args.query =
         '{categoryList(filters:{category_uid:{eq:"1"}}){id,products{items{sku,name}},name,description,children{id,name,description,children{id,name,description}}}}';

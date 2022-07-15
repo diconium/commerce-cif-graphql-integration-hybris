@@ -1,0 +1,26 @@
+{
+    "data": {
+      "updateCustomerAddress": {
+        "id": 8,
+        "__typename": "CustomerAddress",
+        "city": "Austin",
+        "country_code": "US",
+        "default_billing": null,
+        "default_shipping": false,
+        "firstname": "Abc",
+        "lastname": "Xyz",
+        "middlename": "",
+        "postcode": "73331",
+        "region": {
+          "region": "US-NY",
+          "region_code": "US-NY",
+          "region_id": 1,
+          "__typename": "CustomerAddressRegion"
+        },
+        "street": [
+          "Magento Shipping"
+        ],
+        "telephone": "1234567890"
+      }
+    }
+  }

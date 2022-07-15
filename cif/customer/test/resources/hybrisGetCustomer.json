@@ -1,7 +1,7 @@
 {
   "type": "userWsDTO",
-  "name": "xyz",
-  "uid": "abc.xyz@123.com",
+  "name": "abc",
+  "uid": "abc.xzy@123.com",
   "currency": {
     "active": true,
     "isocode": "USD",
@@ -13,9 +13,9 @@
       "isocode": "US"
     },
     "defaultAddress": false,
-    "firstName": "xyz",
+    "firstName": "abc",
     "id": "8796127297559",
-    "lastName": "Roll",
+    "lastName": "xyz",
     "line1": "Magento shipping",
     "line2": "Main Street",
     "phone": "9999998899",
@@ -25,8 +25,8 @@
     },
     "town": "Austin"
   },
-  "displayUid": "abc.xyz@123.com",
-  "firstName": "xyz",
+  "displayUid": "abc.xzy@123.com",
+  "firstName": "abc",
   "language": {
     "active": true,
     "isocode": "en",

@@ -50,9 +50,10 @@ class AddProductToCart {
    * @returns {Object} convert the hybris data into magento graphQL schema and return the object
    */
   __convertData() {
+    let cartID = this.input.cart_id || this.input.cartId;
     return {
       cart: new Cart({
-        cartId: this.input.cart_id,
+        cartId: cartID,
         graphqlContext: this.graphqlContext,
         actionParameters: this.actionParameters,
         add: true,

@@ -73,7 +73,7 @@ class UpdateCartItemsLoader {
     const { cart_id, cart_items } = queryInput;
 
     const cartItem = cart_items[0];
-    const { cart_item_uid, quantity } = cartItem;
+    const { cart_item_id, quantity } = cartItem;
     const body = {
       quantity: quantity,
     };
@@ -82,7 +82,7 @@ class UpdateCartItemsLoader {
         Authorization: `Bearer ${bearer}`,
       },
     };
-    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cart_id}/entries/${cart_item_uid}?fields=FULL`;
+    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cart_id}/entries/${cart_item_id}?fields=FULL`;
     return new Promise((resolve, reject) => {
       axios
         .patch(uri, body, config)

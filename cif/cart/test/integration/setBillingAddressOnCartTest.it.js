@@ -59,7 +59,7 @@ describe('Cart Resolver', () => {
 
     it('Mutation: set billing address on cart', () => {
       args.query =
-        'mutation {setBillingAddressOnCart(input: {cart_id: "00000035", billing_address: {address: {firstname: "Bob", lastname: "Roll", company: "Magento", street: ["Magento Pkwy", "Main Street"], city: "Austin", region: "WA", postcode: "78758", country_code: "US", telephone: "9999998899", save_in_address_book: true}, use_for_shipping: false}}) {cart { billing_address {firstname,lastname,company,street,city, region {code, label}, postcode,telephone,country {code,label}}}}}';
+        'mutation {setBillingAddressOnCart(input: {cart_id: "00000035", billing_address: {address: {firstname: "abc", lastname: "xyz", company: "Magento", street: ["Magento Pkwy", "Main Street"], city: "Austin", region: "WA", postcode: "78758", country_code: "US", telephone: "9999998899", save_in_address_book: true}, use_for_shipping: false}}) {cart { billing_address {firstname,lastname,company,street,city, region {code, label}, postcode,telephone,country {code,label}}}}}';
       return resolve(args).then(result => {
         assert.isUndefined(result.errors); // No GraphQL errors
         assert.equal(BillingAddress.callCount, 1);

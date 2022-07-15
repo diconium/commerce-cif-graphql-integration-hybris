@@ -1,6 +1,6 @@
 {
   "type": "userWsDTO",
-  "name": " abc xyz",
+  "name": "abc xyz",
   "uid": "abc.xyz@123.com",
   "active": false,
   "currency": {
@@ -15,10 +15,10 @@
       "isocode": "US"
     },
     "defaultAddress": false,
-    "firstName": " abc",
+    "firstName": "abc",
     "formattedAddress": "Magento Shipping, New York, Austin, 73331, New York, Austin, 73331",
     "id": "8796125888535",
-    "lastName": "k",
+    "lastName": "xyz",
     "line1": "Magento Shipping, New York, Austin, 73331",
     "phone": "1234567890",
     "postalCode": "73331",
@@ -28,13 +28,13 @@
     "town": "Austin"
   },
   "displayUid": "abc.xyz@123.com",
-  "firstName": " abc",
+  "firstName": "abc",
   "language": {
     "active": true,
     "isocode": "en",
     "name": "English",
     "nativeName": "English"
   },
-  "lastName": " abc",
+  "lastName": "xyz",
   "selected": false
 }

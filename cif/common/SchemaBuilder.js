@@ -13,7 +13,7 @@
  ******************************************************************************/
 
 'use strict';
-const magentoSchema = require('./../resources/magento-schema-2.4.2.min.json');
+const magentoSchema = require('./../resources/magento-schema-2.4.3.min.json');
 const {
   buildClientSchema,
   GraphQLSchema, // eslint-disable-line no-unused-vars

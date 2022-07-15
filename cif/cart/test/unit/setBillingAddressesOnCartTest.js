@@ -80,8 +80,8 @@ describe('SetBillingAddress OnCart', function() {
       .reply(200, hybrisDeliveryModes);
     args.variables = {
       cartId: '00000035',
-      firstname: 'Bob',
-      lastname: 'Roll',
+      firstname: 'abc',
+      lastname: 'xyz',
       street: ['Magento Pkwy', 'Main Street'],
       city: 'Austin',
       regionCode: 'US-WA',
@@ -116,8 +116,8 @@ describe('SetBillingAddress OnCart', function() {
 
     args.variables = {
       cartId: '00000035',
-      firstname: 'Bob',
-      lastname: 'Roll',
+      firstname: 'abc',
+      lastname: 'xyz',
       street: ['Magento Pkwy', 'Main Street'],
       city: 'Austin',
       regionCode: 'US-WA',
@@ -155,8 +155,8 @@ describe('SetBillingAddress OnCart', function() {
       .reply(200, hybrisDeliveryModes);
     args.variables = {
       cartId: '00000035',
-      firstname: 'Bob',
-      lastname: 'Roll',
+      firstname: 'abc',
+      lastname: 'xyz',
       street: ['Magento Pkwy', 'Main Street'],
       city: 'Austin',
       regionCode: 'DEFAULT',
@@ -194,8 +194,8 @@ describe('SetBillingAddress OnCart', function() {
       .reply(200, hybrisDeliveryModes);
     args.variables = {
       cartId: '00000035',
-      firstname: 'Bob',
-      lastname: 'Roll',
+      firstname: 'abc',
+      lastname: 'xyz',
       street: ['Magento Pkwy', 'Main Street'],
       city: 'Austin',
       regionCode: 'US-WA',

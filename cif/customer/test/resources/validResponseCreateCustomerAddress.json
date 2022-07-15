@@ -5,9 +5,9 @@
         "city": "Austin",
         "country_code": "US",
         "default_shipping": true,
-        "firstname": "Bob",
+        "firstname": "abc",
         "id": 1,
-        "lastname": "Roll",
+        "lastname": "xyz",
         "postcode": "78756",
         "region": {
           "__typename": "CustomerAddressRegion",

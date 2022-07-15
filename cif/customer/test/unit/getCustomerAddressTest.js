@@ -21,14 +21,12 @@ const expect = require('chai').expect;
 const chaiShallowDeepEqual = require('chai-shallow-deep-equal');
 const nock = require('nock');
 const validResponseGetCustomerAddress = require('../resources/validResponseGetCustomerAddress.json');
-const hybrisGetCustomerAddress = require('../../../customer/test/resources/hybrisGetCustomerAddress.json');
-// const hybrisAuthLoginMock = require('../resources/hybris-token.json');
+const hybrisGetCustomer = require('../resources/hybrisGetCustomer.json');
+const hybrisGetCustomerAddress = require('../resources/hybrisGetCustomerAddress.json');
 const resolve = require('../../../customer/src/customerResolver.js').main;
 chai.use(chaiShallowDeepEqual);
 const TestUtils = require('../../../utils/TestUtils.js');
 const AddressLoader = require('../../src/AddressLoader.js');
-// const invalidRegionCode = require('../../../cart/test/resources/invalidRegionCode.json');
-// const invalidCountryCode = require('../../../cart/test/resources/invalidCountryCode.json');
 
 describe('Get Customer Address Resolver', function() {
   const scope = nock(TestUtils.getHybrisInstance());
@@ -61,6 +59,10 @@ describe('Get Customer Address Resolver', function() {
     const HB_API_BASE_PATH = TestUtils.getYmlData().HB_API_BASE_PATH;
 
     it('Get customer Address mutation', () => {
+      scope
+        .get(`${HB_API_BASE_PATH}electronics/users/current`)
+        .query({ fields: 'DEFAULT', query: '' })
+        .reply(200, hybrisGetCustomer);
       scope
         .get(`${HB_API_BASE_PATH}electronics/users/current/addresses`)
         .query({ fields: 'DEFAULT', query: '' })

@@ -23,7 +23,7 @@ chai.use(chaiShallowDeepEqual);
 const resolve = require('../../src/cartResolver.js').main;
 const nock = require('nock');
 const hybrisAddSimpleProductToCart = require('../resources/hybrisAddSimpleProductToCart');
-const validResponseAddSimpleProductToCart = require('../resources/validResponseAddSimpleProductToCart');
+const validResponseAddProductToCart = require('../resources/validResponseAddProductToCart');
 const inValidCart = require('../resources/inValidJsonFileAddSimpleProductToCart.json');
 const AddProductToCartLoader = require('../../../cart/src/AddProductToCartLoader');
 const TestUtils = require('../../../utils/TestUtils.js');
@@ -84,21 +84,18 @@ describe('AddProductToCart', () => {
         cartId: '00000035',
         cartItems: [
           {
-            data: {
-              sku: '301233',
-              quantity: 1,
-            },
+            sku: '301233',
+            quantity: 1,
           },
         ],
       };
 
       args.query =
-        'mutation addSimpleProductToCart($cartId:String!$cartItems:[SimpleProductCartItemInput]!){addSimpleProductsToCart(input:{cart_id:$cartId cart_items:$cartItems}){cart{id items{uid quantity product{name thumbnail{url __typename}__typename}__typename}...MiniCartFragment __typename}__typename}}fragment MiniCartFragment on Cart{id total_quantity prices{subtotal_excluding_tax{currency value __typename}__typename}...ProductListFragment __typename}fragment ProductListFragment on Cart{id items{id product{id name url_key url_suffix thumbnail{url __typename}stock_status ...on ConfigurableProduct{variants{attributes{uid __typename}product{id thumbnail{url __typename}__typename}__typename}__typename}__typename}prices{price{currency value __typename}__typename}quantity ...on ConfigurableCartItem{configurable_options{id option_label value_id value_label __typename}__typename}__typename}__typename}';
+        'mutation($cartId:String!$cartItems:[CartItemInput!]!){addProductsToCart(cartId:$cartId cartItems:$cartItems){cart{id items{uid quantity product{sku name thumbnail{url __typename}__typename}__typename}...MiniCartFragment __typename}__typename}}fragment MiniCartFragment on Cart{id total_quantity prices{subtotal_excluding_tax{currency value __typename}__typename}...ProductListFragment __typename}fragment ProductListFragment on Cart{id items{id product{id name url_key url_suffix thumbnail{url __typename}stock_status ...on ConfigurableProduct{variants{attributes{uid __typename}product{id thumbnail{url __typename}__typename}__typename}__typename}__typename}prices{price{currency value __typename}__typename}quantity ...on ConfigurableCartItem{configurable_options{id option_label value_id value_label __typename}__typename}__typename}__typename}';
       return resolve(args).then(result => {
-        let items = result.data.addSimpleProductsToCart.cart.items[0];
+        let items = result.data.addProductsToCart.cart.items[0];
         let testData =
-          validResponseAddSimpleProductToCart.data.addSimpleProductsToCart.cart
-            .items[0];
+          validResponseAddProductToCart.data.addProductsToCart.cart.items[0];
         const { errors } = result;
         assert.isUndefined(result.errors);
         expect(errors).to.be.undefined;
@@ -130,16 +127,14 @@ describe('AddProductToCart', () => {
         cartId: 'INVALID-CART-ID',
         cartItems: [
           {
-            data: {
-              sku: '301233',
-              quantity: 1,
-            },
+            sku: '301233',
+            quantity: 1,
           },
         ],
       };
 
       args.query =
-        'mutation addSimpleProductToCart($cartId:String!$cartItems:[SimpleProductCartItemInput]!){addSimpleProductsToCart(input:{cart_id:$cartId cart_items:$cartItems}){cart{id items{uid quantity product{name thumbnail{url __typename}__typename}__typename}...MiniCartFragment __typename}__typename}}fragment MiniCartFragment on Cart{id total_quantity prices{subtotal_excluding_tax{currency value __typename}__typename}...ProductListFragment __typename}fragment ProductListFragment on Cart{id items{id product{id name url_key url_suffix thumbnail{url __typename}stock_status ...on ConfigurableProduct{variants{attributes{uid __typename}product{id thumbnail{url __typename}__typename}__typename}__typename}__typename}prices{price{currency value __typename}__typename}quantity ...on ConfigurableCartItem{configurable_options{id option_label value_id value_label __typename}__typename}__typename}__typename}';
+        'mutation($cartId:String!$cartItems:[CartItemInput!]!){addProductsToCart(cartId:$cartId cartItems:$cartItems){cart{id items{uid quantity product{sku name thumbnail{url __typename}__typename}__typename}...MiniCartFragment __typename}__typename}}fragment MiniCartFragment on Cart{id total_quantity prices{subtotal_excluding_tax{currency value __typename}__typename}...ProductListFragment __typename}fragment ProductListFragment on Cart{id items{id product{id name url_key url_suffix thumbnail{url __typename}stock_status ...on ConfigurableProduct{variants{attributes{uid __typename}product{id thumbnail{url __typename}__typename}__typename}__typename}__typename}prices{price{currency value __typename}__typename}quantity ...on ConfigurableCartItem{configurable_options{id option_label value_id value_label __typename}__typename}__typename}__typename}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({

@@ -3,7 +3,7 @@
     "setShippingAddressesOnCart": {
       "cart": {
         "id": "00000035",
-        "email": "abc.xyz@123.com",
+        "email": "abc.xzy@123.com",
         "shipping_addresses": [
           {
             "city": "Austin",
@@ -12,8 +12,8 @@
               "label": "United States",
               "__typename": "CartAddressCountry"
             },
-            "firstname": "Bob",
-            "lastname": "Roll",
+            "firstname": "abc",
+            "lastname": "xyz",
             "postcode": "78758",
             "region": {
               "code": "WA",

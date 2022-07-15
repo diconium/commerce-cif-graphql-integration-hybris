@@ -3,8 +3,8 @@
     "isocode": "US"
   },
   "defaultAddress": true,
-  "firstName": "Bob",
-  "lastName": "Roll",
+  "firstName": "abc",
+  "lastName": "xyz",
   "line1": "Magento Pkwy",
   "line2": "Main Street",
   "phone": "9999998899",

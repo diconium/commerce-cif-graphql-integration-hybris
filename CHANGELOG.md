@@ -3,6 +3,27 @@
 
 # 3rd-Party GraphQL integration with AEM Commerce and CIF on Adobe I/O Runtime
 
+## 2.5 (July 15 2022)
+##### ENHANCEMENTS:
+###### Integration Testing on Adobe cloud based on below updates and changes in application accordingly
+  * CIF (2.9.0)  ,Venia (2022-05-30) , Commerce-addon(2022-05-31) and Service Pack(6.5.13.0)    upgraded to latest 
+  * Magento Upgrade (2.4.3).
+  * Node upgradation(14.19.1).
+  * Updated ACS Commons to Latest(5.3.2).
+
+  Features added
+  * addProductsToCart Mutation.
+  * updateCartItems Mutation.
+  * removeCartItemFromCart Mutation.
+  * Optimized Code across the Hybris connector with demo details.
+  * Get categoryList based on url_path.
+  * Fixed CategoryPicker dailog box loading issue after CIF upgrade.
+  * Code changes and optimization in Category Search since hybris response got changed.
+  * Product picker product loading issue solved after CIF upgrade.
+  * UpdateCustomerAddress Mutation.
+  * DeleteCustomerAddress Mutation. 
+
+
 ## 2.4 (May 4 2022)
 ##### ENHANCEMENTS: 
   * Changes updated as Latest Adobe CIF release 2.7.2 and Latest Storefront 

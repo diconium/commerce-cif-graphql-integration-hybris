@@ -1,0 +1,33 @@
+{
+    "data": {
+      "products": {
+        "items": [
+          {
+            "id": 898503,
+            "sku": "898503",
+            "thumbnail": {
+              "label": "1V",
+              "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyODM2N3xpbWFnZS9qcGVnfGltYWdlcy9oOTAvaGU5Lzg3OTY4MjcxODkyNzguanBnfGI0MTE3ZjdhNDM5NTVhMjcxZWZjNTY4MjE4ODVkNWYxMWMzNWQzNzY3ZGIyYjAxMDViY2U3YmZkZWE5ZTkyMTY",
+              "__typename": "ProductImage"
+            },
+            "url_key": "898503",
+            "url_suffix": null,
+            "__typename": "SimpleProduct"
+          },
+          {
+            "id": 2278102,
+            "sku": "2278102",
+            "thumbnail": {
+              "label": "miniDV Head Cleaner",
+              "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNTQ3N3xpbWFnZS9qcGVnfGltYWdlcy9oZTEvaDk5Lzg3OTY4MTIxMTU5OTguanBnfDdiM2M5ZmVhMGUzZDA2NjgzZGE3NzhjY2QzOGIzNDc3ZTQzMzFiYmM1N2M1M2YyZjNhYmJjYzY1MGVmZDA1ODQ",
+              "__typename": "ProductImage"
+            },
+            "url_key": "2278102",
+            "url_suffix": null,
+            "__typename": "SimpleProduct"
+          }
+        ],
+        "__typename": "Products"
+      }
+    }
+  }

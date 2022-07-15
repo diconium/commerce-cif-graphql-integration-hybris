@@ -73,8 +73,8 @@
             "code": "US",
             "label": "United States"
           },
-          "firstname": "Bob",
-          "lastname": "Roll",
+          "firstname": "abc",
+          "lastname": "xyz",
           "postcode": "78758",
           "region": {
             "__typename": "CartAddressRegion",

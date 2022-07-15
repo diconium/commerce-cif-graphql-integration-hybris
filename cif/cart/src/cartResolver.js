@@ -45,6 +45,7 @@ function resolve(args) {
           'removeCouponFromCart',
           'updateCartItems',
           'addSimpleProductsToCart',
+          'addProductsToCart',
           'removeItemFromCart',
           'setShippingMethodsOnCart',
           'mergeCarts',
@@ -195,6 +196,20 @@ function resolve(args) {
      */
     addSimpleProductsToCart: (params, context) => {
       const { input } = params;
+      return new AddProductToCart({
+        input,
+        graphqlContext: context,
+        actionParameters: args,
+      });
+    },
+
+    /**
+     * method used to addProductsToCart
+     * @param {Object} params parameter contains input,graphqlContext and actionParameters
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
+    addProductsToCart: (params, context) => {
+      const input = params;
       return new AddProductToCart({
         input,
         graphqlContext: context,

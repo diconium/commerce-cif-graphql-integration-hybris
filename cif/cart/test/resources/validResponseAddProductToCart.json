@@ -1,0 +1,49 @@
+{
+  "data": {
+    "addProductsToCart": {
+      "cart": {
+        "id": "00000035",
+        "items": [
+          {
+            "uid": "0",
+            "quantity": 3,
+            "product": {
+              "sku": "1298094",
+              "name": "AC-VQ900AM",
+              "thumbnail": {
+                "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMTU5fGltYWdlL2pwZWd8aW1hZ2VzL2gxMy9oMTgvODc5Njg1NDg0NTQ3MC5qcGd8MzAzOTUwNWVhODE0NGM2ZGU0OGFjNGVmMDFiOTc4MTZlMjRkZTNkZGY0MjZmYjljMDk5MDAxYjNjZWE1NGFmMw",
+                "__typename": "ProductImage"
+              },
+              "__typename": "SimpleProduct",
+              "id": null,
+              "url_key": null,
+              "url_suffix": null,
+              "stock_status": null
+            },
+            "__typename": "SimpleCartItem",
+            "id": "0",
+            "prices": {
+              "price": {
+                "currency": "USD",
+                "value": 505.56,
+                "__typename": "Money"
+              },
+              "__typename": "CartItemPrices"
+            }
+          }
+        ],
+        "total_quantity": 3,
+        "prices": {
+          "subtotal_excluding_tax": {
+            "currency": "USD",
+            "value": 473.86,
+            "__typename": "Money"
+          },
+          "__typename": "CartPrices"
+        },
+        "__typename": "Cart"
+      },
+      "__typename": "AddProductsToCartOutput"
+    }
+  }
+}

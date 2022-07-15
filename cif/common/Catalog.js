@@ -37,10 +37,11 @@ class CategoryTree {
     let cateId =
       parameters.categoryId.url_key !== undefined
         ? parameters.categoryId.url_key.eq
+        : parameters.categoryId.url_path !== undefined
+        ? parameters.categoryId.url_path.eq
         : '';
     if (cateId !== '') {
-      cateId = cateId.split('/');
-      cateId = cateId[cateId.length - 1];
+      cateId = cateId.split('/').pop();
     }
     if (parameters.categoryId.category_uid !== undefined) {
       if (parameters.categoryId.category_uid.eq)
@@ -49,6 +50,8 @@ class CategoryTree {
         this.categoryId = parameters.categoryId.category_uid.in.toString();
       }
     } else if (parameters.categoryId.url_key !== undefined) {
+      this.categoryId = cateId;
+    } else if (parameters.categoryId.url_path !== undefined) {
       this.categoryId = cateId;
     } else if (parameters.categoryId.parent_category_uid !== undefined) {
       this.categoryId = parameters.categoryId.parent_category_uid.eq;
@@ -287,6 +290,15 @@ class Products {
   __convertData(data) {
     return {
       total_count: data.pagination.totalResults,
+      sort_fields: {
+        default: 'ASC',
+        options: data.sorts.map(sort => {
+          return {
+            label: sort.name,
+            value: sort.code,
+          };
+        }),
+      },
       page_info: {
         current_page: data.pagination.currentPage,
         page_size: data.pagination.pageSize,
@@ -397,7 +409,7 @@ class Product {
         : '';
     return {
       sku: data.code,
-      id: data.code,
+      id: parseInt(data.code),
       uid: data.code,
       url_key: data.code,
       name: data.name,
