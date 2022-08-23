@@ -9,7 +9,7 @@
   "scripts": {
     "jq-install": "npm install jq",
     "run-doc": "npm run doc && jq-install",
-    "doc": "node ./generate.js && jq -c . < ../resources/magento-schema-2.4.2.pruned.json > ../resources/magento-schema-2.4.2.pruned.min.json"
+    "doc": "node ./generate.js && jq -c . < ../resources/magento-schema-2.4.3.pruned.json > ../resources/magento-schema-2.4.3.pruned.min.json"
   },
   "dependencies": {
     "@adobe/commerce-cif-model": "^1.1.2",

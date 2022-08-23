@@ -1,14 +1,14 @@
 {
   "cart": {
-    "email": "abc.xyz@123.com",
+    "email": "abc.xzy@123.com",
     "billing_address": {
       "city": "Austin",
       "country": {
         "code": "US",
         "label": "United States"
       },
-      "firstname": "Bob",
-      "lastname": "Roll",
+      "firstname": "abc",
+      "lastname": "xyz",
       "postcode": "78758",
       "region": {
         "code": "WA",
@@ -21,8 +21,8 @@
     },
     "shipping_addresses": [
       {
-        "firstname": "Bob",
-        "lastname": "Roll",
+        "firstname": "abc",
+        "lastname": "xyz",
         "street": [
           "Magento Pkwy, Main Street, Washington, Austin, 78758"
         ],

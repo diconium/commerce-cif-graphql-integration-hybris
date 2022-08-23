@@ -69,9 +69,9 @@ describe('Update Customer Resolver', function() {
       args.variables = {
         customerInput: {
           email: 'abc.xyz@123.com',
-          firstname: ' abc',
-          lastname: ' abc',
-          password: ' abc123@',
+          firstname: 'abc',
+          lastname: 'xyz',
+          password: 'abc123@',
         },
       };
       args.query =

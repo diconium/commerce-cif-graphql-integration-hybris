@@ -57,7 +57,7 @@ class CustomerLoader {
 
   /**
    * Method used to get customer details from hybris
-   * @param {Object} [parameters.graphqlContext] The optional GraphQL execution context passed to the resolver.
+   * @param {Object} actionParameters Some parameters of the I/O action itself (e.g. backend server URL, authentication info, etc)
    * @returns {Promise} a promise resolves and return customer details.
    */
   getCustomer(actionParameters) {

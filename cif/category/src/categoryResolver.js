@@ -32,6 +32,11 @@ function resolve(args) {
   }
 
   const resolvers = {
+    /**
+     * method used to get the category list
+     * @param {Object} params parameter contains filter,graphqlContext and actionParameters
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
     categoryList: (params, context) => {
       return [
         new CategoryTree({
@@ -41,6 +46,11 @@ function resolve(args) {
         }),
       ];
     },
+    /**
+     * method used to get the category
+     * @param {Object} params parameter contains category id,graphqlContext and actionParameters
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
     category: (params, context) => {
       return new CategoryTree({
         categoryId: params.id,
@@ -48,8 +58,13 @@ function resolve(args) {
         actionParameters: args,
       });
     },
+    /**
+     * method used to get the categories
+     * @param {Object} params parameter contains filter,graphqlContext and actionParameters
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
     categories: (params, context) => {
-      if (params.filters && params.filters.name) {
+      if (params.filters && params.filters.name && params.filters.name.match) {
         return new CategorySearch({
           categoryId: params.filters,
           params,

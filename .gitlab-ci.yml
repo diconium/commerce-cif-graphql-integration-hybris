@@ -1,0 +1,155 @@
+image: gcr.io/geometric-smoke-193807/wsk-serverless:1.0.10
+
+variables:
+  DOCKER_DRIVER: overlay2
+  reports_nginx_k8s: connector-reports-nginx-0
+
+stages:
+  - build
+  - test
+  - reports
+  - deploy
+#  - publish
+
+build:master:
+  stage: build
+
+
+  script:
+    - yarn build
+    - yarn install --ignore-engines
+    - mkdir -pvm 0700 ~/.ssh
+    - echo "StrictHostKeyChecking=no" > ~/.ssh/config
+    - echo "$CI_PRIVATE_RSA_KEY" > ~/.ssh/id_rsa
+    - chmod 0400 ~/.ssh/id_rsa
+    - git config --global user.email "${GITLAB_USER_EMAIL}"
+    - git config --global user.name "${GITLAB_USER_NAME}"
+    - git checkout -f $CI_COMMIT_REF_NAME
+    - git pull
+    - git remote set-url --push origin $CI_SSH_REPO
+
+
+  artifacts:
+    untracked: true
+  only:
+    - master
+  tags:
+    - diconium
+    - internal
+
+build:feature:
+  stage: build
+  script:
+    - yarn install --ignore-engines
+    - yarn lint
+  artifacts:
+    untracked: true
+  only:
+    - /^feature\/.+$/
+    - v2/develop
+  tags:
+    - diconium
+    - internal
+
+
+build:schema:
+  stage: build
+  script:
+    - yarn autoclean -F
+    - yarn build
+    - yarn install --ignore-engines
+    - yarn run-doc
+  only:
+    - schedules
+  tags:
+    - internal
+
+test:unit-test:
+  stage: test
+  script:
+    - yarn test-cov
+  dependencies:
+    - build:master
+    - build:feature
+  artifacts:
+    paths:
+      - coverage/
+  except:
+    - /^release\/.+$/
+    - schedules
+  tags:
+    - diconium
+    - internal
+
+test:eslint:
+  stage: test
+  script:
+    - yarn lint
+  dependencies:
+    - build:master
+    - build:feature
+  except:
+    - /^release\/.+$/
+    - schedules
+  tags:
+    - internal
+
+deploy:schema:
+  stage: deploy
+  script:
+    - wsk property set --auth "$ADOBE_RUNTIME_AUTH" --apihost "$ADOBE_RUNTIME_HOST"
+    - serverless deploy function -f cif-schema
+  only:
+    - schedules
+  tags:
+    - internal
+
+deploy:
+  stage: deploy
+  script:
+    - git pull origin $CI_COMMIT_REF_NAME
+    - wsk property set --auth "$ADOBE_RUNTIME_AUTH" --apihost "$ADOBE_RUNTIME_HOST" --namespace "$ADOBE_NAMESPACE"
+    - yarn deploy
+  dependencies:
+    - build:master
+  only:
+    - master
+  except:
+    - schedule
+  tags:
+    - internal
+
+#publish:npm:
+#  stage: publish
+#  script:
+#    - echo "$NPM_REGISTRY_TOKEN" >> ~/.npmrc
+#    - mkdir -pvm 0700 ~/.ssh
+#    - echo "StrictHostKeyChecking=no" > ~/.ssh/config
+#    - echo "$CI_PRIVATE_RSA_KEY" > ~/.ssh/id_rsa
+#    - chmod 0400 ~/.ssh/id_rsa
+#    - git checkout $CI_COMMIT_REF_NAME
+#    - git pull
+#    - lerna publish from-git --yes
+#  dependencies:
+#    - build:master
+#  only:
+#    - master
+#
+#publish:reports:
+#  image: gcr.io/geometric-smoke-193807/kubernetes-helm:2.10.0-1
+#  stage: publish
+#  script:
+#    - /home/scripts/generate_cluster_host_config.sh $KUBERNETES_CLUSTER_NAME $KUBERNETES_CLUSTER_HOST $KUBERNETES_KUBE_TOKEN $KUBERNETES_TOOLS_NAMESPACE $KUBERNETES_USERNAME
+#    - ls
+#    - cp -r coverage html
+#    - ls
+#    - ls coverage
+#    - ls html
+#    - kubectl cp html $reports_nginx_k8s:/usr/share/nginx -n $KUBERNETES_TOOLS_NAMESPACE
+#    - kubectl exec $reports_nginx_k8s -n $KUBERNETES_TOOLS_NAMESPACE -- chmod -R a+r /usr/share/nginx/html
+#  only:
+#    - master
+#  except:
+#    - schedule
+#  dependencies:
+#    - test:unit-test

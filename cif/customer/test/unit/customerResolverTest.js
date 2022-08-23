@@ -79,7 +79,7 @@ describe('Customer Resolver', () => {
       return resolve(args).then(result => {
         let customer = result.data.customer;
         const { errors } = result;
-        assert.equal(customer.firstname, 'xyz');
+        assert.equal(customer.firstname, 'abc');
         assert.equal(customer.lastname, '');
         assert.isUndefined(result.errors);
         assert.equal(customerDetails.callCount, 1);
@@ -104,9 +104,9 @@ describe('Customer Resolver', () => {
         '{customer{firstname, lastname, addresses{firstname, lastname, street}}}';
       return resolve(args).then(result => {
         let addresses = result.data.customer.addresses;
-        let street = addresses[0].street;
+        let street = addresses[1].street;
         assert.equal(addressDetails.callCount, 1);
-        expect(addresses[0].firstname).to.be.equal(' abc');
+        expect(addresses[0].firstname).to.be.equal('abc');
         expect(street[0]).to.be.equal('Magento Shipping');
         expect(result.errors).to.be.undefined;
       });

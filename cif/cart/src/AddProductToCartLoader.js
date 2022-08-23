@@ -54,7 +54,7 @@ class AddProductToCartResolverLoader {
   }
 
   /**
-   * @param {String} input consists of cart id,quantity and sku to which the item to added.
+   * @param {String} input consists of cart id,quantity and sku to which the item to be added to the cart.
    * @param {Object} actionParameters Some parameters of the I/O action itself (e.g. backend server URL, authentication info, etc)
    * @returns {Promise} a promise with the Item to be added data.
    */
@@ -67,22 +67,28 @@ class AddProductToCartResolverLoader {
       HB_PROTOCOL,
       HB_BASESITEID,
     } = actionParameters.context.settings;
+    let sku;
+    let quantity;
+    let body = {};
+    let cartID = input.cart_id || input.cartId;
 
-    const { cart_id, cart_items } = input;
-    const { data } = cart_items[0];
-
-    const body = {
+    let cartItems =
+      input.cart_items != undefined ? input.cart_items : input.cartItems;
+    sku = cartItems[0].sku || cartItems[0].data.sku;
+    quantity = cartItems[0].quantity || cartItems[0].data.quantity;
+    body = {
       product: {
-        code: data.sku,
+        code: sku,
       },
-      quantity: data.quantity,
+      quantity: quantity,
     };
+
     const config = {
       headers: {
         Authorization: `Bearer ${bearer}`,
       },
     };
-    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cart_id}/entries?fields=FULL`;
+    const uri = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/users/${customerId}/carts/${cartID}/entries?fields=FULL`;
     return new Promise((resolve, reject) => {
       axios
         .post(uri, body, config)

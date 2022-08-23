@@ -80,9 +80,13 @@ describe('Update Cart Items Resolver', () => {
         )
         .query({ fields: 'FULL', query: '' })
         .reply(200, hybrisDeliveryModes);
-
+      args.variables = {
+        cartId: '00000016',
+        itemId: 0,
+        quantity: 3,
+      };
       args.query =
-        'mutation {updateCartItems(input: {cart_id: "00000016", cart_items: [{cart_item_uid: "0",quantity: 3}]}){ cart{items {uid,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
+        'mutation updateItemQuantity($cartId:String!$itemId:Int!$quantity:Float!){updateCartItems(input:{cart_id:$cartId cart_items:[{cart_item_id:$itemId quantity:$quantity}]}){cart{id ...CartPageFragment ...AvailableShippingMethodsCartFragment __typename}__typename}}fragment CartPageFragment on Cart{id total_quantity ...AppliedCouponsFragment ...GiftCardFragment ...ProductListingFragment ...PriceSummaryFragment __typename}fragment AppliedCouponsFragment on Cart{id applied_coupons{code __typename}__typename}fragment GiftCardFragment on Cart{applied_gift_cards{code current_balance{currency value __typename}__typename}id __typename}fragment ProductListingFragment on Cart{id items{id product{id name sku url_key url_suffix thumbnail{url __typename}small_image{url __typename}stock_status ...on ConfigurableProduct{variants{attributes{uid __typename}product{id small_image{url __typename}__typename}__typename}__typename}__typename}prices{price{currency value __typename}__typename}quantity ...on ConfigurableCartItem{configurable_options{id configurable_product_option_value_uid option_label value_id value_label __typename}__typename}__typename}__typename}fragment PriceSummaryFragment on Cart{id items{id quantity __typename}...ShippingSummaryFragment prices{...TaxSummaryFragment ...DiscountSummaryFragment ...GrandTotalFragment subtotal_excluding_tax{currency value __typename}__typename}...GiftCardSummaryFragment __typename}fragment DiscountSummaryFragment on CartPrices{discounts{amount{currency value __typename}label __typename}__typename}fragment GiftCardSummaryFragment on Cart{id applied_gift_cards{code applied_balance{value currency __typename}__typename}__typename}fragment GrandTotalFragment on CartPrices{grand_total{currency value __typename}__typename}fragment ShippingSummaryFragment on Cart{id shipping_addresses{selected_shipping_method{amount{currency value __typename}__typename}street __typename}__typename}fragment TaxSummaryFragment on CartPrices{applied_taxes{amount{currency value __typename}__typename}__typename}fragment AvailableShippingMethodsCartFragment on Cart{id shipping_addresses{available_shipping_methods{amount{currency value __typename}available carrier_code carrier_title method_code method_title __typename}street __typename}__typename}';
       return resolve(args).then(result => {
         let response = result.data.updateCartItems.cart;
         const { errors } = result;
@@ -102,9 +106,13 @@ describe('Update Cart Items Resolver', () => {
         )
         .query({ fields: 'FULL' })
         .reply(400, cartNotFound);
-
+      args.variables = {
+        cartId: 'INVALID-CART-ID',
+        itemId: 0,
+        quantity: 3,
+      };
       args.query =
-        'mutation {updateCartItems(input: {cart_id: "INVALID-CART-ID", cart_items: [{cart_item_uid: "0",quantity: 3}]}){ cart{items {uid,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
+        'mutation updateItemQuantity($cartId:String!$itemId:Int!$quantity:Float!){updateCartItems(input:{cart_id:$cartId cart_items:[{cart_item_id:$itemId quantity:$quantity}]}){cart{id ...CartPageFragment ...AvailableShippingMethodsCartFragment __typename}__typename}}fragment CartPageFragment on Cart{id total_quantity ...AppliedCouponsFragment ...GiftCardFragment ...ProductListingFragment ...PriceSummaryFragment __typename}fragment AppliedCouponsFragment on Cart{id applied_coupons{code __typename}__typename}fragment GiftCardFragment on Cart{applied_gift_cards{code current_balance{currency value __typename}__typename}id __typename}fragment ProductListingFragment on Cart{id items{id product{id name sku url_key url_suffix thumbnail{url __typename}small_image{url __typename}stock_status ...on ConfigurableProduct{variants{attributes{uid __typename}product{id small_image{url __typename}__typename}__typename}__typename}__typename}prices{price{currency value __typename}__typename}quantity ...on ConfigurableCartItem{configurable_options{id configurable_product_option_value_uid option_label value_id value_label __typename}__typename}__typename}__typename}fragment PriceSummaryFragment on Cart{id items{id quantity __typename}...ShippingSummaryFragment prices{...TaxSummaryFragment ...DiscountSummaryFragment ...GrandTotalFragment subtotal_excluding_tax{currency value __typename}__typename}...GiftCardSummaryFragment __typename}fragment DiscountSummaryFragment on CartPrices{discounts{amount{currency value __typename}label __typename}__typename}fragment GiftCardSummaryFragment on Cart{id applied_gift_cards{code applied_balance{value currency __typename}__typename}__typename}fragment GrandTotalFragment on CartPrices{grand_total{currency value __typename}__typename}fragment ShippingSummaryFragment on Cart{id shipping_addresses{selected_shipping_method{amount{currency value __typename}__typename}street __typename}__typename}fragment TaxSummaryFragment on CartPrices{applied_taxes{amount{currency value __typename}__typename}__typename}fragment AvailableShippingMethodsCartFragment on Cart{id shipping_addresses{available_shipping_methods{amount{currency value __typename}available carrier_code carrier_title method_code method_title __typename}street __typename}__typename}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({
@@ -123,9 +131,13 @@ describe('Update Cart Items Resolver', () => {
         )
         .query({ fields: 'FULL' })
         .reply(400, entryNotFoundUpdateCartItems);
-
+      args.variables = {
+        cartId: '00000016',
+        itemId: 10,
+        quantity: 3,
+      };
       args.query =
-        'mutation {updateCartItems(input: {cart_id: "00000016", cart_items: [{cart_item_uid:"10",quantity: 3}]}){ cart{items {uid,product {name sku},quantity } prices { grand_total{ value,currency}}}}}';
+        'mutation updateItemQuantity($cartId:String!$itemId:Int!$quantity:Float!){updateCartItems(input:{cart_id:$cartId cart_items:[{cart_item_id:$itemId quantity:$quantity}]}){cart{id ...CartPageFragment ...AvailableShippingMethodsCartFragment __typename}__typename}}fragment CartPageFragment on Cart{id total_quantity ...AppliedCouponsFragment ...GiftCardFragment ...ProductListingFragment ...PriceSummaryFragment __typename}fragment AppliedCouponsFragment on Cart{id applied_coupons{code __typename}__typename}fragment GiftCardFragment on Cart{applied_gift_cards{code current_balance{currency value __typename}__typename}id __typename}fragment ProductListingFragment on Cart{id items{id product{id name sku url_key url_suffix thumbnail{url __typename}small_image{url __typename}stock_status ...on ConfigurableProduct{variants{attributes{uid __typename}product{id small_image{url __typename}__typename}__typename}__typename}__typename}prices{price{currency value __typename}__typename}quantity ...on ConfigurableCartItem{configurable_options{id configurable_product_option_value_uid option_label value_id value_label __typename}__typename}__typename}__typename}fragment PriceSummaryFragment on Cart{id items{id quantity __typename}...ShippingSummaryFragment prices{...TaxSummaryFragment ...DiscountSummaryFragment ...GrandTotalFragment subtotal_excluding_tax{currency value __typename}__typename}...GiftCardSummaryFragment __typename}fragment DiscountSummaryFragment on CartPrices{discounts{amount{currency value __typename}label __typename}__typename}fragment GiftCardSummaryFragment on Cart{id applied_gift_cards{code applied_balance{value currency __typename}__typename}__typename}fragment GrandTotalFragment on CartPrices{grand_total{currency value __typename}__typename}fragment ShippingSummaryFragment on Cart{id shipping_addresses{selected_shipping_method{amount{currency value __typename}__typename}street __typename}__typename}fragment TaxSummaryFragment on CartPrices{applied_taxes{amount{currency value __typename}__typename}__typename}fragment AvailableShippingMethodsCartFragment on Cart{id shipping_addresses{available_shipping_methods{amount{currency value __typename}available carrier_code carrier_title method_code method_title __typename}street __typename}__typename}';
       return resolve(args).then(result => {
         const errors = result.errors[0];
         expect(errors).shallowDeepEqual({

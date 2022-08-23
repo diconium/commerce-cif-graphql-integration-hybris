@@ -20,7 +20,7 @@ const chaiShallowDeepEqual = require('chai-shallow-deep-equal');
 const nock = require('nock');
 chai.use(chaiShallowDeepEqual);
 const TestUtils = require('../../../utils/TestUtils.js');
-const categoryListLoader = require('../../src/CategoryListLoader.js');
+const categorySearchLoader = require('../../src/CategorySearchLoader.js');
 const categorySearchHybris = require('../resources/categorySearchHybrisResponse.json');
 const mockRequire = require('mock-require');
 
@@ -60,7 +60,7 @@ describe('category search', function() {
 
   beforeEach(() => {
     // We "spy" all the loading functions
-    getCategory = sinon.spy(categoryListLoader.prototype, '__getCategory');
+    getCategory = sinon.spy(categorySearchLoader.prototype, '__getCategory');
   });
 
   afterEach(() => {

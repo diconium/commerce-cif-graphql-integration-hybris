@@ -2,22 +2,114 @@
   "data": {
     "removeItemFromCart": {
       "cart": {
+        "id": "00000035",
+        "total_quantity": 3,
+        "applied_coupons": [],
+        "__typename": "Cart",
+        "applied_gift_cards": [],
         "items": [
           {
-            "uid": "0",
+            "id": "0",
             "product": {
-              "name": "EF-S 60mm f/2.8 USM Macro"
+              "id": null,
+              "name": "AC-VQ900AM",
+              "sku": "1298094",
+              "url_key": null,
+              "url_suffix": null,
+              "thumbnail": {
+                "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMTU5fGltYWdlL2pwZWd8aW1hZ2VzL2gxMy9oMTgvODc5Njg1NDg0NTQ3MC5qcGd8MzAzOTUwNWVhODE0NGM2ZGU0OGFjNGVmMDFiOTc4MTZlMjRkZTNkZGY0MjZmYjljMDk5MDAxYjNjZWE1NGFmMw",
+                "__typename": "ProductImage"
+              },
+              "small_image": {
+                "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyMTU5fGltYWdlL2pwZWd8aW1hZ2VzL2gxMy9oMTgvODc5Njg1NDg0NTQ3MC5qcGd8MzAzOTUwNWVhODE0NGM2ZGU0OGFjNGVmMDFiOTc4MTZlMjRkZTNkZGY0MjZmYjljMDk5MDAxYjNjZWE1NGFmMw",
+                "__typename": "ProductImage"
+              },
+              "stock_status": null,
+              "__typename": "SimpleProduct"
             },
-            "quantity": 1
+            "prices": {
+              "price": {
+                "currency": "USD",
+                "value": 505.56,
+                "__typename": "Money"
+              },
+              "__typename": "CartItemPrices"
+            },
+            "quantity": 3,
+            "__typename": "SimpleCartItem"
+          }
+        ],
+        "shipping_addresses": [
+          {
+            "selected_shipping_method": {
+              "amount": {
+                "currency": "USD",
+                "value": 11.99,
+                "__typename": "Money"
+              },
+              "__typename": "SelectedShippingMethod"
+            },
+            "street": [
+              "Magento Pkwy, Main Street, Washington, Austin, 78758"
+            ],
+            "__typename": "ShippingCartAddress",
+            "available_shipping_methods": [
+              {
+                "amount": {
+                  "currency": "USD",
+                  "value": 11.99,
+                  "__typename": "Money"
+                },
+                "available": true,
+                "carrier_code": "standard-gross",
+                "carrier_title": "3-5 business days",
+                "method_code": "standard-gross",
+                "method_title": "Standard Delivery",
+                "__typename": "AvailableShippingMethod"
+              },
+              {
+                "amount": {
+                  "currency": "USD",
+                  "value": 19.99,
+                  "__typename": "Money"
+                },
+                "available": true,
+                "carrier_code": "premium-gross",
+                "carrier_title": "1-2 business days",
+                "method_code": "premium-gross",
+                "method_title": "Premium Delivery",
+                "__typename": "AvailableShippingMethod"
+              }
+            ]
           }
         ],
         "prices": {
+          "applied_taxes": [],
+          "__typename": "CartPrices",
+          "discounts": [
+            {
+              "amount": {
+                "currency": "USD",
+                "value": 20,
+                "__typename": "Money"
+              },
+              "label": "",
+              "__typename": "Discount"
+            }
+          ],
           "grand_total": {
-            "value": 446.88,
-            "currency": "USD"
+            "currency": "USD",
+            "value": 497.55,
+            "__typename": "Money"
+          },
+          "subtotal_excluding_tax": {
+            "currency": "USD",
+            "value": 473.86,
+            "__typename": "Money"
           }
         }
-      }
+      },
+      "__typename": "RemoveItemFromCartOutput"
     }
   }
 }

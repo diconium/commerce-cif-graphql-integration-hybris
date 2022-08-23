@@ -28,17 +28,17 @@ class ChangeCustomerPassword {
     this.graphqlContext = parameters.graphqlContext;
     this.actionParameters = parameters;
     this.actionParameters.params = parameters.params;
-    this.ChangeCustomerPasswordLoader = new ChangeCustomerPasswordLoader(
+    this.changeCustomerPasswordLoader = new ChangeCustomerPasswordLoader(
       parameters.actionParameters
     );
     return new LoaderProxy(this);
   }
 
   /**
-   * method used to call load method of generateCustomerTokenLoader class
+   * method used to call load method of changeCustomerPasswordLoader class
    */
   __load() {
-    return this.ChangeCustomerPasswordLoader.load(this.actionParameters);
+    return this.changeCustomerPasswordLoader.load(this.actionParameters);
   }
 
   /**

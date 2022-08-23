@@ -50,7 +50,7 @@ class SchemaPruner {
       //eslint-disable-next-line
         .match(/\`(.*)\`/)
       .pop();
-      this.process(query);
+    this.process(query);
   }
   /**
    * Processes a query and adds it to the internal list of fields being queried.

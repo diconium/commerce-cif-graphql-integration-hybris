@@ -23,10 +23,10 @@
       "name": "United States"
     },
     "defaultAddress": false,
-    "firstName": "Bob",
+    "firstName": "abc",
     "formattedAddress": "Magento Pkwy, Main Street, Washington, Austin, 78758",
     "id": "8796130508823",
-    "lastName": "Roll",
+    "lastName": "xyz",
     "line1": "Magento Pkwy",
     "line2": "Main Street",
     "phone": "9999998899",
@@ -240,10 +240,10 @@
       },
       "defaultAddress": false,
       "email": "abc.xyz@123.com",
-      "firstName": "Bob",
+      "firstName": "abc",
       "formattedAddress": "Magento Pkwy, Main Street, Washington, Austin, 78758",
       "id": "8796130508823",
-      "lastName": "Roll",
+      "lastName": "xyz",
       "line1": "Magento Pkwy",
       "line2": "Main Street",
       "phone": "9999998899",
@@ -314,8 +314,8 @@
     "value": 23.69
   },
   "user": {
-    "name": "xyz",
-    "uid": "abc.xyz@123.com"
+    "name": "abc",
+    "uid": "abc.xzy@123.com"
   },
   "potentialOrderPromotions": [],
   "potentialProductPromotions": [],

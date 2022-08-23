@@ -1,26 +1,199 @@
 {
-    "data": {
-      "customer": {
-        "__typename": "Customer",
-        "addresses": [{
-          "__typename": "CustomerAddress",
-          "city": "Austin",
+  "data": {
+    "customer": {
+      "id": 1,
+      "addresses": [
+        {
+          "id": 0,
+          "city": "Texas",
           "country_code": "US",
           "default_shipping": true,
-          "firstname": " abc",
-          "id": 0,
-          "lastname": "K",
+          "firstname": "abc",
+          "lastname": "xyz",
           "postcode": "123456",
           "region": {
-            "__typename": "CustomerAddressRegion",
-            "region": "US-WA",
-            "region_code": "US-WA",
-            "region_id": 1
+            "region": "US-NY",
+            "region_code": "US-NY",
+            "region_id": 1,
+            "__typename": "CustomerAddressRegion"
           },
-          "street": ["Magento Shipping", "string"],
-          "telephone": "123456789"
-        }],
-        "id": null
-      }
+          "street": [
+            "Magento Shipping, New York, Texas, 123456, New York, Texas, 123456, New York, Texas, 123456",
+            null
+          ],
+          "telephone": "123456789",
+          "__typename": "CustomerAddress"
+        },
+        {
+          "id": 1,
+          "city": "Texas",
+          "country_code": "US",
+          "default_shipping": false,
+          "firstname": "abc",
+          "lastname": "xyz",
+          "postcode": "123456",
+          "region": {
+            "region": "US-NY",
+            "region_code": "US-NY",
+            "region_id": 1,
+            "__typename": "CustomerAddressRegion"
+          },
+          "street": [
+            "Magento Shipping",
+            null
+          ],
+          "telephone": "123456789",
+          "__typename": "CustomerAddress"
+        },
+        {
+          "id": 2,
+          "city": "Texas",
+          "country_code": "US",
+          "default_shipping": false,
+          "firstname": "abc",
+          "lastname": "xyz",
+          "postcode": "123456",
+          "region": {
+            "region": "US-NY",
+            "region_code": "US-NY",
+            "region_id": 1,
+            "__typename": "CustomerAddressRegion"
+          },
+          "street": [
+            "Magento Shipping, New York, Texas, 123456",
+            null
+          ],
+          "telephone": "123456789",
+          "__typename": "CustomerAddress"
+        },
+        {
+          "id": 3,
+          "city": "Texas",
+          "country_code": "US",
+          "default_shipping": false,
+          "firstname": "abc",
+          "lastname": "xyz",
+          "postcode": "123456",
+          "region": {
+            "region": "US-NY",
+            "region_code": "US-NY",
+            "region_id": 1,
+            "__typename": "CustomerAddressRegion"
+          },
+          "street": [
+            "Magento Shipping",
+            null
+          ],
+          "telephone": "123456789",
+          "__typename": "CustomerAddress"
+        },
+        {
+          "id": 4,
+          "city": "Texas",
+          "country_code": "US",
+          "default_shipping": false,
+          "firstname": "abc",
+          "lastname": "xyz",
+          "postcode": "123456",
+          "region": {
+            "region": "US-NY",
+            "region_code": "US-NY",
+            "region_id": 1,
+            "__typename": "CustomerAddressRegion"
+          },
+          "street": [
+            "Magento Shipping, New York, Texas, 123456, New York, Texas, 123456",
+            null
+          ],
+          "telephone": "123456789",
+          "__typename": "CustomerAddress"
+        },
+        {
+          "id": 5,
+          "city": "Texas",
+          "country_code": "US",
+          "default_shipping": false,
+          "firstname": "abc",
+          "lastname": "xyz",
+          "postcode": "123456",
+          "region": {
+            "region": "US-NY",
+            "region_code": "US-NY",
+            "region_id": 1,
+            "__typename": "CustomerAddressRegion"
+          },
+          "street": [
+            "Magento Shipping",
+            null
+          ],
+          "telephone": "123456789",
+          "__typename": "CustomerAddress"
+        },
+        {
+          "id": 6,
+          "city": "Texas",
+          "country_code": "US",
+          "default_shipping": false,
+          "firstname": "abc",
+          "lastname": "xyz",
+          "postcode": "123456",
+          "region": {
+            "region": "US-NY",
+            "region_code": "US-NY",
+            "region_id": 1,
+            "__typename": "CustomerAddressRegion"
+          },
+          "street": [
+            "Magento Shipping, New York, Texas, 123456",
+            null
+          ],
+          "telephone": "123456789",
+          "__typename": "CustomerAddress"
+        },
+        {
+          "id": 7,
+          "city": "Texas",
+          "country_code": "US",
+          "default_shipping": false,
+          "firstname": "abc",
+          "lastname": "xyz",
+          "postcode": "123456",
+          "region": {
+            "region": "US-NY",
+            "region_code": "US-NY",
+            "region_id": 1,
+            "__typename": "CustomerAddressRegion"
+          },
+          "street": [
+            "Magento Shipping, New York, Texas, 123456, New York, Texas, 123456",
+            null
+          ],
+          "telephone": "123456789",
+          "__typename": "CustomerAddress"
+        },
+        {
+          "id": 8,
+          "city": "Austin",
+          "country_code": "US",
+          "default_shipping": false,
+          "firstname": "Abc",
+          "lastname": "Xyz",
+          "postcode": "73331",
+          "region": {
+            "region": "US-NY",
+            "region_code": "US-NY",
+            "region_id": 1,
+            "__typename": "CustomerAddressRegion"
+          },
+          "street": [
+            "Magento Shipping",
+            null
+          ],
+          "telephone": "1234567890",
+          "__typename": "CustomerAddress"
+        }
+      ],
+      "__typename": "Customer"
     }
   }
+}

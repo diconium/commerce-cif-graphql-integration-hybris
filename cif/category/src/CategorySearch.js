@@ -15,7 +15,7 @@
 'use strict';
 
 const LoaderProxy = require('../../common/LoaderProxy.js');
-const CategoryListLoader = require('../src/CategoryListLoader');
+const CategorySearchLoader = require('../src/CategorySearchLoader');
 
 class CategorySearch {
   /**
@@ -28,16 +28,18 @@ class CategorySearch {
     this.parmas = parameters.params;
     this.graphqlContext = parameters.graphqlContext;
     this.actionParameters = parameters.actionParameters;
-    this.categoryListLoader = new CategoryListLoader(parameters.graphqlContext);
+    this.categorySearchLoader = new CategorySearchLoader(
+      parameters.graphqlContext
+    );
 
     return new LoaderProxy(this);
   }
 
   /**
-   *  method used to call the load method from categoryListLoader class
+   *  method used to call the load method from categorySearchLoader class
    */
   __load() {
-    return this.categoryListLoader.load(this.actionParameters);
+    return this.categorySearchLoader.load(this.actionParameters);
   }
 
   /**
@@ -46,62 +48,100 @@ class CategorySearch {
    * @returns {Object} convert the hybris data into magento graphQL schema and return the category object
    */
   __convertData(data) {
-    let words = this.parmas.filters.name.match;
+    let searchedCategory = this.parmas.filters.name.match;
 
     //Covert first letter of each words to UpperCase
-    let searchedName = words
+    let searchedCategoryName = searchedCategory
       .split(' ')
       .map(word => {
         return word[0].toUpperCase() + word.substring(1);
       })
       .join(' ');
 
-    let filteredCategoryData =
-      data.catalogs[0].catalogVersions[1].categories[2];
-
-    let subCategoryData = filteredCategoryData.subcategories.flatMap(
-      categoryData => categoryData
-    );
-
-    let subCategoriesData = subCategoryData.flatMap(subCategory => {
-      return subCategory.subcategories.flatMap(subCatData => subCatData);
-    });
-
-    let subCategoriesData1 = subCategoriesData.flatMap(subCategory => {
-      return subCategory.subcategories.flatMap(subCatData => subCatData);
-    });
-    let subCategoriesData2 = subCategoriesData1.flatMap(subCategory => {
-      return subCategory.subcategories.flatMap(subCatData => subCatData);
-    });
-
-    let searchedCategoryName = [];
+    /**
+     * map and filter each categories data
+     */
+    let categoriesData = data.catalogs
+      .flatMap(categoryData => {
+        return categoryData.catalogVersions;
+      })
+      .flatMap(categoryData => {
+        return categoryData;
+      })
+      .flatMap(categoryData => {
+        return categoryData.categories;
+      });
 
     /**
-     *  filtered and includes method used to check whether searched category name exists in catalog array
+     *  filter and includes method used to check whether searched category name exists in catalog array
      */
-    let searchedCategoryData = subCategoryData.filter(searchName =>
-      searchName.name.includes(searchedName)
+
+    let filteredSubcategoriesData = categoriesData
+      .flatMap(categoryData => {
+        return categoryData.subcategories.flatMap(
+          subcategoryData => subcategoryData
+        );
+      })
+      .filter(
+        searchCategoryNameData =>
+          searchCategoryNameData.name !== undefined &&
+          searchCategoryNameData.name.includes(searchedCategoryName)
+      );
+
+    let filteredSubcategoriesDataLevelOne = categoriesData
+      .flatMap(categoryData => {
+        return categoryData.subcategories.flatMap(subcategoryData => {
+          return subcategoryData.subcategories.flatMap(
+            subcategoryData => subcategoryData
+          );
+        });
+      })
+      .filter(
+        searchCategoryNameData =>
+          searchCategoryNameData.name !== undefined &&
+          searchCategoryNameData.name.includes(searchedCategoryName)
+      );
+
+    let filteredSubcategoriesDataLevelTwo = categoriesData
+      .flatMap(categoryData => {
+        return categoryData.subcategories.flatMap(subcategoryData => {
+          return subcategoryData.subcategories.flatMap(subcategoryData => {
+            return subcategoryData.subcategories.flatMap(
+              subcategoryData => subcategoryData
+            );
+          });
+        });
+      })
+      .filter(searchCategoryNameData =>
+        searchCategoryNameData.name.includes(searchedCategoryName)
+      );
+
+    let filteredSubcategoriesDataLevelThree = categoriesData
+      .flatMap(categoryData => {
+        return categoryData.subcategories.flatMap(subcategoryData => {
+          return subcategoryData.subcategories.flatMap(subcategoryData => {
+            return subcategoryData.subcategories.flatMap(subcategoryData => {
+              return subcategoryData.subcategories.flatMap(
+                subcategoryData => subcategoryData
+              );
+            });
+          });
+        });
+      })
+      .filter(searchCategoryNameData =>
+        searchCategoryNameData.name.includes(searchedCategoryName)
+      );
+
+    let filteredSearchCategoryNameData = [];
+
+    filteredSearchCategoryNameData = filteredSubcategoriesData.concat(
+      filteredSubcategoriesDataLevelOne,
+      filteredSubcategoriesDataLevelTwo,
+      filteredSubcategoriesDataLevelThree
     );
 
-    let searchedCategoryData1 = subCategoriesData.filter(searchName =>
-      searchName.name.includes(searchedName)
-    );
-
-    let searchedCategoryData2 = subCategoriesData1.filter(searchName =>
-      searchName.name.includes(searchedName)
-    );
-
-    let searchedCategoryData3 = subCategoriesData2.filter(searchName =>
-      searchName.name.includes(searchedName)
-    );
-
-    searchedCategoryName = searchedCategoryData.concat(
-      searchedCategoryData1,
-      searchedCategoryData2,
-      searchedCategoryData3
-    );
     return {
-      items: searchedCategoryName.map(categoryName => {
+      items: filteredSearchCategoryNameData.map(categoryName => {
         return {
           id: categoryName.id,
           image: null,
@@ -112,7 +152,7 @@ class CategorySearch {
           children_count: null,
         };
       }),
-      total_count: searchedCategoryName.length,
+      total_count: filteredSearchCategoryNameData.length,
     };
   }
 }

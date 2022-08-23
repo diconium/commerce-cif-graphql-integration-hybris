@@ -5,9 +5,9 @@
             "customer": {
                 "__typename": "Customer",
                 "email": "abc.xyz@123.com",
-                "firstname": " abc",
+                "firstname": "abc",
                 "id": 1,
-                "lastname": "k"
+                "lastname": "xyz"
             }
         }
     }

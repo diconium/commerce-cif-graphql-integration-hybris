@@ -2,23 +2,77 @@
   "data": {
     "updateCartItems": {
       "cart": {
+        "id": "00000016",
+        "total_quantity": 1,
+        "applied_coupons": [
+          {
+                 "__typename": "AppliedCoupon",
+                 "code": "BUYMORE16"
+               }
+      
+        ],
+        "__typename": "Cart",
+        "applied_gift_cards": [],
         "items": [
           {
-            "uid": "0",
+            "id": "0",
             "product": {
+              "id": null,
               "name": "AC Power Adapter ACK-E2",
-              "sku": "594471"
+              "sku": "594471",
+              "url_key": null,
+              "url_suffix": null,
+              "thumbnail": {
+                "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNDQwfGltYWdlL2pwZWd8aW1hZ2VzL2gxOC9oODkvODc5NjkwMzQ0MDQxNC5qcGd8N2RlMjAxMjJiMzQ2NWYxMDdkNjM4ZTdiMmUxNTk4Y2FmZTcyN2I4M2JiMjc0YzUzOTExZGQ0YzdmZDMyYjI5Mg",
+                "__typename": "ProductImage"
+              },
+              "small_image": {
+                "url": "https://hybris.example.com/yacceleratorstorefront/medias/?context=bWFzdGVyfGltYWdlc3wyNDQwfGltYWdlL2pwZWd8aW1hZ2VzL2gxOC9oODkvODc5NjkwMzQ0MDQxNC5qcGd8N2RlMjAxMjJiMzQ2NWYxMDdkNjM4ZTdiMmUxNTk4Y2FmZTcyN2I4M2JiMjc0YzUzOTExZGQ0YzdmZDMyYjI5Mg",
+                "__typename": "ProductImage"
+              },
+              "stock_status": null,
+              "__typename": "SimpleProduct"
             },
-            "quantity": 1
+            "prices": {
+              "price": {
+                "currency": "USD",
+                "value": 64.92,
+                "__typename": "Money"
+              },
+              "__typename": "CartItemPrices"
+            },
+            "quantity": 1,
+            "__typename": "SimpleCartItem"
           }
         ],
+        "shipping_addresses": [],
         "prices": {
+          "applied_taxes": [],
+          "__typename": "CartPrices",
+          "discounts": [
+            {
+              "amount": {
+                "currency": "USD",
+                "value": 0,
+                "__typename": "Money"
+              },
+              "label": "",
+              "__typename": "Discount"
+            }
+          ],
           "grand_total": {
+            "currency": "USD",
             "value": 64.92,
-            "currency": "USD"
+            "__typename": "Money"
+          },
+          "subtotal_excluding_tax": {
+            "currency": "USD",
+            "value": 61.83,
+            "__typename": "Money"
           }
         }
-      }
+      },
+      "__typename": "UpdateCartItemsOutput"
     }
   }
 }

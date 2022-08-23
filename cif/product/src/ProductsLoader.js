@@ -68,7 +68,7 @@ class ProductsLoader {
    * @param {Object} params An object with the search parameters defined by the Magento GraphQL "products" field.
    * @param {String} [params.search] The "search" argument of the GraphQL "products" field.
    * @param {String} [params.filter] The "filter" argument of the GraphQL "products" field.
-   * @param {String} [params.categoryId] An optional category id, to get all the products if a given category.
+   * @param {String} [params.categoryId] An optional category id, to get all the products of a given category.
    * @param {Integer} params.currentPage The "currentPage" argument of the GraphQL "products" field.
    * @param {Integer} params.pageSize The "pageSize" argument of the GraphQL "products" field.
    * @param {Object} actionParameters Some parameters of the I/O action itself (e.g. backend server URL, authentication info, etc)
@@ -99,8 +99,21 @@ class ProductsLoader {
         : params.categoryId
         ? params.categoryId
         : '';
-
-    if (params.search || categoryId !== '') {
+    // check whether filter object value is empty or not
+    if (params.filter && Object.keys(params.filter).length === 0) {
+      const apiHost = `${HB_PROTOCOL}://${HB_API_HOST}${HB_API_BASE_PATH}${HB_BASESITEID}/products/search?fields=FULL`;
+      return axios
+        .get(apiHost, config)
+        .then(response => {
+          response.data.products = response.data.products.filter(
+            product => !isNaN(parseInt(product.code))
+          ); // Removing Product if code contains alphabets
+          return response.data;
+        })
+        .catch(error => {
+          return error;
+        });
+    } else if (params.search || categoryId !== '') {
       /** Get a products by category id or search value */
 
       /** Creating query and sort params for Hybris Api*/

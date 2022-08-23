@@ -33,7 +33,6 @@ const basicProductSearchGraphqlResponse = require('../resources/basicProductSear
 const searchProductByCategoryIdHybrisResponse = require('../resources/searchProductByCategoryIdHybrisResponse.json');
 const searchProductByCategoryIdGraphqlResponse = require('../resources/searchProductByCategoryIdGraphqlResponse.json');
 const combinedSearchProductbySkuHybrisResponse = require('../resources/combinedSearchProductbySkuHybrisResponse.json');
-//const combinedSearchCategoryHybrisResponse = require('../resources/combinedSearchCategoryHybrisResponse.json');
 const combinedSearchCategory553HybrisResponse = require('../resources/combinedSearchCategory553HybrisResponse.json');
 const combinedSearchCategory574HybrisResponse = require('../resources/combinedSearchCategory574HybrisResponse.json');
 const combinedSearchCategory604HybrisResponse = require('../resources/combinedSearchCategory604HybrisResponse.json');
@@ -43,6 +42,7 @@ const combinedSearchGraphqlResplonse = require('../resources/combinedSearchGraph
 const multipleSkuSearch898503HybrisResponse = require('../resources/multipleSkuSearch898503HybrisResponse.json');
 const multipleSkuSearch2278102HybrisResponse = require('../resources/multipleSkuSearch2278102HybrisResponse.json');
 const multipleSkuSearchGraphqlResponse = require('../resources/multipleSkuSearchGraphqlResponse.json');
+const multipleUrlKeysSearchGraphqlResponse = require('../resources/multipleUrlKeysSearchGraphqlResponse.json');
 
 describe('Dispatcher Resolver', () => {
   const scope = nock(TestUtils.getHybrisInstance());
@@ -156,6 +156,29 @@ describe('Dispatcher Resolver', () => {
         expect(products).to.deep.equals(
           basicProductSearchGraphqlResponse.data.products
         );
+      });
+    });
+
+    it('Basic products search with empty filter', () => {
+      args.query =
+        '{products(filter:{}) {sort_fields {default options {label value}}}}';
+      const param = {
+        fields: 'FULL',
+        json: true,
+      };
+      scope
+        .get(`${HB_API_BASE_PATH}electronics/products/search`)
+        .query(param)
+        .reply(200, basicProductSearchHybrisResponse)
+        .log(console.log);
+      return resolve(args).then(result => {
+        assert.isUndefined(result.body.errors); // No GraphQL errors
+
+        let products = result.body.data.products.sort_fields;
+        assert.equal(products.default, 'ASC');
+
+        // Ensure the Products search function is only called once
+        assert.equal(searchProducts.callCount, 1);
       });
     });
 
@@ -310,6 +333,86 @@ describe('Dispatcher Resolver', () => {
         assert(getProductBySku.calledTwice);
         expect(items).to.deep.equals(
           multipleSkuSearchGraphqlResponse.data.products.items
+        );
+      });
+    });
+
+    it('Query multiple urlkeys remote resolver', () => {
+      args.query =
+        'query GetProductThumbnailsByURLKey($urlKeys:[String!]!){products(filter:{url_key:{in:$urlKeys}}){items{id sku thumbnail{label url __typename}url_key url_suffix ...on ConfigurableProduct{variants{product{sku id thumbnail{label url __typename}__typename}__typename}__typename}__typename}__typename}}';
+      args.variables = {
+        urlKeys: [
+          '/Open-Catalogue/Cameras/Camera-Accessories-%26-Supplies/Colour-Films/Farbwelt-CN-135%2C-ISO-200%2C-36-pic%2C-2-Pack/p/898503',
+          '/Open-Catalogue/Cameras/Camera-Accessories-%26-Supplies/Blank-Video-Tapes/miniDV-Head-Cleaner/p/2278102',
+        ],
+      };
+      let param = {
+        fields: 'FULL',
+        json: true,
+      };
+      scope
+        .get(`${HB_API_BASE_PATH}electronics/products/898503`)
+        .query(param)
+        .reply(200, multipleSkuSearch898503HybrisResponse)
+        .log(console.log);
+      scope
+        .get(
+          `${HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/574`
+        )
+        .query(param)
+        .reply(200, combinedSearchCategory574HybrisResponse)
+        .log(console.log);
+      scope
+        .get(
+          `${HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/553`
+        )
+        .query(param)
+        .reply(200, combinedSearchCategory553HybrisResponse)
+        .log(console.log);
+      scope
+        .get(`${HB_API_BASE_PATH}electronics/products/2278102`)
+        .query(param)
+        .reply(200, multipleSkuSearch2278102HybrisResponse)
+        .log(console.log);
+      scope
+        .get(
+          `${HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/604`
+        )
+        .query(param)
+        .reply(200, combinedSearchCategory604HybrisResponse)
+        .log(console.log);
+      scope
+        .get(
+          `${HB_API_BASE_PATH}electronics/catalogs/electronicsProductCatalog/Online/categories/562`
+        )
+        .query(param)
+        .reply(200, combinedSearchCategory562HybrisResponse)
+        .log(console.log);
+      param = {
+        currentPage: 1,
+        fields: 'FULL',
+        pageSize: 20,
+        json: true,
+      };
+      scope
+        .get(`${HB_API_BASE_PATH}electronics/products/search`)
+        .query(param)
+        .reply(200, combinedSearchProductHybrisResponse)
+        .log(console.log);
+
+      return resolve(args).then(result => {
+        assert.isUndefined(result.body.errors); // No GraphQL errors
+
+        let items = result.body.data.products.items;
+        assert.equal(items.length, 2);
+        assert.equal(items[0].sku, '898503');
+        assert.equal(items[1].sku, '2278102');
+
+        // Ensure the product loading function is only called twice, once for each product sku
+        // (we dont check the 'args' parameter because this is modified by graphql-tools)
+        assert(getProductBySku.calledTwice);
+        expect(items).to.deep.equals(
+          multipleUrlKeysSearchGraphqlResponse.data.products.items
         );
       });
     });

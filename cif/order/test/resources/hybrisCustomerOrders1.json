@@ -11,10 +11,10 @@
       "name": "United States"
     },
     "defaultAddress": false,
-    "firstName": " abc",
+    "firstName": "abc",
     "formattedAddress": "Magento Shipping, New York, Austin, 752345, New York, Austin, 752345",
     "id": "8796127035415",
-    "lastName": "k",
+    "lastName": "xyz",
     "line1": "Magento Shipping, New York, Austin, 752345",
     "phone": "1234567890",
     "postalCode": "752345",
@@ -227,10 +227,10 @@
       },
       "defaultAddress": false,
       "email": "abc.xyz@123.com",
-      "firstName": " abc",
+      "firstName": "abc",
       "formattedAddress": "Magento Shipping, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345",
       "id": "8796127100951",
-      "lastName": "k",
+      "lastName": "xyz",
       "line1": "Magento Shipping, New York, Austin, 752345, New York, Austin, 752345",
       "postalCode": "752345",
       "region": {
@@ -297,7 +297,7 @@
     "value": 0
   },
   "user": {
-    "name": " abc xyz",
+    "name": "abc xyz",
     "uid": "abc.xyz@123.com"
   },
   "cancellable": true,
@@ -305,7 +305,7 @@
   "created": "2022-04-22T10:46:50+0000",
   "guestCustomer": false,
   "orgCustomer": {
-    "name": " abc xyz",
+    "name": "abc xyz",
     "uid": "abc.xyz@123.com",
     "active": false,
     "currency": {
@@ -321,10 +321,10 @@
         "name": "United States"
       },
       "defaultAddress": false,
-      "firstName": " abc",
+      "firstName": "abc",
       "formattedAddress": "Magento Shipping, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345",
       "id": "8796128051223",
-      "lastName": "k",
+      "lastName": "xyz",
       "line1": "Magento Shipping, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345, New York, Austin, 752345",
       "phone": "1234567890",
       "postalCode": "752345",
@@ -339,14 +339,14 @@
       "visibleInAddressBook": true
     },
     "displayUid": "abc.xyz@123.com",
-    "firstName": " abc",
+    "firstName": "abc",
     "language": {
       "active": true,
       "isocode": "en",
       "name": "English",
       "nativeName": "English"
     },
-    "lastName": " abc",
+    "lastName": "xyz",
     "selected": false
   },
   "permissionResults": [],

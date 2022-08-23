@@ -4,8 +4,8 @@
       "cart": {
         "id": "00000035",
         "billing_address": {
-          "firstname": "Bob",
-          "lastname": "Roll",
+          "firstname": "abc",
+          "lastname": "xyz",
           "country": {
             "code": "US",
             "__typename": "CartAddressCountry"

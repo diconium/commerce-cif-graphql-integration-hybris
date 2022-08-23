@@ -24,7 +24,9 @@ const RevokeCustomerToken = require('./RevokeCustomerToken.js');
 const CustomerCart = require('./CustomerCart.js');
 const ChangeCustomerPassword = require('./ChangeCustomerPassword.js');
 const CreateCustomerAddress = require('./CreateCustomerAddress.js');
-const UpdateCustomer = require('./UpdateCustomer');
+const UpdateCustomer = require('./UpdateCustomer.js');
+const UpdateCustomerAddress = require('./UpdateCustomerAddress.js');
+const DeleteCustomerAddress = require('./DeleteCustomerAddress.js');
 
 let cachedSchema = null;
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
@@ -42,6 +44,8 @@ function resolve(args) {
           'createCustomerAddress',
           'changeCustomerPassword',
           'updateCustomer',
+          'updateCustomerAddress',
+          'deleteCustomerAddress',
         ])
       )
       .filterQueryFields(new Set(['customer', 'customerCart']));
@@ -50,12 +54,21 @@ function resolve(args) {
   }
 
   const resolvers = {
-    customer: (params, context) => {
+    /**
+     * method used to get the customer
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
+    customer: context => {
       return new Customer({
         graphqlContext: context,
         actionParameters: args,
       });
     },
+    /**
+     * method used to create customer address
+     * @param {Object} params parameter contains input,graphqlContext and actionParameters
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
     createCustomerAddress: (params, context) => {
       return new CreateCustomerAddress({
         input: params.input,
@@ -63,7 +76,11 @@ function resolve(args) {
         actionParameters: args,
       });
     },
-    customerCart: (params, context) => {
+    /**
+     * method used to get the customer cart details
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
+    customerCart: context => {
       return new CustomerCart({
         graphqlContext: context,
         actionParameters: args,
@@ -99,6 +116,7 @@ function resolve(args) {
     },
     /**
      * method used to update customer
+     * @param {Object} params parameter contains input,graphqlContext and actionParameters
      * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
      */
     updateCustomer: (params, context) => {
@@ -106,6 +124,34 @@ function resolve(args) {
         input: params.input,
         graphqlContext: context,
         actionParameters: args,
+      });
+    },
+
+    /**
+     * method used to update customer address
+     * @param {Object} params parameter contains input,graphqlContext and actionParameters
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
+    updateCustomerAddress: (params, context) => {
+      return new UpdateCustomerAddress({
+        input: params,
+        graphqlContext: context,
+        actionParameters: args,
+      });
+    },
+    /**
+     * method used to delete customer address
+     * @param {Object} params parameter contains input,graphqlContext and actionParameters
+     * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
+     */
+    deleteCustomerAddress: (params, context) => {
+      const result = new DeleteCustomerAddress({
+        input: params.id,
+        graphqlContext: context,
+        actionParameters: args,
+      });
+      return result.__load().then(() => {
+        return true;
       });
     },
 
@@ -126,7 +172,7 @@ function resolve(args) {
      * @param {Object} params parameter contains input,graphqlContext and actionParameters
      * @param {cachedSchema} context parameter contains the context of the GraphQL Schema
      */
-    revokeCustomerToken: (params, context) => {
+    revokeCustomerToken: context => {
       return new RevokeCustomerToken({
         graphqlContext: context,
         actionParameters: args,
