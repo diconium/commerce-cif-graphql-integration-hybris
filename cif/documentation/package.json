@@ -21,7 +21,7 @@
     "openwhisk": "^3.19.0",
     "request": "2.88.0",
     "winston": "2.4.5",
-    "yaml": "^1.10.0"
+    "yaml": "^2.2.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",
