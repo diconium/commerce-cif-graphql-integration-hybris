@@ -24,7 +24,7 @@
     "node-fetch": "^2.6.0",
     "openwhisk": "^3.19.0",
     "request": "2.88.0",
-    "yaml": "^1.10.0"
+    "yaml": "^2.2.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",
